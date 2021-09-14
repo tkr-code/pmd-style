@@ -1,0 +1,61 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap'); */
+*{
+    font-family: 'Lato', sans-serif;
+}
+body{
+    background: #D2CAEC;
+}
+.bg-1{
+    background: #010E21;
+    color: #fff !important;
+}
+.bg-1 a{
+    color: #fff !important;
+}
+.bg-1 a:hover{
+    color: #ff0000 !important;
+}
+header nav{
+    height: 80px;
+    font-size: 18px;
+}
+section{
+    margin: 0;
+    min-height: 100px;
+    padding-bottom: 85px;
+}
+section > h3{
+    color: #010E21;
+    font-weight: 700;
+    text-align: center;
+    text-transform: capitalize;
+    padding-top: 30px;
+}
+section > p{
+    color: #010E21;
+    padding-bottom: 30px;
+    text-align: center;
+    text-transform: capitalize;
+}
+section#services{
+    background: red;
+}
+footer{
+    padding-top: 20px;
+    min-height: 100px;
+    background: #010E21;
+    color: #fff;
+}
+footer .col-lg-4 > p {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+footer .col-lg-4 > ul li {
+   list-style: none;
+    padding-bottom: 10px;
+    text-align: center;
+}
+footer .col-lg-12 > p {
+    text-align: center;
+}
