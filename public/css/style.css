@@ -1,61 +1,109 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap'); */
-*{
+
+* {
     font-family: 'Lato', sans-serif;
 }
-body{
+
+body {
     background: #D2CAEC;
 }
-.bg-1{
+
+.bg-1 {
     background: #010E21;
     color: #fff !important;
 }
-.bg-1 a{
+
+.bg-1 a {
     color: #fff !important;
 }
-.bg-1 a:hover{
+
+.bg-1 a:hover {
     color: #ff0000 !important;
 }
-header nav{
+
+header nav {
     height: 80px;
     font-size: 18px;
 }
-section{
+
+section {
     margin: 0;
     min-height: 100px;
     padding-bottom: 85px;
 }
-section > h3{
+
+section>h3 {
     color: #010E21;
     font-weight: 700;
     text-align: center;
     text-transform: capitalize;
     padding-top: 30px;
 }
-section > p{
+
+section>p {
     color: #010E21;
     padding-bottom: 30px;
     text-align: center;
     text-transform: capitalize;
 }
-section#services{
+
+section#services {
     background: red;
 }
-footer{
+
+section#message {
+    background-color: rgb(190, 180, 200);
+}
+
+footer {
     padding-top: 20px;
     min-height: 100px;
     background: #010E21;
     color: #fff;
+    margin-top: 20px;
 }
-footer .col-lg-4 > p {
+
+footer .col-lg-4>p {
     font-size: 20px;
     font-weight: 700;
     text-align: center;
 }
-footer .col-lg-4 > ul li {
-   list-style: none;
+
+footer .col-lg-4>ul li {
+    list-style: none;
     padding-bottom: 10px;
     text-align: center;
 }
-footer .col-lg-12 > p {
+
+footer .col-lg-12>p {
     text-align: center;
+}
+
+#services img {
+    width: 200px;
+    height: 200px;
+}
+
+#services h3 {
+    color: #010E21;
+}
+
+#message .col-lg-6 form label {
+    color: #010E21;
+    font-weight: 600;
+}
+
+#coordonnee .col-lg-3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#coordonnee .col-lg-3 .tel {
+    font-size: 30px;
+    margin-right: 4px;
+}
+
+#coordonnee .col-lg-3 .mail {
+    font-size: 30px;
+    margin-right: 15px;
 }
