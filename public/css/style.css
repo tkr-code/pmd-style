@@ -51,8 +51,12 @@ section#services {
     background: red;
 }
 
+section#coordonee {
+    background-color: #8b75eee7
+}
+
 section#message {
-    background-color: #b5afd1;
+    *background-color: #f32121
 }
 
 footer {
@@ -88,24 +92,28 @@ footer .col-lg-12>p {
     color: #010E21;
 }
 
-#message .col-lg-6 form label {
+#message form .col-lg-6 label {
     color: #010E21;
-    font-weight: 600;
+    font-weight: 800;
+}
+
+#message form .col-lg-6 span {
+    color: red;
 }
 
 .col-lg-6 .tel {
     font-size: 30px;
-    margin-right: 4px;
+    margin-right: 20px;
+    color: red;
 }
 
 .col-lg-6 .mail {
     font-size: 30px;
-    margin-right: 15px;
+    margin-right: 20px;
+    color: red;
 }
 
-.depl {
-    margin-top: 30px;
-    margin-left: 160px;
-    margin-bottom: 30px;
-    font-size: 20px;
+.col-lg-6 span {
+    font-size: 30px;
+    color: #010E21;
 }
