@@ -5,6 +5,9 @@
 body{
     background: #D2CAEC;
 }
+.c-1{
+  color: #007bff;
+}
 .circle-1{
     border: 6px solid #0b0a31;
     box-shadow: 0px 0px 8px 1px #ea0505f0;
@@ -72,6 +75,13 @@ section > p{
 section#services{
     background: #010E21;
     color: #fff;
+}
+#services h3, #services p{
+  color: #fff;
+}
+section#home{
+  padding-bottom: 30px;
+  background: #fff;
 }
 footer{
     padding-top: 20px;
