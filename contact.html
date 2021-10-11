@@ -23,7 +23,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-1">
+        <nav aria-label="breadcrumb" class="navbar navbar-expand-lg navbar-light bg-1">
             <div class="container">
                 <a class="navbar-brand" href="/">PMD Developper</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,16 +73,16 @@
             <p>Une Equipe disponible à votre service. <br> Nous sommes pret pour vous accompagnez dans la réalisation de vos projets, formations d'Etudes.</p>
         </section>
 
-        <section id="coordonee">
+        <section id="coordonee" class="bg-3">
             <h3>nos coordonnées</h3>
             <p></p>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                        <i class="fas fa-phone-alt tel"></i>&nbsp; <span>+221 77 000 00 99</span>
+                        <i class="fas fa-phone-alt tel fa-2x"></i>&nbsp; <span>+221 77 000 00 99</span>
                     </div>
                     <div class="col-lg-6">
-                        <i class="fas fa-mail-bulk mail"></i>&nbsp;<span>info.pmd@gmail.com</span>
+                        <i class="fas fa-mail-bulk mail fa-2x"></i>&nbsp;<span>info.pmd@gmail.com</span>
                     </div>
                 </div>
             </div>
@@ -96,39 +96,36 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="">Nom <span>*</span> </label>
-                                <input type="text" class="form-control" id="" name="">
+                                <label for="">Name <span>*</span> </label>
+                                <input type="text" class="form-control size-input" placeholder="Enter your name" id="" name="">
                                 <small id="" class="form-text text-muted"></small>
                             </div>
+
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Prénom <span>*</span></label>
-                                <input type="text" class="form-control" id="">
-                                <small id="" class="form-text text-muted"></small>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Adresse <span>*</span></label>
-                                <input type="text" class="form-control" id="">
+                                <label for="exampleInputEmail1">Phone <span>*</span></label>
+                                <input type="text" class="form-control size-input" id="" placeholder="Enter your phone number">
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tel <span>*</span></label>
-                                <input type="text" class="form-control" id="">
+                                <label for="exampleInputEmail1">Email <span>*</span></label>
+                                <input type="text" class="form-control size-input" id="" placeholder="Enter your Email adress">
                                 <small id="emailHelp " class="form-text text-muted "></small>
                             </div>
-                            <button type="submit" class="btn btn-primary">envoyer</button>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email <span>*</span></label>
-                                <input type="email" class="form-control" id="">
-                                <small id="emailHelp " class="form-text text-muted "></small>
-                            </div>
                             <div class="form-group ">
-                                <label for="exampleInputEmail1 ">Votre  Message <span>*</span></label>
-                                <textarea name=" " id=" " cols="10 " rows="5 " class="form-control "></textarea>
+                                <label for="exampleInputEmail1 ">Your  Message <span>*</span></label>
+                                <textarea name=" " id=" " cols="10 " rows="5 " class="form-control " placeholder="Please Whrite something"></textarea>
                                 <small id="emailHelp " class="form-text text-muted "></small>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn"> <i class="fas fa-paper-plane"></i>&nbsp;Submit</button>
+                        </div>
+                        <div class="col-md-5"></div>
                     </div>
                 </form>
             </div>

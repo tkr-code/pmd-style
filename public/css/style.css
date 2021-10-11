@@ -13,6 +13,18 @@ body {
     color: #fff !important;
 }
 
+.bg-2 {
+    background: #011431;
+}
+
+.bg-3 {
+    background: #031328ad;
+}
+
+.bg-5 {
+    background: #f5f5f5f0;
+}
+
 .bg-1 a {
     color: #fff !important;
 }
@@ -51,12 +63,17 @@ section#services {
     background: red;
 }
 
-section#coordonee {
-    background-color: #8b75eee7
+section#coordonee h3 {
+    color: #fff;
 }
 
 section#message {
-    *background-color: #f32121
+    background-image: url(../images/7.jpg);
+    background-size: cover;
+}
+
+section#message h3 {
+    color: #fff;
 }
 
 footer {
@@ -93,27 +110,48 @@ footer .col-lg-12>p {
 }
 
 #message form .col-lg-6 label {
-    color: #010E21;
+    color: #fff;
+    font-size: 20px;
     font-weight: 800;
+}
+
+#message form .col-md-4 button {
+    font-size: 25px;
 }
 
 #message form .col-lg-6 span {
     color: red;
 }
 
-.col-lg-6 .tel {
-    font-size: 30px;
+#coordonee .col-lg-6 .tel {
     margin-right: 20px;
     color: red;
 }
 
-.col-lg-6 .mail {
-    font-size: 30px;
+#coordonee .col-lg-6 .mail {
     margin-right: 20px;
     color: red;
 }
 
 .col-lg-6 span {
     font-size: 30px;
-    color: #010E21;
+    color: #fff;
+}
+
+.size-input {
+    height: 52px;
+    border-radius: 10px;
+}
+
+#message form textarea {
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+#message form .btn {
+    background: #ea0505f0 !important;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    width: 100%;
 }
