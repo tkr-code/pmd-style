@@ -22,44 +22,46 @@
 </head>
 
 <body>
-    <header class="main-header">
+    <header class="main-header pt-1">
         <div class="container">
-            <nav class="navbar navbar-expand-lg main-nav px-0">
-                <a class="navbar-brand" href="#">
-                    <!-- <img src="" alt="rajeshdas.com"> -->
-                    PMD Developper
+            <nav class="navbar  navbar-expand-lg main-nav px-0">
+                <a href="#">
+                    <!-- PMD Developper -->
+                    <img class="img-nav" src="public/img/pmd-developper.png" alt="">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
-                    aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="icon-bar icon-bar-1"></span>
-                    <span class="icon-bar icon-bar-2"></span>
-                    <span class="icon-bar icon-bar-3"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li>
                             <a href="index.html" class="active active-first">home</a>
                         </li>
                         <li>
-                            <a href="#about">about us</a>
+                            <a href="about.html">about us</a>
                         </li>
                         <li>
-                            <a href="#service">services</a>
+                            <a href="#services">services</a>
                         </li>
-                        <li>
-                            <a href="#creations">Creations</a>
-                        </li>
-                        <li>
-                            <a href="#team">team</a>
-                        </li>
-                        <li>
-                            <a href="#testimony">testimonils</a>
-                        </li>
+                        <!-- <li>
+                                                                <a href="#creations">Creations</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#team">team</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#testimony">testimonils</a>
+                                                            </li> -->
                         <li>
                             <a href="contact.html">contact</a>
                         </li>
                     </ul>
                 </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
+                    aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar icon-bar-1"></span>
+                    <span class="icon-bar icon-bar-2"></span>
+                    <span class="icon-bar icon-bar-3"></span>
+
+                </button>
+
             </nav>
         </div>
         <!-- /.container -->
@@ -68,8 +70,14 @@
         <!-- carrousel -->
         <section id="home">
             <div class="container py-5">
-                <p class="home-title">Pmd Developper</p>
-                <p class="text-center">Nous vous accompagnons dans la réalisation de vos projets informatique.</p>
+                <img class="w-100" src="public/img/pmd-developper.png" alt="">
+                <p class="home-title">
+                </p>
+                <p class="text-center">
+                    <b>
+                        Nous vous accompagnons dans la réalisation de vos projets informatique.
+                </p>
+                </b>
             </div>
             <!-- <div class="container-fluid">
                 <div class="row">
@@ -112,7 +120,7 @@
         <!-- services -->
         <section id="services">
             <h3>Services</h3>
-            <p class="text-justify text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
+            <p class="text-justify  text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
                 projets aussi
                 fous soient-ils.</p>
             <div class="container">
@@ -121,9 +129,10 @@
                         <div class="card bg-2  card-body rounded">
                             <div class="mt-5">
                                 <i class="fa sh-2 fa-shopping-bag fa-5x rounded-circle bg-4 p-4"></i>
-                                <h5 class="mt-5 c-1">Vente informatique</h5>
-                                <p class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                    Consequatur, qui.</p>
+                                <h5 class="mt-5 text-uppercase c-1">Vente informatique</h5>
+                                <p class="text-justify">Des ordinateurs et accessoires informatique sont disponible dans
+                                    notre
+                                    boutique en ligne</p>
                             </div>
                         </div>
                     </div>
@@ -131,9 +140,9 @@
                         <div class="card card-body bg-3 rounded">
                             <div class="mt-5">
                                 <i class="fa fa-globe fa-5x sh-2 rounded-circle bg-4 p-4"></i>
-                                <h5 class="mt-5 c-1">Application Personalisée</h5>
-                                <p class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                    Consequatur, qui.</p>
+                                <h5 class="mt-5 text-uppercase c-1">Application Personalisée</h5>
+                                <p class="text-justify">Nous vous proposont des maquettes réalisées à partir des
+                                    informations de votre project.</p>
                             </div>
                         </div>
                     </div>
@@ -141,7 +150,7 @@
                         <div class="card card-body bg-2 mg-1 mb-4 rounded">
                             <div class="mt-5">
                                 <i class="fa fa-cog fa-5x bg-4 sh-2 rounded-circle bg-1 p-4"></i>
-                                <h5 class="mt-5 c-1">Maitenance de logiciel</h5>
+                                <h5 class="mt-5 c-1 text-uppercase">Maitenance de logiciel</h5>
                                 <p class="text-justify">Une améioration de logiciel apres la mise en oeurvre,
                                     pour en corriger les fautes, en
                                     améliorant l'éfficacité ou autres caractéristiques, ou encore adapter celui-ci à un
@@ -310,7 +319,7 @@
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                             </div>
                             <div class="text">
-                                <span>Sacre coeur 2, Dakar, Libreville, brazaville</span>
+                                <span>Dakar, Sénégal</span>
                             </div>
                         </div>
                     </div>
@@ -364,8 +373,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="footer-site-info">2020 © <a href="https://www.youtube.com/watch?v=pdr4IzBpacI&t=34s"
-                                target="_blank">Top HTML & CSS Program </a></div>
+                        <div class="footer-site-info">2020 - 2021 © <a
+                                href="https://www.youtube.com/watch?v=pdr4IzBpacI&t=34s" target="_blank">Top HTML & CSS
+                                Program </a></div>
                     </div>
 
                     <div class="col-md-6">
@@ -422,8 +432,12 @@
 
     <!-- owl-carousel -->
     <script src="public/js/owl-carousel/owl.carousel.min.js"></script>
+
+    <script src="public/js/main.js"></script>
+
     <script>
         $(document).ready(function () {
+
             $('.owl-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
