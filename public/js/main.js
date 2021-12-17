@@ -13,4 +13,7 @@ $(function(){
             $('.img-nav').removeClass('img-nav-fixed');
         }
     });
+
+    // scroll to top
+    
 })

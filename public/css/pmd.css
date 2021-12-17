@@ -9,6 +9,42 @@
 body{
     background: #D2CAEC;
 }
+/* btn croll start */
+  #btn-scroll {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Fixed/sticky position */
+      bottom: 20px;
+      /* Place the button at the bottom of the page */
+      right: 30px;
+      /* Place the button 30px from the right */
+      z-index: 99;
+      /* Make sure it does not overlap */
+      border: none;
+      /* Remove borders */
+      outline: none;
+      border: 2px solid #e22323;
+      /* Remove outline */
+      /* background-color: red; */
+      /* Set a background color */
+      color: white;
+      /* Text color */
+      cursor: pointer;
+      /* Add a mouse pointer on hover */
+      padding: 8px;
+      /* Some padding */
+      border-radius: 7px;
+      /* Rounded corners */
+      font-size: 28px;
+      /* Increase font size */
+  }
+
+  #btn-scroll:hover {
+      background-color: #e22323;
+      /* Add a dark-grey background on hover */
+  }
+/* btn croll end */
 /* breadcrumb start */
 .breadcrumb-1{
   border-radius: 0px;

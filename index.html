@@ -22,6 +22,9 @@
 </head>
 
 <body>
+    <button onclick="topFunction()" id="btn-scroll" class="bg-3" title="Go to top"><i
+            class="fa fa-arrow-circle-up fa-1x" aria-hidden="true"></i></button>
+
     <header class="main-header pt-1">
         <div class="container">
             <nav class="navbar  navbar-expand-lg main-nav px-0">
@@ -67,6 +70,7 @@
         <!-- /.container -->
     </header>
     <main>
+
         <!-- carrousel -->
         <section id="home">
             <div class="container py-5">
@@ -284,7 +288,6 @@
         </section>
 
     </main>
-
     <footer class="footer-10">
         <div class="container">
             <div class="row mb-5 pb-3 no-gutters">
@@ -436,7 +439,26 @@
     <script src="public/js/main.js"></script>
 
     <script>
+        var mybutton = document.getElementById("btn-scroll");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
         $(document).ready(function () {
+
 
             $('.owl-carousel').owlCarousel({
                 loop: false,
