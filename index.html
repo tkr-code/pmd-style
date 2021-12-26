@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
-    <link rel="shortcut icon" href="public/img/pmd-developper.png" type="image/x-icon">
+    <link rel="shortcut icon" href="public/img/logo/logo-pmd-1.png" type="image/x-icon">
     <link rel="stylesheet" href="public/css/boostrap/bootstrap.min.css">
     <!-- owl.carousel -->
     <link rel="stylesheet" href="public/css/owl-carousel/owl.carousel.min.css">
@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="public/fonts/fontawesome/css/all.min.css">
     <!-- Style -->
     <link rel="stylesheet" href="public/css/pmd.css">
-
     <title>Pmd Deveolpper - Home</title>
 </head>
 
@@ -67,8 +66,26 @@
         </div>
         <!-- /.container -->
     </header>
+    <style>
+        .loader {
+            color: #eee;
+            font-size: 20px;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            position: relative;
+            text-indent: -9999em;
+            -webkit-animation: load4 1.3s infinite linear;
+            animation: load4 1.3s infinite linear;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+    </style>
+    <!-- <div id="loader-pmd">
+        <div class="loader">Loading...</div>
+    </div> -->
     <main>
-
         <!-- carrousel -->
         <section id="home">
             <div class="container py-5">
@@ -447,56 +464,8 @@
     <!-- owl-carousel -->
     <script src="public/js/owl-carousel/owl.carousel.min.js"></script>
 
+    <script src="public/js/util.js"></script>
     <script src="public/js/main.js"></script>
-
-    <script>
-        var mybutton = document.getElementById("btn-scroll");
-
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () { scrollFunction() };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        }
-        $(document).ready(function () {
-            $(document).on('click', '#mainMenu li a', function () {
-                // this.removeClass('active')
-                $('#mainMenu li a.active').removeClass('active')
-                $(this).addClass('active')
-
-                // alert('ok')
-                console.log(this);
-            })
-            $('.owl-carousel').owlCarousel({
-                loop: false,
-                margin: 10,
-                nav: false,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 1
-                    }
-                }
-            })
-        })
-    </script>
 </body>
 
 </html>

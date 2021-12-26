@@ -11,17 +11,37 @@ html{
 body{
     background: #D2CAEC;
 }
+/* loader start */
+#loader-pmd {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* loader end */
 /*document start*/
 .document{
   background: #fff;
-  border-radius: 5px
+  border-radius: 5px;
+  width: 80%;
+  margin: 0 auto;
 }
 .cv-card-img{
-
+  
 }
 
 .cv-card-img img{
-  width: 100%
+  width: 200px;
+  border: 5px solid #d8dcee21;
+  border-radius: 100px;
+  transition: .5s ease-out
+}
+.cv-card-img img:hover{
+  width: 200px;
+  border-radius: 5px;
+  transition: .5s ease-in-out;
 }
 /*document end*/
 /* btn croll start */
@@ -332,7 +352,7 @@ footer .col-lg-12 > p {
 
 .main-header {
   position: relative;
-  /* top: px; */
+  top: 0px!important;;
   left: 0;
   z-index: 99;
   width: 100%;
@@ -369,7 +389,9 @@ footer .col-lg-12 > p {
 /* main-header end */
 @media (max-width: 991px) {
   /*header starts*/
-
+.document{
+  width: 100%;
+}
   .collapse.in {
     display: block !important;
     padding: 0;
