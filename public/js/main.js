@@ -21,5 +21,7 @@ $(function(){
         $(this).addClass('active')
         console.log(this);
     })
+
+    AOS.init();
     
 })

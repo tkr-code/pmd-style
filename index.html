@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="public/css/owl-carousel/owl.theme.default.min.css">
     <!-- fontawesome -->
     <link rel="stylesheet" href="public/fonts/fontawesome/css/all.min.css">
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Style -->
     <link rel="stylesheet" href="public/css/pmd.css">
     <title>Pmd Deveolpper - Home</title>
@@ -86,55 +88,16 @@
         <div class="loader">Loading...</div>
     </div> -->
     <main>
-        <!-- carrousel -->
-        <section id="home">
-            <div class="container py-5">
+        <!-- home -->
+        <section id="home" data-aos="fade-up">
+            <div class="container py-5" data-aos="fade-up">
                 <img class="w-100" src="public/img/logo/pmd-developper.png" alt="">
                 <p class="text-center home-title text-uppercase">
-                    <!-- <b> -->
                     <span>
                         Nous vous accompagnons dans la réalisation de vos projets informatique.
                     </span>
-
-                    <!-- </b> -->
                 </p>
             </div>
-            <!-- <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 mx-auto bg-white">
-                        <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-lg-12 vente-informnatique">
-                                        <div class="home-img">
-                                            <img src="public/img/vente.jpg" alt="">
-                                        </div>
-                                        <h3 class="text-center my-5 home-title">Vente informatique.</h3>
-                                        <p class="text-justify p-3">Lorem ipsum dolor sit amet consectetur adipisicing
-                                            elit. Maxime et rerum
-                                            voluptatum nisi deleniti quis est voluptatem maiores dolorem. Commodi sed
-                                            repellat eligendi sint rerum nesciunt ad doloribus, quasi, labore fuga quae
-                                            officia cumque ullam dolore eum mollitia quos porro saepe assumenda laborum
-                                            error totam suscipit. Obcaecati itaque magnam quo?</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-lg-8 maintenance">
-                                        <img src="public/img/maintenance.jpg" alt="">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p>Maintenance
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </section>
 
         <!-- services -->
@@ -145,7 +108,7 @@
                 fous soient-ils.</p>
             <div class="container">
                 <div class="row pb-4">
-                    <div class="col-lg-4 bg-2  text-center">
+                    <div data-aos="flip-left" class="col-lg-4 bg-2  text-center">
                         <div class="card bg-2  card-body rounded">
                             <div class="mt-5">
                                 <i class="fa sh-2 fa-shopping-bag fa-5x rounded-circle bg-4 p-4"></i>
@@ -156,7 +119,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4  bg-3 text-center">
+                    <div data-aos="zoom-in-down" class="col-lg-4  bg-3 text-center">
                         <div class="card card-body bg-3 rounded">
                             <div class="mt-5">
                                 <i class="fa fa-globe fa-5x sh-2 rounded-circle bg-4 p-4"></i>
@@ -166,7 +129,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 bg-2 text-center">
+                    <div data-aos="flip-right" class="col-lg-4 bg-2 text-center">
                         <div class="card card-body bg-2 mg-1 mb-4 rounded">
                             <div class="mt-5">
                                 <i class="fa fa-cog fa-5x bg-4 sh-2 rounded-circle bg-1 p-4"></i>
@@ -190,13 +153,10 @@
                 fous soient-ils.</p>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 mb-5 text-center">
+                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-right">
                         <img src="public/img/user/pepin.jpg" width="200px" class="rounded-circle circle-1 m-2" alt="">
                         <h3><span class="first">P</span>epin Djoneska</h3>
                         <p>Développeur Full stack</p>
-                        <!-- <a href="#" target="_blank" title="Facebook" class="socials-item">
-                            <i class="fab fa-facebook-f facebook"></i>
-                        </a> -->
                         <a href="https://api.whatsapp.com/send?phone=221772375369&text=Salut , Pépin j'ai eu votre contacte sur votre site"
                             target="_blank" title="whatsapp" class="socials-item">
                             <i class="fab fa-whatsapp whatsapp"></i>
@@ -206,11 +166,11 @@
                             <i class="fab fa-linkedin linkedin" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div class="col-lg-4 mb-5 text-center">
+                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out">
                         <img src="public/img/user/malick-tounkara.jpg" width="200px" class="rounded-circle circle-1 m-2"
                             alt="">
                         <h3><span class="first">M</span>alick Tounkara</h3>
-                        <p>Développeur Web.</p>
+                        <p>Développeur Full Stack.</p>
                         <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
                             class="socials-item">
                             <i class="fab fa-facebook-f facebook"></i>
@@ -224,20 +184,14 @@
                             <i class="fab fa-linkedin" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div class="col-lg-4 mb-5 text-center">
+                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-left">
                         <img src="public/img/user/dieme.jpg" width="200px" class="rounded-circle circle-1 m-2" alt="">
                         <h3><span class="first">D</span>ieme mamadou</h3>
                         <p>Développeur Java</p>
-                        <!-- <a href="#" target="_blank" title="Facebook" class="socials-item">
-                            <i class="fab fa-facebook-f facebook"></i>
-                        </a> -->
                         <a href="https://api.whatsapp.com/send?phone=221770431225&text=Bienvenue chez TKR-CODE. (Merci de vous présenter)"
                             target="_blank" title="Whatsapp" class="socials-item">
                             <i class="fab fa-whatsapp whatsapp"></i>
                         </a>
-                        <!-- <a href="#" target="_blank" title="Facebook" class="socials-item">
-                            <i class="fab fa-linkedin" aria-hidden="true"></i>
-                        </a> -->
                     </div>
                 </div>
             </div>
@@ -303,13 +257,12 @@
                 </div>
             </div>
         </section>
-
     </main>
     <footer class="footer-10">
         <div class="container">
             <div class="row mb-5 pb-3 no-gutters">
                 <div class="col-md-4 mb-md-0  d-flex">
-                    <div class="con con-1 bg-2 w-100 py-5">
+                    <div data-aos="zoom-in" class="con con-1 bg-2 w-100 py-5">
                         <div class="con-info w-100 text-center">
                             <div class="icon d-flex align-items-center justify-content-center">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
@@ -321,7 +274,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-md-0 d-flex">
-                    <div class="con con-2 bg-3 w-100 py-5">
+                    <div data-aos="zoom-in-up" class="con con-2 bg-3 w-100 py-5">
                         <div class="con-info w-100 text-center">
                             <div class="icon d-flex align-items-center   justify-content-center">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -333,7 +286,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-md-0 d-flex">
-                    <div class="con con-3 bg-2 w-100 py-5">
+                    <div data-aos="zoom-in-down" class="con con-3 bg-2 w-100 py-5">
                         <div class="con-info w-100 text-center">
                             <div class="icon d-flex align-items-center justify-content-center">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -463,9 +416,13 @@
 
     <!-- owl-carousel -->
     <script src="public/js/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Aos -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script src="public/js/util.js"></script>
     <script src="public/js/main.js"></script>
+    <script>
+    </script>
 </body>
 
 </html>
