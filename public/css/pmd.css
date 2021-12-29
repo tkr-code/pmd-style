@@ -19,6 +19,12 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  z-index: 100;
+  color: #fff;
+  font-weight: bold;
+  background: #010E21;
+  text-align: center;
 }
 /* loader end */
 /*document start*/
