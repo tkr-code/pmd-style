@@ -7,206 +7,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
+    <link rel="shortcut icon" href="public/img/logo/logo-pmd-1.png" type="image/x-icon">
     <link rel="stylesheet" href="public/css/boostrap/bootstrap.min.css">
-    <!-- font lato -->
-    <link rel="stylesheet" href="public/fonts/Lato/Lato-Regular.ttf">
     <!-- owl.carousel -->
     <link rel="stylesheet" href="public/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="public/css/owl-carousel/owl.theme.default.min.css">
     <!-- fontawesome -->
     <link rel="stylesheet" href="public/fonts/fontawesome/css/all.min.css">
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Style -->
-    <link rel="stylesheet" href="public/css/style.css">
-
+    <link rel="stylesheet" href="public/css/pmd.css">
     <title>Pmd Deveolpper - Home</title>
 </head>
 
 <body>
-    <header class="main-header">
+    <button onclick="topFunction()" id="btn-scroll" class="bg-3" title="Go to top"><i
+            class="fa fa-arrow-circle-up fa-1x" aria-hidden="true"></i></button>
+    <div id="loader-pmd">
+        <div class="loader">
+            <img width="40%" src="public/img/logo/pmd-developper.png" class="d-block mx-auto" alt="">
+            <!-- Loading... -->
+            chargement...
+        </div>
+    </div>
+
+    <header class="main-header pt-1">
         <div class="container">
-            <nav class="navbar navbar-expand-lg main-nav px-0">
-                <a class="navbar-brand" href="#">
-                    <!-- <img src="" alt="rajeshdas.com"> -->
-                    PMD Developper
+            <nav class="navbar  navbar-expand-lg main-nav px-0">
+                <a href="#">
+                    <!-- PMD Developper -->
+                    <img class="img-nav" src="public/img/logo/pmd-developper.png" alt="">
                 </a>
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="navbar-nav ml-auto text-uppercase f1">
+                        <li>
+                            <a href="index.html" class="active">home</a>
+                        </li>
+                        <li>
+                            <a href="#services">services</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#creations">Creations</a>
+                        </li> -->
+                        <li>
+                            <a href="#team">team</a>
+                        </li>
+                        <li>
+                            <a href="about.html">about us</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">contact</a>
+                        </li>
+                    </ul>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
                     aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar icon-bar-1"></span>
                     <span class="icon-bar icon-bar-2"></span>
                     <span class="icon-bar icon-bar-3"></span>
+
                 </button>
-                <div class="collapse navbar-collapse" id="mainMenu">
-                    <ul class="navbar-nav ml-auto text-uppercase f1">
-                        <li>
-                            <a href="#home" class="active active-first">home</a>
-                        </li>
-                        <li>
-                            <a href="#about">about us</a>
-                        </li>
-                        <li>
-                            <a href="#service">services</a>
-                        </li>
-                        <li>
-                            <a href="#project">projects</a>
-                        </li>
-                        <li>
-                            <a href="#team">team</a>
-                        </li>
-                        <li>
-                            <a href="#testimony">testimonils</a>
-                        </li>
-                        <li>
-                            <a href="#contact">contact</a>
-                        </li>
-                    </ul>
-                </div>
+
             </nav>
         </div>
         <!-- /.container -->
     </header>
-    <!-- <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-1">
-            <div class="container">
-                <a class="navbar-brand" href="/">PMD Developper</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-home" aria-hidden="true"></i> Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-cogs" aria-hidden="true"></i> Services
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-book-open    "></i> About
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-address-book" aria-hidden="true"></i> Contact
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto ">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-lock" aria-hidden="true"></i> Se connecter
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header> -->
 
     <main>
-        <!-- carrousel -->
-        <section>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 mx-auto bg-white">
-                        <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <img src="http://placehold.it/620x230" alt="">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate, odio.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <img src="http://placehold.it/620x230" alt="">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate, odio.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <img src="http://placehold.it/620x230" alt="">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate, odio.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <img src="http://placehold.it/620x230" alt="">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate, odio.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <img src="http://placehold.it/620x230" alt="">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate, odio.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- home -->
+        <section id="home" data-aos="fade-up">
+            <div class="container py-5" data-aos="fade-up">
+                <img class="w-100" src="public/img/logo/pmd-developper.png" alt="">
+                <p class="text-center home-title text-uppercase">
+                    <span>
+                        Nous vous accompagnons dans la réalisation de vos projets informatique.
+                    </span>
+                </p>
             </div>
         </section>
 
         <!-- services -->
         <section id="services">
             <h3>Services</h3>
+            <p class="text-justify  text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
+                projets aussi
+                fous soient-ils.</p>
             <div class="container">
-                <div class="row ">
-                    <div class="col-lg-4 bg-2 mb-4  text-center">
+                <div class="row pb-4">
+                    <div data-aos="flip-left" class="col-lg-4 bg-2  text-center">
                         <div class="card bg-2  card-body rounded">
-                            <div class="my-5">
-                                <i class="fa sh-2 fa-shopping-bag fa-5x rounded-circle bg-4 p-5"></i>
-                                <h3 class="mt-5"><a href="#">Vente informatique</a></h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, qui.</p>
+                            <div class="mt-5">
+                                <i class="fa sh-2 fa-shopping-bag fa-5x rounded-circle bg-4 p-4"></i>
+                                <h5 class="mt-5 text-uppercase c-1">Vente informatique</h5>
+                                <p class="text-justify">Des ordinateurs et accessoires informatique sont disponible dans
+                                    notre
+                                    boutique en ligne</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-4  bg-3 text-center">
+                    <div data-aos="zoom-in-down" class="col-lg-4  bg-3 text-center">
                         <div class="card card-body bg-3 rounded">
-                            <div class="my-5">
-                                <i class="fa fa-globe fa-5x sh-2 rounded-circle bg-4 p-5"></i>
-                                <h3 class="mt-5">Application Personalisée</h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, qui.</p>
+                            <div class="mt-5">
+                                <i class="fa fa-globe fa-5x sh-2 rounded-circle bg-4 p-4"></i>
+                                <h5 class="mt-5 text-uppercase c-1">Application Personalisée</h5>
+                                <p class="text-justify">Nous vous proposons des maquettes réalisées à partir des
+                                    informations de votre project.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-4 bg-2 text-center">
+                    <div data-aos="flip-right" class="col-lg-4 bg-2 text-center">
                         <div class="card card-body bg-2 mg-1 mb-4 rounded">
-                            <div class="my-5">
-                                <i class="fa fa-cog fa-5x bg-4 sh-2 rounded-circle bg-1 p-5"></i>
-                                <h3 class="mt-5">Maitenance de logiciel</h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, qui.</p>
+                            <div class="mt-5">
+                                <i class="fa fa-cog fa-5x bg-4 sh-2 rounded-circle bg-1 p-4"></i>
+                                <h5 class="mt-5 c-1 text-uppercase">Maintenance de logiciel</h5>
+                                <p class="text-justify">Une améioration de logiciel apres la mise en oeuvre,
+                                    pour en corriger les fautes, en
+                                    améliorant l'éfficacité ou autres caractéristiques, ou encore adapter celui-ci à un
+                                    environement modifié.</p>
                             </div>
                         </div>
                     </div>
@@ -215,52 +135,61 @@
         </section>
 
         <!-- Notre equipe -->
-        <section id="equipes" class="bg-white">
+        <section id="team" class="bg-white">
             <h3>Notre equipe</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus deserunt sed veniam expedita sint
-                blanditiis nesciunt ratione in aliquam consequuntur?.</p>
+            <p class="text-justify text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
+                projets aussi
+                fous soient-ils.</p>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 mb-5 text-center">
-                        <img src="http://placehold.it/200x200" class="rounded-circle circle-1 m-2" alt="">
+                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-right">
+                        <img src="public/img/user/pepin.jpg" width="200px" class="rounded-circle circle-1 m-2" alt="">
                         <h3><span class="first">P</span>epin Djoneska</h3>
-                        <p>Développeur Java.</p>
-                        <a href="#" target="_blank" title="Facebook" class="socials-item">
-                            <i class="fab fa-facebook-f facebook"></i>
-                        </a>
-                        <a href="#" target="_blank" title="whatsapp" class="socials-item">
+                        <p>Développeur Full stack</p>
+                        <a href="https://api.whatsapp.com/send?phone=221772375369&text=Salut , Pépin j'ai eu votre contacte sur votre site"
+                            target="_blank" title="whatsapp" class="socials-item">
                             <i class="fab fa-whatsapp whatsapp"></i>
                         </a>
-                        <a href="#" target="_blank" title="linkedin" class="socials-item">
+                        <a href="https://www.linkedin.com/in/can-va-1a5227223/" target="_blank" title="linkedin"
+                            class="socials-item">
                             <i class="fab fa-linkedin linkedin" aria-hidden="true"></i>
                         </a>
+                        <a href="cv-ngoulou-pepin.html" title="cv malick tounkara" class="socials-item">
+                            cv
+                        </a>
                     </div>
-                    <div class="col-lg-4 mb-5 text-center">
-                        <img src="http://placehold.it/200x200" class="rounded-circle circle-1 m-2" alt="">
+                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out">
+                        <img src="public/img/user/malick-tounkara.jpg" width="200px" class="rounded-circle circle-1 m-2"
+                            alt="">
                         <h3><span class="first">M</span>alick Tounkara</h3>
-                        <p>Développeur Web.</p>
-                        <a href="#" target="_blank" title="Facebook" class="socials-item">
+                        <p>Développeur Full Stack.</p>
+                        <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
+                            class="socials-item">
                             <i class="fab fa-facebook-f facebook"></i>
                         </a>
-                        <a href="#" target="_blank" title="Facebook" class="socials-item">
+                        <a href="https://api.whatsapp.com/send?phone=221781278288&text=Salut, Malick j'ai eu votre contacte sur votre site :"
+                            target="_blank" title="Whatsapp" class="socials-item">
                             <i class="fab fa-whatsapp whatsapp"></i>
                         </a>
-                        <a href="#" target="_blank" title="Facebook" class="socials-item">
+                        <a href="https://www.linkedin.com/in/malick-tounkara-b858a41aa/" target="_blank"
+                            title="Facebook" class="socials-item">
                             <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="cv-malick-tounkara.html" target="_blank" title="cv malick toumkara"
+                            class="socials-item">
+                            cv
                         </a>
                     </div>
-                    <div class="col-lg-4 mb-5 text-center">
-                        <img src="http://placehold.it/200x200" class="rounded-circle circle-1 m-2" alt="">
+                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-left">
+                        <img src="public/img/user/dieme.jpg" width="200px" class="rounded-circle circle-1 m-2" alt="">
                         <h3><span class="first">D</span>ieme mamadou</h3>
-                        <p>Développeur Full stack.</p>
-                        <a href="#" target="_blank" title="Facebook" class="socials-item">
-                            <i class="fab fa-facebook-f facebook"></i>
-                        </a>
-                        <a href="#" target="_blank" title="Facebook" class="socials-item">
+                        <p>Développeur Java</p>
+                        <a href="https://api.whatsapp.com/send?phone=221770431225&text=Bienvenue chez TKR-CODE. (Merci de vous présenter)"
+                            target="_blank" title="Whatsapp" class="socials-item">
                             <i class="fab fa-whatsapp whatsapp"></i>
                         </a>
-                        <a href="#" target="_blank" title="Facebook" class="socials-item">
-                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        <a href="cv-mamadou-dieme.html" target="_blank" title="cv malick toumkara" class="socials-item">
+                            cv
                         </a>
                     </div>
                 </div>
@@ -268,80 +197,97 @@
             </div>
         </section>
 
-    </main>
+        <!-- creations -->
+        <section id="creations">
+            <h3>Creations</h3>
+            <p class="text-justify text-center p-4">Des exemples de projet créés dans nos ateliers</p>
+            <div class="container mx-auto mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="public/img/creation/gaboma-annonce.png" width="100px" class="card-img-top"
+                                alt="Gaboma annonce">
+                            <div class="card-body">
+                                <h5 class="card-title">Gaboma annonce</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Site d'annonce au sénégal</h6>
+                                <a href="https://gaboma-annonce.com" target="_blank" class="btn btn-1 mr-2">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    Visiter le Site</a>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="text-center">
+                    <a href="#" class="btn btn-2">
+                        Toutes nos creations
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
     <footer class="footer-10">
         <div class="container">
             <div class="row mb-5 pb-3 no-gutters">
-                <div class="col-md-4 mb-md-0 mb-4 d-flex">
-                    <div class="con con-1 bg-2 w-100 py-5">
+                <div class="col-md-4 mb-md-0  d-flex">
+                    <div data-aos="zoom-in" class="con con-1 bg-2 w-100 py-5">
                         <div class="con-info w-100 text-center">
                             <div class="icon d-flex align-items-center justify-content-center">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                             </div>
                             <div class="text">
-                                <span>(+221) 78 127 82 88 </span>
+                                <span>+221 78 127 82 88 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-md-0 mb-4 d-flex">
-                    <div class="con con-2 bg-3 w-100 py-5">
+                <div class="col-md-4 mb-md-0 d-flex">
+                    <div data-aos="zoom-in-up" class="con con-2 bg-3 w-100 py-5">
                         <div class="con-info w-100 text-center">
                             <div class="icon d-flex align-items-center   justify-content-center">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                             </div>
                             <div class="text">
-                                <span>pmd.dev@email.com</span>
+                                <span>contact@pmd-developper.com</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-md-0 mb-4 d-flex">
-                    <div class="con con-3 bg-2 w-100 py-5">
+                <div class="col-md-4 mb-md-0 d-flex">
+                    <div data-aos="zoom-in-down" class="con con-3 bg-2 w-100 py-5">
                         <div class="con-info w-100 text-center">
                             <div class="icon d-flex align-items-center justify-content-center">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                             </div>
                             <div class="text">
-                                <span>Sacre coeur 2, Dakar, Libreville, brazaville</span>
+                                <span>Dakar sacré couer 2, Sénégal</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mb-5">
-                <div class="col-md-7">
+                <div class="col-md-8 mx-auto">
                     <div class="row">
-                        <div class="col-md-4 mb-md-0 mb-4">
-                            <h2 class="footer-heading">About</h2>
+                        <div class="col-md-6 mb-md-0 mb-4">
+                            <h2 class="footer-heading">A propos</h2>
                             <ul class="list-unstyled">
-                                <li><a href="#" class="d-block">Out story</a></li>
-                                <li><a href="#" class="d-block">Awards</a></li>
-                                <li><a href="#" class="d-block">Our Team</a></li>
-                                <li><a href="#" class="d-block">Career</a></li>
+                                <li><a href="about.html/#about" class="d-block">Out story</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-4 mb-md-0 mb-4">
-                            <h2 class="footer-heading">Company</h2>
+                        <div class="col-md-6 mb-md-0 mb-4">
+                            <h2 class="footer-heading">Lien utile</h2>
                             <ul class="list-unstyled">
-                                <li><a href="#" class="d-block">Our services</a></li>
-                                <li><a href="#" class="d-block">Clients</a></li>
-                                <li><a href="#" class="d-block">Contact</a></li>
-                                <li><a href="#" class="d-block">Press</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 mb-md-0 mb-4">
-                            <h2 class="footer-heading">Resources</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="d-block">Blog</a></li>
-                                <li><a href="#" class="d-block">Newsletter</a></li>
-                                <li><a href="#" class="d-block">Privacy Policy</a></li>
+                                <li><a href="#services" class="d-block">Our services</a></li>
+                                <!-- <li><a href="#" class="d-block">Clients</a></li>
+ -->
+                                <li><a href="contact.html" class="d-block">Contact</a></li>
+                                <li><a href="cv.html" class="d-block">Cv</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 mb-md-0 mb-4">
+                <!-- <div class="col-md-5 mb-md-0 mb-4">
                     <h2 class="footer-heading">Subscribe</h2>
                     <form action="#" class="subscribe-form">
                         <div class="form-group d-flex">
@@ -351,15 +297,14 @@
                         </div>
                         <span class="subheading">Get digital marketing updates in your mailbox</span>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="footer-site-info">2020 © <a href="https://www.youtube.com/watch?v=pdr4IzBpacI&t=34s"
-                                target="_blank">Top HTML & CSS Program </a></div>
+                        <div class="footer-site-info">© 2020 - <span id="year"></span></div>
                     </div>
 
                     <div class="col-md-6">
@@ -371,7 +316,7 @@
                                         href="#">Support</a></li>
                                 <li id="menu-item-27"
                                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27"><a
-                                        href="#">Contact Us</a></li>
+                                        href="contact.html">Contact Us</a></li>
                                 <li id="menu-item-28"
                                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a
                                         href="#">Disclaimer</a></li>
@@ -387,10 +332,15 @@
                         <div id="footer-socials">
                             <div class="socials inline-inside socials-colored">
 
-                                <a href="#" target="_blank" title="Facebook" class="socials-item">
+                                <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
+                                    class="socials-item">
                                     <i class="fab fa-facebook-f facebook"></i>
                                 </a>
-                                <a href="#" target="_blank" title="Twitter" class="socials-item">
+                                <a href="https://api.whatsapp.com/send?phone=221781278288&text=Salut, Malick j'ai eu votre contacte sur votre site :"
+                                    target="_blank" title="Whatsapp" class="socials-item">
+                                    <i class="fab fa-whatsapp whatsapp"></i>
+                                </a>
+                                <!-- <a href="#" target="_blank" title="Twitter" class="socials-item">
                                     <i class="fab fa-twitter twitter"></i>
 
                                 </a>
@@ -402,7 +352,7 @@
                                 </a>
                                 <a href="#" target="_blank" title="Telegram" class="socials-item">
                                     <i class="fab fa-telegram telegram"></i>
-                                </a>
+                                </a> -->
                             </div>
                         </div>
                     </div>
@@ -411,71 +361,28 @@
             </div>
         </div>
     </footer>
-
-    <!-- <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 text-center">
-                    <h4>PMD Developper</h4>
-                    <img src="http://placehold.it/100x100" class="rounded-circle" alt="">
-
-                </div>
-                <div class="col-lg-4">
-                    <p>Nos pages</p>
-                    <ul>
-                        <li>Home</li>
-                        <li>Services</li>
-                        <li>About</li>
-                        <li>Contact</li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <p>Liens utiles</p>
-                    <ul>
-                        <li>Home</li>
-                        <li>Services</li>
-                        <li>About</li>
-                        <li>Contact</li>
-                    </ul>
-                </div>
-                <div class="col-lg-12">
-                    <p><i class="fa fa-copyright" aria-hidden="true"></i> Tous droits
-                        reservés
-                        par <b>PMD Developper</b>
-                        2021
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer> -->
-
-
     <script src="public/js/jquery/jquery-v3.6.js"></script>
+
+
     <script src="public/js/boostrap/bootstrap.min.js"></script>
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script> -->
+
 
     <!-- owl-carousel -->
     <script src="public/js/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Aos -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="public/js/util.js"></script>
+    <script src="public/js/main.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.owl-carousel').owlCarousel({
-                loop: false,
-                margin: 10,
-                nav: false,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 1
-                    }
-                }
-            })
-        })
+
     </script>
 </body>
 
