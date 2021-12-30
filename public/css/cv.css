@@ -29,11 +29,11 @@ ul.timeline > li {
 }
 ul.timeline > li:before {
     content: ' ';
-    background: white;
+    background: #010E21;
     display: inline-block;
     position: absolute;
     border-radius: 50%;
-    border: 3px solid #22c0e8;
+    border: 2px solid #e22323;
     left: 20px;
     width: 20px;
     height: 20px;
@@ -253,7 +253,17 @@ ul.timeline > li:before {
         padding: 10px 30px 10px 0
     }
 }
-
+.education-diplome {
+    font-weight: bold;
+    color: #e22323;
+    letter-spacing: 1px;
+}
+.education-school {
+    font-weight: bold;
+}
+.document h3{
+    
+}
 @media only screen and (max-width: 767px) {
     .main-timeline:before {
         margin: 0;

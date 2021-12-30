@@ -19,9 +19,9 @@ $(function(){
     $(document).on('click', '#mainMenu li a', function () {
         $('#mainMenu li a.active').removeClass('active')
         $(this).addClass('active')
-        console.log(this);
     })
-
     AOS.init();
+
+    //scroll active
     
 })
