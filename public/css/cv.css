@@ -266,7 +266,6 @@ ul.timeline > li:before {
     letter-spacing: 1px;
     color: #010E21;
 }   
-}
 @media only screen and (max-width: 767px) {
     .main-timeline:before {
         margin: 0;
