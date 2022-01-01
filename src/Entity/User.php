@@ -53,6 +53,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $personne;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Cv::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $cv;
+
 
     public function getId(): ?int
     {
@@ -163,6 +168,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPersonne(?Personne $personne): self
     {
         $this->personne = $personne;
+
+        return $this;
+    }
+
+    public function getCv(): ?Cv
+    {
+        return $this->cv;
+    }
+
+    public function setCv(Cv $cv): self
+    {
+        // set the owning side of the relation if necessary
+        if ($cv->getUser() !== $this) {
+            $cv->setUser($this);
+        }
+
+        $this->cv = $cv;
 
         return $this;
     }

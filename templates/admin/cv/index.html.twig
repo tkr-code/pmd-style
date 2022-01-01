@@ -10,6 +10,10 @@
             <tr>
                 <th>Id</th>
                 <th>Description</th>
+                <th>Poste</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Tel</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +22,10 @@
             <tr>
                 <td>{{ cv.id }}</td>
                 <td>{{ cv.description }}</td>
+                <td>{{ cv.poste }}</td>
+                <td>{{ cv.email }}</td>
+                <td>{{ cv.adresse }}</td>
+                <td>{{ cv.tel }}</td>
                 <td>
                     <a href="{{ path('admin_cv_show', {'id': cv.id}) }}">show</a>
                     <a href="{{ path('admin_cv_edit', {'id': cv.id}) }}">edit</a>
@@ -25,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

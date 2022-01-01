@@ -63,7 +63,7 @@ class CvController extends AbstractController
      */
     public function edit(Request $request, Cv $cv): Response
     {
-        $form = $this->createForm(CvType::class, $cv);
+        $form = $this->createForm(Cv1Type::class, $cv);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

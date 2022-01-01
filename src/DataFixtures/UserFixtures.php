@@ -64,6 +64,7 @@ class UserFixtures extends Fixture
             ->setRoles($value['roles'])
             ->setPersonne($personne);
             $this->em->persist($user);
+            $this->addReference('user_'.$value['email'],$user);
         }
         $this->em->flush();
     }
