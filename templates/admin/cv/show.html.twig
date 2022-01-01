@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cv{% endblock %}
+
+{% block body %}
+    <h1>Cv</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cv.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ cv.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_cv_index') }}">back to list</a>
+
+    <a href="{{ path('admin_cv_edit', {'id': cv.id}) }}">edit</a>
+
+    {{ include('admin_cv/_delete_form.html.twig') }}
+{% endblock %}

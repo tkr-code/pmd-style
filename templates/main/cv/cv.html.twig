@@ -1,0 +1,325 @@
+{% extends "main/base.html.twig" %}
+{% block head %}
+    <!-- Style  cv -->
+    <link rel="stylesheet" href="{{ asset('css/cv.css') }}">
+{% endblock %}
+{% block body %}
+        <div class="container-fluid header-cv bg-2">
+            <p class="text-center mb-0 py-1">{{ cv.nom ~ cv.prenom}} - Developpeur full stack - Email:
+                malick.tounkara.1@gmail.com -
+                Tel: +221
+                78 127 82 88</p>
+        </div>
+        <div class="container my-5">
+            <!-- <p> liencv : <a target="_blank" href="https://templateflip.com/demo/templates/right-resume/">modele</a>
+            </p> -->
+            <div class="document">
+                <div class="container-fluid">
+                    <div class="row bg-1 py-3 rounded-top mb-5">
+                        <div class="col-12 py-5 col-md-4">
+                            <div class="cv-card-img text-center">
+                                <img width="200px" height="200px" src="{{ asset('img/user/' ~ cv.photo) }}">
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-12">
+                            <h4 class="cv-name">{{ cv.prenom ~ ' ' ~ cv.nom }}</h4>
+                            <p>{{cv.poste }}</p>
+                            <p>{{cv.description }}</p>
+                            <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
+                                class="socials-item">
+                                <i class="fab fa-facebook-f facebook"></i>
+                            </a>
+                            <a href="https://api.whatsapp.com/send?phone=221781278288&text=Salut, Malick j'ai eu votre contacte sur votre site :"
+                                target="_blank" title="Whatsapp" class="socials-item">
+                                <i class="fab fa-whatsapp whatsapp"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/malick-tounkara-b858a41aa/" target="_blank"
+                                title="Facebook" class="socials-item">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <div class="btn-group">
+
+                                <!-- <button class="btn btn-primary">
+                                    Télécharger cv <i class="fa fa-download" aria-hidden="true"></i>
+                                </button> -->
+                            </div>
+
+                            <!-- <a href="#" class="btn btn-light"></a> -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="card border-0">
+                            <div class="card-body">
+                                <h3>
+                                    À propos de moi
+                                    <!-- About me -->
+                                </h3>
+                                <p class="text-justify">
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non nisi facilis adipisci
+                                    totam eos a eveniet cumque nulla ullam optio.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="card border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <dd class="col-md-4 col-4">Email :</dd>
+                                    <dd class="col-md-8 col-8">malick.tounkara.1@gmail.com</dd>
+                                    <dd class="col-md-4 col-4">Téléphone :</dd>
+                                    <dd class="col-md-8 col-8"> +221 78 127 82 88</dd>
+                                    <dd class="col-md-4 col-4">Adresse :</dd>
+                                    <dd class="col-md-8 col-8"> Dakar sacre coeur 2 1100, Sénégal</dd>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="d-print-one">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <div class="card border-0">
+                            <div class="card-body">
+                                <h3 class="mb-3 h3">
+                                    Compétences professionnelles
+                                    <!-- Professional Skills -->
+                                </h3>
+                                <div class="row">
+                                    <div class="col-md-6 p-3">
+                                        <span>SQL SERVER</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 50%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-3">
+                                        <span>UML</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-3">
+                                        <span>React native</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-3">
+                                        <span>Java</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-3">
+                                        <span>Symfony</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-3">
+                                        <span>Maintenace informatique</span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- <div id="work-experience">
+                    <h3 class="mb-3 ml-3 h3">
+                        Expérience professionnelle
+                        Work Experience
+                    </h3>
+                    <div class="container">
+                        <div class="main-timeline">
+
+                            <div class="timeline">
+                                <div class="icon"></div>
+                                <div class="date-content">
+                                    <div class="date-outer">
+                                        <span class="date">
+                                            <span class="month">2 Years</span>
+                                            <span class="year">2013</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5 class="title">Visual Art &amp; Design</h5>
+                                    <p class="description">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur ex sit
+                                        amet massa scelerisque
+                                        scelerisque. Aliquam erat volutpat. Aenean interdum finibus efficitur. Praesent
+                                        dapibus dolor felis,
+                                        eu ultrices elit molestie.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="timeline">
+                                <div class="icon"></div>
+                                <div class="date-content">
+                                    <div class="date-outer">
+                                        <span class="date">
+                                            <span class="month">1 Years</span>
+                                            <span class="year">2015</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5 class="title">Product Designer</h5>
+                                    <p class="description">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur ex sit
+                                        amet massa scelerisque
+                                        scelerisque. Aliquam erat volutpat. Aenean interdum finibus efficitur. Praesent
+                                        dapibus dolor felis,
+                                        eu ultrices elit molestie.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="timeline">
+                                <div class="icon"></div>
+                                <div class="date-content">
+                                    <div class="date-outer">
+                                        <span class="date">
+                                            <span class="month">5 mois</span>
+                                            <span class="year">2016</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5 class="title">Web Designer</h5>
+                                    <p class="description">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur ex sit
+                                        amet massa scelerisque
+                                        scelerisque. Aliquam erat volutpat. Aenean interdum finibus efficitur. Praesent
+                                        dapibus dolor felis,
+                                        eu ultrices elit molestie.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="timeline">
+                                <div class="icon"></div>
+                                <div class="date-content">
+                                    <div class="date-outer">
+                                        <span class="date">
+                                            <span class="month">2 Years</span>
+                                            <span class="year">2018</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5 class="title">Graphic Designer</h5>
+                                    <p class="description">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur ex sit
+                                        amet massa scelerisque
+                                        scelerisque. Aliquam erat volutpat. Aenean interdum finibus efficitur. Praesent
+                                        dapibus dolor felis,
+                                        eu ultrices elit molestie.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr> -->
+                <div id="education">
+                    <h3 class="mb-3 ml-3 h3">Education</h3>
+                    <div class="container mt-5 mb-5">
+                        <div class="row">
+                            <div class="col-md-9 offset-md-1 col-12">
+                                <ul class="timeline">
+                                    <li>
+                                        <p class="education-school">IPG/ISTI(Dakar-Sénégal)</p>
+                                        <p class="education-diplome">
+                                            LICENCE EN INFORMATIQUE
+                                            <span class="float-right education-diplome-date">Oct 2019 - Août 2020</span>
+                                        </p>
+                                        <p class="text-justify"><b>Developpeur</b><br> Je prend un projet, qui a été
+                                            pensée et réfléchie par
+                                            un client ou une équipe de conception, et le transforme en
+                                            application.</p>
+                                    </li>
+                                    <li>
+                                        <p class="education-school">IPG/ISTI(Dakar-Sénégal)</p>
+                                        <p class="education-diplome">
+                                            DTS EN INFORMATIQUE
+                                            <span class="float-right education-diplome-date">Oct 2018 - Août 2019</span>
+                                        </p>
+                                        <p class="text-justify"><b>Analyste programmeur</b><br>
+                                            Je m'occupe de créer des logiciels. Je suis également
+                                            chargé de m'occuper de la maintenance des anciens
+                                            logiciels et du suivi des nouveaux. J'analyse d'une part un
+                                            souhait émis par le client et d'autre part programmer
+                                            cette demande
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="education-school">LYCEE NATIONAL LEOM MBA(Libreville-Gabon)</p>
+                                        <p class="education-diplome">
+                                            BACCALAUREAT D
+                                            <span class="float-right education-diplome-date">Oct 2016 - Juil 2017</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div id="contact">
+                    <h3 class="h3 mb-3 ml-3">Contactez moi</h3>
+                    <div class="row mb-3">
+                        <div class="col-md-7">
+                            <form action="#" method="post">
+                                <div class="form-row mb-3 mx-3">
+                                    <div class="form-group col-md-6">
+                                        <label for="user">Nom et prénom</label>
+                                        <input type="text" name="user" class="form-control" placeholder="Prénom et nom">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email</label>
+                                        <input type="mail" name="email" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="form-group col-12 col-md-12">
+                                        <label for="message"></label>
+                                        <textarea class="form-control" name="message" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success mx-auto d-block">Envoyer</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row mx-3">
+                                <dt class="col-12">Email</dt>
+                                <dd class="col-12"> malick.tounkara.1@gmail.com</dd>
+                                <dt class="col-12">Téléphone</dt>
+                                <dd class="col-12"> +221 78 127 82 88</dd>
+                                <dt class="col-12">Adresse</dt>
+                                <dd class="col-12"> Wakam</dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

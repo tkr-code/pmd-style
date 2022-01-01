@@ -1,0 +1,21 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_4_layout.html.twig'] # accepte plusieurs thèmes
+    globals: 
+        app_name: 'PMD DEVELOPPER'
+        locales: '%app.locales%'
+        navs: '@App\Twig\NavExtension'
+        site: 
+            name: 'pmd-developper'
+            description: "Startup de developement d'application"
+            email: 'contact@pmd-developper.com'
+            current_name: 'F cfa'
+            current: 'XOF'
+            phone_number_1: '+221 78 127 82 88'
+            phone_number_2: '+221 77 000 00 00'
+            link: "https://pmd-developper.com"
+            mission_text: 'text à definir'
+            user_empty: 'empty.png'
+when@test:
+    twig:
+        strict_variables: true

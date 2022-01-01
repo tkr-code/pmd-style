@@ -1,0 +1,76 @@
+{% extends "main/base.html.twig" %}
+{% block navUl %}
+<ul class="navbar-nav ml-auto text-uppercase f1">
+    <li>
+        <a href="/">Accueil</a>
+    </li>
+    <li>
+        <a href="/#services">Services</a>
+    </li>
+    <li>
+        <a href="/#team">Equipe</a>
+    </li>
+    <li>
+        <a href="{{ path('about') }}">A propos</a>
+    </li>
+    <li>
+        <a class="active" href="{{ path('contact') }}">Contact</a>
+    </li>
+</ul>
+{% endblock %}
+{% block body %}
+<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+    <a class="breadcrumb-item" href="#">Home</a>
+    <span class="breadcrumb-item text-white active">Contact</span>
+</nav>
+<!-- description de PMD-->
+<section data-aos="fade-up" id="description" class="bg-white text-center">
+    <img class="w-50 " src="{{ asset('img/logo/pmd-developper.png') }}" alt="">
+
+    <p class="text-white home-title font-weight-bold">Une Equipe à votre service</p>
+</section>
+<!--message client-->
+<section id="message" data-aos="fade-down">
+    <h3>Laissez-nous un message</h3>
+    <p></p>
+    <div class="container">
+        <form action="">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="">Name <span>*</span> </label>
+                        <input type="text" class="form-control size-input" placeholder="Enter your name" id="" name="">
+                        <small id="" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phone <span>*</span></label>
+                        <input type="text" class="form-control size-input" id="" placeholder="Enter your phone number">
+                        <small id="emailHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email <span>*</span></label>
+                        <input type="text" class="form-control size-input" id="" placeholder="Enter your Email adress">
+                        <small id="emailHelp " class="form-text text-muted "></small>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group ">
+                        <label for="exampleInputEmail1 ">Your Message <span>*</span></label>
+                        <textarea name=" " id=" " cols="10 " rows="5 " class="form-control "
+                            placeholder="Please Whrite something"></textarea>
+                        <small id="emailHelp " class="form-text text-muted "></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary"> <i
+                            class="fas fa-paper-plane"></i>&nbsp;Submit</button>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
