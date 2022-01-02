@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -57,6 +59,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToOne(targetEntity=Cv::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $cv;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Social::class, mappedBy="user")
+     */
+    private $socials;
+
+    public function __construct()
+    {
+        $this->socials = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -185,6 +197,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->cv = $cv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Social[]
+     */
+    public function getSocials(): Collection
+    {
+        return $this->socials;
+    }
+
+    public function addSocial(Social $social): self
+    {
+        if (!$this->socials->contains($social)) {
+            $this->socials[] = $social;
+            $social->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSocial(Social $social): self
+    {
+        if ($this->socials->removeElement($social)) {
+            // set the owning side to null (unless already changed)
+            if ($social->getUser() === $this) {
+                $social->setUser(null);
+            }
+        }
 
         return $this;
     }

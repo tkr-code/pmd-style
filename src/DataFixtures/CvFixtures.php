@@ -99,9 +99,9 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
                     ],
                     [
                         'annee'=>'Oct 2015 - Juil 2017',
-                        'diplome'=>'MATH PHYSIQUE INFORMATIQUE (UCAD)',
-                        'ecole'=>'LYCEE NATIONAL LEOM MBA',
-                        'pays'=>'Gabon',
+                        'diplome'=>'MATH PHYSIQUE INFORMATIQUE',
+                        'ecole'=>'UCAD',
+                        'pays'=>'Sénégal',
                         'title'=>null,
                         'description'=>null,
                         'ville'=>'Libreville'
@@ -109,11 +109,11 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
                     [
                         'annee'=>'Oct 2014 - Juil 2015',
                         'diplome'=>'BACCALAUREAT S2',
-                        'ecole'=>'NOn fournie',
+                        'ecole'=>'ecole',
                         'pays'=>'Sénégal',
                         'title'=>null,
                         'description'=>null,
-                        'ville'=>'non-fournie'
+                        'ville'=>'ville'
                     ]
                 ],
                 'competences'=>[
