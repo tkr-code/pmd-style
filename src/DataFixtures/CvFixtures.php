@@ -60,6 +60,74 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
                     'html & Css'=>70,
                     'maintenance Informatique'=>50
                 ]
+            ],
+            [
+                'user'=>'user_nans',
+                'slug'=>'mamadou-nanna-dieme',
+                'adresse'=>'Point E',
+                'description'=>null,
+                'email'=>'diememamadou96@gmail.com',
+                'poste'=>'Dévéloppeur Web',
+                'tel'=>'+221 77 043 12 25',
+                'formations'=>[
+                    [
+                        'annee'=>'Oct 2019 - Août 2020',
+                        'diplome'=>'LICENCE EN INFORMATIQUE',
+                        'ecole'=>'IPG/ISTI',
+                        'pays'=>'Sénégal',
+                        'title'=>null,
+                        'description'=>null,
+                        'ville'=>'Dakar'
+                    ],
+                    [
+                        'annee'=>'Oct 2018 - Août 2019',
+                        'diplome'=>'BREVET DE TECHNICIEN SUPERIEUR EN INFO-GESTION (BTS)',
+                        'ecole'=>'IPG/ISTI',
+                        'pays'=>'Sénégal',
+                        'title'=>null,
+                        'description'=>null,
+                        'ville'=>'Dakar'
+                    ],
+                    [
+                        'annee'=>'Oct 2018 - Août 2019',
+                        'diplome'=>'DTS EN INFORMATIQUE',
+                        'ecole'=>'IPG/ISTI',
+                        'pays'=>'Sénégal',
+                        'title'=>'Analyste programmeur',
+                        'description'=>null,
+                        'ville'=>'Dakar'
+                    ],
+                    [
+                        'annee'=>'Oct 2015 - Juil 2017',
+                        'diplome'=>'MATH PHYSIQUE INFORMATIQUE (UCAD)',
+                        'ecole'=>'LYCEE NATIONAL LEOM MBA',
+                        'pays'=>'Gabon',
+                        'title'=>null,
+                        'description'=>null,
+                        'ville'=>'Libreville'
+                    ],
+                    [
+                        'annee'=>'Oct 2014 - Juil 2015',
+                        'diplome'=>'BACCALAUREAT S2',
+                        'ecole'=>'NOn fournie',
+                        'pays'=>'Sénégal',
+                        'title'=>null,
+                        'description'=>null,
+                        'ville'=>'non-fournie'
+                    ]
+                ],
+                'competences'=>[
+                    'Analyse informatique'=>85,
+                    'Symfony'=>85,
+                    'Angular'=>80,
+                    'Wordpresse'=>80,
+                    'Mysql'=>80,
+                    'Sql Server'=>85,
+                    'Oracle'=>80,
+                    'Javascript'=>80,
+                    'Java'=>86,
+                    'html & Css'=>50,
+                ]
             ]
         ];
         foreach ($cvs as $cv) {
