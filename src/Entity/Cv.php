@@ -45,7 +45,7 @@ class Cv
     private $tel;
 
     /**
-     * @ORM\OneToMany(targetEntity=Formation::class, mappedBy="cv", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Formation::class, mappedBy="cv", orphanRemoval=true, cascade={"persist"})
      */
     private $formations;
 
@@ -55,12 +55,12 @@ class Cv
     private $experiences;
 
     /**
-     * @ORM\OneToMany(targetEntity=Langue::class, mappedBy="cv", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Langue::class, mappedBy="cv", orphanRemoval=true, cascade={"persist"})
      */
     private $langues;
 
     /**
-     * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="cv", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="cv", orphanRemoval=true, cascade={"persist"})
      */
     private $competences;
 
@@ -79,6 +79,11 @@ class Cv
      * @ORM\OneToMany(targetEntity=Logiciel::class, mappedBy="cv", orphanRemoval=true)
      */
     private $logiciels;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -343,6 +348,18 @@ class Cv
                 $logiciel->setCv(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

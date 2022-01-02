@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Competence;
 use App\Entity\Cv;
+use App\Entity\Experience;
 use App\Entity\Formation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -13,32 +14,87 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $cv = new Cv();
-        $cv->setUser($this->getReference('user_tkr'));
-        $cv->setAdresse('sacre cour 2')
-        ->setDescription('Je suis un informaticien avec une connaissance holistique du développement et de la conception de logiciels.')
-        ->setEmail('malick.tounkara.1@gmail.com')
-        ->setPoste('Dévéloppeur Web')
-        ->setTel('+221 78 127 82 88');
-        $fomation = new Formation();
-        $fomation->setAnnee('Oct 2019 - Août 2020')
-        ->setDiplome('LICENCE EN INFORMATIQUE')
-        ->setEcole('IPG/ISTI')
-        ->setPays('Sénégal')
-        ->setTitle('Developpeur')
-        ->setDescription('Je prend un projet, qui a été pensée et réfléchie par un client ou une équipe de conception, et le transforme en application.')
-        ->setVille('Dakar');
-        $cv->addFormation($fomation);
+        $cvs = [
+            [
+                'user'=>'user_tkr',
+                'slug'=>'malick-tounkara',
+                'adresse'=>'Sacre coeur 2',
+                'description'=>'Je suis un informaticien avec une connaissance holistique du développement et de la conception de logiciels.',
+                'email'=>'malick.tounkara.1@gmail.com',
+                'poste'=>'Dévéloppeur Web',
+                'tel'=>'+221 78 127 82 88',
+                'formations'=>[
+                    [
+                        'annee'=>'Oct 2019 - Août 2020',
+                        'diplome'=>'LICENCE EN INFORMATIQUE',
+                        'ecole'=>'IPG/ISTI',
+                        'pays'=>'Sénégal',
+                        'title'=>'Dévéloppeur Web',
+                        'description'=>'Je prend un projet, qui a été pensée et réfléchie par un client ou une équipe de conception, et le transforme en application.',
+                        'ville'=>'Dakar'
+                    ],
+                    [
+                        'annee'=>'Oct 2018 - Août 2019',
+                        'diplome'=>'DTS EN INFORMATIQUE',
+                        'ecole'=>'IPG/ISTI',
+                        'pays'=>'Sénégal',
+                        'title'=>'Analyste programmeur',
+                        'description'=>"Je m'occupe de créer des logiciels. Je suis également chargé de m'occuper de la maintenance des anciens logiciels et du suivi des nouveaux. J'analyse d'une part un souhait émis par le client et d'autre part programmer cette demande",
+                        'ville'=>'Dakar'
+                    ],
+                    [
+                        'annee'=>'Oct 2016 - Juil 2017',
+                        'diplome'=>'BACCALAUREAT D',
+                        'ecole'=>'LYCEE NATIONAL LEOM MBA',
+                        'pays'=>'Gabon',
+                        'title'=>null,
+                        'description'=>null,
+                        'ville'=>'Libreville'
+                    ]
+                ],
+                'competences'=>[
+                    'Symfony'=>85,
+                    'Uml'=>80,
+                    'Javascript'=>80,
+                    'Java'=>50,
+                    'html & Css'=>70,
+                    'maintenance Informatique'=>50
+                ]
+            ]
+        ];
+        foreach ($cvs as $cv) {
+            # code...
+        $Cv = new Cv();
+        $Cv->setUser($this->getReference($cv['user']));
+        $Cv->setSlug($cv['slug']);
+        $Cv->setAdresse($cv['adresse'])
+        ->setDescription($cv['description'])
+        ->setEmail($cv['email'])
+        ->setPoste($cv['poste'])
+        ->setTel($cv['tel']);
+        foreach ($cv['formations'] as $formation) {   
+            $fomation1 = new Formation();
+            $fomation1->setAnnee($formation['annee'])
+            ->setDiplome($formation['diplome'])
+            ->setEcole($formation['ecole'])
+            ->setPays($formation['pays'])
+            ->setTitle($formation['title'])
+            ->setDescription($formation['description'])
+            ->setVille($formation['ville']);
+            $Cv->addFormation($fomation1);
+        }
+        foreach ($cv['competences'] as $nom => $valeur) {
+            $competence = new Competence();
+            $competence->setNom($nom)
+            ->setValeur($valeur);
+            $Cv->addCompetence($competence);
+        }
 
-        $competence = new Competence();
-        $competence->setNom('Symfony')
-        ->setValeur(80);
-        $cv->addCompetence($competence);
-
-        $manager->persist($cv);
-
+        $manager->persist($Cv);
+        }
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [

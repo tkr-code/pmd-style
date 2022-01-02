@@ -5,24 +5,20 @@
 {% endblock %}
 {% block body %}
         <div class="container-fluid header-cv bg-2">
-            <p class="text-center mb-0 py-1">{{ cv.nom ~ cv.prenom}} - Developpeur full stack - Email:
-                malick.tounkara.1@gmail.com -
-                Tel: +221
-                78 127 82 88</p>
+            <p class="text-center mb-0 py-1">{{ cv.user.personne.fullName }} - {{cv.poste}} - Email: {{cv.email}} -
+                Tel: {{cv.tel}} </p>
         </div>
         <div class="container my-5">
-            <!-- <p> liencv : <a target="_blank" href="https://templateflip.com/demo/templates/right-resume/">modele</a>
-            </p> -->
             <div class="document">
                 <div class="container-fluid">
                     <div class="row bg-1 py-3 rounded-top mb-5">
                         <div class="col-12 py-5 col-md-4">
                             <div class="cv-card-img text-center">
-                                <img width="200px" height="200px" src="{{ asset('img/user/' ~ cv.photo) }}">
+                                <img width="200px" height="200px" src="{{ asset('img/user/' ~ cv.user.personne.avatar) }}">
                             </div>
                         </div>
                         <div class="col-md-8 col-12">
-                            <h4 class="cv-name">{{ cv.prenom ~ ' ' ~ cv.nom }}</h4>
+                            <h4 class="cv-name">{{ cv.user.personne.fullName }}</h4>
                             <p>{{cv.poste }}</p>
                             <p>{{cv.description }}</p>
                             <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
@@ -69,16 +65,17 @@
                             <div class="card-body">
                                 <div class="row">
                                     <dd class="col-md-4 col-4">Email :</dd>
-                                    <dd class="col-md-8 col-8">malick.tounkara.1@gmail.com</dd>
+                                    <dd class="col-md-8 col-8">{{ cv.email }}</dd>
                                     <dd class="col-md-4 col-4">Téléphone :</dd>
-                                    <dd class="col-md-8 col-8"> +221 78 127 82 88</dd>
+                                    <dd class="col-md-8 col-8">{{ cv.tel }}</dd>
                                     <dd class="col-md-4 col-4">Adresse :</dd>
-                                    <dd class="col-md-8 col-8"> Dakar sacre coeur 2 1100, Sénégal</dd>
+                                    <dd class="col-md-8 col-8">{{cv.adresse}}</dd>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% if cv.competences %}
                 <hr class="d-print-one">
                 <div class="row">
                     <div class="col-md-12 col-12">
@@ -89,15 +86,18 @@
                                     <!-- Professional Skills -->
                                 </h3>
                                 <div class="row">
+                                {% for item in cv.competences %}
+                                    
                                     <div class="col-md-6 p-3">
-                                        <span>SQL SERVER</span>
+                                        <span>{{item.nom }}</span>
                                         <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: 50%;"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%
+                                            <div class="progress-bar" role="progressbar" style="width: {{ item.valeur}}%;"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{item.valeur}}%
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 p-3">
+                                {% endfor %}
+                                    {# <div class="col-md-6 p-3">
                                         <span>UML</span>
                                         <div class="progress">
                                             <div class="progress-bar bg-success" role="progressbar" style="width: 80%;"
@@ -136,14 +136,16 @@
                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> #}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
+                <!-- 
                 <hr>
-                <!-- <div id="work-experience">
+                <div id="work-experience">
                     <h3 class="mb-3 ml-3 h3">
                         Expérience professionnelle
                         Work Experience
@@ -240,26 +242,26 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <hr> -->
+                </div>-->
+                {% if cv.formations %}
+                <hr>
                 <div id="education">
                     <h3 class="mb-3 ml-3 h3">Education</h3>
                     <div class="container mt-5 mb-5">
                         <div class="row">
                             <div class="col-md-9 offset-md-1 col-12">
                                 <ul class="timeline">
+                                {% for item in cv.formations %}
                                     <li>
-                                        <p class="education-school">IPG/ISTI(Dakar-Sénégal)</p>
+                                        <p class="education-school">{{item.ecole}}({{item.ville}}-{{item.pays}})</p>
                                         <p class="education-diplome">
-                                            LICENCE EN INFORMATIQUE
-                                            <span class="float-right education-diplome-date">Oct 2019 - Août 2020</span>
+                                            {{item.diplome}}
+                                            <span class="float-right education-diplome-date">{{item.annee}}</span>
                                         </p>
-                                        <p class="text-justify"><b>Developpeur</b><br> Je prend un projet, qui a été
-                                            pensée et réfléchie par
-                                            un client ou une équipe de conception, et le transforme en
-                                            application.</p>
+                                        <p class="text-justify"><b>{{item.title}}</b><br> {{item.description}} </p>
                                     </li>
-                                    <li>
+                                {% endfor %}
+                                    {# <li>
                                         <p class="education-school">IPG/ISTI(Dakar-Sénégal)</p>
                                         <p class="education-diplome">
                                             DTS EN INFORMATIQUE
@@ -279,12 +281,13 @@
                                             BACCALAUREAT D
                                             <span class="float-right education-diplome-date">Oct 2016 - Juil 2017</span>
                                         </p>
-                                    </li>
+                                    </li> #}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 <hr>
                 <div id="contact">
                     <h3 class="h3 mb-3 ml-3">Contactez moi</h3>

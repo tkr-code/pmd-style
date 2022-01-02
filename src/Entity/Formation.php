@@ -43,7 +43,7 @@ class Formation
     private $diplome;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cv::class, inversedBy="formations")
+     * @ORM\ManyToOne(targetEntity=Cv::class, inversedBy="formations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $cv;

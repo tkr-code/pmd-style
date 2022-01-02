@@ -25,15 +25,16 @@ class UserFixtures extends Fixture
                 'first_name' => 'Malick',
                 'last_name' => 'Tounkara',
                 'email' => 'tkr',
-                'roles' => ["ROLE_ADMIN"]
+                'roles' => ["ROLE_ADMIN"],
+                'avatar'=>'malick-tounkara.jpg'
         ],
         [
                 'first_name' => 'Mamadou','last_name' => 'Dieme','email' => 'nans',
-                'roles' => ["ROLE_ADMIN"]
+                'roles' => ["ROLE_ADMIN"],'avatar'=>'dieme.jpg'
         ],
         [
                 'first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'lkp',
-                'roles' => ["ROLE_ADMIN"]],
+                'roles' => ["ROLE_ADMIN"], 'avatar'=>'pepin.jpg'],
         [
                 'first_name' => 'Pepin','last_name' => 'Ngoulou','email' => 'editor1',
                 'roles' => ["ROLE_EDITOR"]],
@@ -57,6 +58,7 @@ class UserFixtures extends Fixture
             $user = new User();
             $personne = new Personne();
             $personne->setFirstName($value['first_name'])
+            ->setAvatar($value['avatar'] ?? null)
             ->setLastName($value['last_name']);
             $user->setEmail($value['email'].'@pmd-developper.com');
             $user->setIsVerified(true);

@@ -28,7 +28,7 @@ class Competence
     private $valeur;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cv::class, inversedBy="competences")
+     * @ORM\ManyToOne(targetEntity=Cv::class, inversedBy="competences", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $cv;
