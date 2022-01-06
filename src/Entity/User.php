@@ -61,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $cv;
 
     /**
-     * @ORM\OneToMany(targetEntity=Social::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Social::class, mappedBy="user", cascade={"persist"})
      */
     private $socials;
 

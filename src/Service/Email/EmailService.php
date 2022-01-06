@@ -17,19 +17,11 @@ class EmailService
     }
     public function theme($id = '')
     {
-        $id_user = 1;
-        $cle_user = 'cleuser1';
-        $cle= '';
-        $site = 'Gaboma annonce';
-        $introduction = 'Site de petites annonces.';
-        $link_site = 'https://lesekoya.com';
-        $link_img = $link_site.'/public/img/icons/favicon.png';
+        $link_site = 'https://localhost:8000';
         $message = '';
-        $link_contrat = $link_site."/public/doc/condition-d'utilisation-gaboma-annonce.pdf";
         $button_link = $link_site;
         $button_text = '';
         $titre = '';
-        $link_disinscription = $link_site.'/se-desinscrire-'.$id_user.'-tkr'.$cle_user.'-gaboma-annonce';
         switch ($id) {
           case '1':
             // inscription verification ou desinscription
@@ -113,7 +105,7 @@ class EmailService
                 'path'=>$button_link,
                 'text'=>$button_text
             ],
-            'tokenKey'=>$this->csrf->getToken($button_link)
+            'tokenKey'=> ($button_link) ? $this->csrf->getToken($button_link) : null
         ];
     }
 }

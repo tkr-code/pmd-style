@@ -21,10 +21,13 @@
                             <h4 class="cv-name">{{ cv.user.personne.fullName }}</h4>
                             <p>{{cv.poste }}</p>
                             <p>{{cv.description }}</p>
-                            <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
+                            {% for item in cv.user.socials %}
+                            <a href="{{ item.path }}" target="_blank" title="{{ item.nom }}"
                                 class="socials-item">
-                                <i class="fab fa-facebook-f facebook"></i>
+                                <i class="{{item.icon}}"></i>
                             </a>
+                            {% endfor %}
+{#                             
                             <a href="https://api.whatsapp.com/send?phone=221781278288&text=Salut, Malick j'ai eu votre contacte sur votre site :"
                                 target="_blank" title="Whatsapp" class="socials-item">
                                 <i class="fab fa-whatsapp whatsapp"></i>
@@ -32,7 +35,7 @@
                             <a href="https://www.linkedin.com/in/malick-tounkara-b858a41aa/" target="_blank"
                                 title="Facebook" class="socials-item">
                                 <i class="fab fa-linkedin" aria-hidden="true"></i>
-                            </a>
+                            </a> #}
                             <div class="btn-group">
 
                                 <!-- <button class="btn btn-primary">
@@ -46,7 +49,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-12">
+                    {# <div class="col-md-6 col-12">
                         <div class="card border-0">
                             <div class="card-body">
                                 <h3>
@@ -59,7 +62,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> #}
                     <div class="col-md-6 col-12">
                         <div class="card border-0">
                             <div class="card-body">

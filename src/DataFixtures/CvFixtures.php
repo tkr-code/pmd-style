@@ -63,7 +63,7 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'user'=>'user_nans',
-                'slug'=>'mamadou-nanna-dieme',
+                'slug'=>'mamadou-dieme',
                 'adresse'=>'Point E',
                 'description'=>null,
                 'email'=>'diememamadou96@gmail.com',
@@ -127,6 +127,53 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
                     'Javascript'=>80,
                     'Java'=>86,
                     'html & Css'=>50,
+                ]
+            ],
+            [
+                'user'=>'user_lkp',
+                'slug'=>'pepin-djoneska',
+                'adresse'=>'Dieupeul derklé',
+                'description'=>"Je suis un passionné de la conception et développement des logiciels. Autodidacte, motivé et solidaire ; ouvert à l’apprentissage.",
+                'email'=>'pepindjoneska@gmail.com',
+                'poste'=>'Dévéloppeur Web',
+                'tel'=>'+221 77 237 53 69',
+                'formations'=>[
+                    [
+                        'annee'=>'Oct 2019 - Août 2020',
+                        'diplome'=>'LICENCE EN INFORMATIQUE',
+                        'ecole'=>'IPG/ISTI',
+                        'pays'=>'Sénégal',
+                        'title'=>null,
+                        'description'=>null,
+                        'ville'=>'Dakar'
+                    ],
+                    [
+                        'annee'=>'Oct 2018 - Août 2019',
+                        'diplome'=>'DTS EN INFORMATIQUE',
+                        'ecole'=>'IPG/ISTI',
+                        'pays'=>'Sénégal',
+                        'title'=>'Analyste programmeur',
+                        'description'=>null,
+                        'ville'=>'Dakar'
+                    ],
+                    [
+                        'annee'=>'Oct 2016 - Août 2017',
+                        'diplome'=>'BACCALAUREAT TECHNIQUE SERIE E ',
+                        'ecole'=>'Lycée Technique POATY BERNARD',
+                        'pays'=>'CONGO BRAZZAVILLE',
+                        'title'=>null,
+                        'description'=>'La maintenance industrielle, fabrication des pièces mécaniques pour un besoin spécifique. ',
+                        'ville'=>'Pointe-noire'
+                    ]
+                ],
+                'competences'=>[
+                    'Html'=>70,
+                    'Css'=>60,
+                    'Symfony'=>60,
+                    'Php'=>70,
+                    'Merise'=>80,
+                    'Mysql'=>70,
+                    'Multimédia (son, video, montage vidéo et événemetiel'=>85,
                 ]
             ]
         ];

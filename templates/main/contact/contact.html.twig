@@ -1,4 +1,6 @@
 {% extends "main/base.html.twig" %}
+{% import "macros/alertes.html.twig" as alertes %}
+
 {% block navUl %}
 <ul class="navbar-nav ml-auto text-uppercase f1">
     <li>
@@ -23,6 +25,9 @@
     <a class="breadcrumb-item" href="#">Home</a>
     <span class="breadcrumb-item text-white active">Contact</span>
 </nav>
+{% for item in app.flashes('success') %}
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
 <!-- description de PMD-->
 <section data-aos="fade-up" id="description" class="bg-white text-center">
     <img class="w-50 " src="{{ asset('img/logo/pmd-developper.png') }}" alt="">
@@ -34,43 +39,41 @@
     <h3>Laissez-nous un message</h3>
     <p></p>
     <div class="container">
-        <form action="">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="">Name <span>*</span> </label>
-                        <input type="text" class="form-control size-input" placeholder="Enter your name" id="" name="">
-                        <small id="" class="form-text text-muted"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Phone <span>*</span></label>
-                        <input type="text" class="form-control size-input" id="" placeholder="Enter your phone number">
-                        <small id="emailHelp" class="form-text text-muted"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email <span>*</span></label>
-                        <input type="text" class="form-control size-input" id="" placeholder="Enter your Email adress">
-                        <small id="emailHelp " class="form-text text-muted "></small>
-                    </div>
+        {{ form_start(form)}}
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="form-group">
+                    <label for="">Name <span>*</span> </label>
+                    {{form_widget(form.name)}}
                 </div>
-                <div class="col-lg-6">
-                    <div class="form-group ">
-                        <label for="exampleInputEmail1 ">Your Message <span>*</span></label>
-                        <textarea name=" " id=" " cols="10 " rows="5 " class="form-control "
-                            placeholder="Please Whrite something"></textarea>
-                        <small id="emailHelp " class="form-text text-muted "></small>
-                    </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Phone <span>*</span></label>
+                    {{form_widget(form.phone_number)}}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email <span>*</span></label>
+                    {{form_widget(form.email)}}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-5"></div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary"> <i
-                            class="fas fa-paper-plane"></i>&nbsp;Submit</button>
+            <div class="col-lg-6 col-12">
+                <div class="form-group ">
+                    <label for="exampleInputEmail1 ">Your Message <span>*</span></label>
+                    {{ form_widget(form.message) }}
+                    {# <textarea name=" " id=" " cols="10 " rows="5 " class="form-control "
+                        placeholder="Please Whrite something"></textarea>
+                    <small id="emailHelp " class="form-text text-muted "></small> #}
                 </div>
-                <div class="col-md-5"></div>
             </div>
-        </form>
+        </div>
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary"> <i class="fas fa-paper-plane"></i>&nbsp;Submit</button>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
+        {{form_widget(form)}}
+        {{ form_end(form)}}
     </div>
 </section>
 {% endblock %}
