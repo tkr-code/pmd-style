@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\SocialType;
+use App\Form\PersonneType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserType extends AbstractType
 {
@@ -37,6 +40,13 @@ class UserType extends AbstractType
                 'label'=>false
                 ])
             ->add('isVerified')
+            ->add('socials',CollectionType::class,[
+                'label'=>false,
+                'entry_type'=>SocialType::class,
+                'by_reference'=>false,
+                'allow_add'=>true,
+                'allow_delete'=>true
+            ])
         ;
     }
 

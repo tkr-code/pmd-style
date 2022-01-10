@@ -28,3 +28,23 @@ name:'Manage users'
     </div>
 </div>
 {% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+       $(document).on('click','#new-social',function(){
+          let prototype = $('#user_socials').data('prototype')
+          let counter =$('#user_socials').children().length
+          let newSocial = prototype.replace(/__name__/g,counter)
+          let btnDelete = $('<button type="button" class="btn btn-delete-social btn-danger">Delete</button>')
+          let item = $('<div></div>')
+          item.append(newSocial)
+          item.append(btnDelete)
+          $('#user_socials').append(item)
+       })
+       $(document).on('click','.btn-delete-social',function(){
+           //supprimer l'element parent
+           $(this).parent().remove()
+       })
+    })
+</script>
+{% endblock %}

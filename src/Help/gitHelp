@@ -67,3 +67,7 @@ git commit --amend  vous permet de sélectionner le dernier commit afin d'y ajou
     git reset --hard HEAD^ permet de réinitialiser l'index et le répertoire de travail à l'état du dernier commit.
 
     git commit --amend permet de sélectionner le dernier commit pour y effectuer des modifications.
+
+
+    copier une branche
+    git clone -b <branche> --single-branch lien git    
