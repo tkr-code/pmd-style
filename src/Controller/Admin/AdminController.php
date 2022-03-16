@@ -27,4 +27,13 @@ class AdminController extends AbstractController
             'parent_page'=>$this->translator->trans('Dashboard')
         ]);
     }
+    /**
+     * @Route("/admin/blank", name="admin_blank_index")
+     */
+    public function blank(): Response
+    {
+        return $this->render('admin/blank.html.twig',[
+            'parent_page'=>$this->translator->trans('Dashboard')
+        ]);
+    }
 }

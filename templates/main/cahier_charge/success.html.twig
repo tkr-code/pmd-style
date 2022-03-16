@@ -1,0 +1,22 @@
+{% extends "main/base.html.twig" %}
+{% import "macros/alertes.html.twig" as alertes %}
+{% import "macros/navUl.html.twig" as navs %}
+{% block title %}Cahier de charge ajouté{% endblock %}
+{% block navUl %}
+    {{ navs.ul('cahier de charge ajouté') }}
+{% endblock %}
+{% block body %}
+<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <a class="breadcrumb-item" href="{{ path('cahier_charge_index') }}">Cahier de charge</a>
+    <span class="breadcrumb-item text-white active">Cahier de charge succes</span>
+</nav>
+<section id="cahier-de-charge-success" data-aos="fade-down">
+    <div class="container text-center">
+        <i class="fa fa-check-circle text-success fa-6x" aria-hidden="true"></i>
+    <h3>Votre cahier de charge a été ajouté</h3>
+    <p class="text-justify" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quo sit tenetur, impedit libero ad at dolores ex atque modi reiciendis quam. Nulla perspiciatis ullam doloremque laudantium ea ipsam id.</p>
+    <a class=" btn btn-2" href="{{ path('home') }}">{{'Home'| trans}}</a>
+    </div>
+</section>
+{% endblock %}

@@ -55,6 +55,9 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
                 'competences'=>[
                     'Symfony'=>85,
                     'Uml'=>80,
+                    'Sql Server'=>50,
+                    'Mysql'=>75,
+                    'Oracle'=>50,
                     'Javascript'=>80,
                     'Java'=>50,
                     'html & Css'=>70,
@@ -67,7 +70,7 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
                 'adresse'=>'Point E',
                 'description'=>null,
                 'email'=>'diememamadou96@gmail.com',
-                'poste'=>'Dévéloppeur Web',
+                'poste'=>'Dévéloppeur Java',
                 'tel'=>'+221 77 043 12 25',
                 'formations'=>[
                     [
@@ -104,16 +107,16 @@ class CvFixtures extends Fixture implements DependentFixtureInterface
                         'pays'=>'Sénégal',
                         'title'=>null,
                         'description'=>null,
-                        'ville'=>'Libreville'
+                        'ville'=>'Dakar'
                     ],
                     [
                         'annee'=>'Oct 2014 - Juil 2015',
                         'diplome'=>'BACCALAUREAT S2',
-                        'ecole'=>'ecole',
+                        'ecole'=>'LYCEE DEMBA DIOP',
                         'pays'=>'Sénégal',
                         'title'=>null,
                         'description'=>null,
-                        'ville'=>'ville'
+                        'ville'=>'Mbour'
                     ]
                 ],
                 'competences'=>[

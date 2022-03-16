@@ -21,7 +21,6 @@ class ContactType extends AbstractType
                 
                 'attr'=>[
                     'placeholder'=>'Votre nom (obligatoire)',
-                    'class'=>'size-input'
                 ],
                 'required'=>true,
                 'constraints' => [
@@ -33,7 +32,6 @@ class ContactType extends AbstractType
                 'label'=>'Email',
                 'attr'=>[
                     'placeholder'=>'Votre email (obligatoire)',
-                    'class'=>'size-input'
                 ],
                 'constraints' => [
                     new NotBlank(),
@@ -44,8 +42,7 @@ class ContactType extends AbstractType
             ->add('phone_number',TextType::class,[
                 'label'=>'Téléphone',
                 'attr'=>[
-                    'placeholder'=>'Votre email (obligatoire)',
-                    'class'=>'size-input'
+                    'placeholder'=>'Numéro de portable (obligatoire)',
                 ],
                 'constraints' => [
                     new NotBlank(),

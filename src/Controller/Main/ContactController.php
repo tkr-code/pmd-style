@@ -16,7 +16,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(MailerInterface $mailerInterface, Request $request, EmailService $emailService): Response
+    public function index( MailerInterface $mailerInterface, Request $request, EmailService $emailService): Response
     {
         $form = $this->createForm(ContactType::class);
         $contact = $form->handleRequest($request);

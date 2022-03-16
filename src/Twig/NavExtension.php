@@ -36,21 +36,34 @@ class NavExtension extends AbstractExtension
                     ]
                 ],
                 [
-                    'name'=>'Profile',
-                    'icon'=>'fas fa-user',
-                    'path'=>'profile_index',
-                ],
-                [
-                    'name'=>'App name',
+                    'name'=>'Pmd Developper',
                     'icon'=>'fa fa-home',
                     'links'=>
                         [
                             [
                                 'name'=>$this->translator->trans('Home'),
                                 'path'=>'home'
-                            ]
+                            ],
+                            [
+                                'name'=>'A propos',
+                                'path'=>'about'
+                            ],
+                            [
+                                'name'=>'Contact',
+                                'path'=>'contact'
+                            ],
                         ]
                 ],
+                [
+                    'name'=>'Profile',
+                    'icon'=>'fas fa-user',
+                    'path'=>'profile_index',
+                ],
+                [
+                    'name'=>'Cahier de charge',
+                    'path'=>'admin_cahier_charge_index',
+                ],
+                
             ],
             'admin'=>
             [

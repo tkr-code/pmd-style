@@ -1,13 +1,5 @@
 
-/* header-cv start */
-.header-cv{
-    position: fixed;
-    font-size: 15px;
-    color: #fff;
-    top: 60px !important;
-    z-index: 99;
-}
-/* header-cv end */
+
 /* education start */
 ul.timeline {
     list-style-type: none;

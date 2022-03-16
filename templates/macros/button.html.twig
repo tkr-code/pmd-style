@@ -2,8 +2,8 @@
     <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
 {% endmacro %}
 
-{% macro delete() %}
-    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+{% macro delete(text) %}
+    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> {{ text|default('') }}</button>
 {% endmacro %}
 
 {% macro order(state) %}

@@ -1,6 +1,9 @@
+{% import "macros/navUl.html.twig" as navs %}
 {% extends "main/base.html.twig" %}
+{% block title %}A propos{% endblock %}
 {% block navUl %}
-<ul class="navbar-nav ml-auto text-uppercase f1">
+{{ navs.ul('about') }}
+{# <ul class="navbar-nav ml-auto text-uppercase f1">
     <li>
         <a href="/">Accueil</a>
     </li>
@@ -16,12 +19,12 @@
     <li>
         <a href="{{ path('contact') }}">Contact</a>
     </li>
-</ul>
+</ul> #}
 {% endblock %}
 {% block body %}
 <nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
-    <a class="breadcrumb-item" href="index.html">Home</a>
-    <span class="breadcrumb-item text-white active">About us</span>
+    <a class="breadcrumb-item" href="/">{{'Home'|trans}}</a>
+    <span class="breadcrumb-item text-white active">{{'About'|trans}}</span>
 </nav>
 <!-- description de PMD-->
 <section data-aos="fade-up" id="description" class="bg-white text-center">

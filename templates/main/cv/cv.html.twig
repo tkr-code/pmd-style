@@ -1,9 +1,38 @@
 {% extends "main/base.html.twig" %}
+{% import "macros/alertes.html.twig" as alertes %}
+
 {% block head %}
     <!-- Style  cv -->
     <link rel="stylesheet" href="{{ asset('css/cv.css') }}">
 {% endblock %}
+{% block title %}  cv{% endblock %}
+{% block navUl %}
+<ul class="navbar-nav ml-auto text-uppercase f1">
+    <li>
+        <a href="/">Accueil</a>
+    </li>
+    <li>
+        <a href="/#services">Services</a>
+    </li>
+    <li>
+        <a href="/#team">Equipe</a>
+    </li>
+    <li>
+        <a href="{{ path('about') }}">A propos</a>
+    </li>
+    <li>
+        <a class="active" href="{{ path('contact') }}">Contact</a>
+    </li>
+</ul>
+{% endblock %}
 {% block body %}
+<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+    <a class="breadcrumb-item" href="/">Home</a>
+    <span class="breadcrumb-item text-white active">Cv</span>
+</nav>
+{% for item in app.flashes('success') %}
+    {{ alertes.alert(item,'success')}}
+{% endfor %}
         <div class="container-fluid header-cv bg-2">
             <p class="text-center mb-0 py-1">{{ cv.user.personne.fullName }} - {{cv.poste}} - Email: {{cv.email}} -
                 Tel: {{cv.tel}} </p>
@@ -93,8 +122,17 @@
                                     
                                     <div class="col-md-6 p-3">
                                         <span>{{item.nom }}</span>
+    
                                         <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: {{ item.valeur}}%;"
+                                            <div class="progress-bar{% if item.valeur <= 40 %}
+                                            bg-danger
+                                        {% elseif item.valeur > 50 and item.valeur <= 60 %}
+                                        bg-info
+                                        {% elseif item.valeur > 60 and item.valeur <= 70 %}
+                                        bg-primary
+                                        {% elseif item.valeur  > 70 and item.valeur <= 100 %}
+                                        bg-success
+                                        {% endif %}" role="progressbar" style="width: {{ item.valeur}}%;"
                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{item.valeur}}%
                                             </div>
                                         </div>
@@ -293,26 +331,34 @@
                 {% endif %}
                 <hr>
                 <div id="contact">
-                    <h3 class="h3 mb-3 ml-3">Contactez moi</h3>
+
+                    <h3 class="h3 mb-3 ml-3">Contactez moi !</h3>
                     <div class="row mb-3">
                         <div class="col-md-7">
-                            <form action="#" method="post">
+                {{ form_start(form)}}
                                 <div class="form-row mb-3 mx-3">
-                                    <div class="form-group col-md-6">
-                                        <label for="user">Nom et prénom</label>
-                                        <input type="text" name="user" class="form-control" placeholder="Prénom et nom">
+                                    <div class="form-group col-md-12">
+                                        <label for="user"><i class="fa fa-user" aria-hidden="true"></i> Nom et prénom</label>
+                                         {{form_widget(form.name)}}
+                                        {# <input type="text" name="user" class="form-control" placeholder="Prénom et nom"> #}
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="email">Email</label>
-                                        <input type="mail" name="email" class="form-control" placeholder="Email">
+                                    <div class="form-group col-md-12">
+                                        <label for="email"><i class="fa fa-envelope-open" aria-hidden="true"></i> Email</label>
+                                        {{form_widget(form.email)}}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="email"> <i class="fas fa-phone-alt" aria-hidden="true"></i> Telephone</label>
+                                        {{form_widget(form.phone_number)}}
                                     </div>
                                     <div class="form-group col-12 col-md-12">
                                         <label for="message"></label>
-                                        <textarea class="form-control" name="message" rows="3"></textarea>
+                                        {{form_widget(form.message)}}
                                     </div>
                                     <button type="submit" class="btn btn-success mx-auto d-block">Envoyer</button>
                                 </div>
-                            </form>
+                {{form_widget(form)}}
+
+                            {{ form_end(form)}}
                         </div>
                         <div class="col-md-5">
                             <div class="row mx-3">

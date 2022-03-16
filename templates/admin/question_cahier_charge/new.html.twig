@@ -1,0 +1,11 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New Question Cahier de Charge{% endblock %}
+
+{% block body %}
+    <h1>Create new Question Cahier de Charge</h1>
+
+    {{ include('admin/question_cahier_charge/_form.html.twig') }}
+
+    <a href="{{ path('admin_question_cahier_charge_index') }}">back to list</a>
+{% endblock %}

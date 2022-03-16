@@ -3,7 +3,7 @@ $(function(){
     //------- fixed navbar --------//  
     $(window).scroll(function () {
         var sticky = $('.main-header'),
-            scroll = $(window).scrollTop();
+        scroll = $(window).scrollTop();
         if (scroll >= 100) {
             $('.img-nav').addClass('img-nav-fixed')
             sticky.addClass('position-fixed');
@@ -20,8 +20,13 @@ $(function(){
         $('#mainMenu li a.active').removeClass('active')
         $(this).addClass('active')
     })
-    AOS.init();
-
     //scroll active
+    AOS.init();
     
+    //user menu click
+    $(document).on('click','#user-icon',function(){
+        $('.user-icon-dropdown').toggle('slow')
+        $(this).find('i').toggleClass('fa fa-angle-up fa fa-angle-down','slow')
+
+    })
 })

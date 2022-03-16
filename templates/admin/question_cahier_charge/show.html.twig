@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QuestionCahierCharge{% endblock %}
+
+{% block body %}
+    <h1>QuestionCahierCharge</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Question</th>
+                <td>{{ question_cahier_charge.question }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ question_cahier_charge.number }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_question_cahier_charge_index') }}">back to list</a>
+
+    <a href="{{ path('admin_question_cahier_charge_edit', {'id': question_cahier_charge.id}) }}">edit</a>
+
+    {{ include('admin/question_cahier_charge/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Question Cahier de Charge index{% endblock %}
+
+{% block body %}
+    <h1>Question Cahier de Charge</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{'Number'|trans}}</th>
+                <th>Question</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question_cahier_charge in question_cahier_charges %}
+            <tr>
+                <td>{{ question_cahier_charge.number }}</td>
+                <td>{{ question_cahier_charge.question }}</td>
+                <td>
+                    <a href="{{ path('admin_question_cahier_charge_show', {'id': question_cahier_charge.id}) }}">show</a>
+                    <a href="{{ path('admin_question_cahier_charge_edit', {'id': question_cahier_charge.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_question_cahier_charge_new') }}">Create new</a>
+{% endblock %}

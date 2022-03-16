@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edit CahierCharge{% endblock %}
+
+{% block body %}
+    <h1>Edit CahierCharge</h1>
+
+    {{ include('admin/cahier_charge/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_cahier_charge_index') }}">back to list</a>
+
+    {{ include('admin/cahier_charge/_delete_form.html.twig') }}
+{% endblock %}

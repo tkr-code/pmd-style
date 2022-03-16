@@ -1,3 +1,27 @@
-.a{
-    color:#222;
+.a {
+    color: #222;
 }
+
+
+/* loader start */
+
+#loader-pmd {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1040;
+    color: #fff;
+    font-weight: bold;
+    background: #010E21;
+    text-align: center;
+}
+
+
+/* loader end */
+
+
+/*document start*/

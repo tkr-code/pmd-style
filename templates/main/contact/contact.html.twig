@@ -1,28 +1,13 @@
 {% extends "main/base.html.twig" %}
 {% import "macros/alertes.html.twig" as alertes %}
-
+{% import "macros/navUl.html.twig" as navs %}
+{% block title %}Contact{% endblock %}
 {% block navUl %}
-<ul class="navbar-nav ml-auto text-uppercase f1">
-    <li>
-        <a href="/">Accueil</a>
-    </li>
-    <li>
-        <a href="/#services">Services</a>
-    </li>
-    <li>
-        <a href="/#team">Equipe</a>
-    </li>
-    <li>
-        <a href="{{ path('about') }}">A propos</a>
-    </li>
-    <li>
-        <a class="active" href="{{ path('contact') }}">Contact</a>
-    </li>
-</ul>
+    {{ navs.ul('contact') }}
 {% endblock %}
 {% block body %}
 <nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
-    <a class="breadcrumb-item" href="#">Home</a>
+    <a class="breadcrumb-item" href="/">Home</a>
     <span class="breadcrumb-item text-white active">Contact</span>
 </nav>
 {% for item in app.flashes('success') %}
@@ -44,24 +29,33 @@
             <div class="col-lg-6 col-12">
                 <div class="form-group">
                     <label for="">Name <span>*</span> </label>
-                    {{form_widget(form.name)}}
+                    {{form_widget(form.name,{
+                        attr:{
+                            'class':'size-input'
+                        }
+                    })}}
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Phone <span>*</span></label>
-                    {{form_widget(form.phone_number)}}
+                    {{form_widget(form.phone_number,{
+                        attr:{
+                            class:'size-input'
+                        }
+                    })}}
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email <span>*</span></label>
-                    {{form_widget(form.email)}}
+                    {{form_widget(form.email,{
+                        attr:{
+                            class:'size-input'
+                        }
+                    })}}
                 </div>
             </div>
             <div class="col-lg-6 col-12">
                 <div class="form-group ">
                     <label for="exampleInputEmail1 ">Your Message <span>*</span></label>
                     {{ form_widget(form.message) }}
-                    {# <textarea name=" " id=" " cols="10 " rows="5 " class="form-control "
-                        placeholder="Please Whrite something"></textarea>
-                    <small id="emailHelp " class="form-text text-muted "></small> #}
                 </div>
             </div>
         </div>

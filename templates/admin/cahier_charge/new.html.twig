@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CahierCharge{% endblock %}
+
+{% block body %}
+    <h1>Create new CahierCharge</h1>
+
+    {{ include('admin_cahier_charge/_form.html.twig') }}
+
+    <a href="{{ path('admin_cahier_charge_index') }}">back to list</a>
+{% endblock %}

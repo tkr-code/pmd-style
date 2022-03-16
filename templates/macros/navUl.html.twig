@@ -1,0 +1,63 @@
+{% macro ul(page = 'home') %}
+		<ul class="navbar-nav ml-auto text-uppercase f1">
+			<li>
+				<a href="/" class="{{ (page == 'home') ? 'active':'' }}">Accueil</a>
+			</li>
+			<li>
+				<a class="{{ (page == 'service') ? 'active':'' }}" href="{{ (page == 'home') ? '#services':'/#services' }}">Services</a>
+			</li>
+			<li>
+				<a class="{{ (page == 'team') ? 'active':'' }}" href="{{ (page == 'home') ? '#team':'/#team' }}">Equipe</a>
+			</li>
+			<li>
+				<a class="{{ (page == 'about') ? 'active':'' }}" href="{{ path('about') }}">A propos</a>
+			</li>
+			<li>
+				<a class="{{ (page == 'contact') ? 'active':'' }}" href="{{ path('contact') }}">Contact</a>
+			</li>
+			{% if is_granted('ROLE_USER') %}
+				<li>
+					<div id="user-icon">
+						<img src="{{ asset('img/user/malick-tounkara.jpg') }}" alt="">
+						<div class="user-content">TKR
+							<i class="fa fa-angle-up"></i>
+						</div>
+					</div>
+					<div class="user-icon-dropdown">
+						<a href="{{ path('profile_index') }}">
+							<div>
+								<i class="fa fa-user"></i>
+							</div>
+							<div>
+								Malick TOUNKARA
+							</div>
+						</a>
+						<hr>
+						<a href="{{ path('admin') }}">
+							<div>
+								<i class="fas fa-tachometer-alt"></i>
+							</div>
+							<div>
+								Tableau de bord
+							</div>
+						</a>
+						<hr>
+						<a href="#">
+							<div>
+								<i class="fa fa-power-off"></i>
+							</div>
+							<div>
+								Log out
+							</div>
+						</a>
+					</div>
+				</li>
+			{% else %}
+				<li>
+					<a href="{{ path('app_login') }}">
+						<i class="fa fa-user-circle fa-2x"></i>
+						Se connecter</a>
+				</li>
+			{% endif %}
+		</ul>
+{% endmacro %}

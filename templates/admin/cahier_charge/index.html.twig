@@ -1,0 +1,56 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/breadcrumb.html.twig" as breadcrumbs %}
+
+{% block title %}Cahier de Charge
+{% endblock %}
+{% block breadcrumb %}
+	{{ breadcrumbs.breadcrumb('Cahier de charge',[
+{
+path:path('admin_cahier_charge_index'),
+name:'Manage Cahier de charge'
+}
+])}}
+{% endblock %}
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<h3>
+				Cahier de Charge
+			</h3>
+		</div>
+		<div class="card-body">
+			<a class="btn btn-primary" href="{{ path('cahier_charge_index') }}">Create new</a>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom complet</th>
+						<th>Email</th>
+						<th>Tel</th>
+						<th>Status</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for cahier_charge in cahier_charges %}
+						<tr>
+							<td>{{ cahier_charge.id }}</td>
+							<td>{{ cahier_charge.fullName }}</td>
+							<td>{{ cahier_charge.email }}</td>
+							<td>{{ cahier_charge.tel }}</td>
+							<td>{{ cahier_charge.status }}</td>
+							<td>
+								<a href="{{ path('admin_cahier_charge_show', {'id': cahier_charge.id}) }}">show</a>
+								<a href="{{ path('admin_cahier_charge_edit', {'id': cahier_charge.id}) }}">edit</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

@@ -1,113 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="eTuFS4d" resname="View cart">
-        <source>View cart</source>
-        <target>Voir le Panier</target>
-      </trans-unit>
-      <trans-unit id="eVF_lX3" resname="See all our articles">
-        <source>See all our articles</source>
-        <target>Voir tous nos biens</target>
-      </trans-unit>
-      <trans-unit id="DpQINTx" resname="Add to cart">
-        <source>Add to cart</source>
-        <target>Ajouter au panier</target>
-      </trans-unit>
-      <trans-unit id="EdWLCN6" resname="Home page">
-        <source>Home page</source>
-        <target>Page d'acueil</target>
-      </trans-unit>
       <trans-unit id="Z7aWRoY" resname="Dashboard">
         <source>Dashboard</source>
-        <target>Tableau de board</target>
+        <target>Tableau de bord</target>
       </trans-unit>
-      <trans-unit id="WiNESCj" resname="Manage">
-        <source>Manage</source>
-        <target>Gérer</target>
+      <trans-unit id="tRLZfny" resname="User">
+        <source>User</source>
+        <target>__User</target>
       </trans-unit>
-      <trans-unit id="tTGBpNh" resname="My account">
-        <source>My account</source>
-        <target>Mon compte</target>
+      <trans-unit id="HFqXNft" resname="profil modify">
+        <source>profil modify</source>
+        <target>__profil modify</target>
       </trans-unit>
-      <trans-unit id="Iv67XLO" resname="My orders">
-        <source>My orders</source>
-        <target>Mes commandes</target>
-      </trans-unit>
-      <trans-unit id="GF_NsyJ" resname="Hello">
-        <source>Hello</source>
-        <target>Salut</target>
-      </trans-unit>
-      <trans-unit id="ScJmuqq" resname="Search">
-        <source>Search</source>
-        <target>Recherche</target>
+      <trans-unit id="vSTb9IR" resname="Hi! Please confirm your email!">
+        <source>Hi! Please confirm your email!</source>
+        <target>__Hi! Please confirm your email!</target>
       </trans-unit>
       <trans-unit id="OnhpU4i" resname="Home">
         <source>Home</source>
         <target>Accueil</target>
       </trans-unit>
-      <trans-unit id="K1w9JnI" resname="Contact">
-        <source>Contact</source>
-        <target>Contact</target>
+      <trans-unit id="awzJBNC" resname="Users">
+        <source>Users</source>
+        <target>Utilisateurs</target>
       </trans-unit>
-      <trans-unit id="DiImtSN" resname="Welcome">
-        <source>Welcome</source>
-        <target>Bienvenue</target>
+      <trans-unit id="6KiDUxl" resname="Edit User">
+        <source>Edit User</source>
+        <target>__Edit User</target>
       </trans-unit>
-      <trans-unit id="KdlJIlE" resname="Article">
-        <source>Article</source>
-        <target>Article</target>
+      <trans-unit id="OpQ.Vio" resname="Manage Users">
+        <source>Manage Users</source>
+        <target>Gestion des Utilisateurs</target>
       </trans-unit>
-      <trans-unit id="nWMiwfT" resname="Login">
-        <source>Login</source>
-        <target>Se connecter</target>
+      <trans-unit id="10MHBUC" resname="Confirmation">
+        <source>Confirmation</source>
+        <target>Confirmation</target>
       </trans-unit>
-      <trans-unit id="P5yZH2O" resname="Change password">
-        <source>Change password</source>
-        <target>Modifier le mot de passe</target>
+      <trans-unit id="nZPB._o" resname="Please confirm your email address by clicking the following link">
+        <source>Please confirm your email address by clicking the following link</source>
+        <target>__Please confirm your email address by clicking the following link</target>
       </trans-unit>
-      <trans-unit id="FaMlmHb" resname="Manage adresses">
-        <source>Manage adresses</source>
-        <target>Gérer les addresses</target>
+      <trans-unit id="87wG9uu" resname="This link will expire in">
+        <source>This link will expire in</source>
+        <target>__This link will expire in</target>
       </trans-unit>
-      <trans-unit id="SWFhRVF" resname="Log out">
-        <source>Log out</source>
-        <target>Se déconnecter</target>
+      <trans-unit id="F7WctIl" resname="Cheers!">
+        <source>Cheers!</source>
+        <target>__Cheers!</target>
       </trans-unit>
-      <trans-unit id="pSrOQg8" resname="All">
-        <source>All</source>
-        <target>Tous</target>
+      <trans-unit id="ITaQX9q" resname="Confirm my Email">
+        <source>Confirm my Email</source>
+        <target>Comfirmer mon email</target>
       </trans-unit>
-      <trans-unit id="bik6jAC" resname="Waiting">
-        <source>Waiting</source>
-        <target>En attente</target>
+      <trans-unit id="4O3_s6c" resname="Reset password">
+        <source>Reset password</source>
+        <target>__Reset password</target>
       </trans-unit>
-      <trans-unit id="wfiOnWx" resname="In progress">
-        <source>In progress</source>
-        <target>En cour</target>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>Recherche</target>
       </trans-unit>
-      <trans-unit id="E8ou4km" resname="Canceled">
-        <source>Canceled</source>
-        <target>Anuller</target>
+      <trans-unit id="A5wsWVG" resname="Out story">
+        <source>Out story</source>
+        <target>Notre histoire</target>
       </trans-unit>
-      <trans-unit id="Iqlw0uW" resname="Completed">
-        <source>Completed</source>
-        <target>Terminer</target>
+      <trans-unit id="vMC8yRQ" resname="Sign In">
+        <source>Sign In</source>
+        <target>__Sign In</target>
       </trans-unit>
-      <trans-unit id="Um4Ah8w" resname="Description">
-        <source>Description</source>
-        <target>Description</target>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Mot de passe</target>
       </trans-unit>
-      <trans-unit id="xDY3y18" resname="Caractéristique">
-        <source>Caractéristique</source>
-        <target>__Caractéristique</target>
+      <trans-unit id="_TJnqhH" resname="Remember me">
+        <source>Remember me</source>
+        <target>Se souvenir de moi</target>
       </trans-unit>
-      <trans-unit id="L.WZgUO" resname="Tous">
-        <source>Tous</source>
-        <target>__Tous</target>
+      <trans-unit id=".f1B3nr" resname="Forgot Password">
+        <source>Forgot Password</source>
+        <target>Mot de passe oublié</target>
+      </trans-unit>
+      <trans-unit id="Tvyg0Qx" resname="About">
+        <source>About</source>
+        <target>A propos</target>
       </trans-unit>
     </body>
   </file>
