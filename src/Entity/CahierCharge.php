@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CahierCharge
 {
+    const status =
+    [
+        'En attente'=>'En attente',
+        'Valider'=>'Valider',
+        'Anuller'=>'Anuller'
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% import "macros/breadcrumb.html.twig" as breadcrumbs %}
+{% import "macros/alertes.html.twig" as alerte %}
+
+{% block title %}New Caisse{% endblock %}
+{% block breadcrumb %}
+	{{ breadcrumbs.breadcrumb('Caisse',[
+{
+path:path('admin_caisse_index'),
+name:'Manage Caisse'|trans
+}
+])}}
+{% endblock %}
+{% block body %}
+{% for item in app.flashes('success') %}
+{{ alerte.alert(item,'success')}}
+{% endfor %}
+    <h1>Create new Caisse</h1>
+
+    {{ include('admin_caisse/_form.html.twig') }}
+
+    <a href="{{ path('admin_caisse_index') }}">back to list</a>
+{% endblock %}

@@ -2,27 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\CahierCharge;
+use App\Entity\Adresse;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CahierChargeType extends AbstractType
+class AdresseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fullName')
-            ->add('email')
-            ->add('tel')
-            ->add('status')
+            ->add('rue')
+            ->add('ville')
+            ->add('pays')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CahierCharge::class,
+            'data_class' => Adresse::class,
         ]);
     }
 }

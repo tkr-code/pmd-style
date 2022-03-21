@@ -15,6 +15,9 @@ html {
 body {
   background: #D2CAEC;
 }
+main{
+  overflow: hidden;
+}
 
 /* loader start */
 #loader-pmd {

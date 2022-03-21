@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="tRLZfny" resname="User">
         <source>User</source>
-        <target>__User</target>
+        <target>Utilisateur</target>
       </trans-unit>
       <trans-unit id="HFqXNft" resname="profil modify">
         <source>profil modify</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="6KiDUxl" resname="Edit User">
         <source>Edit User</source>
-        <target>__Edit User</target>
+        <target>Modfier un utilisateur</target>
       </trans-unit>
       <trans-unit id="OpQ.Vio" resname="Manage Users">
         <source>Manage Users</source>

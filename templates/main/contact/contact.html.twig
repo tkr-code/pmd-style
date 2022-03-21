@@ -3,15 +3,37 @@
 {% import "macros/navUl.html.twig" as navs %}
 {% block title %}Contact{% endblock %}
 {% block navUl %}
-    {{ navs.ul('contact') }}
+{{ navs.ul('contact') }}
 {% endblock %}
+{% block head %}
+{# <script>
+    function onSubmit(token) {
+      alert('thanks ' + document.getElementById('contact_name').value);
+    }
+
+    function validate(event) {
+      event.preventDefault();
+      if (!document.getElementById('contact_name').value) {
+        alert("You must add text to the required contact name");
+      } else {
+        grecaptcha.execute();
+      }
+    }
+
+    function onload() {
+      var element = document.getElementById('submit');
+      element.onclick = validate;
+    }
+  </script> #}
+{% endblock %}
+
 {% block body %}
 <nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
     <a class="breadcrumb-item" href="/">Home</a>
     <span class="breadcrumb-item text-white active">Contact</span>
 </nav>
 {% for item in app.flashes('success') %}
-    {{ alertes.alert(item,'success')}}
+{{ alertes.alert(item,'success')}}
 {% endfor %}
 <!-- description de PMD-->
 <section data-aos="fade-up" id="description" class="bg-white text-center">
@@ -30,25 +52,25 @@
                 <div class="form-group">
                     <label for="">Name <span>*</span> </label>
                     {{form_widget(form.name,{
-                        attr:{
-                            'class':'size-input'
-                        }
+                    attr:{
+                    'class':'size-input'
+                    }
                     })}}
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Phone <span>*</span></label>
                     {{form_widget(form.phone_number,{
-                        attr:{
-                            class:'size-input'
-                        }
+                    attr:{
+                    class:'size-input'
+                    }
                     })}}
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email <span>*</span></label>
                     {{form_widget(form.email,{
-                        attr:{
-                            class:'size-input'
-                        }
+                    attr:{
+                    class:'size-input'
+                    }
                     })}}
                 </div>
             </div>
@@ -59,15 +81,21 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
-            <div class="col-md-5"></div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-primary"> <i class="fas fa-paper-plane"></i>&nbsp;Submit</button>
+            <div id='recaptcha' class="g-recaptcha"
+          data-sitekey="6Lf5x_ceAAAAAGo5ObTVmBQva3GcIV8nzhmu2xlI"
+          data-callback="onSubmit"
+          data-size="invisible"></div>
+                <!-- <button type="submit" class="btn btn-primary"> <i class="fas fa-paper-plane"></i>&nbsp;Submit</button> -->
+                <button id="submit" class="btn btn-2">Submit</button>
             </div>
-            <div class="col-md-5"></div>
         </div>
         {{form_widget(form)}}
         {{ form_end(form)}}
+        <script>onload();</script>
     </div>
 </section>
 {% endblock %}
+{% block javascripts %}{% endblock %}

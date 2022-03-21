@@ -62,6 +62,12 @@ class NavExtension extends AbstractExtension
                 [
                     'name'=>'Cahier de charge',
                     'path'=>'admin_cahier_charge_index',
+                    'icon'=>'fas fa-book-open'
+                ],
+                [
+                    'name'=>'Caisse',
+                    'path'=>'admin_caisse_index',
+                    'icon'=>'fas fa-funnel-dollar'
                 ],
                 
             ],
