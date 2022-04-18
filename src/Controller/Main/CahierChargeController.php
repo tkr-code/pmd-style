@@ -6,6 +6,7 @@ use App\Entity\CahierCharge;
 use App\Entity\ReponseCahierCharge;
 use App\Repository\QuestionCahierChargeRepository;
 use App\Repository\ReponseCahierChargeRepository;
+use App\Service\CahierChargeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +34,7 @@ class CahierChargeController extends AbstractController
     /**
      * @Route("cahier-de-charge/new", name="cahier_charge_new")
      */
-    public function new(Request $request, QuestionCahierChargeRepository $questionCahierChargeRepository):Response
+    public function new(Request $request,CahierChargeService $cahierChargeService, QuestionCahierChargeRepository $questionCahierChargeRepository):Response
     {
         if(!empty($request->request)){
             $cahierCharge = new CahierCharge();
@@ -41,6 +42,7 @@ class CahierChargeController extends AbstractController
             $cahierCharge->setEmail($request->request->get('email'));
             $cahierCharge->setTel($request->request->get('tel'));
             $cahierCharge->setStatus('En attente');
+            $cahierCharge->setNumber($cahierChargeService->nextNumber());
             //QUESTION  1 START
             $reponse1 = new ReponseCahierCharge();
             $r1 = '';

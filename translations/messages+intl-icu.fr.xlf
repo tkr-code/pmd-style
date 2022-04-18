@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="87wG9uu" resname="This link will expire in">
         <source>This link will expire in</source>
-        <target>__This link will expire in</target>
+        <target>Ce lien expirera dans</target>
       </trans-unit>
       <trans-unit id="F7WctIl" resname="Cheers!">
         <source>Cheers!</source>
@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="4O3_s6c" resname="Reset password">
         <source>Reset password</source>
-        <target>__Reset password</target>
+        <target>Réinitialiser mot de passe</target>
       </trans-unit>
       <trans-unit id="ScJmuqq" resname="Search">
         <source>Search</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="vMC8yRQ" resname="Sign In">
         <source>Sign In</source>
-        <target>__Sign In</target>
+        <target>Connectez-vous</target>
       </trans-unit>
       <trans-unit id="588_9PF" resname="Password">
         <source>Password</source>

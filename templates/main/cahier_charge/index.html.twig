@@ -1,11 +1,13 @@
 {% extends 'main/base.html.twig' %}
 {% import "macros/navUl.html.twig" as navs %}
 
-{% block title %}Questionnaires cahier de charge pour faciliter la création de votre application cahier de charge{%
+{% block title %}Questionnaires cahier de charge pour faciliter la création de votre application
+{%
 endblock %}
 {% block navUl %}
 {{ navs.ul('cahier de charge') }}
 {% endblock %}
+
 {% block body %}
 <nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
     <a class="breadcrumb-item" href="/">Home</a>
@@ -17,7 +19,7 @@ endblock %}
 <div class="container my-5">
     <div class="document cahier-de-charge">
         <div class="">
-            <h3 class="title">Questionnaires cahier de charge pour faciliter la création de votre application</h3>
+            <h3 class="title">Questionnaires cahiers des charge pour faciliter la création de votre application</h3>
         </div>
         <div class="container">
             <div id="questionnaire">
@@ -30,7 +32,7 @@ endblock %}
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="fullName">Nom complet (*)</label>
-                                            <input type="text" id="fullName" name="fullName" value="Malick tounkara"
+                                            <input type="text" id="fullName" name="fullName" value=""
                                                 class="form-control text-capitalize" placeholder="Prénom et nom" />
                                             <small id="helpFullName" class="text-muted error"></small>
                                         </div>
@@ -38,16 +40,16 @@ endblock %}
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="email">Email(*)</label>
-                                            <input type="text" class="form-control" value="malick@mail.com" id="email"
-                                                name="email" placeholder="Email">
+                                            <input type="text" class="form-control" value="" id="email" name="email"
+                                                placeholder="Email">
                                             <small id="helpEmail" class="text-muted error"></small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Téléphone</label>
-                                            <input type="text" name="tel" id="tel" class="form-control phone"
-                                                value="781278288" placeholder="Téléphone">
+                                            <input type="text" name="tel" id="tel" class="form-control phone" value=""
+                                                placeholder="Téléphone">
                                             <small id="helpTel" class="text-muted error"></small>
                                         </div>
                                     </div>
@@ -56,11 +58,11 @@ endblock %}
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="question">
-                                    <label class="label-1">{{ questions[0].number ~ ') ' ~ questions[0].question }} 
-                                    {# 1) Quel genre d’application voulez-vous ? #}
+                                    <label class="label-1">{{ questions[0].number ~ ') ' ~ questions[0].question }}
+                                        {# 1) Quel genre d’application voulez-vous ? #}
                                     </label>
                                     <div class="question-content ">
-                                    <small id="help-genre" class="text-muted error"></small>
+                                        <small id="help-genre" class="text-muted error"></small>
                                         <div class="question-item question-1">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="genre-mobile"
@@ -133,8 +135,7 @@ endblock %}
                                                     </label>
                                                     <div class="form-group reponse-autre web-autre container">
                                                         <textarea class="form-control" name="app-web-autre-text"
-                                                            id="app-web-autre-text"
-                                                            rows="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, veniam.</textarea>
+                                                            id="app-web-autre-text" rows="3"></textarea>
                                                         <small id="helpApp-web-autre-text"
                                                             class="text-muted error"></small>
                                                     </div>
@@ -182,8 +183,7 @@ endblock %}
                                                     <div class="reponse-autre bureau-autre">
                                                         <div class="form-group container">
                                                             <textarea class="form-control" id="bureau-autre-text"
-                                                                name="bureau-autre-text"
-                                                                rows="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, cupiditate?</textarea>
+                                                                name="bureau-autre-text" rows="3"></textarea>
                                                             <small id="helpApp-bureau-autre-text"
                                                                 class="text-muted error"></small>
                                                         </div>
@@ -216,9 +216,8 @@ endblock %}
                                             <div class="reponse-autre autre-question-1">
                                                 <div class="form-group">
                                                     <textarea class="form-control" name="autre-question-1-text"
-                                                        id="autre-question-1-text"
-                                                        rows="3">Lorem ipsum dolor sit amet.</textarea>
-                                                        <small id="help-autre-question-1" class="text-muted error"></small>
+                                                        id="autre-question-1-text" rows="3"></textarea>
+                                                    <small id="help-autre-question-1" class="text-muted error"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -231,8 +230,8 @@ endblock %}
                                     <div class="question-content">
                                         <div class="form-group">
                                             <textarea class="form-control" id="question-2" name="q2"
-                                                rows="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, saepe.</textarea>
-                                                <small id="help-question-2" class="text-muted error"></small>
+                                                rows="3"></textarea>
+                                            <small id="help-question-2" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -242,9 +241,8 @@ endblock %}
                                     <label class="label-1">3) Quels sont vos concurrents ? (*)</label>
                                     <div class="question-content">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="q3" id="q3"
-                                                rows="3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae, odit.</textarea>
-                                                <small id="help-q3" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q3" id="q3" rows="3"></textarea>
+                                            <small id="help-q3" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -254,9 +252,8 @@ endblock %}
                                     <label class="label-1">4) Quelles sont vos cibles ? (*)</label>
                                     <div class="question-content">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="q4" id="q4"
-                                                rows="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, non!</textarea>
-                                                <small id="help-q4" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q4" id="q4" rows="3"></textarea>
+                                            <small id="help-q4" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -264,19 +261,20 @@ endblock %}
                             <div class="col-md-12 col-12">
                                 <div class="question">
                                     <label class="label-1">5) Quelles sont les questions que vous posent les clients
-                                        ? (*) </label>
+                                        ? (*)
+                                    </label>
                                     <div class="question-content">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="q5" id="q5"
-                                                rows="3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio, iure.</textarea>
-                                                <small id="help-q5" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q5" id="q5" rows="3"></textarea>
+                                            <small id="help-q5" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="question">
-                                    <label class="label-1">6) Les fonctionnalités de votre site </label>
+                                    <label class="label-1">6) Les fonctionnalités de votre site
+                                    </label>
                                     <p>Il s'agit ici de lister les principales fonctionnalités que vous souhaitez
                                         mettre en place sur votre futur application:</p>
                                     <div class="question-content">
@@ -390,9 +388,8 @@ endblock %}
                                                 </div>
                                                 <div class="form-group reponse-autre autre-question-6">
                                                     <textarea class="form-control" name="autre-q6-text"
-                                                        id="autre-q6-text" required
-                                                        rows="3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore, omnis!</textarea>
-                                                        <small id="help-autre-q6" class="text-muted error"></small>
+                                                        id="autre-q6-text" rows="3"></textarea>
+                                                    <small id="help-autre-q6" class="text-muted error"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -401,35 +398,36 @@ endblock %}
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="question">
-                                    <label class="label-1">7) Avez-vous des sites références au moins ? </label>
+                                    <label class="label-1">7) Avez-vous des sites références au moins ?
+                                    </label>
                                     <div class="question-content">
                                         <div class="form-group">
-                                            <textarea class="form-control" required name="q7" id="q7"
-                                                rows="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, est?</textarea>
-                                                <small id="help-q7" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q7" id="q7" rows="3"></textarea>
+                                            <small id="help-q7" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="question">
-                                    <label class="label-1">8) Nom de domaine </label>
+                                    <label class="label-1">8) Nom de domaine
+                                    </label>
                                     <div class="question-content">
                                         <p>Le nom de domaine est une « adresse », un « nom » qui permet de retrouver
                                             facilement Votre site internet. Ex : www.monnom.com</p>
                                         <p>Veuillez indiquer ci-contre le nom de domaine que vous souhaitez réserver
                                             : *selon la disponibilité :</p>
                                         <div class="form-group">
-                                            <textarea class="form-control" required name="q8" id="q8"
-                                                rows="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, vero!</textarea>
-                                                <small id="help-q8" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q8" id="q8" rows="3"></textarea>
+                                            <small id="help-q8" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="question">
-                                    <label class="label-1">9) Le référencement </label>
+                                    <label class="label-1">9) Le référencement
+                                    </label>
                                     <div class="question-content">
                                         <p>Le référencement consiste à améliorer et consolider le positionnement de
                                             votre site sur internet dans les résultats d'une requête effectuée dans
@@ -440,9 +438,8 @@ endblock %}
                                             Référencer le site dans plusieurs annuaires bien précis.
                                         </p>
                                         <div class="form-group">
-                                            <textarea class="form-control" required name="q9" id="q9"
-                                                rows="3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis, nisi.</textarea>
-                                                <small id="help-q9" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q9" id="q9" rows="3"></textarea>
+                                            <small id="help-q9" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -451,35 +448,40 @@ endblock %}
                                 <div class="question">
                                     <label class="label-1">10) Une particularité, une spécialité, un évènement,
                                         quelque chose de particulier qui caractérise votre activité ou vos
-                                        créations. </label>
+                                        créations.
+                                    </label>
                                     <div class="question-content">
                                         <div class="form-group">
-                                            <textarea class="form-control" required name="q10" id="q10"
-                                                rows="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, reiciendis!</textarea>
-                                                <small id="help-q10" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q10" id="q10" rows="3"></textarea>
+                                            <small id="help-q10" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="question">
-                                    <label class="label-1">11) Autres suggestions et questions : </label>
+                                    <label class="label-1">11) Autres suggestions et questions :
+                                    </label>
                                     <div class="question-content">
                                         <div class="form-group">
-                                            <textarea class="form-control" required name="q11" id="q11"
-                                                rows="3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, id?</textarea>
-                                                <small id="help-q11" class="text-muted error"></small>
+                                            <textarea class="form-control" name="q11" id="q11" rows="3"></textarea>
+                                            <small id="help-q11" class="text-muted error"></small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- <div class="col-md-12 col-12">
-                                <input type="hidden" name="">
-                            </div> -->
+								                                <input type="hidden" name="">
+								                            </div> -->
                             <div class="col-md-12 col-12">
                                 <div class="row">
                                     <div class="col-md-3 col-6 mx-auto my-3">
-                                        <button type="submit" name="cahierCharge" class="btn btn-2">
+                                        <button class="btn btn-2 cahier-loading" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                aria-hidden="true"></span>
+                                            Loading...
+                                        </button>
+                                        <button type="submit" class="btn btn-2 cahier-send" name="cahierCharge">
                                             Envoyer
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
                                         </button>
@@ -488,8 +490,9 @@ endblock %}
                             </div>
                             <div class="col-md-12 col-12">
                                 <h5>
-                                    Pour tous renseignements complémentaires n'hésitez pas à nous contacter <a
-                                        href="contact.html">ici</a> :
+                                    Pour tous renseignements complémentaires n'hésitez pas à nous contacter
+                                    <a href="contact.html">ici</a>
+                                    :
                                 </h5>
                                 <p>
                                     Par téléphone : +221 78 127 82 88 / +221 77 043 12 25 / +221 77 237 53 69
@@ -509,8 +512,7 @@ endblock %}
 <script>
     $(document).ready(function () {
 
-        $(document).on('click', '#mainMenu li a', function () {
-            // this.removeClass('active')
+        $(document).on('click', '#mainMenu li a', function () { // this.removeClass('active')
             $('#mainMenu li a.active').removeClass('active')
             $(this).addClass('active')
         })
@@ -562,17 +564,17 @@ endblock %}
             let fullName = $('#fullName').val()
             if (fullName.length < 3) { // SI LE NOM COMPLET EST INFERIEURE A TROIS  CARACTERES
                 let text = 'Le nom complet doit contenir au moins trois (3) caractères'
-                $('#helpFullName').text(text) //MESSAGE D'ERREUR
+                $('#helpFullName').text(text) // MESSAGE D'ERREUR
             } else {
                 $('#helpFullName').text('') // ON VIDE LE CHAMP DE L'ERREUR
             }
         })
 
         $(document).on('blur', '#email', function () {
-            let email = $('#email').val()
-            if (!IsEmail(email) || email == '') { // SI LE EMAIL EST VALIDE 
+            let email = $('#email').val().trim()
+            if (!IsEmail(email) || email == '') { // SI LE EMAIL EST VALIDE
                 let text = 'Entrer une adresse email valide !'
-                $('#helpEmail').text(text) //MESSAGE D'ERREUR
+                $('#helpEmail').text(text) // MESSAGE D'ERREUR
                 error = true
             } else {
                 $('#helpEmail').text('') // ON VIDE LE CHAMP DE L'ERREUR
@@ -580,38 +582,22 @@ endblock %}
             }
         })
 
-        // $(document).on('blur', '#tel', function () {
-        //     let phone = $('#tel').val()
-        //     if (!validatePhone(phone)) { // SI LE PHONE EST INVALIDE ET INFERIEUR A 8 
-        //         let text = 'Entrer numéro de téléhone valide !'
-        //         $('#helpTel').text(text) //MESSAGE D'ERREUR
-        //     } else {
-        //         $('#helpTel').text('') // ON VIDE LE CHAMP DE L'ERREUR
-        //     }
-        // })
-
-
         $(document).on('submit', '#formCahierDeCharge', function (e) {
             e.preventDefault();
-            var form_url = $(this).attr("action"); //récupérer l'URL du formulaire
-            var form_method = $(this).attr("method"); //récupérer la méthode GET/POST du formulaire
+            var form_url = $(this).attr("action"); // récupérer l'URL du formulaire
+            var form_method = $(this).attr("method"); // récupérer la méthode GET/POST du formulaire
             let error = false;
             let fullName = $('#fullName').val();
-            let email = $('#email').val()
+            let email = $('#email').val().trim()
             let phone = $('#tel').val()
             let question2 = $('#question-2').val()
             let question3 = $('#q3').val()
             let question4 = $('#q4').val()
             let question5 = $('#q5').val()
-            let question7 = $('#q7').val()
-            let question8 = $('#q8').val()
-            let question9 = $('#q9').val()
-            let question10 = $('#q10').val()
-            let question11 = $('#q11').val()
             if (fullName.length < 3) { // SI LE NOM COMPLET EST INFERIEURE A TROIS  CARACTERES
                 let text = 'Le nom complet doit contenir au moins trois (3) caractères'
-                $('#helpFullName').text(text) //MESSAGE D'ERREUR
-                swalErreur('#fullName', text) //ALERT D'ERREUR
+                $('#helpFullName').text(text) // MESSAGE D'ERREUR
+                swalErreur('#fullName', text) // ALERT D'ERREUR
                 error = true
                 return
             } else {
@@ -619,10 +605,10 @@ endblock %}
                 error = false
             }
 
-            if (!IsEmail(email) || email == '') { // SI LE EMAIL EST VALIDE 
+            if (!IsEmail(email) || email == '') { // SI LE EMAIL EST VALIDE
                 let text = 'Entrer une adresse email valide !'
-                $('#helpEmail').text(text) //MESSAGE D'ERREUR
-                swalErreur('#email', text) //ALERT D'ERREUR
+                $('#helpEmail').text(text) // MESSAGE D'ERREUR
+                swalErreur('#email', text) // ALERT D'ERREUR
                 error = true
                 return
             } else {
@@ -630,112 +616,94 @@ endblock %}
                 error = false
             }
 
-            // if (!validatePhone(phone) || phone.length < 8) { // SI LE PHONE INVALIDE ET INFERIEUR A 8 
-            //     let text = 'Entrer numéro de téléhone valide !'
-            //     $('#helpTel').text(text) //MESSAGE D'ERREUR
-            //     swalErreur('#tel', text) //ALERT D'ERREUR
-            //     error = true
-            // } else {
-            //     $('#helpTel').text('') // ON VIDE LE CHAMP DE L'ERREUR
-            //     error = false
-            // }
-            if($('#mobile').is(':checked') == false && $('#web').is(':checked') == false 
-            && $('#bureau').is(':checked') == false && $('#erp').is(':checked') == false ){
+            if ($('#mobile').is(':checked') == false && $('#web').is(':checked') == false && $('#bureau').is(':checked') == false && $('#erp').is(':checked') == false) {
                 let text = "Vous devez choisir un ou plusieur genre  d'application !"
-                $('#help-genre').text(text) //MESSAGE D'ERREUR
-                    swalErreur('#help-genre', text) //ALERT D'ERREUR
-                    error = true
-                    return
-            }
-            else{
+                $('#help-genre').text(text) // MESSAGE D'ERREUR
+                swalErreur('#help-genre', text) // ALERT D'ERREUR
+                error = true
+                return
+            } else {
                 error = false
-                 $('#help-genre').text('') //MESSAGE D'ERREUR
+                $('#help-genre').text('') // MESSAGE D'ERREUR
             }
 
-            if($('#mobile').is(':checked')){
+            if ($('#mobile').is(':checked')) {
                 let text = "Vous devez choisir un type d'application mobile !"
-                $('#help-app-mobile').text(text) //MESSAGE D'ERREUR
-                if( $('#android').is(':checked') || $('#aos').is(':checked') || $('#hybrides').is(':checked') ){
+                $('#help-app-mobile').text(text) // MESSAGE D'ERREUR
+                if ($('#android').is(':checked') || $('#aos').is(':checked') || $('#hybrides').is(':checked')) {
                     error = false
-                    $('#help-app-mobile').text('') //MESSAGE D'ERREUR
-                }else{
-                    swalErreur('#mobile', text) //ALERT D'ERREUR
+                    $('#help-app-mobile').text('') // MESSAGE D'ERREUR
+                } else {
+                    swalErreur('#mobile', text) // ALERT D'ERREUR
                     error = true
                     return
                 }
-            }
-            else{
+            } else {
                 error = false
                 $('.question-1 .reponse input').prop('checked', false)
-                 $('#help-app-mobile').text('') //MESSAGE D'ERREUR
+                $('#help-app-mobile').text('') // MESSAGE D'ERREUR
             }
 
-            if($('#web').is(':checked')){
+            if ($('#web').is(':checked')) {
                 let text = "Vous devez choisir un type d'application web !"
-                $('#help-web').text(text) //MESSAGE D'ERREUR
+                $('#help-web').text(text) // MESSAGE D'ERREUR
                 error = true
-                if( $('#site-vitrine').is(':checked') == false && $('#app-web-autre').is(':checked') == false 
-                && $('#portofolio').is(':checked') == false && $('#e-commerce').is(':checked') == false ){
-                    swalErreur('#web', text) //ALERT D'ERREUR
+                if ($('#site-vitrine').is(':checked') == false && $('#app-web-autre').is(':checked') == false && $('#portofolio').is(':checked') == false && $('#e-commerce').is(':checked') == false) {
+                    swalErreur('#web', text) // ALERT D'ERREUR
                     error = true
                     return
-                }else{
+                } else {
                     error = false
-                    $('#help-web').text('') //EFFACE LE MESSAGE D'ERREUR
+                    $('#help-web').text('') // EFFACE LE MESSAGE D'ERREUR
                 }
-            }
-            else{
+            } else {
                 error = false
                 $('.question-2 .reponse input').prop('checked', false)
-                 $('#help-web').text('') //MESSAGE D'ERREUR
+                $('#help-web').text('') // MESSAGE D'ERREUR
             }
 
-            if($('#bureau').is(':checked')){
+            if ($('#bureau').is(':checked')) {
                 let text = "Vous devez choisir un type d'application de bureau !"
-                $('#help-bureau').text(text) //MESSAGE D'ERREUR
+                $('#help-bureau').text(text) // MESSAGE D'ERREUR
                 error = true
-                if( $('#system-information').is(':checked') == false && $('#comptabilite').is(':checked') == false 
-                && $('#facture').is(':checked') == false && $('#q-1-autre').is(':checked') == false ){
-                    swalErreur('#bureau', text) //ALERT D'ERREUR
+                if ($('#system-information').is(':checked') == false && $('#comptabilite').is(':checked') == false && $('#facture').is(':checked') == false && $('#q-1-autre').is(':checked') == false) {
+                    swalErreur('#bureau', text) // ALERT D'ERREUR
                     error = true
                     return
-                }else{
+                } else {
                     error = false
-                    $('#help-bureau').text('') //MESSAGE D'ERREUR
+                    $('#help-bureau').text('') // MESSAGE D'ERREUR
                 }
-            }
-            else{
+            } else {
                 error = false
                 $('.question-3 .reponse input').prop('checked', false)
-                 $('#help-web').text('') //MESSAGE D'ERREUR
+                $('#help-web').text('') // MESSAGE D'ERREUR
             }
 
             if ($('#app-web-autre').is(':checked')) {
                 let autreText = $('#app-web-autre-text').val()
                 if (autreText.length < 3) {
                     let text = 'Le champ autre doit contenir au moins trois (3) caractères'
-                    $('#helpApp-web-autre-text').text(text) //MESSAGE D'ERREUR
-                    swalErreur('#app-web-autre', text) //ALERT D'ERREUR
+                    $('#helpApp-web-autre-text').text(text) // MESSAGE D'ERREUR
+                    swalErreur('#app-web-autre', text) // ALERT D'ERREUR
                     error = true
                     return
-                }
-                else {
+                } else {
                     error = false
-                    $('#helpApp-web-autre-text').text('') //MESSAGE D'ERREUR
+                    $('#helpApp-web-autre-text').text('') // MESSAGE D'ERREUR
                 }
             }
             if ($('#app-web-autre').is(':checked')) {
                 let autreText = $('#app-web-autre-text').val()
                 if (autreText.length < 3) {
                     let text = 'Le champ autre doit contenir au moins trois (3) caractères'
-                    $('#helpApp-web-autre-text').text(text) //MESSAGE D'ERREUR
-                    swalErreur('#app-web-autre', text) //ALERT D'ERREUR
+                    $('#helpApp-web-autre-text').text(text) // MESSAGE D'ERREUR
+                    swalErreur('#app-web-autre', text) // ALERT D'ERREUR
                     error = true
                     return
-                }
-                else {
+                } else {
                     error = false
-                    $('#helpApp-web-autre-text').text('') //MESSAGE D'ERREUR
+                    $('#helpApp-web-autre-text').text('') // MESSAGE D'ERREUR
                 }
             }
 
@@ -743,36 +711,36 @@ endblock %}
                 let autreText = $('#bureau-autre-text').val()
                 if (autreText.length < 3) {
                     let text = 'Le champ autre doit contenir au moins trois (3) caractères'
-                    $('#helpApp-bureau-autre-text').text(text) //MESSAGE D'ERREUR
-                    swalErreur('#q-1-autre', text) //ALERT D'ERREUR
+                    $('#helpApp-bureau-autre-text').text(text) // MESSAGE D'ERREUR
+                    swalErreur('#q-1-autre', text) // ALERT D'ERREUR
                     error = true
                     return
 
                 } else {
                     error = false
-                    $('#helpApp-bureau-autre-text').text('') //MESSAGE D'ERREUR
+                    $('#helpApp-bureau-autre-text').text('') // MESSAGE D'ERREUR
                 }
             }
-            
+
             if ($('#autre-question-1').is(':checked')) {
                 let autreText = $('#autre-question-1-text').val()
                 if (autreText.length < 3) {
                     let text = 'Le champ autre doit contenir au moins trois (3) caractères'
-                    $('#help-autre-question-1').text(text) //MESSAGE D'ERREUR
-                    swalErreur('#autre-question-1', text) //ALERT D'ERREUR
+                    $('#help-autre-question-1').text(text) // MESSAGE D'ERREUR
+                    swalErreur('#autre-question-1', text) // ALERT D'ERREUR
                     error = true
                     return
 
                 } else {
                     error = false
-                    $('#help-autre-question-1').text('') //MESSAGE D'ERREUR
+                    $('#help-autre-question-1').text('') // MESSAGE D'ERREUR
                 }
             }
 
             if (question2.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
                 let text = 'La réponse deux (2) est obligatoire.'
-                $('#help-question-2').text(text) //MESSAGE D'ERREUR
-                swalErreur('#question-2', text) //ALERT D'ERREUR
+                $('#help-question-2').text(text) // MESSAGE D'ERREUR
+                swalErreur('#question-2', text) // ALERT D'ERREUR
                 error = true
                 return
             } else {
@@ -782,8 +750,8 @@ endblock %}
 
             if (question3.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
                 let text = 'La réponse trois (3) est obligatoire.'
-                $('#help-q3').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q3', text) //ALERT D'ERREUR
+                $('#help-q3').text(text) // MESSAGE D'ERREUR
+                swalErreur('#q3', text) // ALERT D'ERREUR
                 error = true
                 return
             } else {
@@ -793,8 +761,8 @@ endblock %}
 
             if (question4.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
                 let text = 'La réponse quatre (3) est obligatoire.'
-                $('#help-q4').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q4', text) //ALERT D'ERREUR
+                $('#help-q4').text(text) // MESSAGE D'ERREUR
+                swalErreur('#q4', text) // ALERT D'ERREUR
                 error = true
                 return
             } else {
@@ -804,8 +772,8 @@ endblock %}
 
             if (question5.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
                 let text = 'La réponse cinq (5) est obligatoire.'
-                $('#help-q5').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q5', text) //ALERT D'ERREUR
+                $('#help-q5').text(text) // MESSAGE D'ERREUR
+                swalErreur('#q5', text) // ALERT D'ERREUR
                 error = true
                 return
             } else {
@@ -817,105 +785,61 @@ endblock %}
                 let autreText = $('#autre-q6-text').val()
                 if (autreText.length < 3) {
                     let text = 'Le champ autre doit contenir au moins trois (3) caractères'
-                    $('#help-autre-q6').text(text) //MESSAGE D'ERREUR
-                    swalErreur('#autre-question-6', text) //ALERT D'ERREUR
+                    $('#help-autre-q6').text(text) // MESSAGE D'ERREUR
+                    swalErreur('#autre-question-6', text) // ALERT D'ERREUR
                     error = true
                     return
 
                 } else {
                     error = false
-                    $('#help-autre-q6').text('') //MESSAGE D'ERREUR
+                    $('#help-autre-q6').text('') // MESSAGE D'ERREUR
                 }
             }
 
-            if (question7.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
-                let text = 'La réponse sept (7) est obligatoire.'
-                $('#help-q7').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q7', text) //ALERT D'ERREUR
-                error = true
-            } else {
-                $('#help-q7').text('') // ON VIDE LE CHAMP DE L'ERREUR
-                error = false
-            }
+            if (!error) { // SI ERREUR EST EGAL A LINVERSE DE FALSE
+                var form_data = $(this).serialize(); // Encoder les éléments du formulaire pour la soumission
+                $.ajax(
+                    {
+                        url: form_url,
+                        type: form_method,
+                        data: form_data,
+                        beforeSend: function () {
+                            $('.cahier-loading').css('display', 'block')
+                            $('.cahier-send').css('display', 'none')
+                        }
+                    }).done(function (response) {
+                        if (response == 'success') {
+                            Swal.fire({ 
+                                icon: 'success', 
+                                title: 'Votre cahier de charge a été ajouté.', 
+                                showConfirmButton: false, timer: 1500 }).then((result) => {
+                                window.location.href = "{{ path('cahier_charge_success') }}"
+                            })
+                        } else {
+                            $("#res").html(response);
+                        }
+                        $('.cahier-loading').css('display', 'none')
+                        $('.cahier-send').css('display', 'block')
 
-            if (question8.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
-                let text = 'La réponse huit (8) est obligatoire.'
-                $('#help-q8').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q8', text) //ALERT D'ERREUR
-                error = true
-            } else {
-                $('#help-q8').text('') // ON VIDE LE CHAMP DE L'ERREUR
-                error = false
-            }
-
-            if (question9.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
-                let text = 'La réponse neuf (9) est obligatoire.'
-                $('#help-q9').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q9', text) //ALERT D'ERREUR
-                error = true
-                return
-            } else {
-                $('#help-q9').text('') // ON VIDE LE CHAMP DE L'ERREUR
-                error = false
-            }
-
-            if (question10.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
-                let text = 'La réponse dix (10) est obligatoire.'
-                $('#help-q10').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q10', text) //ALERT D'ERREUR
-                error = true
-                return
-            } else {
-                $('#help-q10').text('') // ON VIDE LE CHAMP DE L'ERREUR
-                error = false
-            }
-
-            if (question11.length < 3) { // SI LA REPONSE EST INFERIEURE A TROIS  CARACTERES
-                let text = 'La réponse dix (11) est obligatoire.'
-                $('#help-q11').text(text) //MESSAGE D'ERREUR
-                swalErreur('#q11', text) //ALERT D'ERREUR
-                error = true
-                return
-            } else {
-                $('#help-q11').text('') // ON VIDE LE CHAMP DE L'ERREUR
-                error = false
-            }
-
-            if (!error) { // SI ERREUR EST EGAL A LINVERSE DE FALSE 
-                var form_data = $(this).serialize(); //Encoder les éléments du formulaire pour la soumission
-                $.ajax({
-                    url: form_url,
-                    type: form_method,
-                    data: form_data
-                }).done(function (response) {
-                    console.log(response)
-                    if(response == 'success'){
-                        window.location.href="{{path('cahier_charge_success') }}"
-                    }else{
-                        $("#res").html(response);
-                    } 
-                });
+                    });
             }
         })
 
-        //SRCOLL VER L'ANCRE
+        // SRCOLL VER L'ANCRE
         function scrollToAncre(identifiant) {
-            $('html,body').animate({ scrollTop: $(identifiant).offset().top - 220 }, 'slow');
+            $('html,body').animate({
+                scrollTop: $(identifiant).offset().top - 220
+            }, 'slow');
         }
 
-        //ALERT swal 2 ERREUR
+        // ALERT swal 2 ERREUR
         function swalErreur(id, text = 'Définir le text') {
-            Swal.fire({
-                title: 'Oups !',
-                text: text,
-                icon: 'error',
-            }).then((result) => {
-                //ON REDIRIGE VER L'identifiant
+            Swal.fire({ title: 'Oups !', text: text, icon: 'error' }).then((result) => { // ON REDIRIGE VER L'identifiant
                 scrollToAncre(id)
             })
         }
 
-        function IsEmail(email) { //SI LA VALEUR EST UNE ADRESSE EMAIL
+        function IsEmail(email) { // SI LA VALEUR EST UNE ADRESSE EMAIL
             var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             if (!regex.test(email)) {
                 return false;
@@ -928,8 +852,7 @@ endblock %}
             var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
             if (filter.test(txtPhone)) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }

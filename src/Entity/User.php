@@ -65,8 +65,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $socials;
 
+        /**
+     * @Assert\Valid
+     * @ORM\OneToOne(targetEntity=Adresse::class, inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $adresse;
+        /**
+     * 
+     * @ORM\OneToMany(targetEntity=Phone::class, mappedBy="user")
+     */
+    private $phones;
+
     public function __construct()
     {
+        $this->phones = new ArrayCollection();
         $this->socials = new ArrayCollection();
     }
 
@@ -225,6 +237,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($social->getUser() === $this) {
                 $social->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+    public function getAdresse(): ?Adresse
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?Adresse $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+     /**
+     * @return Collection|Phone[]
+     */
+    public function getPhones(): Collection
+    {
+        return $this->phones;
+    }
+
+    public function addPhone(Phone $phone): self
+    {
+        if (!$this->phones->contains($phone)) {
+            $this->phones[] = $phone;
+            $phone->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhone(Phone $phone): self
+    {
+        if ($this->phones->removeElement($phone)) {
+            // set the owning side to null (unless already changed)
+            if ($phone->getUser() === $this) {
+                $phone->setUser(null);
             }
         }
 

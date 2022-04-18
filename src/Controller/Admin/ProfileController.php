@@ -4,12 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\ProfileType;
+use App\Entity\Phone;
+use App\Form\PhoneType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Form\ChangePasswordFormType;
+use App\Repository\PhoneRepository;
+
 
 
 /**
@@ -54,6 +58,40 @@ class ProfileController extends AbstractController
 
         return $this->renderForm('profile/new.html.twig', [
             'user' => $user,
+            'form' => $form,
+        ]);
+    }
+        /**
+     * @Route("/phone", name="profile_phone_index", methods={"GET"})
+     */
+    public function phoneIndex(PhoneRepository $phoneRepository): Response
+    {        
+        return $this->render('admin/profile/phone/index.html.twig', [
+            'phones' =>$phoneRepository->findBy([
+                        'user'=>$this->getUser()->getId(),
+                    ])
+        ]);
+    }
+       /**
+     * @Route("/phone/new", name="profile_phone_new", methods={"GET","POST"})
+     */
+    public function phoneNew(Request $request): Response
+    {
+        $phone = new Phone();
+        $phone->setUser($this->getUser());
+        $form = $this->createForm(PhoneType::class, $phone);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($phone);
+            $entityManager->flush();
+            $this->addFlash('success','Success');
+            return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/profile/phone/new.html.twig', [
+            'phone' => $phone,
             'form' => $form,
         ]);
     }

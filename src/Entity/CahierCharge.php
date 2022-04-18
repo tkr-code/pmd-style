@@ -16,7 +16,7 @@ class CahierCharge
     [
         'En attente'=>'En attente',
         'Valider'=>'Valider',
-        'Anuller'=>'Anuller'
+        'Anuller'=>'Anuller',
     ];
     /**
      * @ORM\Id
@@ -54,6 +54,11 @@ class CahierCharge
      * @ORM\Column(type="datetime")
      */
     private $created_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $number;
 
     public function __construct()
     {
@@ -152,6 +157,18 @@ class CahierCharge
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(string $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }

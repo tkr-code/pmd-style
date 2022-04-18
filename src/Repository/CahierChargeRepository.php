@@ -18,6 +18,19 @@ class CahierChargeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CahierCharge::class);
     }
+    public function findQuery()
+    {
+        return $this->createQueryBuilder('o');
+    }
+    public function findLast()
+    {
+       return $this->findQuery()
+        ->orderBy('o.id','desc')
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getResult()
+        ;   
+    }
 
     // /**
     //  * @return CahierCharge[] Returns an array of CahierCharge objects

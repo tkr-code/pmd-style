@@ -6,25 +6,11 @@
 {{ navs.ul('contact') }}
 {% endblock %}
 {% block head %}
-{# <script>
-    function onSubmit(token) {
-      alert('thanks ' + document.getElementById('contact_name').value);
-    }
-
-    function validate(event) {
-      event.preventDefault();
-      if (!document.getElementById('contact_name').value) {
-        alert("You must add text to the required contact name");
-      } else {
-        grecaptcha.execute();
-      }
-    }
-
-    function onload() {
-      var element = document.getElementById('submit');
-      element.onclick = validate;
-    }
-  </script> #}
+ <script>
+function onSubmit(token) {
+         document.getElementById("contact-form").submit();
+       }
+</script> 
 {% endblock %}
 
 {% block body %}
@@ -46,7 +32,11 @@
     <h3>Laissez-nous un message</h3>
     <p></p>
     <div class="container">
-        {{ form_start(form)}}
+        {{ form_start(form,{
+          attr:{
+            id:'contact-form'
+          }
+        })}}
         <div class="row">
             <div class="col-lg-6 col-12">
                 <div class="form-group">
@@ -84,12 +74,9 @@
         
         <div class="row">
             <div class="col-md-2">
-            <div id='recaptcha' class="g-recaptcha"
-          data-sitekey="6Lf5x_ceAAAAAGo5ObTVmBQva3GcIV8nzhmu2xlI"
-          data-callback="onSubmit"
-          data-size="invisible"></div>
-                <!-- <button type="submit" class="btn btn-primary"> <i class="fas fa-paper-plane"></i>&nbsp;Submit</button> -->
-                <button id="submit" class="btn btn-2">Submit</button>
+                <button type="submit" class="g-recaptcha btn btn-2" 
+                data-sitekey="6Lf5x_ceAAAAAGo5ObTVmBQva3GcIV8nzhmu2xlI" 
+                data-callback='onSubmit'><i class="fas fa-paper-plane"></i>&nbsp;Submit</button>
             </div>
         </div>
         {{form_widget(form)}}

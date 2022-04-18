@@ -5,15 +5,19 @@
 {% import "macros/alertes.html.twig" as alerte %}
 
 {% block title %}Cahier de Charge{% endblock %}
+
 {% block head %}
 {{ dataTable.css() }}
 {% endblock %}
+
 {% block javascripts %}
 {{ dataTable.script('#table-1') }}
 {% endblock %}
+
 {% block foot %}
 {{ dataTable.js() }}
 {% endblock %}
+
 {% block breadcrumb %}
 	{{ breadcrumbs.breadcrumb('Cahier de charge',[
 {
@@ -22,20 +26,20 @@ name:'Manage Cahier de charge'
 }
 ])}}
 {% endblock %}
+
 {% block body %}
-{% for item in app.flashes('success') %}
-{{ alerte.alert(item,'success')}}
-{% endfor %}
+{% include "admin/alerte/_success.html.twig" %}
 	<div class="card card-outline card-primary">
 		<div class="card-body">
 			<a class="btn btn-primary mb-3" href="{{ path('cahier_charge_index') }}">Create new</a>
-			<table id="table-1" class="table">
+			<table data-order='[[ 0, "desc" ]]' id="table-1" class="table">
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th>{{'Number'|trans}}</th>
 						<th>Nom complet</th>
 						<th>Email</th>
 						<th>Tel</th>
+						<th>Date</th>
 						<th>Status</th>
 						<th>actions</th>
 					</tr>
@@ -43,10 +47,11 @@ name:'Manage Cahier de charge'
 				<tbody>
 					{% for cahier_charge in cahier_charges %}
 						<tr>
-							<td>{{ cahier_charge.id }}</td>
+							<td>{{ cahier_charge.number }}</td>
 							<td>{{ cahier_charge.fullName }}</td>
 							<td>{{ cahier_charge.email }}</td>
 							<td>{{ cahier_charge.tel }}</td>
+							<td>{{ cahier_charge.createdAt|date_format_fr }}</td>
 							<td>{{ cahier_charge.status }}</td>
 							<td>
 								{{ links.iconEdit(path('admin_cahier_charge_edit', {'id': cahier_charge.id}))}}

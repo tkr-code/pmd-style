@@ -10,6 +10,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Caisse
 {
+    const CODE =[
+        'PMD'=>'PMD',
+        'LKP'=>'LKP',
+        'TKR'=>'TKR',
+        'MOH'=>'MOH',
+    ];
+
+    const TYPE =[
+        'Débit'=>'Débit',
+        'Crédit'=>'Crédit'
+    ];
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -36,6 +52,16 @@ class Caisse
      * @ORM\Column(type="string", length=255)
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_editable;
 
     public function getId(): ?int
     {
@@ -70,6 +96,13 @@ class Caisse
     {
         return $this->montant;
     }
+    public function getValeur(){
+        $valeur = abs($this->getMontant()); //Valeur absolue
+        if($this->type == 'Débit'){
+           return $valeur * -1;
+        }
+        return $valeur;
+    }
 
     public function setMontant(int $montant): self
     {
@@ -86,6 +119,30 @@ class Caisse
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getIsEditable(): ?bool
+    {
+        return $this->is_editable;
+    }
+
+    public function setIsEditable(bool $is_editable): self
+    {
+        $this->is_editable = $is_editable;
 
         return $this;
     }

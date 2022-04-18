@@ -20,24 +20,40 @@ class ContactController extends AbstractController
     {
         $form = $this->createForm(ContactType::class);
         $contact = $form->handleRequest($request);
+        $reCAPTCHA_secret_key="6Lf5x_ceAAAAADml1QNfCFcx_TZ-sWYo6_9euqeV";
+        $g_recaptcha_response="";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $globaals = $this->get('twig')->getGlobals();
 
       if($form->isSubmitted() && $form->isValid()){
-        $email = (new TemplatedEmail())
-        ->from($contact->get('email')->getData())
-        ->to('malick.tounkara.1@gmail.com')
-        ->subject('Contact depuis le site pmd developper')
-        ->htmlTemplate('email/contact.html.twig')
-        ->context([
-          'theme'=>$emailService->theme(6),
-          'name'=>$contact->get('name')->getData(),
-          'mail'=>$contact->get('email')->getData(),
-          'phone'=>$contact->get('phone_number')->getData(),
-          'message'=>$contact->get('message')->getData(),
-        ])
-        ;
-        $mailerInterface->send($email);
-        $this->addFlash('success','Email envoyé');
-        return $this->redirectToRoute('contact', []);
+        $g_recaptcha_response = $request->request->get('g-recaptcha-response');
+        $url = 'https://www.google.com/recaptcha/api/siteverify?secret='
+        . urlencode($reCAPTCHA_secret_key) . '&response=' 
+        . urlencode($g_recaptcha_response) . '&remoteip=' 
+        . urlencode($ip);
+        $response = file_get_contents($url);
+        $responeKey = json_decode($response,true);
+        if($responeKey['success']){
+          $email = (new TemplatedEmail())
+          ->from($contact->get('email')->getData())
+          ->to($globaals['site']['email'])
+          ->subject('Contact depuis le site pmd developper')
+          ->htmlTemplate('email/contact.html.twig')
+          ->context([
+            'theme'=>$emailService->theme(6),
+            'name'=>$contact->get('name')->getData(),
+            'mail'=>$contact->get('email')->getData(),
+            'phone'=>$contact->get('phone_number')->getData(),
+            'message'=>$contact->get('message')->getData(),
+          ]);
+          $mailerInterface->send($email);
+          $this->addFlash('success','Email envoyé');
+          return $this->redirectToRoute('contact', []);
+        }elseif($responeKey['error-codes']){
+          $this->addFlash('errors','Captcha invalide');
+        }else{
+          $this->addFlash('errors','Une erreur est survenu');
+        }
       }
       return $this->renderForm('main/contact/contact.html.twig', [
         'form'=>$form

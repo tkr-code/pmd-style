@@ -42,9 +42,9 @@ class CvController extends AbstractController
           'message'=>$contact->get('message')->getData(),
         ])
         ;
-        $mailerInterface->send($email);
-        $this->addFlash('success','Email envoyé');
-            ;
+            $mailerInterface->send($email);
+            $this->addFlash('success','Votre message a été  envoyé.');
+            return $this->redirectToRoute('cv_show',['slug'=>$slug]);
         }
 
         return $this->renderForm('main/cv/cv.html.twig', [

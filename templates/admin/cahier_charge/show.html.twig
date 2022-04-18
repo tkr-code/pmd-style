@@ -4,42 +4,37 @@
 {% block title %}Cahier de charge{% endblock %}
 
 {% block body %}
-<div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3>Cahier de Charge</h3>
-    </div>
-    <div class="card-body">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ cahier_charge.id }}</td>
-                </tr>
-                <tr>
-                    <th>FullName</th>
-                    <td>{{ cahier_charge.fullName }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ cahier_charge.email }}</td>
-                </tr>
-                <tr>
-                    <th>Tel</th>
-                    <td>{{ cahier_charge.tel }}</td>
-                </tr>
+<div class="row">
+    <div class="col-md-12 col-12">
+        <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-text-width"></i>
+                Cahier de Charge
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <dl>
+                <dt>{{'Number'|trans}}</dt>
+                <dd>{{ cahier_charge.number }}</dd>
+                <dt>FullName</dt>
+                <dd>{{ cahier_charge.fullName }}</dd>
+                <dt>Email</dt>
+                <dd>{{ cahier_charge.email }}</dd>
+                <dt>Tel</dt>
+                <dd>{{ cahier_charge.tel }}</dd>
                 {% for item in cahier_charge.reponses %}
-                    <tr>
-                        <th>{{ item.question.number ~ ') ' ~ item.question.question }}</th>
-                        <td>{{ item.reponse }}</td>
-                    </tr>
+                    <dt>{{ item.question.number ~ ') ' ~ item.question.question }}</dt>
+                    <dd>{{ item.reponse }}</dd>
                 {% endfor %}
-            </tbody>
-        </table>
-        <div>
-            {{ links.back(path('admin_cahier_charge_index')) }}
-            {{ links.edit(path('admin_cahier_charge_edit', {'id': cahier_charge.id})) }}
-            {{ include('admin/cahier_charge/_delete_form.html.twig') }}
-        </div>
+              </dl>
+              {{ links.back(path('admin_cahier_charge_index')) }}
+                {{ links.edit(path('admin_cahier_charge_edit', {'id': cahier_charge.id})) }}
+                {{ include('admin/cahier_charge/_delete_form.html.twig') }}
+            </div>
+            <!-- /.card-body -->
+          </div>
     </div>
 </div>
 {% endblock %}

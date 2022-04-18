@@ -89,7 +89,6 @@ class CahierChargeController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success','Le cahier de charge a été supprimé !');
         }
-
         return $this->redirectToRoute('admin_cahier_charge_index', [], Response::HTTP_SEE_OTHER);
     }
 }

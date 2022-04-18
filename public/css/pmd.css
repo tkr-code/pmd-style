@@ -19,6 +19,7 @@ main{
   overflow: hidden;
 }
 
+
 /* loader start */
 #loader-pmd {
   margin: 0 auto;
@@ -296,6 +297,9 @@ section#about {
 
 #cahier-de-charge {
   background-color: #fff;
+}
+.cahier-loading {
+  display: none;
 }
 #cahier-de-charge-success{
   padding: 30px 10px;

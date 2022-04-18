@@ -14,7 +14,7 @@ class CaisseFixtures extends Fixture
         [
             [
                 'code'=>'PMD',
-                'libelle'=>'Hebergement de janvier',
+                'libelle'=>'Hebergement de décembre',
                 'montant'=>-2000,
                 'type'=>'Débit'
             ],
@@ -26,76 +26,89 @@ class CaisseFixtures extends Fixture
             ],
             [
                 'code'=>'PMD',
-                'libelle'=>'Hebergement de fevrier',
-                'montant'=>-2000,
-                'type'=>'Débit'
-            ],
-            [
-                'code'=>'PMD',
-                'libelle'=>'Hebergement de Mars',
-                'montant'=>-2000,
+                'libelle'=>'Hebergement de fevrier, mars et avril',
+                'montant'=>-5500,
                 'type'=>'Débit'
             ],
             [
                 'code'=>'TKR',
-                'libelle'=>'Versemenent de janvier',
+                'libelle'=>'Cotisation de décembre',
                 'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
                 'code'=>'TKR',
-                'libelle'=>'Versemenent de janvier',
+                'libelle'=>'Cotisation de janvier',
                 'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
                 'code'=>'TKR',
-                'libelle'=>'Versemenent de janvier',
+                'libelle'=>'Cotisation de février',
                 'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
                 'code'=>'TKR',
-                'libelle'=>'Versemenent de janvier',
+                'libelle'=>'Cotisation de mars',
                 'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
-                'code'=>'TKR',
-                'libelle'=>'Versemenent de janvier',
+                'code'=>'LKP',
+                'libelle'=>'Cotisation de décembre',
                 'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
-                'code'=>'TKR',
-                'libelle'=>'Versemenent de janvier',
+                'code'=>'LKP',
+                'libelle'=>'Cotisation de janvier',
                 'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
-                'code'=>'TKR',
-                'libelle'=>'Versemenent de janvier',
+                'code'=>'LKP',
+                'libelle'=>'Cotisation de février',
+                'montant'=>2000,
+                'type'=>'Crédit'
+            ],
+            [
+                'code'=>'LKP',
+                'libelle'=>'Cotisation de mars',
                 'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
                 'code'=>'MOH',
-                'libelle'=>'Versemenent de janvier',
-                'montant'=>8000,
+                'libelle'=>'Cotisation de décembre',
+                'montant'=>2000,
                 'type'=>'Crédit'
             ],
             [
-                'code'=>'LKP',
-                'libelle'=>'Versemenent de janvier',
+                'code'=>'MOH',
+                'libelle'=>'Cotisation de janvier',
                 'montant'=>2000,
                 'type'=>'Crédit'
-            ]
+            ],
+            [
+                'code'=>'MOH',
+                'libelle'=>'Cotisation de février',
+                'montant'=>2000,
+                'type'=>'Crédit'
+            ],
+            [
+                'code'=>'MOH',
+                'libelle'=>'Cotisation de mars',
+                'montant'=>2000,
+                'type'=>'Crédit'
+            ],
         ];
         foreach ($caisses as $key => $value) {
             $caisse = new Caisse();
             $caisse->setCode($value['code'])
             ->setLibelle($value['libelle'])
             ->setType($value['type'])
+            ->setIsEditable(false)
             ->setMontant($value['montant']);
             $manager->persist($caisse);
         }

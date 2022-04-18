@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Caisse;
 use App\Form\CaisseType;
 use App\Repository\CaisseRepository;
+use App\Service\CaisseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,17 +19,43 @@ class CaisseController extends AbstractController
     /**
      * @Route("/", name="admin_caisse_index", methods={"GET"})
      */
-    public function index(CaisseRepository $caisseRepository): Response
+    public function index(CaisseRepository $caisseRepository, CaisseService $caisseService): Response
     {
-        // dd($caisseRepository->findGroupByAllCode());
-        $montantTotal = 0;
-        foreach ($caisseRepository->findGroupByAllCode() as $value) {
-            $montantTotal += $value['total'];
+
+        $pmd = $moh = $tkr= $lkp =0;
+        foreach ($caisseRepository->findAll() as $key => $value) {
+            if($value->getCode() == 'PMD'){
+                $pmd += $value->getMontant();
+            }elseif ($value->getCode() == 'TKR') {
+                $tkr += $value->getMontant();
+            }elseif ($value->getCode() == 'MOH') {
+                $moh += $value->getMontant();
+                
+            }elseif ($value->getCode() == 'LKP') {
+                $lkp += $value->getMontant();
+            }
         }
-        
+        $caisses= [
+            [
+                'code'=>'pmd',
+                'montant'=>$pmd
+            ],
+            [
+                'code'=>'lkp',
+                'montant'=>$lkp
+            ],
+            [
+                'code'=>'moh',
+                'montant'=>$moh
+            ],
+            [
+                'code'=>'tkr',
+                'montant'=>$tkr
+            ],
+            ];        
         return $this->render('admin/caisse/index.html.twig', [
-            'caisses' => $caisseRepository->findGroupByAllCode(),
-            'montantTotal'=>$montantTotal
+            'caisses' => $caisses,
+            'montantTotal'=>$caisseService->total()
         ]);
     }
 
@@ -43,9 +70,10 @@ class CaisseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $caisse->setMontant($caisse->getValeur());
             $entityManager->persist($caisse);
             $entityManager->flush();
-
+            $this->addFlash('success',"L'enregistrement a été éffectué avec succès.");
             return $this->redirectToRoute('admin_caisse_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -56,12 +84,21 @@ class CaisseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin_caisse_show", methods={"GET"})
+     * @Route("/{code}", name="admin_caisse_show", methods={"GET"})
      */
-    public function show(Caisse $caisse): Response
+    public function show(CaisseRepository $caisseRepository, string $code): Response
     {
+        $caisses = $caisseRepository->findBy([
+            'code'=>$code
+        ]);
+        $montantTotal = 0;
+        
+        foreach ($caisses as $key => $value) {
+            $montantTotal += $value->getValeur(); 
+        }
         return $this->render('admin/caisse/show.html.twig', [
-            'caisse' => $caisse,
+            'caisses' => $caisses,
+            'montantTotal'=>$montantTotal
         ]);
     }
 
@@ -74,9 +111,10 @@ class CaisseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('admin_caisse_index', [], Response::HTTP_SEE_OTHER);
+            $caisse->setMontant($caisse->getValeur());
+            $this->getDoctrine()->getManager()->flush($caisse);
+            $this->addFlash('success','Modification réussie.');
+            return $this->redirectToRoute('admin_caisse_show', ['code'=> strtolower($caisse->getCode())], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/caisse/edit.html.twig', [
@@ -94,8 +132,8 @@ class CaisseController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($caisse);
             $entityManager->flush();
+            $this->addFlash('success',"L'enregistrement a été supprimé avec succès.");
         }
-
-        return $this->redirectToRoute('admin_caisse_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_caisse_show', ['code'=>strtolower($caisse->getCode())], Response::HTTP_SEE_OTHER);
     }
 }

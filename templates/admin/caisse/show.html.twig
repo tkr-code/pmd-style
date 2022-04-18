@@ -1,38 +1,75 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin/base.html.twig' %}
+{% import "macros/breadcrumb.html.twig" as breadcrumbs %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/link.html.twig" as links %}
+{% import "macros/alertes.html.twig" as alerte %}
 {% block title %}Caisse{% endblock %}
 
+{% block head %}
+{{ dataTable.css() }}
+{% endblock %}
+
+{% block javascripts %}
+{{ dataTable.script('#table-1') }}
+{% endblock %}
+
+{% block foot %}
+{{ dataTable.js() }}
+{% endblock %}
+
+{% block breadcrumb %}
+{{ breadcrumbs.breadcrumb('Caisse ' ~ app.request.get('code') ,[
+    {
+        path:path('admin_caisse_index'),
+        name:'Manage Caisse'
+    }
+])}}
+{% endblock %}
+
 {% block body %}
-    <h1>Caisse</h1>
+{% include "admin/alerte/_success.html.twig" %}
+<div class="card card-outline card-primary">
+    <div class="card-body">
+        {# <a href="{{ path('admin_caisse_edit', {'id': caisse.id}) }}">edit</a> #}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ caisse.id }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
-                <td>{{ caisse.code }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ caisse.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Montant</th>
-                <td>{{ caisse.montant }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ caisse.type }}</td>
-            </tr>
-        </tbody>
-    </table>
+        {# {{ include('admin/caisse/_delete_form.html.twig') }} #}
+        <a class="btn btn-primary mb-2" href="{{ path('admin_caisse_new') }}">Create new</a>
+        <div class="row">
+            <div class=" col-12 col-md-12">
+                <h3>Total caisse {{app.request.get('code')}} : {{ montantTotal|number_format(0, '', ' ') | default('0') }}</h3>
+                <table id="table-1" class="table">
+                    <thead>
+                        <th>Libelle</th>
+                        <th>Montant</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        {% for caisse in caisses %}
+                        <tr>
+                            <td>{{ caisse.libelle }}</td>
+                            <td class="text-{{ (caisse.montant > 0 )? 'success': 'danger' }} font-weight-bold">{{ caisse.montant }}</td>
+                            <td>{{ caisse.type }}</td>
+                            <td>{{ caisse.createdAt|date_format_fr }}</td>
+                            <td>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {{ links.iconEdit(path('admin_caisse_edit', {'id': caisse.id})) }}
+                                    {{ include('admin/caisse/_delete_form.html.twig') }}
 
-    <a href="{{ path('admin_caisse_index') }}">back to list</a>
-
-    <a href="{{ path('admin_caisse_edit', {'id': caisse.id}) }}">edit</a>
-
-    {{ include('admin_caisse/_delete_form.html.twig') }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{ links.back(path('admin_caisse_index'))}}
+    </div>
+</div>
 {% endblock %}

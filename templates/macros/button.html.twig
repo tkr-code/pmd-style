@@ -1,9 +1,10 @@
+{# button.html.twig #}
 {% macro edit(title) %}
     <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
 {% endmacro %}
 
 {% macro delete(text) %}
-    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> {{ text|default('') }}</button>
+    <button type="submit" class="btn"><i class="fas fa-trash-alt text-danger"></i> {{ text|default('') }}</button>
 {% endmacro %}
 
 {% macro order(state) %}

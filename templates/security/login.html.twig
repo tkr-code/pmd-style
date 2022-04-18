@@ -1,29 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-    <link rel="shortcut icon" href="{{ asset('img/logo/logo-pmd-1.png') }}" type="image/x-icon">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('fonts/icomoon/style.css') }}">
+  <link rel="shortcut icon" href="{{ asset('img/logo/logo-pmd-1.png') }}" type="image/x-icon">
 
-    <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('fonts/icomoon/style.css') }}">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
-    
-    <!-- Style -->
-    <link rel="stylesheet" href="{{asset('css/login.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.min.css') }}">
 
-    <title>{{ app_name }} - Login</title>
-  </head>
-  <body>
-  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
 
-  
+  <!-- Style -->
+  <link rel="stylesheet" href="{{asset('css/login.css') }}">
+
+  <title>{{ app_name }} {{ 'Log in'|trans}}</title>
+</head>
+
+<body>
   <div class="content">
     <div class="container">
       <div class="row">
@@ -34,74 +33,75 @@
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-              <h3>{{'Sign In'|trans}}</h3>
-              <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
-            </div>
-            <form  method="post">
-                            {% if error %}
+                <h3>{{'Sign In'|trans}}</h3>
+                <p class="mb-4">Cette page est strictement reservé aux membres de pmd-developper.</p>
+              </div>
+              <form method="post">
+                {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
 
                 {% if app.user %}
                 <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                  You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
                 {% endif %}
-              <div class="form-group first">
-                {# <label for="username">Username</label>
-                <input type="text" class="form-control" id="username"> #}
-                <label for="inputEmail">Email</label>
-                <input type="email" value="{{ (last_username) ? last_username : 'tkr@pmd-developper.com' }}" name="email" id="inputEmail" class="form-control"
-                    autocomplete="email" required autofocus>
+                <div class="form-group first">
+                  {# <label for="username">Username</label>
+                  <input type="text" class="form-control" id="username"> #}
+                  <label for="inputEmail">Email</label>
+                  <input type="email" value="{{ (last_username) ? last_username : 'tkr@pmd-developper.com' }}" name="email" id="inputEmail"
+                    class="form-control" autocomplete="email" required autofocus>
 
-              </div>
-              <div class="form-group last mb-4">
-                {# <label for="password">Password</label>
-                <input type="password" class="form-control" id="password"> #}
-                <label for="inputPassword">{{'Password'|trans}}</label>
-                <input type="password" name="password" id="inputPassword" class="form-control"
+                </div>
+                <div class="form-group last mb-4">
+                  {# <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password"> #}
+                  <label for="inputPassword">{{'Password'|trans}}</label>
+                  <input type="password" name="password" id="inputPassword" class="form-control"
                     autocomplete="current-password" value="password" required>
 
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-              </div>
-              
-              <div class="d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0"><span class="caption">{{'Remember me'|trans}}</span>
-                  <input type="checkbox" checked="checked"/>
-                  <div class="control__indicator"></div>
-                </label>
-                <span class="ml-auto"><a href="#" class="forgot-pass">{{'Forgot Password'|trans}}</a></span> 
-              </div>
+                  <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </div>
 
-              <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                <div class="d-flex mb-5 align-items-center">
+                  <label class="control control--checkbox mb-0"><span class="caption">{{'Remember me'|trans}}</span>
+                    <input type="checkbox" checked="checked" />
+                    <div class="control__indicator"></div>
+                  </label>
+                  {# <span class="ml-auto"><a href="#" class="forgot-pass">{{'Forgot Password'|trans}}</a></span> #}
+                </div>
 
-              {# <span class="d-block text-left my-4 text-muted">&mdash; or login with &mdash;</span>
-              
-              <div class="social-login">
-                <a href="#" class="facebook">
-                  <span class="icon-facebook mr-3"></span> 
-                </a>
-                <a href="#" class="twitter">
-                  <span class="icon-twitter mr-3"></span> 
-                </a>
-                <a href="#" class="google">
-                  <span class="icon-google mr-3"></span> 
-                </a>
-              </div> #}
-            </form>
+                <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                <a href="{{ path('connect_google_start') }}">Se connecter avec google</a>
+                {# <span class="d-block text-left my-4 text-muted">&mdash; or login with &mdash;</span>
+
+                <div class="social-login">
+                  <a href="#" class="facebook">
+                    <span class="icon-facebook mr-3"></span>
+                  </a>
+                  <a href="#" class="twitter">
+                    <span class="icon-twitter mr-3"></span>
+                  </a>
+                  <a href="#" class="google">
+                    <span class="icon-google mr-3"></span>
+                  </a>
+                </div> #}
+              </form>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
     </div>
   </div>
 
-  
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/main-login.js') }}"></script>
-  </body>
+
+  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('js/main-login.js') }}"></script>
+</body>
+
 </html>

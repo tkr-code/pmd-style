@@ -1,6 +1,7 @@
 {% extends "admin/base.html.twig" %}
 {% import "macros/cards.html.twig" as cards %}
-
+{% import "macros/link.html.twig" as links %}
+{% import "macros/etats.html.twig" as etats %}
 {% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
@@ -12,20 +13,76 @@
             icon:'fas fa-users',
             count:1
         }) }}
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
     <div class="col-12 col-sm-6 col-md-3">
         {{ cards.infoBox({
             path:path('admin_cahier_charge_index'),
-            bg:'bg-warning',
+            bg:'bg-success',
             name:'Cahier de charge',
-            icon:'fas fa-users',
-            count:1
+            icon:'fas fa-book-open',
+            count:cahierCharges|length
         }) }}
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-3">
+        {{ cards.infoBox({
+            path:path('admin_caisse_index'),
+            bg:'bg-info',
+            name:'Caisse',
+            icon:"fas fa-funnel-dollar nav-icon",
+            count:totalCaisse|number_format(0,'',' ') ~ ' ' ~ site.current_name
+        }) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-8">
+        <div class="card">
+            <div class="card-header border-transparent">
+              <h3 class="card-title">Latest cahier de charge</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <thead>
+                  <tr>
+                    <th>{{'Number'|trans}}</th>
+                    <th>Nom complet</th>
+                    <th>Status</th>
+                    <th>Date émission</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for cahier_charge in cahierCharges %}
+                    <tr>
+                        <td>
+                            {{ cahier_charge.number }}
+
+                        <span class="float-right">
+							{{ links.show(path('admin_cahier_charge_show', {'id': cahier_charge.id}))}}
+                        </span>
+                         </td>
+                        <td>{{ cahier_charge.fullName }}</td>
+                        <td>
+                            {{ etats.cahierCahrge(cahier_charge.status) }}
+                        </td>
+                        <td>
+                            {{ cahier_charge.createdAt|date_format_fr }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
+              <a href="{{ path('cahier_charge_new') }}" class="btn btn-sm btn-info float-left">Nouveau cahier de charge</a>
+              <a href="{{ path('admin_cahier_charge_index') }}" class="btn btn-sm btn-secondary float-right">Tous les  cahiers de charge</a>
+            </div>
+            <!-- /.card-footer -->
+          </div>
+    </div>
 </div>
 {% endblock %}
 {% block foot %}

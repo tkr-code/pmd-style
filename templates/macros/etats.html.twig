@@ -5,3 +5,15 @@
         <span class="badge m-1 font-weight-bold badge-danger">{{etat}}</span>
     {% endif %}
 {% endmacro %}
+
+{% macro cahierCahrge(status) %}
+    {% if status == 'En attente' %}
+        <span class="badge badge-info">{{status}}</span>
+    {% elseif etat == 'Valider' %}
+        <span class="badge badge-success">{{status}}</span>
+    {% elseif etat == 'Annuller' %}
+        <span class="badge badge-danger">{{status}}</span>
+    {% else %}
+        <span class="badge">{{status}}</span>
+    {% endif %}
+{% endmacro %}

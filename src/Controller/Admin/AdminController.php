@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\CahierChargeRepository;
+use App\Service\CaisseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,14 +19,19 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/", name="admin")
      */
-    public function index(): Response
+    public function index(CahierChargeRepository $cahierChargeRepository, CaisseService $caisseService): Response
     {
 
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
+        $cahierCharges = $cahierChargeRepository->findBy(
+            [],['id'=>'DESC'],10
+        );
         return $this->render('admin/index.html.twig',[
-            'parent_page'=>$this->translator->trans('Dashboard')
+            'parent_page'=>$this->translator->trans('Dashboard'),
+            'cahierCharges'=>$cahierCharges,
+            'totalCaisse'=>$caisseService->total()
         ]);
     }
     /**

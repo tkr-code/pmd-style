@@ -19,7 +19,12 @@
     background: #010E21;
     text-align: center;
 }
-
+.loader-delete-account,
+.loader-edit-email,
+.alert-delete-account,
+.alert-edit-email{
+    display: none;
+  }
 
 /* loader end */
 

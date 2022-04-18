@@ -6,6 +6,7 @@
         <th>Action</th>
     </tr>
 {% endmacro %}
+
 {% macro css() %}
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -35,7 +36,7 @@
      $('{{ id }}').DataTable({
       "responsive": true, 
       "lengthChange": false, 
-      "autoWidth": false,
+      "autoWidth": true,
       "order":[[3,"desc"]],
       "buttons": 
         ["csv", "excel", "pdf", "print"]

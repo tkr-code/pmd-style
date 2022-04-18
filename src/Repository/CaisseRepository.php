@@ -24,9 +24,7 @@ class CaisseRepository extends ServiceEntityRepository
     public function findGroupByAllCode(){
         $query = $this->findQuery();
         $query->select('o.id, o.code, o.libelle, o.montant, o.type, SUM(o.montant) total');
-        $query->groupBy('o.code');
-        
-
+        $query->groupBy('o.code, o.id')->orderBy('o.code') ;
         return $query->getQuery()->getResult();
     }
 
