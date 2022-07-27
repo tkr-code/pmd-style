@@ -1,0 +1,406 @@
+{% extends "main/base.html.twig" %}
+{% import "macros/navUl.html.twig" as navs %}
+{% block title %}
+	cv
+	{{ cv.user.personne.fullName }}
+{% endblock %}
+
+{% block navUl %}
+	{{ navs.ul('none') }}
+{% endblock %}
+{% block head %}
+	<link rel="stylesheet" href="{{ asset('css/cv/cv-2.css') }}">
+{% endblock %}
+{% block body %}
+	<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+		<a class="breadcrumb-item" href="/">Accueil</a>
+		<span class="breadcrumb-item text-white active">Cv</span>
+		<span class="breadcrumb-item text-white active">{{ cv.user.personne.fullName }}
+		</span>
+	</nav>
+	{% for item in app.flashes('success') %}
+		{{ alertes.alert(item,'success')}}
+	{% endfor %}
+	<div class="container-fluid header-cv bg-2">
+		<p class="text-center mb-0 py-1">{{ cv.user.personne.fullName }}
+			- Dévéloppeur Full stack 
+			- Email: {{cv.email}}
+			- Tel: {{cv.tel}}
+		</p>
+	</div>
+	<div class="container my-5">
+		<div class="document">
+			<div class="row">
+				<div class="col-md-4 bg-1 content-1">
+					<div class="img-content mt-4 mb-2">
+						<img src="{{ asset('img/user/' ~ cv.user.personne.avatar) }}" class="mx-auto d-block" alt="profil">
+					</div>
+					<h4 id="contactez-moi">
+						&#60; / CONTACTEZ MOI &#62;
+					</h4>
+					<div class="text-center p-3">
+						{% for item in cv.user.socials %}
+							<a href="{{ item.path }}" target="_blank" title="{{ item.nom }}" class="socials-item">
+								<i class="{{item.icon}}"></i>
+							</a>
+						{% endfor %}
+					</div>
+					<div id="profile">
+						<p>
+							<span>
+								<i class="fa fa-map-marker" aria-hidden="true"></i>
+							</span>
+							Sacré-coeur 2 ,Dakar,Sénégal
+						</p>
+						<p>
+							<span>
+								<i class="fa fa-phone" aria-hidden="true"></i>
+							</span>
+							+221 78 127 82 88 (Sénégal)
+						</p>
+						<p>
+							<span>
+								<i class="fa fa-envelope-open" aria-hidden="true"></i>
+							</span>
+							malick.tounkara.1@gmail.com
+						</p>
+						<p>
+							<span>
+								<i class="fa fa-desktop" aria-hidden="true"></i>
+							</span>
+							https://pmd-developper.com/cv/malick-tounkara
+						</p>
+					</div>
+					<div id="competences">
+						<h2>
+							Résumé des compétences</h2>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								SYMFONY
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								UML
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								MERISE
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								JAVASCRIPT
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								JAVA
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								MYSQL
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								REACT NATIVE
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								BOOTSTRAP
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								C SHARP
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								ORACLE
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								MAINTENANCE
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								C ET C++
+							</p>
+						</div>
+						<div class="competence">
+							<span>
+								<i class="fa fa-circle" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+								<i class="fa fa-circle circle-o" aria-hidden="true"></i>
+							</span>
+							<p>
+								INFOGRAPHIE
+							</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-8 content-2">
+					<div class="content-2-name">
+						<h2 class="font-weight-bold">Malick Tounkara</h2>
+					</div>
+					<div id="poste">
+						<h2>
+							&#60;/ DEVELOPPEUR FULL STACK &#62;
+						</h2>
+					</div>
+					<div class="content-2-formation">
+						<div id="profil-personnel">
+							<h3>PROFIL</h3>
+							<p>Je suis un informaticien avec une connaissance holistique du développement et de la conception de logiciels.</p>
+						</div>
+						<h3 class="section-name">EXPERIENCE</h3>
+						<div class="content">
+							<div class="content-item">
+								<h3>Études et mise en place d'une application web de vente en	ligne</h3>
+								<h4>Lest</h4>
+								<div class="point-content">
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Analyse et modélisation (merise)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Web design ( Bootstrap, Template adminLt3)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Traitement des donnée, calcul et Gestion de la base de
+																																														données (Symfony)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Gestion de la base de données (Mysql)
+									</p>
+								</div>
+							</div>
+							<div class="content-item">
+								<h3 class="h3">Etudes et mise en place d'une application web d'annonces</h3>
+								<h4>Gaboma annonce</h4>
+								<div class="point-content">
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Analyse et modélisation (merise)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Web design ( Bootstrap, Template adminLt3)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Traitement des donnée et calcul (Php)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Gestion de la base de données (Mysql)
+									</p>
+								</div>
+							</div>
+							<div class="content-item">
+								<h3>Études et mise en place d'une application web de vente de
+																																										bien immobilier</h3>
+								<h4>Safety property</h4>
+								<div class="point-content">
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Analyse et modélisation (Merise, Uml)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Analyse et modélisation (Merise, Uml)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Web design ( Bootstrap, Template adminLt3)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Traitement des donnée et calcul (Php)
+									</p>
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Gestion de la base de données (Mysql)
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<h3 class="section-name">ÉDUCATION</h3>
+						<div class="content">
+							<div class="content-item">
+								<h3>LICENCE EN INFORMATIQUE| Oct 2019 - Août 2020</h3>
+								<h4>IPG/ISTI(Dakar-Sénégal)</h4>
+								<p class="formation-sous-titre">Développeur web</p>
+								<div class="point-content">
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Je prend un projet Web, qui a été pensée et réfléchie par
+																																														                                            un client ou une équipe de conception, et la transforme en
+																																														                                            site Web.
+									</p>
+								</div>
+							</div>
+							<div class="content-item">
+								<h3>DTS EN INFORMATIQUE| Oct 2018 - Août 2019</h3>
+								<h4>IPG/ISTI(Dakar-Sénégal)</h4>
+								<p class="formation-sous-titre">Analyste programmeur</p>
+								<div class="point-content">
+									<p>
+										<span>
+											<i class="fa fa-circle" aria-hidden="true"></i>
+										</span>
+										Je m'occupe de créer des logiciels. Je suis également
+																																														                                            chargé de m'occuper de la maintenance des anciens
+																																														                                            logiciels et du suivi des nouveaux. J'analyse d'une part un
+																																														                                            souhait émis par le client et d'autre part programmer
+																																														                                            cette demande.
+									</p>
+								</div>
+							</div>
+							<div class="content-item">
+								<h3>BACCALAUREAT D | Oct 2016 - Juil 2017</h3>
+								<h4>LYCEE NATIONAL LEOM MBA(Libreville-Gabon)</h4>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		{% include "main/cv/_contact.html.twig" %}
+	</div>
+{% endblock %}
+{# </main>
+		<script src="public/js/jquery/jquery-v3.6.js"></script>
+
+
+		<script src="public/js/boostrap/bootstrap.min.js"></script>
+		<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		        crossorigin="anonymous"></script>
+		    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+		        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+		        crossorigin="anonymous"></script> -->
+
+		<script src="public/js/util.js"></script>
+
+		<script src="public/js/main.js"></script>
+
+	</body>
+
+</html> #}

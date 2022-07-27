@@ -2,10 +2,17 @@
 {% extends 'main/base.html.twig' %}
 
 {% block body %}
-    <h1>Page not found</h1>
-
-    <p>
-        The requested page couldn't be located. Checkout for any URL
-        misspelling or <a href="/">return to the homepage</a>.
-    </p>
+	<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+		<a class="breadcrumb-item" href="#">Home</a>
+		<span class="breadcrumb-item text-white active">Page introuvable</span>
+	</nav>
+	<!-- description de PMD-->
+	<section
+		data-aos="fade-up" id="error_404" class="bg-white text-center">
+		<!--img class="w-50 " src="public/img/logo/pmd-developper.png" alt=""-->
+		<p class="text-white title-404 font-weight-bold">La page que vous recherchez n'existe pas.</p>
+		<div class="container">
+			<a href="{{ path('home') }}" class="btn btn-2">Retour à la page d'accueil</a>
+		</div>
+	</section>
 {% endblock %}

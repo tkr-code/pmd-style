@@ -1,5 +1,6 @@
 {% extends "main/base.html.twig" %}
 {% import "macros/alertes.html.twig" as alertes %}
+{% import "macros/navUl.html.twig" as navs %}
 
 {% block head %}
     <!-- Style  cv -->
@@ -56,15 +57,6 @@
                                 <i class="{{item.icon}}"></i>
                             </a>
                             {% endfor %}
-{#                             
-                            <a href="https://api.whatsapp.com/send?phone=221781278288&text=Salut, Malick j'ai eu votre contacte sur votre site :"
-                                target="_blank" title="Whatsapp" class="socials-item">
-                                <i class="fab fa-whatsapp whatsapp"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/malick-tounkara-b858a41aa/" target="_blank"
-                                title="Facebook" class="socials-item">
-                                <i class="fab fa-linkedin" aria-hidden="true"></i>
-                            </a> #}
                             <div class="btn-group">
 
                                 <!-- <button class="btn btn-primary">
@@ -78,20 +70,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    {# <div class="col-md-6 col-12">
-                        <div class="card border-0">
-                            <div class="card-body">
-                                <h3>
-                                    À propos de moi
-                                    <!-- About me -->
-                                </h3>
-                                <p class="text-justify">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non nisi facilis adipisci
-                                    totam eos a eveniet cumque nulla ullam optio.
-                                </p>
-                            </div>
-                        </div>
-                    </div> #}
                     <div class="col-md-6 col-12">
                         <div class="card border-0">
                             <div class="card-body">
@@ -330,48 +308,7 @@
                 </div>
                 {% endif %}
                 <hr>
-                <div id="contact">
-
-                    <h3 class="h3 mb-3 ml-3">Contactez moi !</h3>
-                    <div class="row mb-3">
-                        <div class="col-md-7">
-                {{ form_start(form)}}
-                                <div class="form-row mb-3 mx-3">
-                                    <div class="form-group col-md-12">
-                                        <label for="user"><i class="fa fa-user" aria-hidden="true"></i> Nom et prénom</label>
-                                         {{form_widget(form.name)}}
-                                        {# <input type="text" name="user" class="form-control" placeholder="Prénom et nom"> #}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="email"><i class="fa fa-envelope-open" aria-hidden="true"></i> Email</label>
-                                        {{form_widget(form.email)}}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="email"> <i class="fas fa-phone-alt" aria-hidden="true"></i> Telephone</label>
-                                        {{form_widget(form.phone_number)}}
-                                    </div>
-                                    <div class="form-group col-12 col-md-12">
-                                        <label for="message"></label>
-                                        {{form_widget(form.message)}}
-                                    </div>
-                                    <button type="submit" class="btn btn-success mx-auto d-block">Envoyer</button>
-                                </div>
-                {{form_widget(form)}}
-
-                            {{ form_end(form)}}
-                        </div>
-                        <div class="col-md-5">
-                            <div class="row mx-3">
-                                <dt class="col-12">Email</dt>
-                                <dd class="col-12">{{cv.email}} </dd>
-                                <dt class="col-12">Téléphone</dt>
-                                <dd class="col-12">{{cv.tel}} </dd>
-                                <dt class="col-12">Adresse</dt>
-                                <dd class="col-12">{{cv.adresse}} </dd>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include "main/cv/_contact.html.twig" %}
             </div>
         </div>
 {% endblock %}

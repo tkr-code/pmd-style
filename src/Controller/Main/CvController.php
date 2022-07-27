@@ -46,8 +46,8 @@ class CvController extends AbstractController
             $this->addFlash('success','Votre message a été  envoyé.');
             return $this->redirectToRoute('cv_show',['slug'=>$slug]);
         }
-
-        return $this->renderForm('main/cv/cv.html.twig', [
+        $page = ($slug == 'malick-tounkara')? 'malick-tounkara':'cv';
+        return $this->renderForm('main/cv/'.$page.'.html.twig', [
             'cv'=>$cv,
             'form'=>$form
         ]);

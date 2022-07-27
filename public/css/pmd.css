@@ -291,6 +291,13 @@ section#description {
   background-size: cover;
 }
 
+section#error_404{
+  padding-top: 100px;
+  background-image: url(../img/icons/404.jpg);
+  height: 100vh;
+  background-size: cover;
+}
+
 section#about {
   background: #fff;
 }
@@ -865,6 +872,13 @@ section#message h3 {
 
 .home-title {
   font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: red 1px 0px 10px;
+}
+.title-404{
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   letter-spacing: 1px;

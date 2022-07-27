@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');
+body{
+    background-color: #ccc;
+}
+p{
+    letter-spacing: 1px
+}
+.document {
+    background: #fff;
+    border-radius: 5px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.bg-1 {
+    background: #003;
+}
+.img-content img{
+    width: 200px;
+    border-radius: 50%;
+}
+.content-1{
+    color: #fff;
+    min-height: 1100px;
+}
+.content-2{
+    background: #fff!important;
+}
+.content-2-name{
+    position: relative;
+    margin-top: 105px;
+    
+    text-align: center;
+    margin-bottom: 60px;
+}
+.content-2-name h2{
+    font-size: 60px;
+    /* font-family: 'Rowdies', cursive; */
+    color: #2d2dbd;;
+}
+.content-2-name h2:before{
+    content: '';
+    top: 100px;
+    position: absolute;
+    background: #2d2dbd;;
+    width: 100px;
+    height: 3px;
+}
+/** profile start*/
+#profile p {
+    font-size: 15px;
+    margin-inline: 10px;
+    margin-bottom: 25px;
+}
+#profile p span{
+    width: 100px;
+    text-align: center;
+    margin-right: 10px;
+}
+/** profile end*/
+
+/* contactez-moi  start*/
+#contactez-moi{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+}
+/* contactez-moi end */
+
+/* competence start*/
+#competences{
+    margin-inline: 25px
+}
+#competences h2{
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.competence{
+    margin-top: 13px
+}
+#competences:last-child{
+    margin-bottom: 30px
+}
+.competence span i{
+    font-size: 6px;
+    margin-right: 3px
+}
+
+.competence p{
+    display: inline-block;
+    font-weight: 500;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+.circle-o{
+    color: #285ad2;
+}
+/* competence end */
+/* poste start */
+#poste{
+    margin-bottom: 45px;
+}
+#poste h2{
+    text-align: center;
+    font-weight: bold;
+    color: #2d2dbd;;
+}
+/* poste end */
+
+/* content-2-formation start */
+.content-2-formation{
+    padding-left: 50px;
+    padding-bottom: 50px;
+}
+/* content-2-formation end */
+
+/* profil-personnel start */
+#profil-personnel h3{
+    font-size: 30px;
+    font-weight: 600;
+    color: #2d2dbd;
+    letter-spacing: 3px;
+}
+/* profil-personnel end */
+.section-name{
+    font-size: 30;
+    font-weight: 600;
+    color: #2d2dbd;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+}
+.content-item{
+    padding-bottom: 30px;
+}
+.content-item p {
+    margin: 0;
+}
+/* formations start */
+.formation h3:first-child, .content-item h4 {
+    font-size: 17px;
+    color: #444440;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+.content-item h3 {
+    font-size: 20px;
+    color: #2d2dbd;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+.formation-sous-titre{
+    color: #444440;
+    font-weight: 600;
+    margin: 0;
+}
+.point-content p{
+    text-align: justify;
+    margin-bottom: 0;
+}
+.point-content p span{
+    margin-right: 10px
+}
+.point-content p span i{
+    font-size: 8px;
+}
+/* formations end */
