@@ -47,4 +47,27 @@ class AvancePaiementRepository extends ServiceEntityRepository
         ;
     }
     */
+    #elle renvoie la derniere avance inserer en base de donnée
+    public function lastAvanceInsert(): array
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM avance_paiement A
+            WHERE A.id = (SELECT MAX(id) FROM avance_paiement)
+            
+            ';
+        #deuxieme façon d'ecrire la requete
+        $sql2 = '
+            SELECT * FROM avance_paiement A
+            ORDER BY A.id DESC LIMIT 1
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 }

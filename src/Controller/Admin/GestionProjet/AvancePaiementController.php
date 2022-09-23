@@ -7,6 +7,7 @@ use App\Entity\Paiement;
 use App\Entity\Projet;
 use App\Form\AvancePaiementType;
 use App\Repository\AvancePaiementRepository;
+use App\Repository\ProjetRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,8 +38,9 @@ class AvancePaiementController extends AbstractController
         return $this->render(
             'admin/gestion_projet/avance_paiement/index.html.twig',
             [
-                'avance_paiements' => $avancePaiementRepository->findBy(['paiement'=>$projet->getPaiement()]),
-                'id_projet' => $projet->getId()
+                'avance_paiements' => $avancePaiementRepository->findBy(['paiement' => $projet->getPaiement()]),
+                'id_projet' => $projet->getId(),
+                'projet' => $projet
             ]
         );
     }
@@ -55,11 +57,11 @@ class AvancePaiementController extends AbstractController
             if (
                 !empty($request->get('date_avance')) &&
                 !empty($request->get('montant_avance')) &&
-               
+
                 !empty($request->get('mode_paiement'))
 
             ) {
-               // dd($request->request);
+                // dd($request->request);
                 // On recupere le paiement deja
                 $paiement = $projet->getPaiement();
 
@@ -76,7 +78,6 @@ class AvancePaiementController extends AbstractController
 
                     //on met aussi le est_atteint à false car il reste encore des sous a payer
                     $paiement->setEstAcheve(false);
-
                 } else if ($request->get('montant_du') == 0) {
                     $avancePaiement->setEstAtteint(true);
                     //On change l'etat du paiement, il est atteint et plus besoin des avances
@@ -151,16 +152,72 @@ class AvancePaiementController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="avance_paiement_delete", methods={"POST"})
+     * @Route("/avance/{id<\d+>}/projet/{id_projet<\d+>}", name="avance_paiement_delete", methods={"GET","POST"})
      */
-    public function delete(Request $request, AvancePaiement $avancePaiement): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $avancePaiement->getId(), $request->request->get('_token'))) {
+    public function delete(
+        Request $request,
+        AvancePaiement $avancePaiement,
+        AvancePaiementRepository $avancePaiementRepository,
+        ProjetRepository $projetRepository
+    ): Response {
+        if (
+            $request->request->get('del_avance') &&
+            $request->request->get('del_avance') == 'del_avance' &&
+            $request->request->get('id_avance') &&
+            !empty($request->request->get('id_avance')) &&
+            $request->request->get('id_projet') &&
+            !empty($request->request->get('id_projet'))
+
+        ) {
+            
+            //quand on enleve une avance, il  faut maintenant
+            #metttre à jour le drnier montant du
+            #on ajoute le montant avance de l'element a supprimer
+            #on va l'ajouter au dernier montant de la dernière avance
+            #c'est afin qu'on ne perd pas la main sur la dette et
+            #par calcul, tout le montant avance plus le dernier montant du nous donne 
+            #la somme exacte du projet, meme si on supprime n'importe quelle avance
+
+            
+            #recuperons la derniere avance inserer afin de mettre a jour le montant du de cette dernière
+            $elements = $avancePaiementRepository->lastAvanceInsert();
+            foreach ($elements as $element) {
+                #recuperons juste l'id et le dernier montant du avec lequel nous allons travailler
+                $last_id = $element['id'];
+                $last_montant_du = $element['montant_du']; 
+            }
+
+            #trouvons le projet avec son repo
+            $projet = $projetRepository->find($request->request->get('id_projet'));
+
+            #recuperons la valeur du montant avance de l'elemeent à supprimer
+            $m_avance_supprimer = $avancePaiement->getMontantAvance();
+
+            #on met à jour la valeur de la derniere avance
+            $dernier_avance = $avancePaiementRepository->find($last_id);
+            $dernier_avance->setMontantDu(($last_montant_du) +  $m_avance_supprimer);
+
+            #on persit la mise a jour
+            $this->em->persist($dernier_avance);
+
+            #on supprime maintenant l'avance en question
+            $this->em->remove($avancePaiement);
+
+            #on valide les commit en base de données
+            $this->em->flush();
+
+            $response = 'success';
+        }else{
+            $response = 'failed';
+        }
+        return new JsonResponse($response);
+
+        /* if ($this->isCsrfTokenValid('delete' . $avancePaiement->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($avancePaiement);
             $entityManager->flush();
-        }
+        } */
 
-        return $this->redirectToRoute('admin_gestion_projet_avance_paiement_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('avance_paiement_index', [], Response::HTTP_SEE_OTHER);
     }
 }
