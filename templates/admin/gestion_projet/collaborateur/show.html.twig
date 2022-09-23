@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collaborateur{% endblock %}
+
+{% block body %}
+    <h1>Collaborateur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ collaborateur.id }}</td>
+            </tr>
+            <tr>
+                <th>Apport</th>
+                <td>{{ collaborateur.apport }}</td>
+            </tr>
+            <tr>
+                <th>NiveauExcellence</th>
+                <td>{{ collaborateur.niveauExcellence }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_projet_collaborateur_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_projet_collaborateur_edit', {'id': collaborateur.id}) }}">edit</a>
+
+    {{ include('admin_gestion_projet_collaborateur/_delete_form.html.twig') }}
+{% endblock %}

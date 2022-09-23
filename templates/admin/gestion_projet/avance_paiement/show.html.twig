@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AvancePaiement{% endblock %}
+
+{% block body %}
+    <h1>AvancePaiement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ avance_paiement.id }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ avance_paiement.dateCreation ? avance_paiement.dateCreation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateAvance</th>
+                <td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MontantAvance</th>
+                <td>{{ avance_paiement.montantAvance }}</td>
+            </tr>
+            <tr>
+                <th>MontantDu</th>
+                <td>{{ avance_paiement.montantDu }}</td>
+            </tr>
+            <tr>
+                <th>EstAtteint</th>
+                <td>{{ avance_paiement.estAtteint ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ModePaiementAvance</th>
+                <td>{{ avance_paiement.modePaiementAvance }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_projet_avance_paiement_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_projet_avance_paiement_edit', {'id': avance_paiement.id}) }}">edit</a>
+
+    {{ include('admin_gestion_projet_avance_paiement/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,119 @@
+{% import "macros/datePicker.html.twig" as picker %}
+
+{% block foot %}
+{{picker.js()}}
+{% endblock  %}
+
+{% block head %}
+{{picker.css()}}
+{% endblock %}
+
+{{projet.id}}
+valeur total : {{projet.valeurTotal}}
+
+<!-- je vais revoir le date picker apres, pour l'instant je continue -->
+ <div class="form-group">
+	<label>Date:</label>
+	<div class="input-group date"  data-target-input="nearest">
+		<input type="text" id="date_avance" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+		<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+			<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+		</div>
+	</div>
+ </div>
+
+<div class="form-group">
+	<label>Montant Avancé</label>
+	<input type="number" class="form-control" id="montant_avance">
+</div>
+<div class="form-group">
+	<label>Montant Restant</label>
+	<input type="number" class="form-control" id="montant_du" value="{{projet.paiement.montantDu}}" readonly>
+	<input type="hidden" class="form-control" id="montant_du_non_mod" value="{{projet.paiement.montantDu}}" disabled>
+</div>
+<div class="form-group">
+	<label>Mode de Paiement</label>
+	<select id="mode_paiement" class="form-control">
+		<option>Choisir un mode de paiement</option>
+		<option value="Espèce">Espèce</option>
+		<option value="Chèque">Chèque</option>
+		<option value="Orange Money">Orange Money</option>
+		<option value="Wave">Wave</option>
+	</select>
+</div>
+<button type="submit" 
+		class="btn btn-primary add_avance"
+		data-path="{{path('avance_paiement_new',{'id':projet.id})}}"
+>Submit</button>
+
+
+{% block javascripts %}
+{# {{picker.script()}}
+ #} 
+ <script>
+    $(document).ready(function(){
+	 
+
+      $('#montant_avance').keyup(function (){
+            let m_avance = $(this).val();
+			
+            CalculMontantDu(parseInt(m_avance));
+			//POUR debuguer, on fait un console de LKP
+        });
+
+        function CalculMontantDu( m_avance){
+
+				let montant_du_non_mod = $('#montant_du_non_mod').val();
+
+				if(isNaN(m_avance)){
+					$('#montant_avance').val();
+					$('#montant_du').val(parseInt(montant_du_non_mod));
+				}
+				else{
+						if(m_avance > montant_du_non_mod){
+						//si le montant avancé est > au montant du en base, on initialise à 0 
+						$('#montant_avance').val(0);
+						$('#montant_du').val(parseInt(montant_du_non_mod));
+
+					}else if(m_avance <= montant_du_non_mod){
+                    //on change le montant du par en enlevant la somme avance
+                    //ce qui nous donne le nouveau montant du
+					$('#montant_du').val(parseInt(montant_du_non_mod) - m_avance);
+					}
+				}
+			}
+		$('.add_avance').on('click',function(){
+			let path = $(this).data('path');
+			let date_avance = $('#date_avance').val();
+			let montant_avance = $('#montant_avance').val();
+			let montant_du = $('#montant_du').val();
+			let mode_paiement = $('#mode_paiement').val();			
+
+			$.ajax({
+				url : path,
+				method:'POST',
+				dataType:'JSON',
+				data:{
+					avance:'avance',
+					date_avance : date_avance,
+					montant_avance : montant_avance,
+					montant_du : montant_du,
+					mode_paiement : mode_paiement
+
+				},
+				success:function(data){
+					if(data == 'success'){
+						Swal.fire(
+							'Bravo!',
+							'Avance Enregistrer Avec Succès!',
+							'success'
+							);
+							location.reload();
+					}
+				}
+			})
+
+		});
+    });  
+  </script>
+{% endblock  %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collaborateur index{% endblock %}
+
+{% block body %}
+    <h1>Collaborateur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Apport</th>
+                <th>NiveauExcellence</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for collaborateur in collaborateurs %}
+            <tr>
+                <td>{{ collaborateur.id }}</td>
+                <td>{{ collaborateur.apport }}</td>
+                <td>{{ collaborateur.niveauExcellence }}</td>
+                <td>
+                    <a href="{{ path('admin_gestion_projet_collaborateur_show', {'id': collaborateur.id}) }}">show</a>
+                    <a href="{{ path('admin_gestion_projet_collaborateur_edit', {'id': collaborateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_projet_collaborateur_new') }}">Create new</a>
+{% endblock %}

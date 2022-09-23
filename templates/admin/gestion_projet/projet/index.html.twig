@@ -1,0 +1,105 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+{% block title %}Projets
+{% endblock %}
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+{% endblock %}
+
+
+{% block body %}
+	{% for item in app.flashes('success') %}
+		{{ alerte.alert(item,'success')}}
+	{% endfor %}
+	<h1>Projets</h1>
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			{{link.add(path('projet_new'),'Create new')}}
+		</div>
+		<div class="card-body">
+			<table class="table" id="table-2">
+				<thead>
+					<tr>
+						<th>Projet Designation</th>
+						<th>Type</th>
+						<th>ValeurTotal</th>
+						<th>DateDebut</th>
+						<th>DateFinPrevu</th>
+						<th>Client</th>
+						<th>Etat Projet</th>
+						<th>Etat Paiment</th>
+						<th>Collaborateur (trice)</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for projet in projets %}
+						<tr>
+							<td>{{ projet.designation }}</td>
+							<td>{{ projet.type }}</td>
+							<td>{{ projet.valeurTotal }}</td>
+							<td>{{ projet.dateDebut ? projet.dateDebut|date('Y-m-d') : '' }}</td>
+							<td>{{ projet.dateFinPrevu ? projet.dateFinPrevu|date('Y-m-d') : '' }}</td>
+							<td>{{ projet.client.getFullName }}</td>
+							<td>{{ projet.etat }}</td>
+							<td>
+								{% if projet.paiement.estAcheve %}
+									Terminé
+								{% else %}
+									Encour de paiement
+							        &nbsp;&nbsp;&nbsp;
+									{{link.iconAdd(path('avance_paiement_index', {'id': projet.id}))}}
+
+								{% endif %}
+							</td>
+							<td>
+								{% if projet.collaborateur|length > 0  %}
+									{{ projet.collaborateur|length }}
+								{% else %}
+									Aucun (e)
+								{% endif %}
+								&nbsp;&nbsp;&nbsp;
+								{{link.iconAdd(path('projet_show', {'id': projet.id}))}}
+
+
+							</td>
+							<td>
+								{{link.show(path('projet_show', {'id': projet.id}))}}
+								{{link.iconEdit(path('projet_show', {'id': projet.id}))}}
+								{{link.delete(path('projet_show', {'id': projet.id}))}}
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="card-footer"></div>
+	</div>
+
+
+{% endblock %}

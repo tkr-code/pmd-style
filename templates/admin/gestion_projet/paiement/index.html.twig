@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement index{% endblock %}
+
+{% block body %}
+    <h1>Paiement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DatePaiement</th>
+                <th>DateCreation</th>
+                <th>MontantTotal</th>
+                <th>MontantVerse</th>
+                <th>MontantDu</th>
+                <th>EstAcheve</th>
+                <th>ModePaiement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paiement in paiements %}
+            <tr>
+                <td>{{ paiement.id }}</td>
+                <td>{{ paiement.datePaiement ? paiement.datePaiement|date('Y-m-d') : '' }}</td>
+                <td>{{ paiement.dateCreation ? paiement.dateCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ paiement.montantTotal }}</td>
+                <td>{{ paiement.montantVerse }}</td>
+                <td>{{ paiement.montantDu }}</td>
+                <td>{{ paiement.estAcheve ? 'Yes' : 'No' }}</td>
+                <td>{{ paiement.modePaiement }}</td>
+                <td>
+                    <a href="{{ path('admin_gestion_projet_paiement_show', {'id': paiement.id}) }}">show</a>
+                    <a href="{{ path('admin_gestion_projet_paiement_edit', {'id': paiement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_projet_paiement_new') }}">Create new</a>
+{% endblock %}

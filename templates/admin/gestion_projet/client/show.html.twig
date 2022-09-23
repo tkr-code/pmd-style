@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client{% endblock %}
+
+{% block body %}
+    <h1>Client</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ client.ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ client.pays }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_projet_client_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_projet_client_edit', {'id': client.id}) }}">edit</a>
+
+    {{ include('admin_gestion_projet_client/_delete_form.html.twig') }}
+{% endblock %}

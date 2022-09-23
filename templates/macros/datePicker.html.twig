@@ -1,0 +1,19 @@
+{% macro css () %}
+	<link rel="stylesheet" 
+    href="{{asset('vendor/daterangepicker/daterangepicker.css')}}">
+{% endmacro %}
+{% macro js () %}
+	<!-- date-range-picker -->
+	<script src="{{ asset('vendor/daterangepicker/daterangepicker.js') }}"></script>
+{% endmacro %}
+
+{% macro script () %}
+    <script>
+        $(document).ready(function(){
+             //Date picker
+        $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+        });
+    </script>
+{% endmacro %}

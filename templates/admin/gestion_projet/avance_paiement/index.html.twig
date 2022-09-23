@@ -1,0 +1,139 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/modal.html.twig" as modal %}
+
+
+{% block title %}
+	Avance Paiement
+{% endblock %}
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block body %}
+	{% for item in app.flashes('success') %}
+		{{ alerte.alert(item,'success')}}
+	{% endfor %}
+
+	<div class="container-fluid">
+		<div
+			class="row mb-2">
+			<!-- Button trigger modal -->
+			<button type="button" 
+                    class="btn btn-primary add_paiement" 
+                     data-toggle="modal"
+                     data-path="{{path('modal_show_avance_paiement',{'id':id_projet})}}"
+                     data-projet={{id_projet}}
+                     >
+				Ajouter une Avance
+			</button>
+		</div>
+	</div>
+
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<h3>Les Avances du projet : nom projet appartenant à Mr ou Mme : nom et prenom du client</h3>
+		</div>
+		<div class="card-body">
+			<table class="table" id="table-2">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>DateCreation</th>
+						<th>DateAvance</th>
+						<th>MontantAvance</th>
+						<th>MontantDu</th>
+						<th>EstAtteint</th>
+						<th>ModePaiementAvance</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for avance_paiement in avance_paiements %}
+						<tr>
+							<td>{{ avance_paiement.id }}</td>
+							<td>{{ avance_paiement.dateCreation ? avance_paiement.dateCreation|date('Y-m-d') : '' }}</td>
+							<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date('Y-m-d') : '' }}</td>
+							<td>{{ avance_paiement.montantAvance }}</td>
+							<td>{{ avance_paiement.montantDu }}</td>
+							<td>{{ avance_paiement.estAtteint ? 'Yes' : 'No' }}</td>
+							<td>{{ avance_paiement.modePaiementAvance }}</td>
+							<td>
+								<a href="{{ path('avance_paiement_show', {'id': avance_paiement.id}) }}">show</a>
+								<a href="{{ path('avance_paiement_edit', {'id': avance_paiement.id}) }}">edit</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="8">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="card-footer">
+		{{link.back(path('projet_index'))}}
+		</div>
+	</div>
+	{#     les modal
+		 #}
+	{{modal.modal_brut('show_paiementModal','Ajouter uneAvance')}}
+
+{# 	<a href="{{ path('avance_paiement_new') }}">Create new</a>
+ #}{% endblock %}
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }} 
+	
+
+	<script>
+		$(document).ready(function () {
+        $(document).on('click','.add_paiement', function (e) {
+             e.preventDefault();
+
+            $('#show_paiementModal').modal('show');
+            let path = $(this).data('path');
+            let projet = $(this).data('projet');
+            
+            $.ajax({
+            url:path,
+            method:'POST',
+            dataType:'JSON',
+            data:{
+                modal:'affiche_paiement',
+                id_projet:projet
+            },
+            beforeSend:function(){
+                $('.modal-loader').css('display','flex');
+            },
+            success:function(data){
+               $('.modal-loader').css('display','none');
+               $('#show_paiementModal .modal-body').html(data.content);
+            },
+            error:function(){
+              $('.modal-loader').css('display','none');
+              Swal.fire('Impossible D\'ajouter  une avance, veuillez Réessayer');
+
+            }
+        	});    
+    	});
+		 
+        
+        
+});
+	</script>
+{% endblock %}

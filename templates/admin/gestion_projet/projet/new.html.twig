@@ -1,0 +1,102 @@
+{% extends 'admin/base.html.twig' %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}New Projet
+{% endblock %}
+
+{% block body %}
+	<h3>Création d'un nouveau Projet</h3>
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<nav class="w-100">
+				<div class="nav nav-tabs" id="product-tab" role="tablist">
+					<a class="nav-item nav-link active" id="projet-desc-tab" data-toggle="tab" href="#projet-desc" role="tab" aria-controls="projet-desc" aria-selected="true">Etape 1</a>
+					<a class="nav-item nav-link" id="projet-client-tab" data-toggle="tab" href="#projet-client" role="tab" aria-controls="projet-client" aria-selected="false">Etape 2</a>
+					<a class="nav-item nav-link" id="projet-paiement-tab" data-toggle="tab" href="#projet-paiement" role="tab" aria-controls="projet-paiement" aria-selected="false">Etape 3</a>
+				</div>
+			</nav>
+		</div>
+		{{form_start(form)}}
+		<div class="card-body">
+			<div class="row mt-1">
+				<div class="tab-content p-3" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="projet-desc" role="tabpanel" aria-labelledby="projet-desc-tab">
+						La première étape est très cruciale, vous devez lire attentivement chaque case avant de le remplir.
+																																				Elle débute par la création de votre projet, c'est pourquoi il est important de bien renseigner les infos demandées.
+
+						<p></p>
+						{{form_row(form.designation)}}
+						{{form_row(form.description)}}
+						{{form_row(form.type)}}
+						{{form_row(form.valeurTotal)}}
+						{{form_row(form.dateDebut)}}
+						{{form_row(form.dateFinPrevu)}}
+						{{form_row(form.etat)}}
+
+					</div>
+					<div class="tab-pane fade" id="projet-client" role="tabpanel" aria-labelledby="projet-client-tab">
+						Veuillez Saisir Les Informations de Votre Client.
+																														Le client est cette PersonneGestion avec qui vous travailler, il faut noter qu'il n'est pas votre collaborateur.
+																														Les collaborateurs seront ajoutés dans un autre onglet, veuillez bien saisir les informations de votre client associé à votre projet.
+						<p></p>
+						{{form_row(form.client.PersonneGestion.nom)}}
+						{{form_row(form.client.PersonneGestion.prenom)}}
+						{{form_row(form.client.PersonneGestion.email)}}
+						{{form_row(form.client.PersonneGestion.titre)}}
+						{{form_row(form.client.PersonneGestion.adresse)}}
+						{{form_row(form.client.PersonneGestion.phone)}}
+						{{form_row(form.client.ville)}}
+						{{form_row(form.client.pays)}}
+						{{form_row(form.client.PersonneGestion.avatar)}}
+					</div>
+					<div class="tab-pane fade" id="projet-paiement" role="tabpanel" aria-labelledby="projet-paiement-tab">
+						Veuillez Remplir Les Informations necéssaires au Paiement.
+																								Veuillez bien saisir les informations de Paiement, si le paiement est une avance, merci de ne pas cocher la case est achevéee en bas, toute erreur de votre part, vous en serrez le responsable.
+						<p></p>
+						{{form_row(form.paiement.datePaiement)}}
+						{{form_row(form.paiement.montantTotal)}}
+						{{form_row(form.paiement.montantVerse)}}
+						{{form_row(form.paiement.montantDu)}}
+						{{form_row(form.paiement.modePaiement)}}
+						{{form_row(form.paiement.estAcheve)}}
+						<div class="row">
+							<div class="col-md-6">
+								{{link.back(path('projet_index'))}}
+								{{btn.save()}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{form_end(form)}}
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {
+			$('#projet_valeurTotal').keyup(function(){	
+				$('#projet_paiement_montantTotal').val($(this).val());
+			});
+			
+			$('#projet_paiement_montantVerse').keyup(function(){
+				let montantTotal = $('#projet_paiement_montantTotal').val();
+				let montantVerse = $(this).val();
+				CalculMontantDu(parseInt(montantTotal),parseInt(montantVerse));
+			});
+
+			function CalculMontantDu(m_total,m_verse){
+				if(m_verse > m_total){
+					//si le montant versé est > au montant total, on initialise à 0 
+					$('#projet_paiement_montantVerse').val(0);
+					$('#projet_paiement_montantDu').val(0);
+
+				}else{
+					$('#projet_paiement_montantDu').val(m_total - m_verse);
+				}
+			}
+		});
+	</script>
+{% endblock %}

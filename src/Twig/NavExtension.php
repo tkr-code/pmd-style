@@ -86,7 +86,23 @@ class NavExtension extends AbstractExtension
                             'path'=>'user_new',
                         ],
                     ]
-                ]
+                    ],
+                    [
+                        'name'=>'Gestion Projets',
+                        'icon'=>'fa fa-home',
+                        'links'=>
+                            [
+                                [
+                                    'name'=>'New Projects',
+                                    'path'=>'projet_new'
+                                ],
+                                [
+                                    'name'=>'All Projects',
+                                    'path'=>'projet_index'
+                                ],
+                                
+                            ]
+                    ],
             ]
         ];
     }

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participation{% endblock %}
+
+{% block body %}
+    <h1>Participation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ participation.id }}</td>
+            </tr>
+            <tr>
+                <th>Present</th>
+                <td>{{ participation.present ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Absent</th>
+                <td>{{ participation.absent ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DateTravail</th>
+                <td>{{ participation.dateTravail ? participation.dateTravail|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_projet_participation_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_projet_participation_edit', {'id': participation.id}) }}">edit</a>
+
+    {{ include('admin_gestion_projet_participation/_delete_form.html.twig') }}
+{% endblock %}

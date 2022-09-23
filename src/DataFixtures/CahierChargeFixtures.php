@@ -15,6 +15,7 @@ class CahierChargeFixtures extends Fixture
         $cahierCharge->setEmail('malick.tounkara.1@gmail.com');
         $cahierCharge->setTel('71278288');
         $cahierCharge->setStatus('En attente');
+        $cahierCharge->setNumber('num001');
         $this->addReference('cahier_1',$cahierCharge);
         $manager->persist($cahierCharge);
         $manager->flush();
