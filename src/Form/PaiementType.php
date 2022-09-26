@@ -37,7 +37,7 @@ class PaiementType extends AbstractType
                     ]
                 ]
             )
-            ->add('estAcheve')
+           // ->add('estAcheve')
             ->add(
                 'modePaiement',
                 ChoiceType::class,

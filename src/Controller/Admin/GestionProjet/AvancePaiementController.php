@@ -34,7 +34,30 @@ class AvancePaiementController extends AbstractController
      * @Route("/projet/{id<\d+>}/", name="avance_paiement_index", methods={"GET","POST"})
      */
     public function index(AvancePaiementRepository $avancePaiementRepository, Projet $projet): Response
-    {
+    {   
+        /*
+        #je testais juste pour voir le comportemen
+        $les_avances_recus = $avancePaiementRepository->allAvanceForPaiement($projet->getPaiement()->getId());
+        $avant_derniere_avance = array_slice($les_avances_recus, count($les_avances_recus) - 2, 1);
+
+        foreach ($avant_derniere_avance as $avance) {
+            $last_id = $avance->getid();
+
+            $avant_dernier_montant_du = $avance->getMontantDu();
+        }
+        $derniere_avance_inserere = end($les_avances_recus);
+        dump('Avant dernier montant du ' . $avant_dernier_montant_du);
+        dump('Dernier montant du' . $derniere_avance_inserere->getMontantDu());
+        dump('Dernier montant du ID ' . $derniere_avance_inserere->getId());
+        // dump($les_avances_recus);
+        dump(
+
+            array_slice($les_avances_recus, count($les_avances_recus) - 2, 1)
+        );
+        //recuperons l'avant dernier element
+
+        // dump($avancePaiementRepository->allAvanceForPaiement($projet->getPaiement()->getId())); 
+        */
         return $this->render(
             'admin/gestion_projet/avance_paiement/index.html.twig',
             [
@@ -169,45 +192,75 @@ class AvancePaiementController extends AbstractController
             !empty($request->request->get('id_projet'))
 
         ) {
-            
-            //quand on enleve une avance, il  faut maintenant
-            #metttre à jour le drnier montant du
-            #on ajoute le montant avance de l'element a supprimer
-            #on va l'ajouter au dernier montant de la dernière avance
-            #c'est afin qu'on ne perd pas la main sur la dette et
-            #par calcul, tout le montant avance plus le dernier montant du nous donne 
-            #la somme exacte du projet, meme si on supprime n'importe quelle avance
-
-            
-            #recuperons la derniere avance inserer afin de mettre a jour le montant du de cette dernière
-            $elements = $avancePaiementRepository->lastAvanceInsert();
-            foreach ($elements as $element) {
-                #recuperons juste l'id et le dernier montant du avec lequel nous allons travailler
-                $last_id = $element['id'];
-                $last_montant_du = $element['montant_du']; 
-            }
 
             #trouvons le projet avec son repo
             $projet = $projetRepository->find($request->request->get('id_projet'));
 
-            #recuperons la valeur du montant avance de l'elemeent à supprimer
+            #toutes les avances du paiemnt actuel 
+            $les_avances_recus = $avancePaiementRepository->allAvanceForPaiement($projet->getPaiement()->getId());
+
+            #recuperons la dernière avance inseree pour ce projet,
+            #la fonction end() permet de le faire
+            $derniere_avance_inserere = end($les_avances_recus);
+            $derniere_avance_inserere->getMontantDu();
+            $derniere_avance_inserere->getId();
+
+
+            #recuperons la valeur du montant avance de l'element à supprimer
             $m_avance_supprimer = $avancePaiement->getMontantAvance();
 
-            #on met à jour la valeur de la derniere avance
-            $dernier_avance = $avancePaiementRepository->find($last_id);
-            $dernier_avance->setMontantDu(($last_montant_du) +  $m_avance_supprimer);
+            #SI l'element à supprimer est la dernbiere avance de ce projet
+            #alors, le montant du de l'avant derniere avance de ce projet sera 
+            #mise à jour dans montant du de paiment et apres on supprimer 
+            #l'avance dont il est question
 
-            #on persit la mise a jour
-            $this->em->persist($dernier_avance);
+            #si c'est une avance quelconque de ce projet, on recupere simplement le montant qui etait
+            #avncé (montant_avance) on l'ajoute au montant du de la dernière avance de ce projet
+            #on met à jour aussi ce montant du dans la table paiement
+
+            if ($request->request->get('id_avance') == $derniere_avance_inserere->getId()) {
+                #dans la liste des avances de ce paiement, on va prendre l'avant dernière avance
+
+                #nous allons utiliser array_slice pour avoir l'avant dernier element du tableaux des avances
+                $avant_derniere_avance =  array_slice($les_avances_recus, count($les_avances_recus) - 2, 1);
+                foreach ($avant_derniere_avance as $avance) {
+                    $last_id = $avance->getId();
+
+                    $avant_dernier_montant_du = $avance->getMontantDu();
+                }
+
+                #on met à jour le montant du de la table paiement
+
+                $paiement = $projet->getPaiement();
+                $paiement->setMontantDu($avant_dernier_montant_du);
+
+                #on persist
+                $this->em->persist($paiement);
+            } else { #si c'est n'importe quelle ligne selectionner sauf la derniere avance
+                #on met à jour la valeur de la derniere avance
+                $derniere_avance_inserere = end($les_avances_recus);
+                $derniere_avance_inserere->setMontantDu($derniere_avance_inserere->getMontantDu() +  $m_avance_supprimer);
+
+                #on met aussi a jour le montant du de la table paiement car c'est lui que nous utilisons
+                $paiement = $projet->getPaiement();
+                $paiement->setMontantDu($derniere_avance_inserere->getMontantDu() +  $m_avance_supprimer);
+
+                #on persit la mise a jour des deux montants du (paiement et avance paiement)
+                $this->em->persist($derniere_avance_inserere);
+                $this->em->persist($paiement);
+            }
 
             #on supprime maintenant l'avance en question
+            #quel que soit sa position
             $this->em->remove($avancePaiement);
 
+            //dump('Apres insertion, derniere avance update '.$derniere_avance_inserere->getMontantDu());
+            //dump('Apres insertion, Paiement montant du update '.$paiement->getMontantDu());
             #on valide les commit en base de données
             $this->em->flush();
 
             $response = 'success';
-        }else{
+        } else {
             $response = 'failed';
         }
         return new JsonResponse($response);

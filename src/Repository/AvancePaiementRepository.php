@@ -22,19 +22,17 @@ class AvancePaiementRepository extends ServiceEntityRepository
     // /**
     //  * @return AvancePaiement[] Returns an array of AvancePaiement objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function allAvanceForPaiement(int $id_projet)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('a.paiement = :val')
+            ->setParameter('val', $id_projet)
             ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?AvancePaiement
@@ -48,14 +46,15 @@ class AvancePaiementRepository extends ServiceEntityRepository
     }
     */
     #elle renvoie la derniere avance inserer en base de donnée
-    public function lastAvanceInsert(): array
+    #Avec le SQL brut comme dans l'ancien temps
+    public function lastAvanceInsertedForPaiment(int $id_projet): array
     {
 
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
             SELECT * FROM avance_paiement A
-            WHERE A.id = (SELECT MAX(id) FROM avance_paiement)
+            WHERE A.paiement_id = :idProjet AND A.id = (SELECT MAX(id) FROM avance_paiement)
             
             ';
         #deuxieme façon d'ecrire la requete
@@ -65,7 +64,7 @@ class AvancePaiementRepository extends ServiceEntityRepository
             ';
 
         $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
+        $resultSet = $stmt->executeQuery(['idProjet' => $id_projet]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();

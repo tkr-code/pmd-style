@@ -64,7 +64,8 @@ class ProjetController extends AbstractController
                     ->setMontantDu($projet->getPaiement()->getMontantDu())
                     ->setModePaiementAvance($projet->getPaiement()->getModePaiement())
                     ->setEstAtteint(false);
-
+                $paiement = $projet->getPaiement();
+                $paiement->setEstAcheve(false);
                 $this->em->persist($avance);
             } else if ($montant_du == 0) {
                 $paiement = $projet->getPaiement();
