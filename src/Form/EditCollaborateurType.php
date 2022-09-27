@@ -2,20 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Collaborateur;
+use App\Entity\EditCollaborateur;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class CollaborateurType extends AbstractType
+class EditCollaborateurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('personneGestion', PersonneGestionType::class, ['label' => false])
-            ->add('apport')
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
+            ->add('adresse', TextType::class)
+            ->add('phone', TextType::class)
+            ->add('Titre', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('avatar', FileType::class, ['required' => false])
+            ->add('apport', TextType::class)
             ->add(
                 'niveauExcellence',
                 ChoiceType::class,
@@ -38,27 +46,13 @@ class CollaborateurType extends AbstractType
                     'multiple' => false,
                     'required' => true
                 ]
-            )
-            ->add(
-                'tache',
-                CollectionType::class,
-                [
-                    'label' => false,
-                    'entry_type' => TacheType::class,
-                    'entry_options' => ['label' => false],
-                    'by_reference' => false,
-                    'allow_add' => true, #pour permmetre plusieurs ajouts
-                    'allow_delete' => true,
-                    //'prototype'=>true,
-
-                ]
             );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Collaborateur::class,
+            'data_class'=>EditCollaborateur::class
         ]);
     }
 }

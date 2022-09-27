@@ -69,7 +69,7 @@
 									Encour de paiement
 							        &nbsp;&nbsp;&nbsp;
 									{{link.iconAdd(path('avance_paiement_index', {'id': projet.id}))}}
-									<br> <small style="color: red;">Reste : {{projet.valeurTotal}}</small>
+									<br> <small style="color: red;">Reste : {{projet.paiement.montantDu}}</small>
 								{% endif %}
 							</td>
 							<td>
@@ -79,7 +79,7 @@
 									Aucun (e)
 								{% endif %}
 								&nbsp;&nbsp;&nbsp;
-								{{link.iconAdd(path('projet_show', {'id': projet.id}))}}
+								{{link.iconAdd(path('collaborateur_index', {'id': projet.id}))}}
 
 
 							</td>

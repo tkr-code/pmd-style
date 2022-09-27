@@ -1,37 +1,102 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Collaborateur index{% endblock %}
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+{% block title %}Collaborateur Projet
+{% endblock %}
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Collaborateur index</h1>
+    {% for item in app.flashes('success') %}
+		{{ alerte.alert(item,'success') }}
+	{% endfor %}
+	<div class="container-fluid">
+		<div class="row mb-3">
+			{{link.add(path('collaborateur_new',{'id':projet.id}))}}
+		</div>
+	</div>
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<h3>Liste des collaborateurs du projet :<b>
+					{{projet.designation}}
+				</b>
+				appartenant à M.
+				<b>{{projet.client.getFullName}}</b>
+			</h3>
+		</div>
+		<div class="card-body">
+			<table class="table" id="table-2">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom & Prenom</th>
+						<th>Apport</th>
+						<th>NiveauExcellence</th>
+						<th>Tache Réalisées</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for collaborateur in collaborateurs %}
+						<tr>
+							<td>{{ collaborateur.id }}</td>
+							<td>{{ collaborateur.getFullName }}</td>
+							<td>{{ collaborateur.apport }}</td>
+							<td>{{ collaborateur.niveauExcellence }}</td>
+							<td>
+								{% if collaborateur.tache|length >= 1 %}
+									{% for tache in collaborateur.tache %}
+										{{tache.designation}}
+                                        
+										<hr>
+									{% endfor %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Apport</th>
-                <th>NiveauExcellence</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for collaborateur in collaborateurs %}
-            <tr>
-                <td>{{ collaborateur.id }}</td>
-                <td>{{ collaborateur.apport }}</td>
-                <td>{{ collaborateur.niveauExcellence }}</td>
-                <td>
-                    <a href="{{ path('admin_gestion_projet_collaborateur_show', {'id': collaborateur.id}) }}">show</a>
-                    <a href="{{ path('admin_gestion_projet_collaborateur_edit', {'id': collaborateur.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+								{% else %}
+									<span style="color: red;">
+										Aucune
+									</span>
+									&nbsp;&nbsp;
+									{{link.iconAdd(path('collaborateur_edit', {'id': collaborateur.id}))}}
+								{% endif %}
 
-    <a href="{{ path('admin_gestion_projet_collaborateur_new') }}">Create new</a>
+							</td>
+							<td>
+								{{link.show(path('collaborateur_show', {'id': collaborateur.id}))}}
+								{{link.iconEdit(path('collaborateur_edit', {'id': collaborateur.id}))}}
+								{{link.delete(path('collaborateur_delete', {'id': collaborateur.id}))}}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="card-footer">
+			{{link.back(path('projet_index'))}}
+		</div>
+	</div>
+
 {% endblock %}

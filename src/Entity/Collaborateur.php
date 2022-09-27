@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CollaborateurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\PersonneGestion;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CollaborateurRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CollaborateurRepository::class)
@@ -35,21 +36,23 @@ class Collaborateur
     private $participation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tache::class, mappedBy="collaborateur")
+     * @ORM\OneToMany(targetEntity=Tache::class, mappedBy="collaborateur",cascade={"persist"})
      */
     private $tache;
 
-    /**
-     * @ORM\OneToOne(targetEntity=PersonneGestion::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $personne;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity=Projet::class, inversedBy="collaborateur")
      * @ORM\JoinColumn(nullable=false)
      */
     private $projet;
+
+    /**
+     * @ORM\OneToOne(targetEntity=PersonneGestion::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $personneGestion;
 
     public function __construct()
     {
@@ -86,17 +89,7 @@ class Collaborateur
         return $this;
     }
 
-    public function getPersonne(): ?Personne
-    {
-        return $this->personne;
-    }
-
-    public function setPersonne(Personne $personne): self
-    {
-        $this->personne = $personne;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection|Participation[]
@@ -166,6 +159,23 @@ class Collaborateur
     public function setProjet(?Projet $projet): self
     {
         $this->projet = $projet;
+
+        return $this;
+    }
+
+    public function getFullName()
+    {
+        return $this->personneGestion->getNom() . ' ' . $this->personneGestion->getPrenom();
+    }
+
+    public function getPersonneGestion(): ?PersonneGestion
+    {
+        return $this->personneGestion;
+    }
+
+    public function setPersonneGestion(PersonneGestion $personneGestion): self
+    {
+        $this->personneGestion = $personneGestion;
 
         return $this;
     }

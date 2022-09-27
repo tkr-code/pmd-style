@@ -18,43 +18,46 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',EmailType::class,[
-                'attr'=>[
-                    'placeholder'=>'Email'
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'Email'
                 ]
             ])
-            ->add('roles',ChoiceType::class,[
-                'choices'=>[
-                    'Administrateur'=>'ROLE_ADMIN',
-                    'Utilisateur'=>'ROLE_USER',
-                    'Editeur'=>'ROLE_EDITOR',
-                    'Client'=>'ROLE_CLIENT',
-                    
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Administrateur' => 'ROLE_ADMIN',
+                    'Utilisateur' => 'ROLE_USER',
+                    'Editeur' => 'ROLE_EDITOR',
+                    'Client' => 'ROLE_CLIENT',
+
                 ],
-                'multiple'=>true,
-                'attr'=>[
-                    'class'=>'select2'
+                'multiple' => true,
+                'attr' => [
+                    'class' => 'select2'
                 ]
             ])
-            ->add('personne',PersonneType::class,[
-                'label'=>false
-                ])
-            ->add('isVerified')
-            ->add('socials',CollectionType::class,[
-                'label'=>false,
-                'entry_type'=>SocialType::class,
-                'by_reference'=>false,
-                'allow_add'=>true,
-                'allow_delete'=>true
+            ->add('personne', PersonneType::class, [
+                'label' => false
             ])
-        ;
+            ->add('isVerified')
+            ->add(
+                'socials',
+                CollectionType::class,
+                [
+                    'label' => false,
+                    'entry_type' => SocialType::class,
+                    'by_reference' => false,
+                    'allow_add' => true,
+                    'allow_delete' => true
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-             'translation_domain'=>'forms',
+            'translation_domain' => 'forms',
 
         ]);
     }

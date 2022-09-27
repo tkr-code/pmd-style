@@ -1,13 +1,173 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit Collaborateur{% endblock %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+
+{% block title %}Edit Collaborateur
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Collaborateur</h1>
+ {% for item in app.flashes('success') %}
+		{{ alerte.alert(item,'success') }}
+	{% endfor %}
 
-    {{ include('admin_gestion_projet_collaborateur/_form.html.twig', {'button_label': 'Update'}) }}
+	<div class="card card-outiline card-success mb-5">
+		<div class="card-header">
+			<h5>Information du collaborateur</h5>
+		</div>
+		<div class="card-body">
+			{{form_start(formCollaborateur)}}
+			<div class="row">
+				<div class="col-md-6 col-lg-6 col-6">
+					{{form_row(formCollaborateur.nom)}}
+					{{form_row(formCollaborateur.prenom)}}
+					{{form_row(formCollaborateur.phone)}}
+					{{form_row(formCollaborateur.adresse)}}
+					{{form_row(formCollaborateur.avatar)}}
+				</div>
+				<div class="col-md-6 col-lg-6 col-6">
+					{{form_row(formCollaborateur.Titre)}}
+					{{form_row(formCollaborateur.email)}}
+					{{form_row(formCollaborateur.apport)}}
+					{{form_row(formCollaborateur.niveauExcellence)}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6 text-right">
+					{{btn.update()}}
+				</div>
+			</div>
 
-    <a href="{{ path('admin_gestion_projet_collaborateur_index') }}">back to list</a>
+			{{form_end(formCollaborateur)}}
+		</div>
+		<div class="card-footer">
+			{{link.back(path('collaborateur_index',{'id':collaborateur.projet.id}),'Annuler la Modification')}}
+		</div>
+	</div>
 
-    {{ include('admin_gestion_projet_collaborateur/_delete_form.html.twig') }}
+	<div class="card card-outiline card-success mb-5">
+		<div class="card-header">
+			<h5>Liste des Taches du collaborateur</h5>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-12 col-lg-12 col-12">
+					<table class="table" id="table-2">
+						<thead>
+							<tr>
+								<th scope="col">Désignation</th>
+								<th scope="col">Description</th>
+								<th scope="col">Etat de la Tache</th>
+								<th scope="col">Achevée Le</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for tache in taches %}
+								<tr>
+									<th>{{tache.designation}}</th>
+									<td>{{tache.description}}</td>
+									<td>{{tache.etat}}</td>
+									<td>{{tache.dateAchevement ? tache.dateAchevement | date('Y-m-d') : ''}}</td>
+									<td>
+										{{link.iconEdit(path('tache_edit', {'id': tache.id}))}}
+										<button type="button" 
+												class="btn btn-danger delete_tache"
+												data-delete="{{tache.id}}"
+												data-path="{{path('tache_delete',{'id': tache.id})}}"
+											>
+											<i class="fas fa-trash-alt"></i>
+										</button>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="4">no records found</td>
+								</tr>
+							{% endfor %}
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer">
+			{{link.back(path('collaborateur_index',{'id':collaborateur.projet.id}),'Annuler la Modification')}}
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+
+	<script>
+		$(document).ready(function(){
+			$(document).on('click','.delete_tache',function(e){
+				e.preventDefault();
+				let delete_tache = $(this).data('delete');
+				let path = $(this).data('path');
+
+				Swal.fire({
+					title: 'Etes Vous sur de supprimer ?',
+					text: "La Suppression est irreverssible !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: 'Oui, Supprimer !',
+					cancelButtonColor: '#d33',
+					cancelButtonText: 'Annuler !'
+					}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url:path,
+							method:'POST',
+							dataType:'JSON',
+							data:{
+								msg_supr:'katoula',
+								delete_tache: delete_tache
+							},
+							success:function(data){
+								if(data == 'success'){
+									Swal.fire(
+										'Tache Supprimée!',
+										'Cette Tache a bien été supprimée de la liste des taches.',
+										'success'
+										)
+										location.reload();
+								}else{
+									swalWithBootstrapButtons.fire(
+										'Suppression Impossible',
+										'Veuillez Réessayer plus tard :)',
+										'error'
+										)
+								}
+							}
+						})
+						
+					}
+				})
+				
+			});
+			
+		});
+	</script>
 {% endblock %}

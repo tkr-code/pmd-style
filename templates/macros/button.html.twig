@@ -3,7 +3,10 @@
     <button type="submit" class="btn btn-primary">Valider</button>
 {% endmacro %}
 {% macro edit(title) %}
-    <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
+    <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i>{{title|default('Modifier')}}</button>
+{% endmacro %}
+{% macro update(title) %}
+    <button type="submit" class="btn btn-success">{{title|default('Valider la Modification')}}</button>
 {% endmacro %}
 
 {% macro delete(text) %}
