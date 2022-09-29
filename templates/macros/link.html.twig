@@ -2,6 +2,9 @@
 {% macro edit(path) %}
     <a class="btn btn-success " href="{{ path|default('#') }} "><i class="fas fa-pencil-alt"></i> {{'Edit'|trans }}</a>
 {% endmacro %}
+{% macro manageList(path,text) %}
+    <a class="btn btn-success " href="{{ path|default('#') }} "> {{text|default('gerer') }}</a>
+{% endmacro %}
 
 {% macro delete(path) %}
     <a class="btn btn-sm btn-danger " href="{{ path }} "><i class="fas fa-trash-alt"></i></a>

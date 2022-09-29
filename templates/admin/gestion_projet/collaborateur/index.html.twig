@@ -20,14 +20,10 @@
 	{{ dataTable.js() }}
 {% endblock %}
 
-{% block javascripts %}
-	{{ dataTable.script('#table-1') }}
-	{{ dataTable.script('#table-2') }}
-	{{ dataTable.script('#table-3') }}
-{% endblock %}
+
 
 {% block body %}
-    {% for item in app.flashes('success') %}
+	{% for item in app.flashes('success') %}
 		{{ alerte.alert(item,'success') }}
 	{% endfor %}
 	<div class="container-fluid">
@@ -67,7 +63,7 @@
 								{% if collaborateur.tache|length >= 1 %}
 									{% for tache in collaborateur.tache %}
 										{{tache.designation}}
-                                        
+
 										<hr>
 									{% endfor %}
 
@@ -83,7 +79,11 @@
 							<td>
 								{{link.show(path('collaborateur_show', {'id': collaborateur.id}))}}
 								{{link.iconEdit(path('collaborateur_edit', {'id': collaborateur.id}))}}
-								{{link.delete(path('collaborateur_delete', {'id': collaborateur.id}))}}
+								<button type="submit" class="btn del_collabo" 
+										data-delete="{{collaborateur.id}}" 
+										data-path="{{path('collaborateur_delete', {'id': collaborateur.id})}}">
+									<i class="fas fa-trash-alt text-danger"></i>
+								</button>
 							</td>
 						</tr>
 					{% else %}
@@ -95,8 +95,62 @@
 			</table>
 		</div>
 		<div class="card-footer">
-			{{link.back(path('projet_index'))}}
+			{{link.back(path('projet_index'),'Tous les projets')}}
+			{{link.back(path('projet_show',{'id':projet.id}),'Le projet')}}
 		</div>
 	</div>
 
+{% endblock %}
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+	<script>
+		$(document).ready(function(){
+			$(document).on('click','.del_collabo',function(){
+				let delete_id = $(this).data('delete');
+				let path = $(this).data('path');
+
+				Swal.fire({
+					title: 'Etes Vous Sur de Supprimer ce collaborateur ?',
+					text: "Attention La Suppression est irreversible !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Oui, Supprimer cela !',
+					cancelButtonText: 'Annuler !'
+					}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url:path,
+							method:'POST',
+							dataType:'JSON',
+							data:{
+								suppr_id:delete_id,
+								suppr_col:'zimbissa'
+							},
+							success:function(data){
+								if(data == 'success'){
+									Swal.fire(
+										'Collaborateur Supprimé!',
+										'Ce Collaborateur a été supprimé complètement.',
+										'success'
+									);
+										location.reload();
+								}else{
+									swalWithBootstrapButtons.fire(
+										'Suppression Impossible !',
+										'Impossible de supprimer ce collaborateur, veuillez réessayer :)',
+										'error'
+									);
+								}
+							}
+						});
+						
+					}
+				})
+			});
+		});
+	</script>
 {% endblock %}

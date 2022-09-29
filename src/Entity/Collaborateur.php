@@ -36,11 +36,11 @@ class Collaborateur
     private $participation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tache::class, mappedBy="collaborateur",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Tache::class, mappedBy="collaborateur",cascade={"persist","remove"})
      */
     private $tache;
 
-    
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Projet::class, inversedBy="collaborateur")
@@ -89,7 +89,7 @@ class Collaborateur
         return $this;
     }
 
-   
+
 
     /**
      * @return Collection|Participation[]
@@ -163,10 +163,6 @@ class Collaborateur
         return $this;
     }
 
-    public function getFullName()
-    {
-        return $this->personneGestion->getNom() . ' ' . $this->personneGestion->getPrenom();
-    }
 
     public function getPersonneGestion(): ?PersonneGestion
     {
@@ -178,5 +174,9 @@ class Collaborateur
         $this->personneGestion = $personneGestion;
 
         return $this;
+    }
+    public function getFullName()
+    {
+        return $this->personneGestion->getNom() . ' ' . $this->personneGestion->getPrenom();
     }
 }

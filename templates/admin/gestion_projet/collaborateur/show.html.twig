@@ -1,30 +1,158 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Collaborateur{% endblock %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}Collaborateur
+{% endblock %}
 
 {% block body %}
-    <h1>Collaborateur</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ collaborateur.id }}</td>
-            </tr>
-            <tr>
-                <th>Apport</th>
-                <td>{{ collaborateur.apport }}</td>
-            </tr>
-            <tr>
-                <th>NiveauExcellence</th>
-                <td>{{ collaborateur.niveauExcellence }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<section>
+		<div class="container py-5">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card mb-4">
+						<div class="card-body text-center">
+							<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+							<h5 class="my-3">{{collaborateur.getFullName}}</h5>
+							<p class="text-muted mb-1">{{collaborateur.personneGestion.titre}}</p>
+							<p class="text-muted mb-4">Projet :
+								{{projet.designation}}</p>
+							<div class="d-flex justify-content-center mb-2">
+								<button type="button" class="btn btn-primary">Changer le profil</button>
+							</div>
+						</div>
+					</div>
 
-    <a href="{{ path('admin_gestion_projet_collaborateur_index') }}">back to list</a>
+				</div>
 
-    <a href="{{ path('admin_gestion_projet_collaborateur_edit', {'id': collaborateur.id}) }}">edit</a>
+				<div class="col-lg-8">
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Nom
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{collaborateur.personneGestion.nom}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Prénom
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{collaborateur.personneGestion.prenom}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Email</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{collaborateur.personneGestion.email}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Phone</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{collaborateur.personneGestion.phone}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Adresse</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{collaborateur.personneGestion.adresse}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Titre</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{collaborateur.personneGestion.titre}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Sa Contribution dans le projet</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{collaborateur.apport}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Niveau Excellence</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 text-right">{{collaborateur.niveauExcellence}}</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar" style="width: {{collaborateur.niveauExcellence}}%" aria-valuenow="{{collaborateur.niveauExcellence}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card mb-4 card-outline card-lightblue">
+						<div class="card-header">
+							Les taches Réalisés
+						</div>
+						<div class="card-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Désignation</th>
+										<th scope="col">Description</th>
+										<th scope="col">Etat</th>
+										<th scope="col">Achevé le</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for tache in taches %}
+										<tr>
+											<td>{{tache.designation}}</td>
+											<td>{{tache.description}}</td>
+											<td>{{tache.etat}}</td>
+											<td>{{tache.dateAchevement ? tache.dateAchevement| date('Y-m-d') : ''}}</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="4">no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							{{link.back(path('collaborateur_index',{'id':projet.id}))}}
+							{{link.edit(path('collaborateur_edit', {'id': collaborateur.id}))}}
+						</div>
+					</div>
 
-    {{ include('admin_gestion_projet_collaborateur/_delete_form.html.twig') }}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
 {% endblock %}

@@ -57,7 +57,8 @@
 			{{form_end(formCollaborateur)}}
 		</div>
 		<div class="card-footer">
-			{{link.back(path('collaborateur_index',{'id':collaborateur.projet.id}),'Annuler la Modification')}}
+			{{link.back(path('collaborateur_index',{'id':collaborateur.projet.id}),'Liste Des Collaborateurs')}}
+			{{link.back(path('collaborateur_show',{'id':collaborateur.id}),'Annuler la Modification')}}
 		</div>
 	</div>
 
@@ -107,9 +108,20 @@
 					</table>
 				</div>
 			</div>
+			{{form_start(formTacheCollection)}}
+			{{form_row(formTacheCollection.tache)}}
+			<div class="row mt-4">
+				<div class="col-md-6">
+					<button type="button" class="btn btn-light" id="new-tache">Ajouter une Tache</button>
+					<button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+				</div>
+			</div>
+			{{form_end(formTacheCollection)}}
+
 		</div>
 		<div class="card-footer">
-			{{link.back(path('collaborateur_index',{'id':collaborateur.projet.id}),'Annuler la Modification')}}
+			{{link.back(path('collaborateur_index',{'id':collaborateur.projet.id}),'Liste Des Collaborateurs')}}
+			{{link.back(path('collaborateur_show',{'id':collaborateur.id}),'Annuler la Modification')}}
 		</div>
 	</div>
 {% endblock %}
@@ -167,6 +179,19 @@
 				})
 				
 			});
+			$(document).on('click', '#new-tache', function () {
+				let prototype = $('#add_tache_collection_tache').data('prototype');
+                let counter = $('#add_tache_collection_tache').children().length
+                let newTache = prototype.replace(/__name__/g, counter)
+                let btnDelete = $('<button type="button" class="btn btn-delete-tache btn-danger">Delete</button>')
+                let item = $('<div></div>')
+                item.append(newTache)
+                item.append(btnDelete)
+                $('#add_tache_collection_tache').append(item)
+                });
+                $(document).on('click', '.btn-delete-tache', function () { // supprimer l'element parent
+                    $(this).parent().remove()
+                });
 			
 		});
 	</script>

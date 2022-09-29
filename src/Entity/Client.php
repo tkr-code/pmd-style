@@ -38,10 +38,7 @@ class Client
      */
     private $personneGestion;
 
-    public function __construct()
-    {
-        $this->projets = new ArrayCollection();
-    }
+    
 
     public function getId(): ?int
     {
@@ -68,38 +65,6 @@ class Client
     public function setPays(string $pays): self
     {
         $this->pays = $pays;
-
-        return $this;
-    }
-
-
-
-    /**
-     * @return Collection|Projet[]
-     */
-    public function getProjets(): Collection
-    {
-        return $this->projets;
-    }
-
-    public function addProjet(Projet $projet): self
-    {
-        if (!$this->projets->contains($projet)) {
-            $this->projets[] = $projet;
-            $projet->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjet(Projet $projet): self
-    {
-        if ($this->projets->removeElement($projet)) {
-            // set the owning side to null (unless already changed)
-            if ($projet->getClient() === $this) {
-                $projet->setClient(null);
-            }
-        }
 
         return $this;
     }

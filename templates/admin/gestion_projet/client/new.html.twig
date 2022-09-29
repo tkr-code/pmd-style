@@ -5,7 +5,6 @@
 {% block body %}
     <h1>Create new Client</h1>
 
-    {{ include('admin_gestion_projet_client/_form.html.twig') }}
 
-    <a href="{{ path('admin_gestion_projet_client_index') }}">back to list</a>
+    <a href="{{ path('projet_show',{'id':projet.id}) }}">back to list</a>
 {% endblock %}

@@ -94,6 +94,10 @@ class ProjetController extends AbstractController
     {
         return $this->render('admin/gestion_projet/projet/show.html.twig', [
             'projet' => $projet,
+            'client' => $projet->getClient(),
+            'paiement' => $projet->getPaiement(),
+            'collaborateurs' => $projet->getCollaborateur(),
+            'avance_paiements' => $projet->getPaiement()->getAvance(),
         ]);
     }
 

@@ -2,9 +2,12 @@
 
 namespace App\Controller\Admin\GestionProjet;
 
+use App\Entity\AddTacheCollection;
 use App\Entity\Projet;
 use App\Entity\Collaborateur;
 use App\Entity\EditCollaborateur;
+use App\Entity\Tache;
+use App\Form\AddTacheCollectionType;
 use App\Form\CollaborateurType;
 use App\Form\EditCollaborateurType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/admin/gestion-projet/collaborateur")
@@ -68,6 +72,8 @@ class CollaborateurController extends AbstractController
     {
         return $this->render('admin/gestion_projet/collaborateur/show.html.twig', [
             'collaborateur' => $collaborateur,
+            'projet' => $collaborateur->getProjet(),
+            'taches' => $collaborateur->getTache(),
         ]);
     }
 
@@ -125,32 +131,73 @@ class CollaborateurController extends AbstractController
                 $this->em->flush();
 
                 $this->addFlash(
-                   'success',
-                   'Modification reussie !'
+                    'success',
+                    'Modification reussie !'
                 );
                 return $this->redirectToRoute('collaborateur_index', ['id' => $collaborateur->getProjet()->getId()], Response::HTTP_SEE_OTHER);
             }
+        }
 
+        #l'ajout d'une ou plusieurs taches pendant la modification
+        #en utilisant la collection
+        $tacheCollection = new AddTacheCollection();
+        $formTacheCollection = $this->createForm(AddTacheCollectionType::class, $tacheCollection);
+        $formTacheCollection->handleRequest($request);
+
+        if ($formTacheCollection->isSubmitted() && $formTacheCollection->isValid()) {
+            //dd($formTacheCollection['tache'][0]->getData());
+            //dd($formTacheCollection['tache'][0]->getData());
+            //$tache = $formTacheCollection['tache'][0]->getData();
+            //dd($tache->getDesignation());
+            // dd($formTacheCollection['tache']->getData());
+            //dd($formTacheCollection->getData());
+
+            foreach ($formTacheCollection['tache']->getData() as  $Matache) {
+
+                $tache = new Tache();
+                $tache->setDesignation($Matache->getDesignation())
+                    ->setDescription($Matache->getDescription())
+                    ->setEtat($Matache->getEtat())
+                    ->setDateAchevement($Matache->getDateAchevement())
+                    ->setCollaborateur($collaborateur);
+                $this->em->persist($tache);
+                $this->em->flush();
+            }
+
+            $this->addFlash(
+                'success',
+                'Nouvelle (s) Tache (s) ajoutée avec succès !'
+            );
+            return $this->redirectToRoute('collaborateur_edit', ['id' => $collaborateur->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/gestion_projet/collaborateur/edit.html.twig', [
             'collaborateur' => $collaborateur,
             'taches' => $collaborateur->getTache(), #renvoie les taches du collaborateur
             'formCollaborateur' => $formCollaborateur,
+            'formTacheCollection' => $formTacheCollection
         ]);
     }
 
     /**
-     * @Route("/{id}", name="collaborateur_delete", methods={"POST"})
+     * @Route("/{id}/del", name="collaborateur_delete", methods={"POST","GET"})
      */
     public function delete(Request $request, Collaborateur $collaborateur): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $collaborateur->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($collaborateur);
-            $entityManager->flush();
+        if (
+            $request->request->get('suppr_col') &&
+            $request->request->get('suppr_col') == 'zimbissa' &&
+            $request->request->get('suppr_id') &&
+            !empty($request->request->get('suppr_id')) &&
+            $request->request->get('suppr_id') == $collaborateur->getId()
+        ) {
+            $this->em->remove($collaborateur);
+            $this->em->flush();
+            $response = 'success';
+        } else {
+            $response = 'failed';
         }
-
-        return $this->redirectToRoute('admin_gestion_projet_collaborateur_index', [], Response::HTTP_SEE_OTHER);
+        return new JsonResponse($response);
+        //return $this->redirectToRoute('collaborateur_index', ['id' => $collaborateur->getProjet()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

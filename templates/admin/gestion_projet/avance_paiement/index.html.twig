@@ -111,7 +111,8 @@
 			</table>
 		</div>
 		<div class="card-footer">
-			{{link.back(path('projet_index'))}}
+			{{link.back(path('projet_index'),'Tous les projets')}}
+			{{link.back(path('projet_show',{'id':projet.id}),'Le projet')}}
 		</div>
 	</div>
 	{#     les modal
