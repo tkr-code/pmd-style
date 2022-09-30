@@ -58,7 +58,7 @@ class Paiement
 
 
     /**
-     * @ORM\OneToMany(targetEntity=AvancePaiement::class, mappedBy="paiement")
+     * @ORM\OneToMany(targetEntity=AvancePaiement::class, mappedBy="paiement",cascade={"remove"})
      */
     private $avance;
 

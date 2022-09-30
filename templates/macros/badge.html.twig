@@ -1,0 +1,15 @@
+{% macro complet(message) %}
+	<span class="badge badge-warning">{{message|default('Atteint')}}</span>
+{% endmacro %}
+
+{% macro annuler(message) %}
+	<span class="badge badge-danger">{{message|default('pas atteint')}}</span>
+{% endmacro %}
+
+{% macro encour(message) %}
+	<span class="badge badge-warning">{{message|default('Encour')}}</span>
+{% endmacro %}
+
+{% macro default(message) %}
+	<span class="badge badge-primary">{{message|default('null')}}</span>
+{% endmacro %}

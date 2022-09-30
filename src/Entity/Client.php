@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Client
 {
     /**
-     * @ORM\Id
+     * @ORM\Idco
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
@@ -37,6 +37,11 @@ class Client
      * @ORM\JoinColumn(nullable=false)
      */
     private $personneGestion;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Projet::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private $projet;
 
     
 
@@ -86,5 +91,22 @@ class Client
     public function getFullName()
     {
         return $this->personneGestion->getNom() . ' ' . $this->personneGestion->getPrenom();
+    }
+
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(Projet $projet): self
+    {
+        // set the owning side of the relation if necessary
+        if ($projet->getClient() !== $this) {
+            $projet->setClient($this);
+        }
+
+        $this->projet = $projet;
+
+        return $this;
     }
 }

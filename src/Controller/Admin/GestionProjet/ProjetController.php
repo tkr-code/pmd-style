@@ -3,12 +3,15 @@
 namespace App\Controller\Admin\GestionProjet;
 
 use App\Entity\AvancePaiement;
+use App\Entity\EditProjet;
 use App\Entity\Paiement;
 use App\Entity\Projet;
+use App\Form\EditProjetType;
 use App\Form\ProjetType;
 use App\Repository\ProjetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -106,13 +109,47 @@ class ProjetController extends AbstractController
      */
     public function edit(Request $request, Projet $projet): Response
     {
-        $form = $this->createForm(ProjetType::class, $projet);
+        $editProjet = new EditProjet();
+        #on remplit les champs a editer avant de le rendre
+        $editProjet->setDesignation($projet->getDesignation())
+            ->setDescription($projet->getDescription())
+            ->setType($projet->getType())
+            ->setEtat($projet->getEtat())
+            ->setDateDebut($projet->getDateDebut())
+            ->setDateFinPrevu($projet->getDateFinPrevu())
+            ->setDateFinRealisation($projet->getDateFinRealisation());
+
+        $form = $this->createForm(EditProjetType::class, $editProjet);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            //dd($form->getData());
+            //dd($form['dateFinRealisation']->getData());
 
-            return $this->redirectToRoute('admin_gestion_projet_projet_index', [], Response::HTTP_SEE_OTHER);
+            if (
+                !empty($form['designation']->getData()) &&
+                !empty($form['description']->getData()) &&
+                !empty($form['type']->getData()) &&
+                !empty($form['dateDebut']->getData()) &&
+                !empty($form['dateFinPrevu']->getData()) &&
+                //!empty($form['dateFinRealisation']->getData()) &&
+                !empty($form['etat']->getData())
+            ) {
+                $projet->setDesignation($form['designation']->getData())
+                    ->setDescription($form['description']->getData())
+                    ->setType($form['type']->getData())
+                    ->setDateDebut($form['dateDebut']->getData())
+                    ->setDateFinPrevu($form['dateFinPrevu']->getData())
+                    ->setDateFinRealisation($form['dateFinRealisation']->getData())
+                    ->setEtat($form['etat']->getData());
+                $this->em->persist($projet);
+                $this->em->flush();
+                $this->addFlash(
+                    'success',
+                    'Les Informations du projet ont bien été mise à jour !'
+                );
+
+                return $this->redirectToRoute('projet_show', ['id' => $projet->getId()], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('admin/gestion_projet/projet/edit.html.twig', [
@@ -122,16 +159,25 @@ class ProjetController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="projet_delete", methods={"POST"})
+     * @Route("/{id}/del", name="projet_delete", methods={"POST"})
      */
     public function delete(Request $request, Projet $projet): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $projet->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($projet);
-            $entityManager->flush();
+        if (
+            $request->request->get('projet_supr') &&
+            $request->request->get('projet_supr') == 'katoula_projet' &&
+            $request->request->get('id_projet') &&
+            !empty($request->request->get('id_projet')) &&
+            $request->request->get('id_projet') == $projet->getId()
+        ) {
+            $this->em->remove($projet);
+            $this->em->flush();
+            $response = 'success';
+        } else {
+            $response = 'failed';
         }
+        return new JsonResponse($response);
 
-        return $this->redirectToRoute('projet_index', [], Response::HTTP_SEE_OTHER);
+        //return $this->redirectToRoute('projet_index', [], Response::HTTP_SEE_OTHER);
     }
 }

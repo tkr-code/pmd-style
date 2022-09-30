@@ -68,14 +68,17 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('projet_show', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash(
+               'success',
+               'Les Informations du client ont été mise à jour'
+            );
+            return $this->redirectToRoute('projet_show', ['id' => $client->getProjet()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/gestion_projet/client/edit.html.twig', [
             'client' => $client,
             'form' => $form,
-            'projet' => $form,
+            'projet' => $client->getProjet(),
 
         ]);
     }
@@ -85,7 +88,7 @@ class ClientController extends AbstractController
      */
     public function delete(Request $request, Client $client): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $client->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($client);
             $entityManager->flush();

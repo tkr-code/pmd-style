@@ -7,6 +7,7 @@
 {% import "macros/alertes.html.twig" as alerte %}
 {% import "macros/button.html.twig" as btn %}
 {% import "macros/link.html.twig" as link %}
+{% import "macros/badge.html.twig" as badge %}
 {% import "macros/dataTable.html.twig" as dataTable %}
 
 {% block head %}
@@ -28,6 +29,9 @@
 {% endblock %}
 
 {% block body %}
+	{% for item in app.flashes('success') %}
+		{{alerte.alert(item,'success')}}
+	{% endfor %}
 	<div class="row mb-3">
 		<div class="col-lg-12 cold-md-12 col-xm-12">
 			<div class="card card-outline card-dark">
@@ -244,14 +248,23 @@
 							<p>
 								Le cout total du projet est :
 								<b class="text-danger">{{paiement.montantTotal}}
-								</b>&nbsp; fcfa, le paiement n'est pas ecore achevé, il reste la somme de
-								<b class="text-danger">{{paiement.montantDu}}
-								</b>&nbsp; fcfa
+								</b>&nbsp; fcfa,
+								{% if paiement.montantDu > 0 %}
+									le paiement n'est pas ecore achevé, il reste la somme de
+									<b class="text-danger">{{paiement.montantDu}}
+									</b>&nbsp; fcfa
+								{% elseif paiement.montantDu == 0 %}
+									le paiement est  achevé, il reste la somme de
+									<b class="text-danger">{{paiement.montantDu}}
+									</b>&nbsp; fcfa
+								{% endif %}
 							</p>
 						</div>
 						<div class="col-md-5 text-right">
 							<p>
-								Monsieur nom du client a effectué
+								Mr ou Mme
+								<b class="text-success">{{projet.client.getFullName}}</b>
+								&nbsp;a effectué
 								<b class="text-danger">{{avance_paiements|length}}</b>&nbsp; avance (s)
 							</p>
 						</div>
@@ -277,7 +290,14 @@
 											<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date('Y-m-d') : '' }}</td>
 											<td>{{ avance_paiement.montantAvance }}</td>
 											<td>{{ avance_paiement.montantDu }}</td>
-											<td>{{ avance_paiement.estAtteint ? 'Yes' : 'No' }}</td>
+											<td>
+												{% if avance_paiement.estAtteint %}
+													{{badge.complet('Yes')}}
+												{% else %}
+													{{ badge.annuler('No')}}
+												{% endif %}
+
+											</td>
 											<td>{{ avance_paiement.modePaiementAvance }}</td>
 
 										</tr>

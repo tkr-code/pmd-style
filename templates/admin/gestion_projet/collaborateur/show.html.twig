@@ -143,8 +143,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
-							{{link.back(path('collaborateur_index',{'id':projet.id}))}}
+						<div class="col-md-12">
+							{{link.back(path('collaborateur_index',{'id':projet.id}),'Liste des Collaborateurs')}}
+							{{link.back(path('projet_show',{'id':projet.id}),'Projet')}}
 							{{link.edit(path('collaborateur_edit', {'id': collaborateur.id}))}}
 						</div>
 					</div>

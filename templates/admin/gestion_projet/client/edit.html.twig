@@ -1,12 +1,50 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit Client{% endblock %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}Edit Client
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Client</h1>
+	<h1>Edit Client</h1>
+	<div class="row mb-3">
+		<div class="col-ld-12 col-md-12 col-xm-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+					Modification des Informations du client
+				</div>
+				{{form_start(form)}}
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							{{form_row(form.PersonneGestion.nom)}}
+							{{form_row(form.PersonneGestion.prenom)}}
+							{{form_row(form.PersonneGestion.adresse)}}
+							{{form_row(form.PersonneGestion.phone)}}
+							{{form_row(form.PersonneGestion.avatar)}}
+						</div>
+						<div class="col-md-6">
+							{{form_row(form.PersonneGestion.titre)}}
+							{{form_row(form.PersonneGestion.email)}}
+							{{form_row(form.ville)}}
+							{{form_row(form.pays)}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6"></div>
+						<div class="col-md-6 text-right">
+							{{btn.update()}}
+						</div>
+					</div>
+				</div>
+				{{form_end(form)}}
+				<div class="card-footer">
+					{{link.back(path('projet_show',{'id':projet.id}),'Annuler')}}
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-    <a href="{{ path('projet_show') }}">back to list</a>
-
-    {{ include('admin_gestion_projet_client/_delete_form.html.twig') }}
 {% endblock %}

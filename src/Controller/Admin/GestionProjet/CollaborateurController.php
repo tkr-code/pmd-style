@@ -175,7 +175,8 @@ class CollaborateurController extends AbstractController
             'collaborateur' => $collaborateur,
             'taches' => $collaborateur->getTache(), #renvoie les taches du collaborateur
             'formCollaborateur' => $formCollaborateur,
-            'formTacheCollection' => $formTacheCollection
+            'formTacheCollection' => $formTacheCollection,
+            'projet'=>$projet
         ]);
     }
 

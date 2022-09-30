@@ -66,22 +66,22 @@ class Projet
     private $paiement;
 
     /**
-     * @ORM\OneToOne(targetEntity=Client::class, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Collaborateur::class, mappedBy="projet",cascade={"remove"})
+     */
+    private $collaborateur;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="projet", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Collaborateur::class, mappedBy="projet")
-     */
-    private $collaborateur;
 
     public function __construct()
     {
         $this->collaborateur = new ArrayCollection();
     }
 
-    
+
 
     public function getId(): ?int
     {
@@ -184,18 +184,6 @@ class Projet
         return $this;
     }
 
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
     public function getPaiement(): ?Paiement
     {
         return $this->paiement;
@@ -243,5 +231,15 @@ class Projet
         return $this;
     }
 
-    
+    public function getClient(): ?client
+    {
+        return $this->client;
+    }
+
+    public function setClient(client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
 }

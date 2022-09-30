@@ -20,86 +20,137 @@
 	{{ dataTable.js() }}
 {% endblock %}
 
-{% block javascripts %}
-	{{ dataTable.script('#table-1') }}
-	{{ dataTable.script('#table-2') }}
-	{{ dataTable.script('#table-3') }}
-{% endblock %}
-
 
 {% block body %}
 	{% for item in app.flashes('success') %}
 		{{ alerte.alert(item,'success')}}
 	{% endfor %}
-	<h1>Projets</h1>
-	<div class="card card-outline card-primary">
-		<div class="card-header">
-			{{link.add(path('projet_new'),'Create new')}}
+	<h1>Mes Projets</h1>
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-xm-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					{{link.add(path('projet_new'),'Create new')}}
+				</div>
+				<div class="card-body">
+					<table class="table" id="table-2">
+						<thead>
+							<tr>
+								<th>Projet Designation</th>
+								<th>Type</th>
+								<th>ValeurTotal</th>
+								<th>DateDebut</th>
+								<th>DateFinPrevu</th>
+								<th>Client</th>
+								<th>Etat Projet</th>
+								<th>Etat Paiment</th>
+								<th>Collaborateur (trice)</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for projet in projets %}
+								<tr>
+									<td>{{ projet.designation }}</td>
+									<td>{{ projet.type }}</td>
+									<td>{{ projet.valeurTotal }}</td>
+									<td>{{ projet.dateDebut ? projet.dateDebut|date('Y-m-d') : '' }}</td>
+									<td>{{ projet.dateFinPrevu ? projet.dateFinPrevu|date('Y-m-d') : '' }}</td>
+									<td>{{ projet.client.getFullName }}</td>
+									<td>{{ projet.etat }}</td>
+									<td>
+										{% if projet.paiement.estAcheve %}
+											Terminé
+										{% else %}
+											Encour de paiement
+																																																	        &nbsp;&nbsp;&nbsp;
+											{{link.iconAdd(path('avance_paiement_index', {'id': projet.id}))}}
+											<br>
+											<small style="color: red;">Reste :
+												{{projet.paiement.montantDu}}</small>
+										{% endif %}
+									</td>
+									<td>
+										{% if projet.collaborateur|length > 0  %}
+											{{ projet.collaborateur|length }}
+										{% else %}
+											Aucun (e)
+										{% endif %}
+										&nbsp;&nbsp;&nbsp;
+										{{link.iconAdd(path('collaborateur_index', {'id': projet.id}))}}
+
+
+									</td>
+									<td>
+										{{link.show(path('projet_show', {'id': projet.id}))}}
+										<button type="button" class="btn del_projet" data-delete="{{projet.id}}" data-path="{{path('projet_delete', {'id': projet.id})}}">
+											<i class="fas fa-trash-alt text-danger"></i>
+										</button>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="10">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer"></div>
+			</div>
 		</div>
-		<div class="card-body">
-			<table class="table" id="table-2">
-				<thead>
-					<tr>
-						<th>Projet Designation</th>
-						<th>Type</th>
-						<th>ValeurTotal</th>
-						<th>DateDebut</th>
-						<th>DateFinPrevu</th>
-						<th>Client</th>
-						<th>Etat Projet</th>
-						<th>Etat Paiment</th>
-						<th>Collaborateur (trice)</th>
-						<th>actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for projet in projets %}
-						<tr>
-							<td>{{ projet.designation }}</td>
-							<td>{{ projet.type }}</td>
-							<td>{{ projet.valeurTotal }}</td>
-							<td>{{ projet.dateDebut ? projet.dateDebut|date('Y-m-d') : '' }}</td>
-							<td>{{ projet.dateFinPrevu ? projet.dateFinPrevu|date('Y-m-d') : '' }}</td>
-							<td>{{ projet.client.getFullName }}</td>
-							<td>{{ projet.etat }}</td>
-							<td>
-								{% if projet.paiement.estAcheve %}
-									Terminé
-								{% else %}
-									Encour de paiement
-							        &nbsp;&nbsp;&nbsp;
-									{{link.iconAdd(path('avance_paiement_index', {'id': projet.id}))}}
-									<br> <small style="color: red;">Reste : {{projet.paiement.montantDu}}</small>
-								{% endif %}
-							</td>
-							<td>
-								{% if projet.collaborateur|length > 0  %}
-									{{ projet.collaborateur|length }}
-								{% else %}
-									Aucun (e)
-								{% endif %}
-								&nbsp;&nbsp;&nbsp;
-								{{link.iconAdd(path('collaborateur_index', {'id': projet.id}))}}
-
-
-							</td>
-							<td>
-								{{link.show(path('projet_show', {'id': projet.id}))}}
-								{{link.iconEdit(path('projet_show', {'id': projet.id}))}}
-								{{link.delete(path('projet_show', {'id': projet.id}))}}
-
-							</td>
-						</tr>
-					{% else %}
-						<tr>
-							<td colspan="10">no records found</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-		<div class="card-footer"></div>
 	</div>
+{% endblock %}
 
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+	<script>
+		$(document).ready(function(){
+			$(document).on('click','.del_projet',function(){
+				let id_projet = $(this).data('delete');
+				let path =$(this).data('path');
 
+				Swal.fire({
+					title: 'Etes vous sur de supprimer ce projet ?',
+					text: "La suppression du projet est irreversible !",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Oui, supprimer !',
+					cancelButtonText: 'Annuler !'
+					}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url:path,
+							method:'POST',
+							dataType:'JSON',
+							data:{
+								id_projet:id_projet,
+								projet_supr:'katoula_projet'
+							},
+							success:function(data){
+								if(data == 'success'){
+									Swal.fire(
+										'Projet Supprimé!',
+										'Le projet a bien été supprimé.',
+										'success'
+									);
+									location.reload();
+								}else{
+									swalWithBootstrapButtons.fire(
+										'Impossible de supprimer !',
+										'Suppression Impossible, veuillez réessayer :)',
+										'error'
+										);
+									}
+							}
+						});
+					}
+				});
+			});
+		});
+	</script>
 {% endblock %}
