@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ClasseFormation{% endblock %}
+
+{% block body %}
+    <h1>Create new ClasseFormation</h1>
+
+    {{ include('admin_gestion_formation_classe_formation/_form.html.twig') }}
+
+    <a href="{{ path('admin_gestion_formation_classe_formation_index') }}">back to list</a>
+{% endblock %}

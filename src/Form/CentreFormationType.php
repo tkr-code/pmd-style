@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\CentreFormation;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class CentreFormationType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('designation')
+            ->add('sigle')
+            ->add('description')
+            ->add('adresse')
+            ->add('specialite')
+            ->add('phone')
+            ->add('email')
+            ->add('personneGestion',PersonneGestionType::class)
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => CentreFormation::class,
+        ]);
+    }
+}

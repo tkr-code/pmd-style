@@ -1,0 +1,96 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block title %}Centre Formation
+{% endblock %}
+
+{% block body %}
+	{% for item in app.flashes('success') %}
+		{{ alerte.alert(item,'success')}}
+
+	{% endfor %}
+
+	<div class="container-fluid">
+		<div class="row mb-2">
+			{{link.add(path('centre_formation_new'))}}
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12 col-xm-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					Tous Les Centres De Formations
+				</div>
+				<div class="card-body">
+					<table class="table" id="table-2">
+						<thead>
+							<tr>
+								<th>Sigle</th>
+								<th>Adresse</th>
+								<th>Phone</th>
+								<th>Email</th>
+								<th>Total Classe</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for centre_formation in centre_formations %}
+								<tr>
+									<td>{{ centre_formation.sigle }}</td>
+									<td>{{ centre_formation.adresse }}</td>
+									<td>{{ centre_formation.phone }}</td>
+									<td>{{ centre_formation.email }}</td>
+									<td>
+										{% if centre_formation.classeFormations|length > 0 %}
+											<span>vous avez&nbsp;
+												<b class="text-danger" style="font-size: 20px;">{{ centre_formation.classeFormations|length }}
+												</b>&nbsp; classe(s)</span>
+											&nbsp;
+											{{link.iconAdd(path('formation_dispensee_new',{'id':centre_formation.id}))}}
+										{% else %}
+											<small class="text-danger">Aucune classe</small>
+											&nbsp;
+											{{link.iconAdd(path('formation_dispensee_new',{'id':centre_formation.id}))}}
+										{% endif %}
+									</td>
+									<td>
+										<a href="{{ path('centre_formation_show', {'id': centre_formation.id}) }}">show</a>
+										<a href="{{ path('centre_formation_edit', {'id': centre_formation.id}) }}">edit</a>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="9">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer"></div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+{% endblock %}

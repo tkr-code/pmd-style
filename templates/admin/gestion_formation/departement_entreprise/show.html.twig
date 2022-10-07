@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DepartementEntreprise{% endblock %}
+
+{% block body %}
+    <h1>DepartementEntreprise</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ departement_entreprise.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ departement_entreprise.designation }}</td>
+            </tr>
+            <tr>
+                <th>NombrePersonne</th>
+                <td>{{ departement_entreprise.nombrePersonne }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_formation_departement_entreprise_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_formation_departement_entreprise_edit', {'id': departement_entreprise.id}) }}">edit</a>
+
+    {{ include('admin_gestion_formation_departement_entreprise/_delete_form.html.twig') }}
+{% endblock %}

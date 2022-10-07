@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DepartementEntreprise index{% endblock %}
+
+{% block body %}
+    <h1>DepartementEntreprise index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Designation</th>
+                <th>NombrePersonne</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for departement_entreprise in departement_entreprises %}
+            <tr>
+                <td>{{ departement_entreprise.id }}</td>
+                <td>{{ departement_entreprise.designation }}</td>
+                <td>{{ departement_entreprise.nombrePersonne }}</td>
+                <td>
+                    <a href="{{ path('admin_gestion_formation_departement_entreprise_show', {'id': departement_entreprise.id}) }}">show</a>
+                    <a href="{{ path('admin_gestion_formation_departement_entreprise_edit', {'id': departement_entreprise.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_formation_departement_entreprise_new') }}">Create new</a>
+{% endblock %}

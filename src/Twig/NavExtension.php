@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -12,98 +13,122 @@ class NavExtension extends AbstractExtension
     {
         $this->translator = $translator;
     }
-    public function getFunctions():array
+    public function getFunctions(): array
     {
-        return[
-            new TwigFunction('sidebar',[$this,'getNavs'])
+        return [
+            new TwigFunction('sidebar', [$this, 'getNavs'])
         ];
     }
 
     public function getNavs()
     {
-        return 
-        [
-            'navs'=>
+        return
             [
+                'navs' =>
                 [
-                    'name'=>$this->translator->trans('Dashboard'),
-                    'icon'=>'fas fa-tachometer-alt',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Dashboard').' 1',
-                            'path'=>'admin'
+                    [
+                        'name' => $this->translator->trans('Dashboard'),
+                        'icon' => 'fas fa-tachometer-alt',
+                        'links' => [
+                            [
+                                'name' => $this->translator->trans('Dashboard') . ' 1',
+                                'path' => 'admin'
+                            ]
                         ]
-                    ]
-                ],
-                [
-                    'name'=>'Pmd Developper',
-                    'icon'=>'fa fa-home',
-                    'links'=>
-                        [
-                            [
-                                'name'=>$this->translator->trans('Home'),
-                                'path'=>'home'
-                            ],
-                            [
-                                'name'=>'A propos',
-                                'path'=>'about'
-                            ],
-                            [
-                                'name'=>'Contact',
-                                'path'=>'contact'
-                            ],
-                        ]
-                ],
-                [
-                    'name'=>'Profile',
-                    'icon'=>'fas fa-user',
-                    'path'=>'profile_index',
-                ],
-                [
-                    'name'=>'Cahier de charge',
-                    'path'=>'admin_cahier_charge_index',
-                    'icon'=>'fas fa-book-open'
-                ],
-                [
-                    'name'=>'Caisse',
-                    'path'=>'admin_caisse_index',
-                    'icon'=>'fas fa-funnel-dollar'
-                ],
-                
-            ],
-            'admin'=>
-            [
-                [
-                    'name'=>$this->translator->trans('User'),
-                    'icon'=>'fas fa-users',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Users'),
-                            'path'=>'user_index',
-                        ],
-                        [
-                            'name'=>$this->translator->trans('User'),
-                            'path'=>'user_new',
-                        ],
-                    ]
                     ],
                     [
-                        'name'=>'Gestion Projets',
-                        'icon'=>'fa fa-home',
-                        'links'=>
+                        'name' => 'Pmd Developper',
+                        'icon' => 'fa fa-home',
+                        'links' =>
+                        [
                             [
-                                [
-                                    'name'=>'New Projects',
-                                    'path'=>'projet_new'
-                                ],
-                                [
-                                    'name'=>'All Projects',
-                                    'path'=>'projet_index'
-                                ],
-                                
-                            ]
+                                'name' => $this->translator->trans('Home'),
+                                'path' => 'home'
+                            ],
+                            [
+                                'name' => 'A propos',
+                                'path' => 'about'
+                            ],
+                            [
+                                'name' => 'Contact',
+                                'path' => 'contact'
+                            ],
+                        ]
                     ],
-            ]
-        ];
+                    [
+                        'name' => 'Profile',
+                        'icon' => 'fas fa-user',
+                        'path' => 'profile_index',
+                    ],
+                    [
+                        'name' => 'Cahier de charge',
+                        'path' => 'admin_cahier_charge_index',
+                        'icon' => 'fas fa-book-open'
+                    ],
+                    [
+                        'name' => 'Caisse',
+                        'path' => 'admin_caisse_index',
+                        'icon' => 'fas fa-funnel-dollar'
+                    ],
+
+                ],
+                'admin' =>
+                [
+                    [
+                        'name' => $this->translator->trans('User'),
+                        'icon' => 'fas fa-users',
+                        'links' => [
+                            [
+                                'name' => $this->translator->trans('Users'),
+                                'path' => 'user_index',
+                            ],
+                            [
+                                'name' => $this->translator->trans('User'),
+                                'path' => 'user_new',
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => 'Gestion Projets',
+                        'icon' => 'fa fa-home',
+                        'links' =>
+                        [
+                            [
+                                'name' => 'New Projects',
+                                'path' => 'projet_new'
+                            ],
+                            [
+                                'name' => 'All Projects',
+                                'path' => 'projet_index'
+                            ],
+
+                        ]
+                    ],
+                    [
+                        'name' => 'Gestion Formations',
+                        'icon' => 'fa fa-home',
+                        'links' =>
+                        [
+                            [
+                                'name' => 'New Module',
+                                'path' => 'module_new'
+                            ],
+                            [
+                                'name' => 'All Modules',
+                                'path' => 'module_index'
+                            ],
+                            [
+                                'name' => 'New Centre formation',
+                                'path' => 'centre_formation_new'
+                            ],
+                            [
+                                'name' => 'Centres Formations',
+                                'path' => 'centre_formation_index'
+                            ],
+
+                        ]
+                    ]
+                ]
+            ];
     }
 }

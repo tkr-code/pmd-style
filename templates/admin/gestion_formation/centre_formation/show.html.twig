@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CentreFormation{% endblock %}
+
+{% block body %}
+    <h1>CentreFormation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ centre_formation.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ centre_formation.designation }}</td>
+            </tr>
+            <tr>
+                <th>Sigle</th>
+                <td>{{ centre_formation.sigle }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ centre_formation.description }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ centre_formation.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Specialite</th>
+                <td>{{ centre_formation.specialite }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ centre_formation.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ centre_formation.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_formation_centre_formation_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_formation_centre_formation_edit', {'id': centre_formation.id}) }}">edit</a>
+
+    {{ include('admin_gestion_formation_centre_formation/_delete_form.html.twig') }}
+{% endblock %}

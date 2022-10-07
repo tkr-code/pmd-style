@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ClasseFormation index{% endblock %}
+
+{% block body %}
+    <h1>ClasseFormation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Designation</th>
+                <th>NiveauEtude</th>
+                <th>NombreEtudiant</th>
+                <th>Abreviation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for classe_formation in classe_formations %}
+            <tr>
+                <td>{{ classe_formation.id }}</td>
+                <td>{{ classe_formation.designation }}</td>
+                <td>{{ classe_formation.niveauEtude }}</td>
+                <td>{{ classe_formation.nombreEtudiant }}</td>
+                <td>{{ classe_formation.abreviation }}</td>
+                <td>
+                    <a href="{{ path('admin_gestion_formation_classe_formation_show', {'id': classe_formation.id}) }}">show</a>
+                    <a href="{{ path('admin_gestion_formation_classe_formation_edit', {'id': classe_formation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_formation_classe_formation_new') }}">Create new</a>
+{% endblock %}

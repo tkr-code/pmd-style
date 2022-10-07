@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ClasseFormation{% endblock %}
+
+{% block body %}
+    <h1>Edit ClasseFormation</h1>
+
+    {{ include('admin_gestion_formation_classe_formation/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_gestion_formation_classe_formation_index') }}">back to list</a>
+
+    {{ include('admin_gestion_formation_classe_formation/_delete_form.html.twig') }}
+{% endblock %}

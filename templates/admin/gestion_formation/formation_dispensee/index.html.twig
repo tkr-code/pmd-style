@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormationDispensee index{% endblock %}
+
+{% block body %}
+    <h1>FormationDispensee index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>VolumeHoraire</th>
+                <th>ValeurHeure</th>
+                <th>Etat</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation_dispensee in formation_dispensees %}
+            <tr>
+                <td>{{ formation_dispensee.id }}</td>
+                <td>{{ formation_dispensee.volumeHoraire }}</td>
+                <td>{{ formation_dispensee.valeurHeure }}</td>
+                <td>{{ formation_dispensee.etat }}</td>
+                <td>{{ formation_dispensee.dateDebut ? formation_dispensee.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ formation_dispensee.dateFin ? formation_dispensee.dateFin|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_gestion_formation_formation_dispensee_show', {'id': formation_dispensee.id}) }}">show</a>
+                    <a href="{{ path('admin_gestion_formation_formation_dispensee_edit', {'id': formation_dispensee.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_formation_formation_dispensee_new') }}">Create new</a>
+{% endblock %}

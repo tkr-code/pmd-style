@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ClasseFormation{% endblock %}
+
+{% block body %}
+    <h1>ClasseFormation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ classe_formation.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ classe_formation.designation }}</td>
+            </tr>
+            <tr>
+                <th>NiveauEtude</th>
+                <td>{{ classe_formation.niveauEtude }}</td>
+            </tr>
+            <tr>
+                <th>NombreEtudiant</th>
+                <td>{{ classe_formation.nombreEtudiant }}</td>
+            </tr>
+            <tr>
+                <th>Abreviation</th>
+                <td>{{ classe_formation.abreviation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_formation_classe_formation_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_formation_classe_formation_edit', {'id': classe_formation.id}) }}">edit</a>
+
+    {{ include('admin_gestion_formation_classe_formation/_delete_form.html.twig') }}
+{% endblock %}

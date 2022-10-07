@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit PaiementFormationDispensee{% endblock %}
+
+{% block body %}
+    <h1>Edit PaiementFormationDispensee</h1>
+
+    {{ include('admin_gestion_formation_paiement_formation_dispensee/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_gestion_formation_paiement_formation_dispensee_index') }}">back to list</a>
+
+    {{ include('admin_gestion_formation_paiement_formation_dispensee/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Pointage{% endblock %}
+
+{% block body %}
+    <h1>Create new Pointage</h1>
+
+    {{ include('admin_gestion_formation_pointage/_form.html.twig') }}
+
+    <a href="{{ path('admin_gestion_formation_pointage_index') }}">back to list</a>
+{% endblock %}
