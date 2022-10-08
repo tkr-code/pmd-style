@@ -47,4 +47,21 @@ class PointageRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function sommeHeurePointageParClasse(int $id_formation): array
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT SUM(nombre_heure_dispense) AS total_heure FROM pointage P
+            WHERE P.formation_dispensee_id = :idFormation
+            
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['idFormation' => $id_formation]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 }

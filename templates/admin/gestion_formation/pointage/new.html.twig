@@ -1,11 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}New Pointage{% endblock %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link%}
+
+{% block title %}New Pointage
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Pointage</h1>
 
-    {{ include('admin_gestion_formation_pointage/_form.html.twig') }}
+	<div class="row mb-2">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					Veuillez Remplir le registre de pointage concernant le module
+                     <b class="text-danger">{{module.designation}}&nbsp;</b> en
+                      <small class="text-blue">abrégé</small>&nbsp;<b class="text-danger">{{module.abreviation}}</b>
+                      &nbsp; Avec un taux horaire de <b class="text-danger">{{formation.volumeHoraire}}</b>&nbsp;H.
+				</div>
+				{{form_start(form)}}
+				<div class="card-body">
+					{{form_row(form.nombreHeureDispense)}}
+					{{form_row(form.contenuDispense)}}
+					{{form_row(form.datePointage)}}
+					<div class="row">
+						<div class="col-md-6">
+							{{btn.save()}}
+						</div>
+					</div>
+				</div>
+				{{form_end(form)}}
+				<div class="card-footer">
+					{{link.back(path('centre_formation_index'),'Tous Les Centres')}}
+					{{link.back(path('pointage_index',{'id':classe.centreFormation.id,'id_forma':classe.formationDispensee.id}),'Tous Les pointages')}}
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <a href="{{ path('admin_gestion_formation_pointage_index') }}">back to list</a>
 {% endblock %}

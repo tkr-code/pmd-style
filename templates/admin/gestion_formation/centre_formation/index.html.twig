@@ -42,11 +42,12 @@
 					<table class="table" id="table-2">
 						<thead>
 							<tr>
-								<th>Sigle</th>
+								<th>Centre</th>
 								<th>Adresse</th>
 								<th>Phone</th>
 								<th>Email</th>
 								<th>Total Classe</th>
+								<th>Pointage Classe</th>
 								<th>actions</th>
 							</tr>
 						</thead>
@@ -63,11 +64,24 @@
 												<b class="text-danger" style="font-size: 20px;">{{ centre_formation.classeFormations|length }}
 												</b>&nbsp; classe(s)</span>
 											&nbsp;
-											{{link.iconAdd(path('formation_dispensee_new',{'id':centre_formation.id}))}}
+											{{link.iconAdd(path('formation_dispensee_new',{'id':centre_formation.id}),'Ajouter une classe')}}
 										{% else %}
 											<small class="text-danger">Aucune classe</small>
 											&nbsp;
-											{{link.iconAdd(path('formation_dispensee_new',{'id':centre_formation.id}))}}
+											{{link.iconAdd(path('formation_dispensee_new',{'id':centre_formation.id}),'Ajouter une classe')}}
+										{% endif %}
+									</td>
+									<td>
+										{% if centre_formation.classeFormations|length > 0 %}
+											{% for classe in  centre_formation.classeFormations %}
+												{{classe.designation}}&nbsp;
+												<small class="text-blue">Niveau</small>&nbsp; <b class="text-danger">{{classe.niveauEtude}}</b>&nbsp;
+												<small class="text-blue">abrégé</small> <b class="text-danger mr-4">{{classe.abreviation}}</b>&nbsp;&nbsp;
+												{{link.iconAdd(path('pointage_index',{'id':centre_formation.id,'id_forma':classe.id}),'gérer le pointage')}}
+												<hr>
+											{% endfor %}
+										{% else %}
+											Aucune classe
 										{% endif %}
 									</td>
 									<td>

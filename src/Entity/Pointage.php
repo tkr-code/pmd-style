@@ -23,11 +23,6 @@ class Pointage
     private $nombreHeureDispense;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $contenuDispense;
-
-    /**
      * @ORM\Column(type="date")
      */
     private $datePointage;
@@ -43,6 +38,11 @@ class Pointage
      */
     private $formationDispensee;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $contenuDispense;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,18 +56,6 @@ class Pointage
     public function setNombreHeureDispense(int $nombreHeureDispense): self
     {
         $this->nombreHeureDispense = $nombreHeureDispense;
-
-        return $this;
-    }
-
-    public function getContenuDispense(): ?string
-    {
-        return $this->contenuDispense;
-    }
-
-    public function setContenuDispense(string $contenuDispense): self
-    {
-        $this->contenuDispense = $contenuDispense;
 
         return $this;
     }
@@ -104,6 +92,18 @@ class Pointage
     public function setFormationDispensee(?FormationDispensee $formationDispensee): self
     {
         $this->formationDispensee = $formationDispensee;
+
+        return $this;
+    }
+
+    public function getContenuDispense(): ?string
+    {
+        return $this->contenuDispense;
+    }
+
+    public function setContenuDispense(string $contenuDispense): self
+    {
+        $this->contenuDispense = $contenuDispense;
 
         return $this;
     }
