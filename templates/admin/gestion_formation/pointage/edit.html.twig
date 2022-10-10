@@ -1,13 +1,35 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit Pointage{% endblock %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}Edit Pointage
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Pointage</h1>
-
-    {{ include('admin_gestion_formation_pointage/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('admin_gestion_formation_pointage_index') }}">back to list</a>
-
-    {{ include('admin_gestion_formation_pointage/_delete_form.html.twig') }}
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+                Modification du Pointage du {{pointage.datePointage ? pointage.datePointage|date('Y-m-d') : ''}}
+                </div>
+                {{form_start(form)}}
+				<div class="card-body">
+                    {{form_row(form.nombreHeureDispense)}}
+                    {{form_row(form.contenuDispense)}}
+                    {{form_row(form.datePointage)}}
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            {{btn.update()}}
+                        </div>
+                    </div>
+                </div>
+                {{form_end(form)}}
+				<div class="card-footer">
+                    {{link.back(path('pointage_index',{'id':centre.id,'id_forma':formation.id}),'Tous Les Pointages')}}
+                    {{link.back(path('pointage_show',{'id':pointage.id}),'Voir Le Pointage')}}
+                </div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

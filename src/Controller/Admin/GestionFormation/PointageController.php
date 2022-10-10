@@ -5,11 +5,13 @@ namespace App\Controller\Admin\GestionFormation;
 use App\Entity\FormationDispensee;
 use App\Entity\Pointage;
 use App\Form\PointageType;
+use App\Repository\CentreFormationRepository;
 use App\Repository\ClasseFormationRepository;
 use App\Repository\FormationDispenseeRepository;
 use App\Repository\PointageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,11 +37,20 @@ class PointageController extends AbstractController
     ): Response {
         $formation = $formationDispenseeRepository->find($id_forma);
         $classe = $classeFormationRepository->find($id_forma);
+
+        #renvoyer la somme des heures deja pointees
+        foreach ($pointageRepository->sommeHeurePointageParClasse($formation->getId()) as $value) {
+            $total_heure = $value['total_heure'];
+        }
+        #afin de savoir le nombre d'heure restant
+        $heure_restant = $formation->getVolumeHoraire() - $total_heure;
         return $this->render('admin/gestion_formation/pointage/index.html.twig', [
             'pointages' => $pointageRepository->findBy(['formationDispensee' => $formation->getId()]),
             'classe' => $classe,
             'formation' => $formation,
-            'module' => $formation->getModule()
+            'module' => $formation->getModule(),
+            'heure_restant' => $heure_restant,
+            'heure_effectue' => $total_heure,
         ]);
     }
 
@@ -74,11 +85,11 @@ class PointageController extends AbstractController
                 #on met es_supplementaire à faux
                 $pointage->setEsSupplementaire(false);
             } else if ($total_heure > 0) { #c'est qu'il a deja un pointage et on renvoie la somme des heures pointés
-                if ($formationDispensee->getVolumeHoraire() > $total_heure) {
+                if ($formationDispensee->getVolumeHoraire() > ( $total_heure + $form['nombreHeureDispense']->getData()) ) {
                     #on met es_supplementaire à faux
                     $pointage->setEsSupplementaire(false);
                 } else {
-                    #on met es_supplementaire à faux
+                    #on met es_supplementaire à vrai
                     $pointage->setEsSupplementaire(true);
                 }
             }
@@ -110,46 +121,100 @@ class PointageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="pointage_show", methods={"GET"})
+     * @Route("/{id}/show", name="pointage_show", methods={"GET"})
      */
-    public function show(Pointage $pointage): Response
-    {
+    public function show(
+        Pointage $pointage,
+        ClasseFormationRepository $classeFormationRepository,
+        CentreFormationRepository $centreFormationRepository
+    ): Response {
+        #on recupere la formation, qui correspond aussi à la classe
+        $formation = $pointage->getFormationDispensee();
+
+        #recuperons la classe, car chaque classe se trouve dans un centre
+        $classe = $classeFormationRepository->find($formation->getId());
+
+        $centre = $classe->getCentreFormation();
         return $this->render('admin/gestion_formation/pointage/show.html.twig', [
             'pointage' => $pointage,
+            'centre' => $centre,
+            'formation' => $formation
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="pointage_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Pointage $pointage): Response
-    {
+    public function edit(
+        Request $request,
+        Pointage $pointage,
+        ClasseFormationRepository $classeFormationRepository
+    ): Response {
+        #on recupere la formation, qui correspond aussi à la classe
+        $formation = $pointage->getFormationDispensee();
+
+        #recuperons la classe, car chaque classe se trouve dans un centre
+        $classe = $classeFormationRepository->find($formation->getId());
+
+        $centre = $classe->getCentreFormation();
+
         $form = $this->createForm(PointageType::class, $pointage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            #on met a jour la formation dediée
+            $pointage->setFormationDispensee($formation);
 
-            return $this->redirectToRoute('pointage_index', [], Response::HTTP_SEE_OTHER);
+            #on valide les modiifications
+            $this->em->persist($pointage);
+            $this->em->flush();
+
+            return $this->redirectToRoute('pointage_index', [
+                'id' => $centre->getId(),
+                'id_forma' => $formation->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/gestion_formation/pointage/edit.html.twig', [
             'pointage' => $pointage,
             'form' => $form,
+            'centre' => $centre,
+            'formation' => $formation
         ]);
     }
 
     /**
-     * @Route("/{id}", name="pointage_delete", methods={"POST"})
+     * @Route("/{id}/del", name="pointage_delete", methods={"POST"})
      */
-    public function delete(Request $request, Pointage $pointage): Response
+    public function delete(Request $request, Pointage $pointage, ClasseFormationRepository $classeFormationRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $pointage->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($pointage);
-            $entityManager->flush();
+        #on recupere la formation, qui correspond aussi à la classe
+        $formation = $pointage->getFormationDispensee();
+
+        #recuperons la classe, car chaque classe se trouve dans un centre
+        $classe = $classeFormationRepository->find($formation->getId());
+
+        $centre = $classe->getCentreFormation();
+
+        if (
+            $request->request->get('pointage_suppr') &&
+            $request->request->get('pointage_suppr') == 'katoula' &&
+            $request->request->get('id_pointage') &&
+            !empty($request->request->get('id_pointage')) &&
+            $request->request->get('id_pointage') == $pointage->getId()
+
+        ) {
+            $this->em->remove($pointage);
+            $this->em->flush();
+            $response = 'success';
+        } else {
+            $response = 'failed';
         }
 
-        return $this->redirectToRoute('pointage_index', [], Response::HTTP_SEE_OTHER);
+        return new JsonResponse($response);
+        /* return $this->redirectToRoute('pointage_index', [
+            'id' => $centre->getId(),
+            'id_forma' => $formation->getId()
+        ], Response::HTTP_SEE_OTHER); */
     }
 }

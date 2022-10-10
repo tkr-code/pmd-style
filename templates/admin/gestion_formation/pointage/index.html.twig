@@ -43,8 +43,39 @@
 					&nbsp; de
 					<b class="text-danger">{{formation.volumeHoraire}}</b>
 					H
-					                    &nbsp; dans le Centre de Formation
+																																								                    &nbsp; dans le Centre de Formation
 					<b class="text-danger">{{classe.centreFormation.sigle}}</b>.
+					<div class="row">
+						<div class="col-md-6 col-lg-6 text-left">
+							{% if heure_effectue == null %}
+								<span>Vous avez effectué
+									<b class="text-danger">0</b>
+									H</span>
+							{% else %}
+								<span>Vous avez effectué
+									<b class="text-danger">{{heure_effectue}}</b>
+									H</span>
+							{% endif %}
+
+						</div>
+						<div class="col-md-6 col-lg-6 text-right">
+
+
+							{% if heure_restant > 0 %}
+								<span>
+									Il vous reste encore
+									<b class="text-danger">{{heure_restant}}</b>
+									H pour Terminer le module
+								</span>
+							{% else %}
+								<span>Vos Heures de Cour sont atteint, vous avez
+									<b class="text-danger">{{ -1 * heure_restant}}</b>
+									H</span>
+								Supplementaire
+							{% endif %}
+
+						</div>
+					</div>
 				</div>
 				<div class="card-body">
 					<table class="table" id="table-2">
@@ -74,8 +105,11 @@
 										{% endif %}
 									</td>
 									<td>
-										<a href="{{ path('pointage_show', {'id': pointage.id}) }}">show</a>
-										<a href="{{ path('pointage_edit', {'id': pointage.id}) }}">edit</a>
+										{{link.show(path('pointage_show', {'id': pointage.id}))}}
+										{{link.iconEdit(path('pointage_edit', {'id': pointage.id}))}}
+										<button type="button" class="btn del_pointage" data-delete="{{pointage.id}}" data-path="{{path('pointage_delete',{'id':pointage.id})}}">
+											<i class="fas fa-trash-alt text-danger"></i>
+										</button>
 									</td>
 								</tr>
 							{% else %}
@@ -97,4 +131,46 @@
 	{{ dataTable.script('#table-1') }}
 	{{ dataTable.script('#table-2') }}
 	{{ dataTable.script('#table-3') }}
+
+	<script>
+		$(document).ready(function () {
+$(document).on('click', '.del_pointage', function () {
+let path = $(this).data('path');
+let id_del = $(this).data('delete');
+
+Swal.fire({
+title: 'Etes Vous Sur ?',
+text: "Attention la suppression est irreversible !",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Oui, Supprimer !',
+cancelButtonText: 'Annuler !'
+}).then((result) => {
+if (result.isConfirmed) {
+$.ajax({
+url: path,
+method: 'POST',
+dataType: 'JSON',
+data: {
+pointage_suppr: 'katoula',
+id_pointage: id_del
+},
+success: function (data) {
+if (data == 'success') {
+Swal.fire('Supprimé !', 'Votre Pointage a été supprimé avec succès.', 'success');
+location.reload();
+} else {
+swalWithBootstrapButtons.fire('Pointage Supprimé', 'Suppression Impossible, veuillez rééssayer plus tard :)', 'error');
+}
+}
+});
+
+}
+})
+
+});
+});
+	</script>
 {% endblock %}
