@@ -75,8 +75,10 @@
 										{% if centre_formation.classeFormations|length > 0 %}
 											{% for classe in  centre_formation.classeFormations %}
 												{{classe.designation}}&nbsp;
-												<small class="text-blue">Niveau</small>&nbsp; <b class="text-danger">{{classe.niveauEtude}}</b>&nbsp;
-												<small class="text-blue">abrégé</small> <b class="text-danger mr-4">{{classe.abreviation}}</b>&nbsp;&nbsp;
+												<small class="text-blue">Niveau</small>&nbsp;
+												<b class="text-danger">{{classe.niveauEtude}}</b>&nbsp;
+												<small class="text-blue">abrégé</small>
+												<b class="text-danger mr-4">{{classe.abreviation}}</b>&nbsp;&nbsp;
 												{{link.iconAdd(path('pointage_index',{'id':centre_formation.id,'id_forma':classe.id}),'gérer le pointage')}}
 												<hr>
 											{% endfor %}
@@ -85,8 +87,12 @@
 										{% endif %}
 									</td>
 									<td>
-										<a href="{{ path('centre_formation_show', {'id': centre_formation.id}) }}">show</a>
-										<a href="{{ path('centre_formation_edit', {'id': centre_formation.id}) }}">edit</a>
+										{{link.show(path('centre_formation_show', {'id': centre_formation.id}))}}
+										{{link.iconEdit(path('centre_formation_edit', {'id': centre_formation.id}))}}
+										<button type="button" class="btn del_centre_f"
+										data-delete="{{centre_formation.id}}"
+										data-path="{{path('centre_formation_delete',{'id':centre_formation.id})}}"
+										><i class="fas fa-trash-alt text-danger"></i></button>
 									</td>
 								</tr>
 							{% else %}
@@ -107,4 +113,54 @@
 	{{ dataTable.script('#table-1') }}
 	{{ dataTable.script('#table-2') }}
 	{{ dataTable.script('#table-3') }}
+
+	<script>
+    $(document).ready(function(){
+        $(document).on('click','.del_centre_f',function(){
+            let path = $(this).data('path');
+             let id_del = $(this).data('delete');
+             Swal.fire({
+                title: 'Etes vous Sur ?',
+                text: "Attention la suppression est Irreversible !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, Supprimer !',
+                cancelButtonText: 'Annuler !'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:path,
+                        method:'POST',
+                        dataType:'JSON',
+                        data:{
+                            centre_suppr:'zimibssa_yawou',
+                            id_del:id_del
+                        },
+                        success:function(data){
+                            if(data == 'success'){
+                                 Swal.fire(
+                                    'Suppression reussie!',
+                                    'Le centre a bien été supprimé.',
+                                    'success'
+                                );
+                                location.reload();
+                            }else{
+                                swalWithBootstrapButtons.fire(
+                                    'Suppression Impossible',
+                                    'Impossible de supprimer ce centre de formation, veuillez réessayer plus tard :)',
+                                    'error'
+                                    );
+                            }
+                        }
+
+                    })
+                    
+                }
+            });
+
+        });
+    });
+    </script>
 {% endblock %}

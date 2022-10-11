@@ -140,4 +140,8 @@ class PersonneGestion
 
         return $this;
     }
+
+    public function getFullName(){
+        return $this->prenom.' '.$this->nom;
+    }
 }

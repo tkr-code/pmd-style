@@ -61,7 +61,7 @@ class CentreFormation
     private $personneGestion;
 
     /**
-     * @ORM\OneToMany(targetEntity=ClasseFormation::class, mappedBy="centreFormation")
+     * @ORM\OneToMany(targetEntity=ClasseFormation::class, mappedBy="centreFormation",cascade={"remove"})
      */
     private $classeFormations;
 

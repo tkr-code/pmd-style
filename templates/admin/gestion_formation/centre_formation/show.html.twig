@@ -1,50 +1,315 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}CentreFormation{% endblock %}
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block title %}Centre Formation
+{% endblock %}
 
 {% block body %}
-    <h1>CentreFormation</h1>
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-dark">
+				<div class="card-header">
+					Informations du centre
+					<b class="text-danger">{{centre_formation.designation}}</b>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6 col-xm-6 col-6">
+							<h3 class="mb-5 text-success">Informations Complete du centre</h3>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Designation
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.designation}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Sigle
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.sigle}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Description
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.description}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Adresse
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.adresse}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Spécialité
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.specialite}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Email
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.email}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Phone
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.phone}}</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+						<div class="col-lg-6 col-xm-6 col-6">
+							<h3 class="mb-5 text-success">Informations du responsable du centre</h3>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Identité Complete
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.personneGestion.getFullName}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Nom
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.personneGestion.nom}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Prenom
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.personneGestion.prenom}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Titre
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.personneGestion.titre}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Email du Responsable
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.personneGestion.email}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Adresse
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.personneGestion.adresse}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Téléphone
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{centre_formation.personneGestion.phone}}</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('centre_formation_index'),'Tous Les Centres')}}
+					{{link.edit(path('centre_formation_edit', {'id': centre_formation.id}))}}
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ centre_formation.id }}</td>
-            </tr>
-            <tr>
-                <th>Designation</th>
-                <td>{{ centre_formation.designation }}</td>
-            </tr>
-            <tr>
-                <th>Sigle</th>
-                <td>{{ centre_formation.sigle }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ centre_formation.description }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ centre_formation.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Specialite</th>
-                <td>{{ centre_formation.specialite }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ centre_formation.phone }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ centre_formation.email }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-dark">
+				<div class="card-header">
+					Liste des classe enseignées dans le centre
+					<b class="text-danger">{{centre_formation.designation}}</b>
+				</div>
+				<div class="card-body">
+					<div class="row mb-5">
+						<div class="col-lg-12 col-12">
+							Vous disposez de
+							<b class="text-danger">{{centre_formation.classeFormations|length}}</b>&nbsp; classe(s) que vous enseignez dans le Centre de Formation
+							<b class="text-success">{{centre_formation.designation}}</b>
+							en sigle
+							<b class="text-danger">{{centre_formation.sigle}}</b>.
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 col-12">
+							<table class="table" id="table-2">
+								<thead>
+									<tr>
+										<th scope="col">Designation</th>
+										<th scope="col">Abrégé</th>
+										<th scope="col">Niveau
+										</th>
+										<th scope="col">Total Etudiant
+										</th>
+										<th scope="col">Module</th>
+										<th scope="col">Volume H.</th>
+										<th scope="col">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for classe in centre_formation.classeFormations %}
+										<tr>
+											<td>{{classe.designation}}</td>
+											<td>{{classe.abreviation}}</td>
+											<td>{{classe.niveauEtude}}</td>
+											<td>{{classe.nombreEtudiant}}</td>
+											<td>{{classe.formationDispensee.module.abreviation}}</td>
+											<td><b class="text-danger">{{classe.formationDispensee.volumeHoraire}}</b> H</td>
+											<td>
+                                            {{link.show(path('classe_formation_show',{'id':centre_formation.id,'id_cla':classe.id}))}}
+                                            {{link.iconEdit(path('classe_formation_edit',{'id':classe.id}))}}
+                                            <button type="button" class="btn del_classe"
+                                            data-delete="{{classe.id}}"
+                                            data-path="{{path('classe_formation_delete',{'id':classe.id})}}"
+                                            ><i class="fas fa-trash-alt text-danger"></i></button>
+                                            </td>
+										</tr>
+									{% else %}
+										<tr>
+											<td>no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('centre_formation_index'),'Tous Les Centres')}}
+					{{link.edit(path('centre_formation_edit', {'id': centre_formation.id}))}}
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <a href="{{ path('admin_gestion_formation_centre_formation_index') }}">back to list</a>
+{% endblock %}
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
 
-    <a href="{{ path('admin_gestion_formation_centre_formation_edit', {'id': centre_formation.id}) }}">edit</a>
+    <script>
+    $(document).ready(function(){
+        $(document).on('click','.del_classe',function(){
+            let path = $(this).data('path');
+             let id_del = $(this).data('delete');
 
-    {{ include('admin_gestion_formation_centre_formation/_delete_form.html.twig') }}
+             Swal.fire({
+                title: 'Etes vous Sur ?',
+                text: "Attention la suppression est Irreversible !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, Supprimer !',
+                cancelButtonText: 'Annuler !'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:path,
+                        method:'POST',
+                        dataType:'JSON',
+                        data:{
+                            classe_suppr:'zimibssa_yawou',
+                            id_del:id_del
+                        },
+                        success:function(data){
+                            if(data == 'success'){
+                                 Swal.fire(
+                                    'Suppression reussie!',
+                                    'La classe a bien été supprimé.',
+                                    'success'
+                                );
+                                location.reload();
+                            }else{
+                                swalWithBootstrapButtons.fire(
+                                    'Suppression Impossible',
+                                    'Impossible de supprimer cette classe, veuillez réessayer plus tard :)',
+                                    'error'
+                                    );
+                            }
+                        }
+
+                    })
+                    
+                }
+            });
+
+        });
+    });
+    </script>
 {% endblock %}

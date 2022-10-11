@@ -45,16 +45,15 @@ class FormationDispensee
     private $dateFin;
 
     /**
-     * @ORM\OneToOne(targetEntity=Module::class, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Pointage::class, mappedBy="formationDispensee", cascade={"remove"})
+     */
+    private $pointage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Module::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $module;
-
-
-    /**
-     * @ORM\OneToMany(targetEntity=Pointage::class, mappedBy="formationDispensee")
-     */
-    private $pointage;
 
     public function __construct()
     {
@@ -126,18 +125,6 @@ class FormationDispensee
         return $this;
     }
 
-    public function getModule(): ?Module
-    {
-        return $this->module;
-    }
-
-    public function setModule(Module $module): self
-    {
-        $this->module = $module;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Pointage[]
      */
@@ -164,6 +151,18 @@ class FormationDispensee
                 $pointage->setFormationDispensee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getModule(): ?Module
+    {
+        return $this->module;
+    }
+
+    public function setModule(?Module $module): self
+    {
+        $this->module = $module;
 
         return $this;
     }

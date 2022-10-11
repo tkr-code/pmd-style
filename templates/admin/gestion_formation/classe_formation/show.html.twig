@@ -1,38 +1,151 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}ClasseFormation{% endblock %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/alertes.html.twig" as alerte %}
+
+
+{% block title %}Classe
+{% endblock %}
 
 {% block body %}
-    <h1>ClasseFormation</h1>
+{% for item in app.flashes('success') %}
+    {{alerte.alert(item,'success')}}
+{% endfor %}
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-dark">
+				<div class="card-header">
+					Informations de la classe
+					<b class="text-danger">{{classe_formation.abreviation}}</b>
+					du centre
+					<b class="text-danger">{{classe_formation.centreFormation.designation}}</b>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6 col-md-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Designation
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{classe_formation.designation}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Abrégé
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{classe_formation.abreviation}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Classe de Niveau
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{classe_formation.niveauEtude}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Nombre Etudiant
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{classe_formation.nombreEtudiant}}</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+						<div class="col-lg-6 col-md-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Volume Horaire
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{classe_formation.formationDispensee.volumeHoraire}}
+										H</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Vous avez Effecuté
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{% if heure_effectuee == null %}
+											0 H
+										{% else %}
+											{{heure_effectuee}}
+											H</p>
+									{% endif %}
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Heure Restante
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ classe_formation.id }}</td>
-            </tr>
-            <tr>
-                <th>Designation</th>
-                <td>{{ classe_formation.designation }}</td>
-            </tr>
-            <tr>
-                <th>NiveauEtude</th>
-                <td>{{ classe_formation.niveauEtude }}</td>
-            </tr>
-            <tr>
-                <th>NombreEtudiant</th>
-                <td>{{ classe_formation.nombreEtudiant }}</td>
-            </tr>
-            <tr>
-                <th>Abreviation</th>
-                <td>{{ classe_formation.abreviation }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('admin_gestion_formation_classe_formation_index') }}">back to list</a>
-
-    <a href="{{ path('admin_gestion_formation_classe_formation_edit', {'id': classe_formation.id}) }}">edit</a>
-
-    {{ include('admin_gestion_formation_classe_formation/_delete_form.html.twig') }}
+										{% if heure_restant > 0 %}
+											{{heure_restant}}
+											H
+										{% else %}
+											Vos Heures sont complètes
+										{% endif %}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Heure Supplémentaire
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{% if heure_restant < 0 %}
+											{{ -1 * heure_restant}}
+											H
+										{% else %}
+											aucune heure suppléntaire
+										{% endif %}
+									</p>
+								</div>
+							</div>
+							<hr>
+                            <div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">L'Heure est payée à
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold "> <span class="text-danger">{{classe_formation.formationDispensee.valeurheure}}</span> F
+									</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('centre_formation_show',{'id':classe_formation.centreFormation.id}),'Retour sur le Centre')}}
+					{{link.edit(path('classe_formation_edit',{'id':classe_formation.id}))}}
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

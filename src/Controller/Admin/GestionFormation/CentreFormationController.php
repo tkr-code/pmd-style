@@ -4,12 +4,14 @@ namespace App\Controller\Admin\GestionFormation;
 
 use App\Entity\CentreFormation;
 use App\Form\CentreFormationType;
-use App\Repository\CentreFormationRepository;
+use App\Repository\PointageRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CentreFormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/gestion-formation/centre")
@@ -55,9 +57,9 @@ class CentreFormationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="centre_formation_show", methods={"GET"})
+     * @Route("/{id}/show", name="centre_formation_show", methods={"GET"})
      */
-    public function show(CentreFormation $centreFormation): Response
+    public function show(CentreFormation $centreFormation, PointageRepository $pointageRepository): Response
     {
         return $this->render('admin/gestion_formation/centre_formation/show.html.twig', [
             'centre_formation' => $centreFormation,
@@ -73,9 +75,14 @@ class CentreFormationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->persist($centreFormation);
+            $this->em->flush();
 
-            return $this->redirectToRoute('centre_formation_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash(
+                'success',
+                'Informations du centre Mises à jour'
+            );
+            return $this->redirectToRoute('centre_formation_edit', ['id' => $centreFormation->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/gestion_formation/centre_formation/edit.html.twig', [
@@ -85,16 +92,28 @@ class CentreFormationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="centre_formation_delete", methods={"POST"})
+     * @Route("/{id}/del", name="centre_formation_delete", methods={"POST"})
      */
     public function delete(Request $request, CentreFormation $centreFormation): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$centreFormation->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($centreFormation);
-            $entityManager->flush();
+        if (
+            $request->request->get('centre_suppr') &&
+            $request->request->get('centre_suppr') == 'zimibssa_yawou' &&
+            $request->request->get('id_del') &&
+            !empty($request->request->get('id_del')) &&
+            $request->request->get('id_del') == $centreFormation->getId()
+
+        ) {
+            $this->em->remove($centreFormation);
+            $this->em->flush();
+
+            $response = 'success';
+        } else {
+            $response = 'failed';
         }
 
-        return $this->redirectToRoute('centre_formation_index', [], Response::HTTP_SEE_OTHER);
+        return new JsonResponse($response);
+
+        //return $this->redirectToRoute('centre_formation_index', [], Response::HTTP_SEE_OTHER);
     }
 }
