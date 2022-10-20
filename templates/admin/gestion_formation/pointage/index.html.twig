@@ -67,11 +67,14 @@
 									<b class="text-danger">{{heure_restant}}</b>
 									H pour Terminer le module
 								</span>
+								{% elseif heure_restant == 0 %}
+								<span>Vos Heures de Cour sont atteintes
+									</span>
 							{% else %}
-								<span>Vos Heures de Cour sont atteint, vous avez
+								<span>Vos Heures de Cour sont atteintes, vous avez
 									<b class="text-danger">{{ -1 * heure_restant}}</b>
 									H</span>
-								Supplementaire
+								Supplementaire(s)
 							{% endif %}
 
 						</div>

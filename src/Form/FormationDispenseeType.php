@@ -27,6 +27,7 @@ class FormationDispenseeType extends AbstractType
                         'En Cour' => 'En Cour',
                         'Annuler' => 'Annulé',
                         'Suspendu' => 'Suspendu',
+                        'Achevée' => 'Achevée',
                     ],
                     'placeholder'=>'Quel est l\'etat du cour ? '
                 ]

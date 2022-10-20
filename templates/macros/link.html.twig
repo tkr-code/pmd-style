@@ -22,6 +22,9 @@
 {% macro iconEdit(path = '#') %}
     <a class="mx-1" href="{{ path }}"><i class="fas fa-pencil-alt text-success"></i></a>
 {% endmacro %}
+{% macro iconMoney(path = '#',text) %}
+    <a class="mx-1" data-toggle="tooltip" data-placement="top" title="{{text|default('')}}" href="{{ path }}"><i class="fas fa-funnel-dollar text-success"></i></a>
+{% endmacro %}
 {% macro show(path = '#') %}
     <a class="mx-1" href="{{ path }}"><i class="fa fa-eye text-dark"></i></a>
 {% endmacro %}

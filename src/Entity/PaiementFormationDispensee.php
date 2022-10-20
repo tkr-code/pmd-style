@@ -28,11 +28,15 @@ class PaiementFormationDispensee
     private $montant;
 
     /**
-     * @ORM\OneToOne(targetEntity=FormationDispensee::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=FormationDispensee::class, inversedBy="paiementFormationDispensee")
      * @ORM\JoinColumn(nullable=false)
      */
     private $formationDispensee;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $justification;
 
     public function getId(): ?int
     {
@@ -75,7 +79,15 @@ class PaiementFormationDispensee
         return $this;
     }
 
-    
+    public function getJustification(): ?string
+    {
+        return $this->justification;
+    }
 
-   
+    public function setJustification(string $justification): self
+    {
+        $this->justification = $justification;
+
+        return $this;
+    }
 }

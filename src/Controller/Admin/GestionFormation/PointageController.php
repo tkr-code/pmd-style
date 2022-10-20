@@ -85,9 +85,20 @@ class PointageController extends AbstractController
                 #on met es_supplementaire à faux
                 $pointage->setEsSupplementaire(false);
             } else if ($total_heure > 0) { #c'est qu'il a deja un pointage et on renvoie la somme des heures pointés
-                if ($formationDispensee->getVolumeHoraire() > ( $total_heure + $form['nombreHeureDispense']->getData()) ) {
+                if ($formationDispensee->getVolumeHoraire() > ($total_heure + $form['nombreHeureDispense']->getData())) {
                     #on met es_supplementaire à faux
                     $pointage->setEsSupplementaire(false);
+                } else if ($formationDispensee->getVolumeHoraire() == ($total_heure + $form['nombreHeureDispense']->getData())) {
+                    #on met es_supplementaire à faux
+                    $pointage->setEsSupplementaire(false);
+
+                    #quand le nombre heure enseigné est egal au volume horaire
+                    #on met la formation a Achevée
+                    $formationDispensee->setEtat('Achevée');
+
+                    #l'autre fait aussi est que: quand l'utilisateur enregistre un paiement, 
+                    #automatiquement on dit que la formation est achevée
+                    #c'est pour quoi nous avons mis la justification
                 } else {
                     #on met es_supplementaire à vrai
                     $pointage->setEsSupplementaire(true);

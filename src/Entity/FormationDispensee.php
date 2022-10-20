@@ -55,6 +55,11 @@ class FormationDispensee
      */
     private $module;
 
+    /**
+     * @ORM\OneToOne(targetEntity=PaiementFormationDispensee::class, mappedBy="formationDispensee", cascade={"persist", "remove"})
+     */
+    private $paiementFormationDispensee;
+
     public function __construct()
     {
         $this->pointage = new ArrayCollection();
@@ -163,6 +168,23 @@ class FormationDispensee
     public function setModule(?Module $module): self
     {
         $this->module = $module;
+
+        return $this;
+    }
+
+    public function getPaiementFormationDispensee(): ?PaiementFormationDispensee
+    {
+        return $this->paiementFormationDispensee;
+    }
+
+    public function setPaiementFormationDispensee(PaiementFormationDispensee $paiementFormationDispensee): self
+    {
+        // set the owning side of the relation if necessary
+        if ($paiementFormationDispensee->getFormationDispensee() !== $this) {
+            $paiementFormationDispensee->setFormationDispensee($this);
+        }
+
+        $this->paiementFormationDispensee = $paiementFormationDispensee;
 
         return $this;
     }
