@@ -1,0 +1,93 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/link.html.twig" as link %}
+{% import "macros/alertes.html.twig" as alerte %}
+
+{% block title %}Rendez Vous
+{% endblock %}
+
+{% block body %}
+    {% for item in app.flashes('success') %}
+        {{alerte.alert(item,'success')}}
+    {% endfor %}
+	<div class="row mb-3">
+		<div class="col-lg-12 col-12 col-md-12">
+			<div class="card card-outline card-dark">
+				<div class="card-header">
+					Rendez vous de Mr ou Mme
+					<b class="text-danger">{{client.personneGestion.getFullName}}</b>
+					de la société
+					<b class="text-danger">{{client.societe}}</b>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Date Rendez-vous</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{rendez_vous.dateRdv ? rendez_vous.dateRdv|date('Y-m-d') : ''}}
+									</p>
+								</div>
+							</div>
+							<hr>
+                            <div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Lieu Rendez-vous</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{rendez_vous.lieu}}
+									</p>
+								</div>
+							</div>
+							<hr>
+                            <div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Heure Rendez-vous</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										<b class="text-danger">{{rendez_vous.heure}}</b> H
+									</p>
+								</div>
+							</div>
+							<hr>
+                            <div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Objet Rendez-vous</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{rendez_vous.objet}}
+									</p>
+								</div>
+							</div>
+							<hr>
+                            <div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Description Rendez-vous</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{rendez_vous.description}}
+									</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('gestion_rendez_vous_client_show',{'id':client.id}),'Voir le Client')}}
+					{{link.back(path('gestion_rendez_vous_client_index'),'Vos Rendez-vous')}}
+                    {{link.edit(path('gestion_rendez_vous_edit',{'id':rendez_vous.id}))}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,291 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+
+{% block title %}RDV client
+{% endblock %}
+
+{% block body %}
+
+{% for item in app.flashes('success') %}
+    {{alerte.alert(item,'success')}}
+{% endfor %}
+
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+					Informations du client
+					<b class="text-danger">
+						{{client_r_d_v.personneGestion.getFullName}}
+					</b>
+					de la société
+					<b class="text-danger">{{client_r_d_v.societe}}</b>
+
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6 col-lg-6 col-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Nom complet</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.personneGestion.getFullName}}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Nom
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.personneGestion.nom}}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Prénom</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.personneGestion.prenom}}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Titre
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.personneGestion.titre}}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Email</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.personneGestion.email}}
+									</p>
+								</div>
+							</div>
+							<hr>
+
+						</div>
+
+						<div class="col-md-6 col-lg-6 col-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Socité
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{client_r_d_v.societe}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Situé dans le ville</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.ville}}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Pays
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.pays}}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Telephone</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.personneGestion.phone}}
+									</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Adresse</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{{client_r_d_v.personneGestion.adresse}}
+									</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('gestion_rendez_vous_client_index'),'Vos Rendez-vous')}}
+                    {{link.edit(path('gestion_rendez_vous_client_edit',{'id':client_r_d_v.id}))}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+					Rendez Vous du client</div>
+				<div class="card-body">
+					<p class="mb-3">
+						vous avez
+						<b class="text-danger">{{client_r_d_v.rendezVous|length }}</b>
+						rendez-Vous
+																								avec le client
+						<b class="text-danger">{{client_r_d_v.personneGestion.getFullName}}</b>
+					</p>
+					<table class="table" id="table-2">
+						<thead>
+							<tr>
+								<th scope="col">Date</th>
+								<th scope="col">Lieu</th>
+								<th scope="col">Heure</th>
+								<th scope="col">Objet</th>
+								<th scope="col">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for rendezVous in client_r_d_v.rendezVous %}
+								<tr>
+									<th>{{rendezVous.dateRdv ? rendezVous.dateRdv|date('Y-m-d') : ''}}</th>
+									<td>{{rendezVous.lieu}}</td>
+									<td>
+										<b class="text-danger">{{rendezVous.heure}}</b>
+										H</td>
+									<td>{{rendezVous.objet}}</td>
+									<td>
+										{{link.show(path('gestion_rendez_vous_show',{'id':rendezVous.id}))}}
+										{{link.iconEdit(path('gestion_rendez_vous_edit',{'id':rendezVous.id}))}}
+
+										{% if client_r_d_v.rendezVous|length == 1 %}
+											<button type="button" class="btn" disabled>
+												<i class="fas fa-trash-alt text-danger"></i>
+											</button>
+										{% elseif client_r_d_v.rendezVous|length > 1 %}
+											<button type="button" class="btn delete_rdv" 
+                                            data-delete="{{rendezVous.id}}"
+                                            data-path="{{path('gestion_rendez_vous_delete',{'id':rendezVous.id})}}">
+												<i class="fas fa-trash-alt text-danger"></i>
+											</button>
+										{% endif %}
+										
+								</td>
+
+								</tr>
+							{% else %}
+								<tr>
+									no records found
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('gestion_rendez_vous_client_index'),'Vos Rendez-vous')}}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.delete_rdv',function(){
+                let id_del = $(this).data('delete');
+                let path = $(this).data('path');
+
+                Swal.fire({
+                    title: 'Etes vous Sure ?',
+                    text: "Attention, la suppression est irreversible!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, Supprimer !',
+                    cancelButtonText: 'Annuler !',
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url:path,
+                            method:'POST',
+                            dataType:'JSON',
+                            data:{
+                                suppr_rdv:'katoula_yawou',
+                                id_supr:id_del
+                            },
+                            success:function(data){
+                                if(data == 'success'){
+                                    Swal.fire(
+                                        'Suppression reussie!',
+                                        'Votre rendez vous a été supprimé avec succès.',
+                                        'success'
+                                    );
+                                    location.reload();
+                                }else{
+                                    swalWithBootstrapButtons.fire(
+                                        'Suppression Impossible',
+                                        'Impossible de supprimer ce rendez-vous, veuillez réessayer plus tard :)',
+                                        'error'
+                                    );
+                                }
+                            }
+                        })
+                        
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

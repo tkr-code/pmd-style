@@ -94,11 +94,11 @@ class NavExtension extends AbstractExtension
                         'links' =>
                         [
                             [
-                                'name' => 'New Projects',
+                                'name' => 'Créer Projet',
                                 'path' => 'projet_new'
                             ],
                             [
-                                'name' => 'All Projects',
+                                'name' => 'Tous Les Projets',
                                 'path' => 'projet_index'
                             ],
 
@@ -110,15 +110,15 @@ class NavExtension extends AbstractExtension
                         'links' =>
                         [
                             [
-                                'name' => 'New Module',
+                                'name' => 'Créer Module',
                                 'path' => 'module_new'
                             ],
                             [
-                                'name' => 'All Modules',
+                                'name' => 'Tous Les Modules',
                                 'path' => 'module_index'
                             ],
                             [
-                                'name' => 'New Centre formation',
+                                'name' => 'Créer Centre formation',
                                 'path' => 'centre_formation_new'
                             ],
                             [
@@ -127,7 +127,24 @@ class NavExtension extends AbstractExtension
                             ],
 
                         ]
-                    ]
+                    ],
+                    [
+                        'name' => 'Gestion Rendez-vous',
+                        'icon' => 'fa fa-home',
+                        'links' =>
+                        [
+                            [
+                                'name' => 'Créer Rendez-vous',
+                                'path' => 'gestion_rendez_vous_client_new'
+                            ],
+                            [
+                                'name' => 'Tous Les Rendez-vous',
+                                'path' => 'gestion_rendez_vous_client_index'
+                            ],
+                            
+                        ]
+                    ],
+
                 ]
             ];
     }

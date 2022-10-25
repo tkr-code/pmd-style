@@ -1,0 +1,79 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}New rendez-vous
+{% endblock %}
+
+{% block body %}
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					Création d'un nouveau rendez-vous
+				</div>
+				{{form_start(form)}}
+				<div class="card-body">
+                    <p class="text-danger">Les Informations du client</p>
+					<div class="row">
+						<div class="col-md-6">
+							{{form_row(form.personneGestion.nom)}}
+							{{form_row(form.personneGestion.prenom)}}
+							{{form_row(form.personneGestion.titre)}}
+							{{form_row(form.personneGestion.email)}}
+							{{form_row(form.personneGestion.adresse)}}
+						</div>
+						<div class="col-md-6">
+							{{form_row(form.societe)}}
+							{{form_row(form.ville)}}
+							{{form_row(form.pays)}}
+							{{form_row(form.personneGestion.phone)}}
+							{{form_row(form.personneGestion.avatar)}}
+						</div>
+					</div>
+
+                    <p class="mt-3 text-danger">Partie du rendez-vous</p>
+					<div class="row">
+						<div class="col-md-6">
+							{{form_row(form.rendezVous)}}
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<button type="button" class="btn btn-light" id="new-rdv">Ajouter Rendez-vous</button>
+							<button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+						</div>
+					</div>
+
+				</div>
+				{{form_end(form)}}
+				<div class="card-footer">
+					{{link.back(path('gestion_rendez_vous_client_index'),'Tous Les Rendez-vous')}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {
+$(document).on('click', '#new-rdv', function () {
+let prototype = $('#client_rdv_rendezVous').data('prototype')
+let counter = $('#client_rdv_rendezVous').children().length
+let newTache = prototype.replace(/__name__/g, counter)
+let btnDelete = $('<button type="button" class="btn btn-delete-rdv btn-danger">Delete</button>')
+let item = $('<div></div>')
+item.append(newTache)
+item.append(btnDelete)
+$('#client_rdv_rendezVous').append(item)
+})
+$(document).on('click', '.btn-delete-rdv', function () { // supprimer l'element parent
+$(this).parent().remove()
+})
+})
+	</script>
+{% endblock %}
