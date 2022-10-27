@@ -1,0 +1,97 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/link.html.twig" as link %}
+{% import "macros/alertes.html.twig" as alerte %}
+
+{% block title %}Depense
+{% endblock %}
+
+{% block body %}
+	{% for item in app.flashes('success') %}
+		{{ alerte.alert(item,'success')}}
+	{% endfor %}
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-dark">
+				<div class="card-header">
+					Depense concernant
+					<b class="text-danger">{{depense.designation}}</b>
+					pour une valeur de
+					<b class="text-danger">{{depense.valeurTotal}}</b>
+					effectuée à l'endroit
+					<b class="text-danger">{{depense.lieu}}</b>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Depense Effectuée Le</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{depense.dateEffectue ? depense.dateEffectue|date_format_fr('Y-m-d'): ''}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Designation
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{depense.designation}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Description
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">
+										{% if depense.description == null %}
+											Aucune description n'a été trouvée !
+										{% else %}
+											{{depense.description}}
+										{% endif %}
+
+									</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+
+						<div class="col-lg-6 col-md-6 col-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Montant de la depense</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{depense.valeurTotal|number_format(0, '', ' ')}}
+										F</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Lieu Depense
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0 font-weight-bold">{{depense.lieu}}</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('gestion_depense_index'),'Toutes Les Dépenses')}}
+					{{link.edit(path('gestion_depense_edit',{'id':depense.id}))}}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

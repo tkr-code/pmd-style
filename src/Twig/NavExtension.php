@@ -144,6 +144,23 @@ class NavExtension extends AbstractExtension
                             
                         ]
                     ],
+                    [
+                        'name' => 'Gestion Depenses',
+                        'icon' => 'fa fa-home',
+                        'links' =>
+                        [
+                            [
+                                'name' => 'Créer Depense',
+                                'path' => 'gestion_depense_new'
+                            ],
+                            [
+                                'name' => 'Toutes Les Depenses',
+                                'path' => 'gestion_depense_index'
+                            ],
+                            
+                        ]
+                    ],
+
 
                 ]
             ];

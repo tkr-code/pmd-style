@@ -76,10 +76,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $phones;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Depense::class, mappedBy="user")
+     */
+    private $depense;
+
     public function __construct()
     {
         $this->phones = new ArrayCollection();
         $this->socials = new ArrayCollection();
+        $this->depense = new ArrayCollection();
     }
 
 
@@ -277,6 +283,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($phone->getUser() === $this) {
                 $phone->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Depense[]
+     */
+    public function getDepense(): Collection
+    {
+        return $this->depense;
+    }
+
+    public function addDepense(Depense $depense): self
+    {
+        if (!$this->depense->contains($depense)) {
+            $this->depense[] = $depense;
+            $depense->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepense(Depense $depense): self
+    {
+        if ($this->depense->removeElement($depense)) {
+            // set the owning side to null (unless already changed)
+            if ($depense->getUser() === $this) {
+                $depense->setUser(null);
             }
         }
 
