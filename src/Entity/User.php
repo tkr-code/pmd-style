@@ -81,11 +81,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $depense;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ClientRDV::class, mappedBy="user")
+     */
+    private $clientRDVs;
+
     public function __construct()
     {
         $this->phones = new ArrayCollection();
         $this->socials = new ArrayCollection();
         $this->depense = new ArrayCollection();
+        $this->clientRDVs = new ArrayCollection();
     }
 
 
@@ -318,5 +324,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|ClientRDV[]
+     */
+    public function getClientRDVs(): Collection
+    {
+        return $this->clientRDVs;
+    }
+
+    public function addClientRDV(ClientRDV $clientRDV): self
+    {
+        if (!$this->clientRDVs->contains($clientRDV)) {
+            $this->clientRDVs[] = $clientRDV;
+            $clientRDV->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientRDV(ClientRDV $clientRDV): self
+    {
+        if ($this->clientRDVs->removeElement($clientRDV)) {
+            // set the owning side to null (unless already changed)
+            if ($clientRDV->getUser() === $this) {
+                $clientRDV->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

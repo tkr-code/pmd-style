@@ -3,10 +3,11 @@
 namespace App\Controller\Admin\GestionRendezVous;
 
 use App\Entity\ClientRDV;
-use App\Entity\EditClientRDV;
 use App\Form\ClientRDVType;
+use App\Entity\EditClientRDV;
 use App\Form\EditClientRDVType;
 use App\Repository\ClientRDVRepository;
+use App\Repository\RendezVousRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,10 +22,15 @@ class ClientRDVController extends AbstractController
     /**
      * @Route("/", name="gestion_rendez_vous_client_index", methods={"GET"})
      */
-    public function index(ClientRDVRepository $clientRDVRepository): Response
-    {
+    public function index(
+        ClientRDVRepository $clientRDVRepository
+    ): Response {
+        #recuperons le user connecté
+        $user = $this->getUser();
+        //dd($clientRDVRepository->allRendezVousClientParUserConnected($user->getId()));
         return $this->render('admin/gestion_rendez_vous/client_rdv/index.html.twig', [
-            'client_r_d_vs' => $clientRDVRepository->findAll(),
+            //'client_r_d_vs' => $clientRDVRepository->findAll(),
+            'client_r_d_vs' => $clientRDVRepository->findBy(['user'=>$user->getId()]),
         ]);
     }
 
@@ -33,11 +39,25 @@ class ClientRDVController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
+
         $clientRDV = new ClientRDV();
         $form = $this->createForm(ClientRDVType::class, $clientRDV);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /* #si ya un rendez-vous qui est soumis
+            if (!empty($clientRDV->getRendezVous())) {
+                #je recupere d'abord tous les rendez-vous crée par un user si c'est defini
+                $rendezVous = $clientRDV->getRendezVous();
+
+                foreach ($rendezVous as  $rdv) {
+                    #pour chaque rendez-vous je met à jour le user
+                    $rdv->setUser($user);
+                }
+            } */
+            $clientRDV->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($clientRDV);
             $entityManager->flush();
@@ -84,7 +104,7 @@ class ClientRDVController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           // dd($form->getData());
+            // dd($form->getData());
             //dd($form['societe']->getData());
             #on met a jour
             if (
@@ -115,14 +135,12 @@ class ClientRDVController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash(
-                   'success',
-                   'Informations du client modifiées avec succès'
+                    'success',
+                    'Informations du client modifiées avec succès'
                 );
 
                 return $this->redirectToRoute('gestion_rendez_vous_client_show', ['id' => $clientRDV->getId()], Response::HTTP_SEE_OTHER);
-
             }
-
         }
 
         return $this->renderForm('admin/gestion_rendez_vous/client_rdv/edit.html.twig', [

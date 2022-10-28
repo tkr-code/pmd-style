@@ -194,7 +194,7 @@
 						<tbody>
 							{% for rendezVous in client_r_d_v.rendezVous %}
 								<tr>
-									<th>{{rendezVous.dateRdv ? rendezVous.dateRdv|date('Y-m-d') : ''}}</th>
+									<th>{{rendezVous.dateRdv ? rendezVous.dateRdv|date_format_fr('Y-m-d') : ''}}</th>
 									<td>{{rendezVous.lieu}}</td>
 									<td>
 										<b class="text-danger">{{rendezVous.heure}}</b>

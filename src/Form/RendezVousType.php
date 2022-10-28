@@ -21,6 +21,7 @@ class RendezVousType extends AbstractType
             ->add('objet',TextType::class)
             ->add('description',TextareaType::class)
            // ->add('clientRDV')
+           // ->add('user')
         ;
     }
 

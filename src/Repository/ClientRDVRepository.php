@@ -47,4 +47,28 @@ class ClientRDVRepository extends ServiceEntityRepository
         ;
     }
     */
+    #on affiche les clients du rendez d'un utilisateur bien speficique
+    public function allRendezVousClientParUserConnected(int $id_user): array
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT 
+                personne_gestion_id as personneGestion,
+                societe,ville,pays 
+            FROM client_rdv C 
+            JOIN rendez_vous R 
+            ON C.id = R.client_rdv_id
+            WHERE R.user_id = :id_user
+            
+            ';
+        
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id_user' => $id_user]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 }

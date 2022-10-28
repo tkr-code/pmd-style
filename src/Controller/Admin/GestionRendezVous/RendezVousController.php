@@ -21,9 +21,11 @@ class RendezVousController extends AbstractController
      * @Route("/", name="gestion_rendez_vous_index", methods={"GET"})
      */
     public function index(RendezVousRepository $rendezVousRepository): Response
-    {
+    {   
+        #on recupere le user
+        $user = $this->getUser();
         return $this->render('admin/gestion_rendez_vous/rendez_vous/index.html.twig', [
-            'rendez_vouses' => $rendezVousRepository->findAll(),
+            'rendez_vouses' => $rendezVousRepository->findBy(['user'=>$user->getId()]),
         ]);
     }
 
@@ -32,6 +34,8 @@ class RendezVousController extends AbstractController
      */
     public function new(ClientRDV $clientRDV,Request $request): Response
     {   
+        $user = $this->getUser();
+
         $rendezVous = new RendezVous();
         $form = $this->createForm(RendezVousType::class, $rendezVous);
         $form->handleRequest($request);
