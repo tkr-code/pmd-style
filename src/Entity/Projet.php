@@ -76,6 +76,12 @@ class Projet
      */
     private $client;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projet")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->collaborateur = new ArrayCollection();
@@ -239,6 +245,18 @@ class Projet
     public function setClient(client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

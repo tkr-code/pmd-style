@@ -4,21 +4,36 @@ namespace App\Form;
 
 use App\Entity\FormationDispensee;
 use App\Entity\Module;
+use App\Repository\ModuleRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class FormationDispenseeType extends AbstractType
-{
-    public function buildForm(FormBuilderInterface $builder, array $options)
+{   
+    #afin d'avoir l'utilisateur courant dans le formType
+    private $security;
+
+    public function __construct(Security $security)
     {
+        $this->security = $security;
+    }   
+    
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {   
+        #je recupere le current User
+        $user = $this->security->getUser();
+        #c'est pour ne recupere que les modules cree par l'utilisateur
+
         $builder
             ->add('volumeHoraire')
             ->add('valeurHeure')
-           /*  ->add(
+            /*  ->add(
                 'etat',
                 ChoiceType::class,
                 [
@@ -33,14 +48,20 @@ class FormationDispenseeType extends AbstractType
                 ]
             ) */
             ->add('dateDebut', DateType::class, ['widget' => 'single_text'])
-           // ->add('dateFin', DateType::class, ['widget' => 'single_text'])
+            // ->add('dateFin', DateType::class, ['widget' => 'single_text'])
             ->add(
                 'module',
                 EntityType::class,
                 [
                     'class' => Module::class,
                     'choice_label' => 'abreviation',
-                    'placeholder' => 'veuillez choisir un Module'
+                    'placeholder' => 'veuillez choisir un Module',
+                    'query_builder' => function (ModuleRepository $mr) {
+                        return $mr->createQueryBuilder('m')
+                            ->andWhere('m.user = :id')
+                            ->setParameter('id', $this->security->getUser())
+                            ;
+                    },
                 ]
             )
             ->add(

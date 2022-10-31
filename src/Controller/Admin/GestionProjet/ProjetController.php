@@ -33,9 +33,11 @@ class ProjetController extends AbstractController
      * @Route("/", name="projet_index", methods={"GET"})
      */
     public function index(ProjetRepository $projetRepository): Response
-    {
+    {   #le current user
+        $user  = $this->getUser();
         return $this->render('admin/gestion_projet/projet/index.html.twig', [
-            'projets' => $projetRepository->findAll(),
+            //'projets' => $projetRepository->findAll(),
+            'projets' => $projetRepository->findBy(['user'=>$user->getId()]),
         ]);
     }
 
@@ -43,7 +45,10 @@ class ProjetController extends AbstractController
      * @Route("/new", name="projet_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
-    {
+    {   
+        #on met le user connecté
+        $user = $this->getUser();
+
         $projet = new Projet();
         $form = $this->createForm(ProjetType::class, $projet);
         $form->handleRequest($request);
@@ -54,6 +59,10 @@ class ProjetController extends AbstractController
             $montant_du = $projet->getPaiement()->getMontantVerse();
             $date_paiement_avance = $projet->getPaiement()->getDatePaiement();
             $date_creation_avance = $projet->getPaiement()->getDatePaiement();
+            
+            #on met a jour le user
+            $projet->setUser($user);
+           
             //dd($request->request);
             //dd($montant_du);
 
@@ -108,7 +117,7 @@ class ProjetController extends AbstractController
      * @Route("/{id}/edit", name="projet_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Projet $projet): Response
-    {
+    {   $user = $this->getUser();
         $editProjet = new EditProjet();
         #on remplit les champs a editer avant de le rendre
         $editProjet->setDesignation($projet->getDesignation())
@@ -134,6 +143,7 @@ class ProjetController extends AbstractController
                 //!empty($form['dateFinRealisation']->getData()) &&
                 !empty($form['etat']->getData())
             ) {
+                $projet->setUser($user);
                 $projet->setDesignation($form['designation']->getData())
                     ->setDescription($form['description']->getData())
                     ->setType($form['type']->getData())

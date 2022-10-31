@@ -53,7 +53,7 @@
 								<tr>
 									<td>{{ projet.designation }}</td>
 									<td>{{ projet.type }}</td>
-									<td>{{ projet.valeurTotal }}</td>
+									<td>{{ projet.valeurTotal|number_format(0,'',' ') }}</td>
 									<td>{{ projet.dateDebut ? projet.dateDebut|date('Y-m-d') : '' }}</td>
 									<td>{{ projet.dateFinPrevu ? projet.dateFinPrevu|date('Y-m-d') : '' }}</td>
 									<td>{{ projet.client.getFullName }}</td>
@@ -66,8 +66,8 @@
 																																																	        &nbsp;&nbsp;&nbsp;
 											{{link.iconAdd(path('avance_paiement_index', {'id': projet.id}))}}
 											<br>
-											<small style="color: red;">Reste :
-												{{projet.paiement.montantDu}}</small>
+											<small class="text-danger">Reste :
+												{{projet.paiement.montantDu|number_format(0, '', ' ')}}</small>
 										{% endif %}
 									</td>
 									<td>

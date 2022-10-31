@@ -27,8 +27,13 @@ class ModuleController extends AbstractController
      */
     public function index(ModuleRepository $moduleRepository): Response
     {
+        #l'utilisateur courant
+        $user = $this->getUser();
+
         return $this->render('admin/gestion_formation/module/index.html.twig', [
-            'modules' => $moduleRepository->findAll(),
+            //'modules' => $moduleRepository->findAll(),
+            'modules' => $moduleRepository->findBy(['user' => $user->getId()]),
+            //'id'=>$user->getID()
         ]);
     }
 
@@ -37,11 +42,14 @@ class ModuleController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
+
         $module = new Module();
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $module->setUser($user);
             $this->em->persist($module);
             $this->em->flush();
 
@@ -74,10 +82,13 @@ class ModuleController extends AbstractController
      */
     public function edit(Request $request, Module $module): Response
     {
+        $user = $this->getUser();
+
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $module->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(

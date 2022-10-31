@@ -92,11 +92,11 @@
 											<th>{{tache.designation}}</th>
 											<td>{{tache.description}}</td>
 											<td>{{tache.etat}}</td>
-											<td>{{tache.dateAchevement ? tache.dateAchevement | date('Y-m-d') : ''}}</td>
+											<td>{{tache.dateAchevement ? tache.dateAchevement | date_format_fr('Y-m-d') : ''}}</td>
 											<td>
 												{{link.iconEdit(path('tache_edit', {'id': tache.id}))}}
-												<button type="button" class="btn btn-danger delete_tache" data-delete="{{tache.id}}" data-path="{{path('tache_delete',{'id': tache.id})}}">
-													<i class="fas fa-trash-alt"></i>
+												<button type="button" class="btn delete_tache" data-delete="{{tache.id}}" data-path="{{path('tache_delete',{'id': tache.id})}}">
+													<i class="fas fa-trash-alt text-danger"></i>
 												</button>
 											</td>
 										</tr>

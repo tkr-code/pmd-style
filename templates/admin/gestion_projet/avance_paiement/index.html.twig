@@ -7,6 +7,7 @@
 {% import "macros/alertes.html.twig" as alerte %}
 {% import "macros/button.html.twig" as btn %}
 {% import "macros/link.html.twig" as link %}
+{% import "macros/badge.html.twig" as badge %}
 {% import "macros/dataTable.html.twig" as dataTable %}
 {% import "macros/modal.html.twig" as modal %}
 
@@ -40,73 +41,79 @@
 
 	<div class="card card-outline card-primary">
 		<div class="card-header">
-			<h3>Les Avances du projet : {{projet.designation}} appartenant à Mr ou Mme : {{projet.client.getFullName}} pour une valeur de <b class="text-danger">{{projet.paiement.montantTotal}}</b></h3>
+			<h3>Les Avances du projet :
+				{{projet.designation}}
+				appartenant à Mr ou Mme :
+				{{projet.client.getFullName}}
+				pour une valeur de
+				<b class="text-danger">{{projet.paiement.montantTotal}}</b>
+			</h3>
 		</div>
 		<div class="card-body">
 			<table class="table" id="table-2">
 				<thead>
 					<tr>
-						<th>Id</th>
-						<th>DateCreation</th>
-						<th>DateAvance</th>
-						<th>MontantAvance</th>
-						<th>MontantDu</th>
-						<th>EstAtteint</th>
-						<th>ModePaiementAvance</th>
+						<th>Date Reception</th>
+						<th>Montant
+						</th>
+						<th>Montant restant</th>
+						<th>Etat Paiement</th>
+						<th>Mode Paiement reçu</th>
 						<th>actions</th>
 					</tr>
 				</thead>
 				<tbody>
-				{% if avance_paiements|length > 1 %}
-					{% for avance_paiement in avance_paiements %}
-						<tr>
-							<td>{{ avance_paiement.id }}</td>
-							<td>{{ avance_paiement.dateCreation ? avance_paiement.dateCreation|date('Y-m-d') : '' }}</td>
-							<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date('Y-m-d') : '' }}</td>
-							<td>{{ avance_paiement.montantAvance }}</td>
-							<td>{{ avance_paiement.montantDu }}</td>
-							<td>{{ avance_paiement.estAtteint ? 'Yes' : 'No' }}</td>
-							<td>{{ avance_paiement.modePaiementAvance }}</td>
-							<td>
-								<button type="button" 
-										class="btn btn-danger del_avance"
-										data-delete="{{avance_paiement.id}}"
-										data-projet="{{projet.id}}"
-										data-path="{{path('avance_paiement_delete',{'id':avance_paiement.id,'id_projet':projet.id})}}"
-										>
-									<i class="fas fa-trash"></i>&nbsp;Supprimer
-								</button>
-							</td>
-						</tr>
-					{% else %}
-						<tr>
-							<td colspan="8">no records found</td>
-						</tr>
-					{% endfor %}
-				{% elseif avance_paiements|length == 1 %}
-					{% for avance_paiement in avance_paiements %}
-						<tr>
-							<td>{{ avance_paiement.id }}</td>
-							<td>{{ avance_paiement.dateCreation ? avance_paiement.dateCreation|date('Y-m-d') : '' }}</td>
-							<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date('Y-m-d') : '' }}</td>
-							<td>{{ avance_paiement.montantAvance }}</td>
-							<td>{{ avance_paiement.montantDu }}</td>
-							<td>{{ avance_paiement.estAtteint ? 'Yes' : 'No' }}</td>
-							<td>{{ avance_paiement.modePaiementAvance }}</td>
-							<td>
-								<button type="button"  disabled
-										class="btn btn-danger del_avance"
-										>
-									<i class="fas fa-trash"></i>&nbsp;Supprimer
-								</button>
-							</td>
-						</tr>
-					{% else %}
-						<tr>
-							<td colspan="8">no records found</td>
-						</tr>
-					{% endfor %}
-				{% endif %}
+					{% if avance_paiements|length > 1 %}
+						{% for avance_paiement in avance_paiements %}
+							<tr>
+								<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date_format_fr('Y-m-d') : '' }}</td>
+								<td>{{ avance_paiement.montantAvance|number_format(0,'',' ') }}</td>
+								<td>{{ avance_paiement.montantDu|number_format(0, '', ' ') }}</td>
+								<td>
+									{% if avance_paiement.estAtteint == false %}
+										{{badge.annuler('paiement incomplet')}}
+									{% else %}
+										{{badge.complet('paiement complet')}}
+									{% endif %}
+								</td>
+								<td>{{ avance_paiement.modePaiementAvance }}</td>
+								<td>
+									<button type="button" class="btn del_avance" data-delete="{{avance_paiement.id}}" data-projet="{{projet.id}}" data-path="{{path('avance_paiement_delete',{'id':avance_paiement.id,'id_projet':projet.id})}}">
+										<i class="fas fa-trash-alt text-danger"></i>&nbsp;
+									</button>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="8">no records found</td>
+							</tr>
+						{% endfor %}
+					{% elseif avance_paiements|length == 1 %}
+						{% for avance_paiement in avance_paiements %}
+							<tr>
+								<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date_format_fr('Y-m-d') : '' }}</td>
+								<td>{{ avance_paiement.montantAvance|number_format(0,'',' ') }}</td>
+								<td>{{ avance_paiement.montantDu|number_format(0,'',' ') }}</td>
+								<td>
+									{% if avance_paiement.estAtteint == false %}
+										{{badge.annuler('paiement incomplet')}}
+									{% else %}
+										{{badge.complet('paiement complet')}}
+									{% endif %}
+								</td>
+								<td>{{ avance_paiement.modePaiementAvance }}</td>
+								<td>
+									<button type="button" disabled class="btn">
+										<i class="fas fa-trash-alt text-danger"></i>&nbsp;
+									</button>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="8">no records found</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
 				</tbody>
 			</table>
 		</div>
@@ -116,11 +123,11 @@
 		</div>
 	</div>
 	{#     les modal
-			 #}
+				 #}
 	{{modal.modal_brut('show_paiementModal','Ajouter uneAvance')}}
 
 	{# 	<a href="{{ path('avance_paiement_new') }}">Create new</a>
-	 #}
+		 #}
 {% endblock %}
 {% block javascripts %}
 	{{ dataTable.script('#table-1') }}
@@ -130,83 +137,75 @@
 
 	<script>
 		$(document).ready(function () {
-			$(document).on('click', '.add_paiement', function (e) {
-			e.preventDefault();
+$(document).on('click', '.add_paiement', function (e) {
+e.preventDefault();
 
-			$('#show_paiementModal').modal('show');
-			let path = $(this).data('path');
-			let projet = $(this).data('projet');
+$('#show_paiementModal').modal('show');
+let path = $(this).data('path');
+let projet = $(this).data('projet');
 
-			$.ajax({
-			url: path,
-			method: 'POST',
-			dataType: 'JSON',
-			data: {
-			modal: 'affiche_paiement',
-			id_projet: projet
-			},
-			beforeSend: function () {
-			$('.modal-loader').css('display', 'flex');
-			},
-			success: function (data) {
-			$('.modal-loader').css('display', 'none');
-			$('#show_paiementModal .modal-body').html(data.content);
-			},
-			error: function () {
-			$('.modal-loader').css('display', 'none');
-			Swal.fire('Impossible D\'ajouter  une avance, veuillez Réessayer');
+$.ajax({
+url: path,
+method: 'POST',
+dataType: 'JSON',
+data: {
+modal: 'affiche_paiement',
+id_projet: projet
+},
+beforeSend: function () {
+$('.modal-loader').css('display', 'flex');
+},
+success: function (data) {
+$('.modal-loader').css('display', 'none');
+$('#show_paiementModal .modal-body').html(data.content);
+},
+error: function () {
+$('.modal-loader').css('display', 'none');
+Swal.fire('Impossible D\'ajouter  une avance, veuillez Réessayer');
 
-			}
-			});
-	});
+}
+});
+});
 
-	$(document).on('click','.del_avance',function(){
-		let id_avance = $(this).data('delete');
-		let path = $(this).data('path');
-		let projet = $(this).data('projet');
+$(document).on('click', '.del_avance', function () {
+let id_avance = $(this).data('delete');
+let path = $(this).data('path');
+let projet = $(this).data('projet');
 
-		//alert('Id est : '+id_avance+' Path : '+path)
-		Swal.fire({
-			title: 'Etes Vous sur de supprimer l\'avance ?',
-			text: "Une fois supprimée, la donnée sera perdue !",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			cancelButtonText: 'Annuler !',
-			confirmButtonText: 'Oui, Supprimer !'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				$.ajax({
-					url:path,
-					method:'POST',
-					dataType:'JSON',
-					data:{
-						id_avance:id_avance,
-						id_projet: projet,
-						del_avance:'del_avance'
-					},
-					success:function(data){
-						if(data == 'success'){
-							Swal.fire(
-								'Suppression Réussie!',
-								'Cette Avance a été supprimée.',
-								'success'
-								);
-							location.reload();
-						}else{
-							swalWithBootstrapButtons.fire(
-							'Suppression Impossible',
-							'L\'Avance n\'a pas pue etre retirée :)',
-							'error'
-							)
-						}
-					}
-				});
-				
-			}
-		})
-	});
+// alert('Id est : '+id_avance+' Path : '+path)
+Swal.fire({
+title: 'Etes Vous sur de supprimer l\'avance ?',
+text: "Une fois supprimée, la donnée sera perdue !",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+cancelButtonText: 'Annuler !',
+confirmButtonText: 'Oui, Supprimer !'
+}).then((result) => {
+if (result.isConfirmed) {
+$.ajax({
+url: path,
+method: 'POST',
+dataType: 'JSON',
+data: {
+id_avance: id_avance,
+id_projet: projet,
+del_avance: 'del_avance'
+},
+success: function (data) {
+if (data == 'success') {
+Swal.fire('Suppression Réussie!', 'Cette Avance a été supprimée.', 'success');
+location.reload();
+} else {
+swalWithBootstrapButtons.fire('Suppression Impossible', 'L\'Avance n\'a pas pue etre retirée :)', 'error')
+}
+}
+});
+
+}
+})
+});
 
 });
 	</script>

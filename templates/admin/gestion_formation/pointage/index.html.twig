@@ -84,7 +84,6 @@
 					<table class="table" id="table-2">
 						<thead>
 							<tr>
-								<th>Id</th>
 								<th>NombreHeureDispense</th>
 								<th>ContenuDispense</th>
 								<th>DatePointage</th>
@@ -95,11 +94,10 @@
 						<tbody>
 							{% for pointage in pointages %}
 								<tr>
-									<td>{{ pointage.id }}</td>
 									<td>
 										<b class="text-danger">{{ pointage.nombreHeureDispense }}</b>&nbsp;H</td>
 									<td>{{ pointage.contenuDispense }}</td>
-									<td>{{ pointage.datePointage ? pointage.datePointage|date('Y-m-d') : '' }}</td>
+									<td>{{ pointage.datePointage ? pointage.datePointage|date_format_fr('Y-m-d') : '' }}</td>
 									<td>
 										{% if pointage.esSupplementaire %}
 											{{badge.complet('OUI')}}

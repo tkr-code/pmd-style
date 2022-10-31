@@ -65,6 +65,12 @@ class CentreFormation
      */
     private $classeFormations;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="centreFormation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->classeFormations = new ArrayCollection();
@@ -199,6 +205,18 @@ class CentreFormation
                 $classeFormation->setCentreFormation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -34,7 +34,7 @@ class AvancePaiementController extends AbstractController
      * @Route("/projet/{id<\d+>}/", name="avance_paiement_index", methods={"GET","POST"})
      */
     public function index(AvancePaiementRepository $avancePaiementRepository, Projet $projet): Response
-    {   
+    {
         /*
         #je testais juste pour voir le comportemen
         $les_avances_recus = $avancePaiementRepository->allAvanceForPaiement($projet->getPaiement()->getId());
@@ -241,13 +241,19 @@ class AvancePaiementController extends AbstractController
                 $derniere_avance_inserere = end($les_avances_recus);
                 $derniere_avance_inserere->setMontantDu($derniere_avance_inserere->getMontantDu() +  $m_avance_supprimer);
 
-                #on met aussi a jour le montant du de la table paiement car c'est lui que nous utilisons
-                $paiement = $projet->getPaiement();
-                $paiement->setMontantDu($derniere_avance_inserere->getMontantDu() +  $m_avance_supprimer);
-
-                #on persit la mise a jour des deux montants du (paiement et avance paiement)
                 $this->em->persist($derniere_avance_inserere);
-                $this->em->persist($paiement);
+
+                if ($derniere_avance_inserere) {
+                    $id_derniere_avance_insere = $derniere_avance_inserere->getId();
+
+                    $derniere_avance_inserere = $avancePaiementRepository->find($id_derniere_avance_insere);
+
+                    #on met aussi a jour le montant du de la table paiement car c'est lui que nous utilisons
+                    $paiement = $projet->getPaiement();
+                    $paiement->setMontantDu($derniere_avance_inserere->getMontantDu());
+                    #on persit la mise a jour des deux montants du (paiement et avance paiement)
+                    $this->em->persist($paiement);
+                }
             }
 
             #on supprime maintenant l'avance en question
@@ -255,7 +261,7 @@ class AvancePaiementController extends AbstractController
             $this->em->remove($avancePaiement);
 
             //dump('Apres insertion, derniere avance update '.$derniere_avance_inserere->getMontantDu());
-            //dump('Apres insertion, Paiement montant du update '.$paiement->getMontantDu());
+            // dump('Apres insertion, Paiement montant du update '.$paiement->getMontantDu());
             #on valide les commit en base de données
             $this->em->flush();
 
@@ -271,6 +277,6 @@ class AvancePaiementController extends AbstractController
             $entityManager->flush();
         } */
 
-        return $this->redirectToRoute('avance_paiement_index', [], Response::HTTP_SEE_OTHER);
+        //return $this->redirectToRoute('avance_paiement_index', [], Response::HTTP_SEE_OTHER);
     }
 }

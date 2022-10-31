@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CentreFormationController extends AbstractController
 {
     private $em;
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
@@ -28,8 +29,10 @@ class CentreFormationController extends AbstractController
      */
     public function index(CentreFormationRepository $centreFormationRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('admin/gestion_formation/centre_formation/index.html.twig', [
-            'centre_formations' => $centreFormationRepository->findAll(),
+            //'centre_formations' => $centreFormationRepository->findAll(),
+            'centre_formations' => $centreFormationRepository->findBy(['user' => $user->getId()]),
         ]);
     }
 
@@ -38,12 +41,15 @@ class CentreFormationController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
+
         $centreFormation = new CentreFormation();
         $form = $this->createForm(CentreFormationType::class, $centreFormation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //dd($form->getData());
+            $centreFormation->setUser($user);
             $this->em->persist($centreFormation);
             $this->em->flush();
 
@@ -75,6 +81,8 @@ class CentreFormationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $centreFormation->setUser($user);
             $this->em->persist($centreFormation);
             $this->em->flush();
 

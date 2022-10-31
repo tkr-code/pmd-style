@@ -275,7 +275,6 @@
 							<table class="table" id="table-2">
 								<thead>
 									<tr>
-										<th>Avance créé le</th>
 										<th>Avance reçcu le</th>
 										<th>Montant Avance</th>
 										<th>Montant Restant</th>
@@ -286,8 +285,7 @@
 								<tbody>
 									{% for avance_paiement in avance_paiements %}
 										<tr>
-											<td>{{ avance_paiement.dateCreation ? avance_paiement.dateCreation|date('Y-m-d') : '' }}</td>
-											<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date('Y-m-d') : '' }}</td>
+											<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date_format_fr('Y-m-d') : '' }}</td>
 											<td>{{ avance_paiement.montantAvance }}</td>
 											<td>{{ avance_paiement.montantDu }}</td>
 											<td>

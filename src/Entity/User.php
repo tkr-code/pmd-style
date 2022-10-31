@@ -82,9 +82,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $depense;
 
     /**
-     * @ORM\OneToMany(targetEntity=ClientRDV::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=ClientRDV::class, mappedBy="user",cascade={"remove"})
      */
     private $clientRDVs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Module::class, mappedBy="user", cascade={"remove"})
+     */
+    private $module;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CentreFormation::class, mappedBy="user",cascade={"remove"})
+     */
+    private $centreFormation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Projet::class, mappedBy="user",cascade={"remove"})
+     */
+    private $projet;
 
     public function __construct()
     {
@@ -92,6 +107,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->socials = new ArrayCollection();
         $this->depense = new ArrayCollection();
         $this->clientRDVs = new ArrayCollection();
+        $this->module = new ArrayCollection();
+        $this->centreFormation = new ArrayCollection();
+        $this->projet = new ArrayCollection();
     }
 
 
@@ -349,6 +367,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($clientRDV->getUser() === $this) {
                 $clientRDV->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Module[]
+     */
+    public function getModule(): Collection
+    {
+        return $this->module;
+    }
+
+    public function addModule(Module $module): self
+    {
+        if (!$this->module->contains($module)) {
+            $this->module[] = $module;
+            $module->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Module $module): self
+    {
+        if ($this->module->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getUser() === $this) {
+                $module->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CentreFormation[]
+     */
+    public function getCentreFormation(): Collection
+    {
+        return $this->centreFormation;
+    }
+
+    public function addCentreFormation(CentreFormation $centreFormation): self
+    {
+        if (!$this->centreFormation->contains($centreFormation)) {
+            $this->centreFormation[] = $centreFormation;
+            $centreFormation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCentreFormation(CentreFormation $centreFormation): self
+    {
+        if ($this->centreFormation->removeElement($centreFormation)) {
+            // set the owning side to null (unless already changed)
+            if ($centreFormation->getUser() === $this) {
+                $centreFormation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Projet[]
+     */
+    public function getProjet(): Collection
+    {
+        return $this->projet;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projet->contains($projet)) {
+            $this->projet[] = $projet;
+            $projet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projet->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getUser() === $this) {
+                $projet->setUser(null);
             }
         }
 
