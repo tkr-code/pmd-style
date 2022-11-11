@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/link.html.twig" as link %}
+{% import "macros/button.html.twig" as btn %}
+
+{% block title %}Edit Investissement
+{% endblock %}
+
+{% block body %}
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+					Modification de l'investissement
+					<b class="text-danger">{{investissement.designation}}</b>
+					de type
+					<b class="text-danger">{{investissement.type}}</b>
+					à la valeur de
+					<b class="text-danger">{{investissement.montantInvestissement|number_format(0, '', ' ')}}
+						F</b>
+				</div>
+				{{form_start(form)}}
+				<div class="card-body">
+					{{form_row(form.type)}}
+					{{form_row(form.designation)}}
+					{{form_row(form.description)}}
+					{{form_row(form.montantInvestissement)}}
+					{{form_row(form.date_debut)}}
+					{{form_row(form.date_fin)}}
+					<div class="row">
+						<div class="col-12 text-right">
+							{{btn.update()}}
+						</div>
+					</div>
+				</div>
+				{{form_end(form)}}
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_investissement_index',{'id':contractantInvestissement.id}))}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

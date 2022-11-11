@@ -1,0 +1,116 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}Investissement
+{% endblock %}
+
+{% block body %}
+
+
+<div class="row mb-3">
+	<div class="col-lg-12 cold-md-12 col-xm-12">
+		<div class="card card-outline card-dark">
+			<div class="card-header">Investissement
+				<b class="text-danger">{{investissement.designation}}</b>
+				de type
+				<b class="text-danger">{{investissement.type}}</b>
+				avec le Partenaire
+				<b class="text-danger">{{contractantInvestissement.personneGestion.getFullName}}</b>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Type Investissement</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">{{investissement.type}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Désignation</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">{{investissement.designation}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Valeur Investissement</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">{{investissement.montantInvestissement|number_format(0, '', ' ')}} F</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Descritpion</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">
+									{{investissement.description}}
+								</p>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Investissement debuttant le
+								</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">{{investissement.getDateDebut ? investissement.getDateDebut|date_format_fr('Y-m-d') : ''}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Investissement se terminant le</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">{{investissement.getDateFin ? investissement.getDateFin|date_format_fr('Y-m-d') : ''}}</p>
+							</div>
+						</div>
+						<hr>
+
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Partenaire</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">{{contractantInvestissement.personneGestion.getFullName}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0 font-weight-bold">Habitant en/au</p>
+							</div>
+							<div class="col-sm-9">
+								<p class="text-muted mb-0">{{contractantInvestissement.pays}}</p>
+							</div>
+						</div>
+						<hr>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				{{link.back(path('admin_gestion_contractant_investissement_index'),'Vos Partenaires d\'affaire')}}
+				{{link.back(path('admin_gestion_contractant_investissement_show',{'id':contractantInvestissement.id}),'Visualiser le Partenaire d\'affaire')}}
+				{{link.edit(path('admin_gestion_investissement_edit', {'id': investissement.id,'id_contractant':contractantInvestissement.id}))}}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -160,6 +160,22 @@ class NavExtension extends AbstractExtension
                             
                         ]
                     ],
+                    [
+                        'name' => 'Gestion Investissement',
+                        'icon' => 'fa fa-home',
+                        'links' =>
+                        [
+                            [
+                                'name' => 'Créer Investissement',
+                                'path' => 'admin_gestion_contractant_investissement_new'
+                            ],
+                            [
+                                'name' => 'Tous Les Investissements',
+                                'path' => 'admin_gestion_contractant_investissement_index'
+                            ],
+                            
+                        ]
+                    ],
 
 
                 ]

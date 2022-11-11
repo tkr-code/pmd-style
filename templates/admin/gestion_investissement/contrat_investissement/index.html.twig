@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContratInvestissement index{% endblock %}
+
+{% block body %}
+    <h1>ContratInvestissement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Designation</th>
+                <th>Date_creation</th>
+                <th>Date_debut</th>
+                <th>Date_echeance</th>
+                <th>Numero_contrat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contrat_investissement in contrat_investissements %}
+            <tr>
+                <td>{{ contrat_investissement.id }}</td>
+                <td>{{ contrat_investissement.designation }}</td>
+                <td>{{ contrat_investissement.dateCreation ? contrat_investissement.dateCreation|date('Y-m-d') : '' }}</td>
+                <td>{{ contrat_investissement.dateDebut }}</td>
+                <td>{{ contrat_investissement.dateEcheance ? contrat_investissement.dateEcheance|date('Y-m-d') : '' }}</td>
+                <td>{{ contrat_investissement.numeroContrat }}</td>
+                <td>
+                    <a href="{{ path('admin_gestion_investissement_contrat_investissement_show', {'id': contrat_investissement.id}) }}">show</a>
+                    <a href="{{ path('admin_gestion_investissement_contrat_investissement_edit', {'id': contrat_investissement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_investissement_contrat_investissement_new') }}">Create new</a>
+{% endblock %}

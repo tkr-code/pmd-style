@@ -1,0 +1,114 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block title %}Investissement index
+{% endblock %}
+
+{% block body %}
+	{% for item in app.flashes('success') %}
+		{{alerte.alert(item,'success')}}
+	{% endfor %}
+	<div class="container-fluid">
+		<div class="row mb-2">
+			{{link.add(path('admin_gestion_investissement_new',{'id':contractantInvestissement.id}))}}
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-md-12 col-lg-12 col-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					Les Investissements que vous possèdez
+				</div>
+				<div class="card-body">
+					<table class="table" id="table-2">
+						<thead>
+							<tr>
+								<th>Type</th>
+								<th>Designation</th>
+								<th>Description</th>
+								<th>Date debut</th>
+								<th>Date fin</th>
+								<th>Montant</th>
+								<th>Temoin (s)</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for investissement in investissements %}
+								<tr>
+									<td>{{ investissement.type }}</td>
+									<td>
+										{% if investissement.designation|length > 30 %}
+											{{ investissement.designation|u.truncate(33,'...') }}
+										{% else %}
+											{{ investissement.designation }}
+										{% endif %}
+
+
+									</td>
+									<td>
+										{% if investissement.description|length > 30 %}
+											{{ investissement.description|u.truncate(33,'...') }}
+										{% else %}
+											{{ investissement.description }}
+										{% endif %}
+									</td>
+									<td>{{ investissement.dateDebut ? investissement.dateDebut|date_format_fr('Y-m-d') : '' }}</td>
+									<td>{{ investissement.dateFin ? investissement.dateFin|date_format_fr('Y-m-d') : '' }}</td>
+									<td>{{ investissement.montantInvestissement|number_format(0, '', ' ') }} F</td>
+									<td>
+									{% if investissement.temoinInvestissement|length > 0 %}
+										vous avez <b class="text-danger">{{investissement.temoinInvestissement|length}}</b> témoin(s) - <small class="text-danger">visualiser les</small>{{link.show(path('admin_gestion_temoin_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}))}}
+										| ajouter {{link.iconAdd(path('admin_gestion_temoin_investissement_new',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}))}}
+									{% else %}
+										vous avez <b class="text-danger">aucun </b> témoin(s)
+										| ajouter {{link.iconAdd(path('admin_gestion_temoin_investissement_new',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}))}}
+									{% endif %}
+									</td>
+									<td>
+										{{link.show(path('admin_gestion_investissement_show', {'id': investissement.id,'id_contractant':contractantInvestissement.id}))}}
+										{{link.iconEdit(path('admin_gestion_investissement_edit', {'id': investissement.id,'id_contractant':contractantInvestissement.id}))}}
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="9">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_contractant_investissement_index'),'Tous vos Partenaires d\'affaire')}}
+				{{link.back(path('admin_gestion_contractant_investissement_show',{'id':contractantInvestissement.id}),'Visualiser le partenaire d\'affaire')}}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+{% endblock %}

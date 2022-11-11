@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RetourInvestissement index{% endblock %}
+
+{% block body %}
+    <h1>RetourInvestissement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant_recu</th>
+                <th>Date_reception</th>
+                <th>EstRecuperer</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for retour_investissement in retour_investissements %}
+            <tr>
+                <td>{{ retour_investissement.id }}</td>
+                <td>{{ retour_investissement.montantRecu }}</td>
+                <td>{{ retour_investissement.dateReception ? retour_investissement.dateReception|date('Y-m-d') : '' }}</td>
+                <td>{{ retour_investissement.estRecuperer ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('admin_gestion_investissement_retour_investissement_show', {'id': retour_investissement.id}) }}">show</a>
+                    <a href="{{ path('admin_gestion_investissement_retour_investissement_edit', {'id': retour_investissement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_investissement_retour_investissement_new') }}">Create new</a>
+{% endblock %}

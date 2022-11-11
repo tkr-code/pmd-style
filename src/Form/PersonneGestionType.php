@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\PersonneGestion;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,12 +14,12 @@ class PersonneGestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('adresse')
-            ->add('phone')
-            ->add('titre')
-            ->add('email')
+            ->add('nom',TextType::class)
+            ->add('prenom',TextType::class)
+            ->add('adresse',TextType::class)
+            ->add('phone',TextType::class)
+            ->add('titre',TextType::class)
+            ->add('email',TextType::class)
             ->add(
                 'avatar',
                 FileType::class,

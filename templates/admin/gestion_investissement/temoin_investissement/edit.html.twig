@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}Edit Temoin Investissement
+{% endblock %}
+
+{% block body %}
+	<div class="row mb-3">
+		<div class="col-ld-12 col-md-12 col-xm-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+					Modification des Informations du temoin  <b class="text-danger">{{temoin_investissement.personneGestion.getFullName}}</b>
+				</div>
+				{{form_start(form)}}
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							{{form_row(form.personneGestion.nom)}}
+							{{form_row(form.personneGestion.prenom)}}
+							{{form_row(form.personneGestion.adresse)}}
+							{{form_row(form.personneGestion.phone)}}
+							{{form_row(form.personneGestion.avatar)}}
+						</div>
+						<div class="col-md-6">
+							{{form_row(form.personneGestion.titre)}}
+							{{form_row(form.personneGestion.email)}}
+							{{form_row(form.message)}}
+							{{form_row(form.signature)}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6"></div>
+						<div class="col-md-6 text-right">
+							{{btn.update()}}
+						</div>
+					</div>
+				</div>
+				{{form_end(form)}}
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_temoin_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}),'Annuler')}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

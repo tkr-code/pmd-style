@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}New Investissement
+{% endblock %}
+
+{% block body %}
+	<div class="row mb-3">
+		<div class="col-md-12 col-lg-12 col-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					Ajouter un Investissement
+				</div>
+				{{form_start(form)}}
+				<div class="card-body">
+					<div class="row">
+
+						<div class="col-md-6 col-lg-6 col-6">
+							<p class="mb-2 text-danger font-weight-bold">Veuillez Saisir les Informations du Contractant</p>
+							{{form_row(form.contractantInvestissement.personneGestion.nom)}}
+							{{form_row(form.contractantInvestissement.personneGestion.prenom)}}
+							{{form_row(form.contractantInvestissement.personneGestion.titre)}}
+							{{form_row(form.contractantInvestissement.personneGestion.phone)}}
+							{{form_row(form.contractantInvestissement.personneGestion.email)}}
+							{{form_row(form.contractantInvestissement.personneGestion.adresse)}}
+							{{form_row(form.contractantInvestissement.ville)}}
+							{{form_row(form.contractantInvestissement.pays)}}
+							{{form_row(form.contractantInvestissement.codePostal)}}
+							{{form_row(form.contractantInvestissement.personneGestion.avatar)}}
+						</div>
+
+						<div class="col-md-6 col-lg-6 col-6">
+							<p class="mb-2 text-danger font-weight-bold">Veuillez Renseigner L'Investissement</p>
+							{{form_row(form.type)}}
+							{{form_row(form.designation)}}
+							{{form_row(form.description)}}
+							{{form_row(form.montantInvestissement)}}
+							{{form_row(form.date_debut)}}
+							{{form_row(form.date_fin)}}
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							{{btn.save()}}
+						</div>
+					</div>
+
+				</div>
+				{{form_end(form)}}
+
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_investissement_index'),'Tous vos Investissements')}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

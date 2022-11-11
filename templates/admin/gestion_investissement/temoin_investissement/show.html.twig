@@ -1,0 +1,127 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/link.html.twig" as link %}
+
+
+{% block title %}Temoin Investissement
+{% endblock %}
+
+{% block body %}
+	{% for item in app.flashes('success') %}
+		{{alerte.alert(item,'success')}}
+	{% endfor %}
+
+	<div class="row mb-3">
+		<div class="col-lg-12 cold-md-12 col-xm-12">
+			<div class="card card-outline card-dark">
+				<div class="card-header">Informations du Temoin</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Nom Complet</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.getFullName}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Nom</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.nom}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Prenom</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.prenom}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Adresse</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.adresse}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Téléphone</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.phone}}</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Titre</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.titre}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Email</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.email}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Message</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.message}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Signature</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.signature ? 'le traitement de l \'image se fera après' : 'pas de signature'}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">A T'il un profile ?</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{temoin_investissement.personneGestion.avatar ? 'la gestion des images se fera après' : 'pas de profil'}}</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_temoin_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}),'Vos temoins d\'affaire')}}
+				{{link.edit(path('admin_gestion_temoin_investissement_edit',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':temoin_investissement.id}))}}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

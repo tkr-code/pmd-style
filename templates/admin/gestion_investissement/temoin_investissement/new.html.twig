@@ -1,0 +1,60 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}New Temoin Investissement
+{% endblock %}
+
+{% block body %}
+<div class="row mb-3">
+	<div class="col-lg-12 col-md-12 col-12">
+		<div class="card card-outline card-primary">
+			<div class="card-header">
+				Ajout d'un nouveau Témoin pour l'investissement
+				<b class="text-danger">{{investissement.designation}}</b>
+				de type
+				<b class="text-danger">{{investissement.type}}</b>
+				avec le partenaire
+				<b class="text-danger">{{contractantInvestissement.personneGestion.getFullName}}</b>
+			</div>
+
+			{{form_start(form)}}
+			<div class="card-body">
+				<div class="row">
+
+					<div class="col-md-6 col-lg-6 col-6">
+						{{form_row(form.personneGestion.nom)}}
+						{{form_row(form.personneGestion.prenom)}}
+						{{form_row(form.personneGestion.titre)}}
+						{{form_row(form.personneGestion.email)}}
+						{{form_row(form.personneGestion.avatar)}}
+					</div>
+
+					<div class="col-md-6 col-lg-6 col-6">
+						{{form_row(form.personneGestion.phone)}}
+						{{form_row(form.personneGestion.adresse)}}
+						{{form_row(form.message)}}
+						{{form_row(form.signature)}}
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						{{btn.save()}}
+					</div>
+				</div>
+
+			</div>
+			{{form_end(form)}}
+
+			<div class="card-footer">
+				{{link.back(path('admin_gestion_temoin_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}),'Tous les Temoins de l\'Investissement')}}
+					{{link.back(path('admin_gestion_investissement_index',{'id':contractantInvestissement.id}),'Tous Vos Investissements')}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

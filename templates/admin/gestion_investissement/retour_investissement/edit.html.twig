@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RetourInvestissement{% endblock %}
+
+{% block body %}
+    <h1>Edit RetourInvestissement</h1>
+
+    {{ include('admin_gestion_investissement_retour_investissement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_gestion_investissement_retour_investissement_index') }}">back to list</a>
+
+    {{ include('admin_gestion_investissement_retour_investissement/_delete_form.html.twig') }}
+{% endblock %}

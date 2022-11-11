@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContratInvestissement{% endblock %}
+
+{% block body %}
+    <h1>ContratInvestissement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contrat_investissement.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ contrat_investissement.designation }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ contrat_investissement.dateCreation ? contrat_investissement.dateCreation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ contrat_investissement.dateDebut }}</td>
+            </tr>
+            <tr>
+                <th>Date_echeance</th>
+                <td>{{ contrat_investissement.dateEcheance ? contrat_investissement.dateEcheance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Numero_contrat</th>
+                <td>{{ contrat_investissement.numeroContrat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_gestion_investissement_contrat_investissement_index') }}">back to list</a>
+
+    <a href="{{ path('admin_gestion_investissement_contrat_investissement_edit', {'id': contrat_investissement.id}) }}">edit</a>
+
+    {{ include('admin_gestion_investissement_contrat_investissement/_delete_form.html.twig') }}
+{% endblock %}

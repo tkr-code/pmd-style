@@ -101,6 +101,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $projet;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ContractantInvestissement::class, mappedBy="user")
+     */
+    private $contractantInvestissement; 
+
     public function __construct()
     {
         $this->phones = new ArrayCollection();
@@ -110,6 +115,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->module = new ArrayCollection();
         $this->centreFormation = new ArrayCollection();
         $this->projet = new ArrayCollection();
+        $this->contractantInvestissement = new ArrayCollection();
     }
 
 
@@ -463,5 +469,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|ContractantInvestissement[]
+     */
+    public function getContractantInvestissement(): Collection
+    {
+        return $this->contractantInvestissement;
+    }
+
+    public function addContractantInvestissement(ContractantInvestissement $contractantInvestissement): self
+    {
+        if (!$this->contractantInvestissement->contains($contractantInvestissement)) {
+            $this->contractantInvestissement[] = $contractantInvestissement;
+            $contractantInvestissement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContractantInvestissement(ContractantInvestissement $contractantInvestissement): self
+    {
+        if ($this->contractantInvestissement->removeElement($contractantInvestissement)) {
+            // set the owning side to null (unless already changed)
+            if ($contractantInvestissement->getUser() === $this) {
+                $contractantInvestissement->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 }
