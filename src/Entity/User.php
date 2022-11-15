@@ -102,7 +102,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $projet;
 
     /**
-     * @ORM\OneToMany(targetEntity=ContractantInvestissement::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=ContractantInvestissement::class, mappedBy="user",cascade={"remove"})
      */
     private $contractantInvestissement; 
 

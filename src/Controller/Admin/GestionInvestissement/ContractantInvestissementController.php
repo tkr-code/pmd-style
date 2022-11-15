@@ -2,17 +2,18 @@
 
 namespace App\Controller\Admin\GestionInvestissement;
 
+use App\Entity\Investissement;
+use App\Entity\PersonneGestion;
 use App\Entity\ContratInvestissement;
 use App\Entity\MonContratInvestissement;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\ContractantInvestissement;
-use App\Entity\Investissement;
-use App\Entity\PersonneGestion;
 use App\Form\ContractantInvestissementType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\MonContractantInvestissementType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\ContratInvestissementRepository;
 use App\Repository\ContractantInvestissementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -172,10 +173,10 @@ class ContractantInvestissementController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash(
-               'success',
-               'Informations du partenaire modifiées avec succès'
+                'success',
+                'Informations du partenaire modifiées avec succès'
             );
-            
+
             return $this->redirectToRoute('admin_gestion_contractant_investissement_show', [
                 'id' => $contractantInvestissement->getId()
             ], Response::HTTP_SEE_OTHER);
@@ -188,16 +189,26 @@ class ContractantInvestissementController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="admin_gestion_contractant_investissement_delete", methods={"POST"})
+     * @Route("/{id<\d+>}", name="admin_gestion_contractant_investissement_delete", methods={"POST"})
      */
     public function delete(Request $request, ContractantInvestissement $contractantInvestissement): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $contractantInvestissement->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($contractantInvestissement);
-            $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('admin_gestion_investissement_contractant_investissement_index', [], Response::HTTP_SEE_OTHER);
+        if (
+            $request->request->get('supr_contractant') &&
+            $request->request->get('supr_contractant') ==  $contractantInvestissement->getId() &&
+            $request->request->get('del_contractant') &&
+            $request->request->get('del_contractant') == 'zimbissa_yawou'
+        ) {
+            $this->em->remove($contractantInvestissement);
+            $this->em->flush();
+
+            $response = 'success';
+        } else {
+            $response = 'false';
+        }
+        return new JsonResponse($response);
+
+        //return $this->redirectToRoute('admin_gestion_investissement_contractant_investissement_index', [], Response::HTTP_SEE_OTHER);
     }
 }

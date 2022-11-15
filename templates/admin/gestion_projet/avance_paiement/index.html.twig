@@ -174,37 +174,37 @@ let projet = $(this).data('projet');
 
 // alert('Id est : '+id_avance+' Path : '+path)
 Swal.fire({
-title: 'Etes Vous sur de supprimer l\'avance ?',
-text: "Une fois supprimée, la donnée sera perdue !",
-icon: 'warning',
-showCancelButton: true,
-confirmButtonColor: '#3085d6',
-cancelButtonColor: '#d33',
-cancelButtonText: 'Annuler !',
-confirmButtonText: 'Oui, Supprimer !'
-}).then((result) => {
-if (result.isConfirmed) {
-$.ajax({
-url: path,
-method: 'POST',
-dataType: 'JSON',
-data: {
-id_avance: id_avance,
-id_projet: projet,
-del_avance: 'del_avance'
-},
-success: function (data) {
-if (data == 'success') {
-Swal.fire('Suppression Réussie!', 'Cette Avance a été supprimée.', 'success');
-location.reload();
-} else {
-swalWithBootstrapButtons.fire('Suppression Impossible', 'L\'Avance n\'a pas pue etre retirée :)', 'error')
-}
-}
-});
+		title: 'Etes Vous sur de supprimer l\'avance ?',
+		text: "Une fois supprimée, la donnée sera perdue !",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Annuler !',
+		confirmButtonText: 'Oui, Supprimer !'
+		}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+			url: path,
+			method: 'POST',
+			dataType: 'JSON',
+			data: {
+			id_avance: id_avance,
+			id_projet: projet,
+			del_avance: 'del_avance'
+		},
+		success: function (data) {
+			if (data == 'success') {
+			Swal.fire('Suppression Réussie!', 'Cette Avance a été supprimée.', 'success');
+			location.reload();
+			} else {
+			swalWithBootstrapButtons.fire('Suppression Impossible', 'L\'Avance n\'a pas pue etre retirée :)', 'error')
+			}
+		}
+	});
 
-}
-})
+	}
+	})
 });
 
 });

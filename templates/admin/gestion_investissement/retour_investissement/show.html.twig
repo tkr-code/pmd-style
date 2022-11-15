@@ -1,34 +1,140 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}RetourInvestissement{% endblock %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/badge.html.twig" as badge %}
+
+{% block title %}Retour Investissement
+{% endblock %}
 
 {% block body %}
-    <h1>RetourInvestissement</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ retour_investissement.id }}</td>
-            </tr>
-            <tr>
-                <th>Montant_recu</th>
-                <td>{{ retour_investissement.montantRecu }}</td>
-            </tr>
-            <tr>
-                <th>Date_reception</th>
-                <td>{{ retour_investissement.dateReception ? retour_investissement.dateReception|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EstRecuperer</th>
-                <td>{{ retour_investissement.estRecuperer ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('admin_gestion_investissement_retour_investissement_index') }}">back to list</a>
+	<div class="row mb-3">
+		<div class="col-lg-12 cold-md-12 col-xm-12">
+			<div class="card card-outline card-dark">
+				<div class="card-header">Retour Investissement
+					<b class="text-danger">{{investissement.designation}}</b>
+					de type
+					<b class="text-danger">{{investissement.type}}</b>
+					avec le Partenaire
+					<b class="text-danger">{{contractantInvestissement.personneGestion.getFullName}}</b>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Type Investissement</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{investissement.type}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Désignation</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{investissement.designation}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Valeur Investissement</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{investissement.montantInvestissement|number_format(0, '', ' ')}}
+										F</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Descritpion</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">
+										{{investissement.description}}
+									</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Retour Invest. du
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{retour_investissement.getDateReception ? retour_investissement.getDateReception|date_format_fr('Y-m-d') : ''}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Montant reçu
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{retour_investissement.getMontantRecu|number_format(0,'',' ')}}</p>
+								</div>
+							</div>
+							<hr>
 
-    <a href="{{ path('admin_gestion_investissement_retour_investissement_edit', {'id': retour_investissement.id}) }}">edit</a>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">est Recuperer le montant Invest ?
+									</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">
+										{% if retour_investissement.estRecuperer == true %}
+											<b class="text-danger">Oui</b>
+											|
+											{{badge.complet('Somme Investie recuperée')}}
+										{% else %}
+											<b class="text-danger">Non</b>
+											|
+											{{badge.annuler('Somme Investie non atteinte ')}}
+										{% endif %}
+									</p>
 
-    {{ include('admin_gestion_investissement_retour_investissement/_delete_form.html.twig') }}
+								</div>
+							</div>
+							<hr>
+
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Partenaire</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{contractantInvestissement.personneGestion.getFullName}}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0 font-weight-bold">Habitant en/au</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{contractantInvestissement.pays}}</p>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_retour_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}),'Vos retour sur investissements')}}
+					{{link.edit(path('admin_gestion_retour_investissement_edit', {'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':retour_investissement.id}))}}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 {% endblock %}

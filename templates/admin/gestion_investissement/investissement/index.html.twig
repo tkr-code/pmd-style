@@ -40,20 +40,17 @@
 					<table class="table" id="table-2">
 						<thead>
 							<tr>
-								<th>Type</th>
 								<th>Designation</th>
-								<th>Description</th>
 								<th>Date debut</th>
-								<th>Date fin</th>
 								<th>Montant</th>
 								<th>Temoin (s)</th>
+								<th>Retour Invest.</th>
 								<th>actions</th>
 							</tr>
 						</thead>
 						<tbody>
 							{% for investissement in investissements %}
 								<tr>
-									<td>{{ investissement.type }}</td>
 									<td>
 										{% if investissement.designation|length > 30 %}
 											{{ investissement.designation|u.truncate(33,'...') }}
@@ -63,15 +60,8 @@
 
 
 									</td>
-									<td>
-										{% if investissement.description|length > 30 %}
-											{{ investissement.description|u.truncate(33,'...') }}
-										{% else %}
-											{{ investissement.description }}
-										{% endif %}
-									</td>
+									
 									<td>{{ investissement.dateDebut ? investissement.dateDebut|date_format_fr('Y-m-d') : '' }}</td>
-									<td>{{ investissement.dateFin ? investissement.dateFin|date_format_fr('Y-m-d') : '' }}</td>
 									<td>{{ investissement.montantInvestissement|number_format(0, '', ' ') }} F</td>
 									<td>
 									{% if investissement.temoinInvestissement|length > 0 %}
@@ -83,8 +73,26 @@
 									{% endif %}
 									</td>
 									<td>
+									{% if investissement.retourInvestissement|length > 0 %}
+										<small>vous avez</small><b class="text-danger">{{investissement.retourInvestissement|length}}</b> <small>retour(s)</small>
+										| ajouter {{link.iconAdd(path('admin_gestion_retour_investissement_new',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}))}}
+										| <small class="text-danger">visualiser les - </small> {{link.show(path('admin_gestion_retour_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}))}}
+									{% else %}
+										<small>Aucun retour </small>
+						 				| ajouter {{link.iconAdd(path('admin_gestion_retour_investissement_new',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}))}}
+
+									{% endif %}
+									</td>
+									<td>
 										{{link.show(path('admin_gestion_investissement_show', {'id': investissement.id,'id_contractant':contractantInvestissement.id}))}}
 										{{link.iconEdit(path('admin_gestion_investissement_edit', {'id': investissement.id,'id_contractant':contractantInvestissement.id}))}}
+										<button 
+											class="btn del_investissement"
+											type="button"
+											data-delete="{{investissement.id}}"
+											data-contractant="{{contractantInvestissement.id}}"
+											data-path="{{path('admin_gestion_investissement_delete',{'id':investissement.id,'id_contractant':contractantInvestissement.id})}}"><i class="fas fa-trash-alt text-danger"></i>
+										</button>
 									</td>
 								</tr>
 							{% else %}
@@ -111,4 +119,49 @@
 	{{ dataTable.script('#table-1') }}
 	{{ dataTable.script('#table-2') }}
 	{{ dataTable.script('#table-3') }}
+
+		<script>
+	$(document).ready(function(){
+		$(document).on('click', '.del_investissement', function () {
+		let id_investi = $(this).data('delete');
+		let id_contractant = $(this).data('contractant');
+		let path = $(this).data('path');
+
+
+
+Swal.fire({
+		title: 'Etes Vous sur de supprimer cet Investissement ?',
+		text: "Une fois supprimé, la donnée sera perdue !",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Annuler !',
+		confirmButtonText: 'Oui, Supprimer !'
+		}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+			url: path,
+			method: 'POST',
+			dataType: 'JSON',
+			data: {
+			supr_investis: id_investi,
+			id_contractant: id_contractant,
+			del_investi: 'katoula_yawou'
+		},
+		success: function (data) {
+			if (data == 'success') {
+			Swal.fire('Suppression Réussie!', 'Ce Témoin a été supprimé.', 'success');
+			location.reload();
+			} else {
+			swalWithBootstrapButtons.fire('Suppression Impossible', 'veuillez rééssayer plus tard  :)', 'error')
+			}
+		}
+	});
+
+	}
+	})
+});
+	});
+	</script>
 {% endblock %}

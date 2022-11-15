@@ -57,9 +57,13 @@
 									<td>{{ contractant_investissement.personneGestion.getFullName }}</td>
 									<td>{{ contractant_investissement.personneGestion.email }}</td>
 									<td>
-										vous avez <b class="text-danger">{{ contractant_investissement.investissements|length }}</b>&nbsp; investissement(s)
-										<b class="text-dark">|</b>&nbsp;ajoutez {{link.iconAdd(path('admin_gestion_investissement_new',{'id':contractant_investissement.id}))}} <b class="text-dark">|</b>
-										 &nbsp;visualiser les {{link.show(path('admin_gestion_investissement_index',{'id':contractant_investissement.id}))}}
+										vous avez
+										<b class="text-danger">{{ contractant_investissement.investissements|length }}</b>&nbsp; investissement(s)
+										<b class="text-dark">|</b>&nbsp;ajoutez
+										{{link.iconAdd(path('admin_gestion_investissement_new',{'id':contractant_investissement.id}))}}
+										<b class="text-dark">|</b>
+										&nbsp;visualiser les
+										{{link.show(path('admin_gestion_investissement_index',{'id':contractant_investissement.id}))}}
 									</td>
 									<td>{{ contractant_investissement.ville }}</td>
 									<td>{{ contractant_investissement.pays }}</td>
@@ -67,6 +71,11 @@
 									<td>
 										{{link.show(path('admin_gestion_contractant_investissement_show', {'id': contractant_investissement.id}))}}
 										{{link.iconEdit(path('admin_gestion_contractant_investissement_edit', {'id': contractant_investissement.id}))}}
+										<button type="button"
+										class="btn del_contractant_invest" 
+										data-delete="{{contractant_investissement.id}}" data-path="{{path('admin_gestion_contractant_investissement_delete',{'id':contractant_investissement.id})}}">
+											<i class="fas fa-trash-alt text-danger"></i>
+										</button>
 									</td>
 								</tr>
 							{% else %}
@@ -86,7 +95,49 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ dataTable.script('#table-1') }}
-{{ dataTable.script('#table-2') }}
-{{ dataTable.script('#table-3') }}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+
+	<script>
+		$(document).ready(function () {
+$(document).on('click', '.del_contractant_invest', function () {
+let id_contractant = $(this).data('delete');
+let path = $(this).data('path');
+
+
+Swal.fire({
+title: 'Etes Vous sur de supprimer ce Partenaire ?',
+text: "Une fois supprimé, les investissements que vous disposez avec lui seront perdus !",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+cancelButtonText: 'Annuler !',
+confirmButtonText: 'Oui, Supprimer !'
+}).then((result) => {
+if (result.isConfirmed) {
+$.ajax({
+url: path,
+method: 'POST',
+dataType: 'JSON',
+data: {
+supr_contractant: id_contractant,
+del_contractant: 'zimbissa_yawou'
+},
+success: function (data) {
+if (data == 'success') {
+Swal.fire('Suppression Réussie!', 'Ce Partenaire a été supprimé.', 'success');
+location.reload();
+} else {
+swalWithBootstrapButtons.fire('Suppression Impossible', 'veuillez rééssayer plus tard  :)', 'error')
+}
+}
+});
+
+}
+})
+});
+});
+	</script>
 {% endblock %}

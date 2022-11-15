@@ -1,11 +1,51 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}New RetourInvestissement{% endblock %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}New Retour Investissement
+{% endblock %}
 
 {% block body %}
-    <h1>Create new RetourInvestissement</h1>
+<div class="row mb-3">
+	<div class="col-lg-12 col-md-12 col-12">
+		<div class="card card-outline card-primary">
+			<div class="card-header">
+				Ajout d'une nouvelle entree   pour l'investissement
+				<b class="text-danger">{{investissement.designation}}</b>
+				de type
+				<b class="text-danger">{{investissement.type}}</b>
+				avec le partenaire
+				<b class="text-danger">{{contractantInvestissement.personneGestion.getFullName}}</b>
+                dont la valeur Investie est de <b class="text-danger">{{investissement.montantInvestissement|number_format(0, '', ' ')}} F</b>
+			</div>
 
-    {{ include('admin_gestion_investissement_retour_investissement/_form.html.twig') }}
+			{{form_start(form)}}
+			<div class="card-body">
+				<div class="row">
 
-    <a href="{{ path('admin_gestion_investissement_retour_investissement_index') }}">back to list</a>
+					<div class="col-col-12 col-lg-12 col-12">
+						{{form_row(form.montant_recu)}}
+						{{form_row(form.date_reception)}}
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						{{btn.save()}}
+					</div>
+				</div>
+
+			</div>
+			{{form_end(form)}}
+
+			<div class="card-footer">
+				{{link.back(path('admin_gestion_retour_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}),'Tous les retours de l\'Investissement')}}
+					{{link.back(path('admin_gestion_investissement_index',{'id':contractantInvestissement.id}),'Tous Vos Investissements')}}
+				</div>
+			</div>
+		</div>
+	</div>
+
 {% endblock %}

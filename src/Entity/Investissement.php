@@ -56,13 +56,13 @@ class Investissement
     private $montantInvestissement;
 
     /**
-     * @ORM\OneToMany(targetEntity=RetourInvestissement::class, mappedBy="investissement")
+     * @ORM\OneToMany(targetEntity=RetourInvestissement::class, mappedBy="investissement", cascade={"remove"})
      */
     private $retourInvestissement;
 
 
     /**
-     * @ORM\OneToMany(targetEntity=TemoinInvestissement::class, mappedBy="investissement")
+     * @ORM\OneToMany(targetEntity=TemoinInvestissement::class, mappedBy="investissement",cascade={"remove"})
      */
     private $temoinInvestissement;
 
@@ -73,7 +73,7 @@ class Investissement
     private $contratInvestissement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ContractantInvestissement::class, inversedBy="investissements", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity=ContractantInvestissement::class, inversedBy="investissements", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $contractantInvestissement;

@@ -47,4 +47,21 @@ class RetourInvestissementRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function sommmeRetourInvestissement(int $id_invest): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT SUM(montant_recu) AS total_retour
+            FROM retour_investissement AS R
+            JOIN investissement I
+            ON I.id = R.investissement_id
+            WHERE R.investissement_id = :val
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['val' => $id_invest]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 }

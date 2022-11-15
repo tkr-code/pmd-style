@@ -1,13 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit RetourInvestissement{% endblock %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+
+{% block title %}Edit Temoin Investissement
+{% endblock %}
 
 {% block body %}
-    <h1>Edit RetourInvestissement</h1>
+	<div class="row mb-3">
+		<div class="col-ld-12 col-md-12 col-xm-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+					Modification des Informations du retour investissement concernat l'investissement
+                    <b class="text-danger">{{investissement.designation}}</b> pour le partenaire 
+                      <b class="text-danger">{{contractantInvestissement.personneGestion.getFullName}}</b>
+				</div>
+				{{form_start(form)}}
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12 col-12 col-lg-12">
+							{{form_row(form.montant_recu)}}
+							{{form_row(form.date_reception)}}
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-md-6"></div>
+						<div class="col-md-6 text-right">
+							{{btn.update()}}
+						</div>
+					</div>
+				</div>
+				{{form_end(form)}}
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_retour_investissement_index',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}),'Annuler')}}
+				</div>
+			</div>
+		</div>
+	</div>
 
-    {{ include('admin_gestion_investissement_retour_investissement/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('admin_gestion_investissement_retour_investissement_index') }}">back to list</a>
-
-    {{ include('admin_gestion_investissement_retour_investissement/_delete_form.html.twig') }}
 {% endblock %}

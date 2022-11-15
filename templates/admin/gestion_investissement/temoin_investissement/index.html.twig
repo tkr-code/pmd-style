@@ -73,6 +73,14 @@
 									<td>
 										{{link.show(path('admin_gestion_temoin_investissement_show',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':temoin_investissement.id}))}}
 										{{link.iconEdit(path('admin_gestion_temoin_investissement_edit',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':temoin_investissement.id}))}}
+										<button 
+											class="btn del_temoin_contrat"
+											type="button"
+											data-delete="{{temoin_investissement.id}}"
+											data-contractant="{{contractantInvestissement.id}}"
+											data-investi="{{investissement.id}}"
+											data-path="{{path('admin_gestion_temoin_investissement_delete',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':temoin_investissement.id})}}"><i class="fas fa-trash-alt text-danger"></i>
+										</button>
 									</td>
 								</tr>
 							{% else %}
@@ -95,4 +103,50 @@
 	{{ dataTable.script('#table-1') }}
 	{{ dataTable.script('#table-2') }}
 	{{ dataTable.script('#table-3') }}
+
+	<script>
+	$(document).ready(function(){
+		$(document).on('click', '.del_temoin_contrat', function () {
+let id_temoin = $(this).data('delete');
+let id_contractant = $(this).data('contractant');
+let id_ivesti = $(this).data('investi');
+let path = $(this).data('path');
+
+
+Swal.fire({
+		title: 'Etes Vous sur de supprimer ce temoin ?',
+		text: "Une fois supprimé, la donnée sera perdue !",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Annuler !',
+		confirmButtonText: 'Oui, Supprimer !'
+		}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+			url: path,
+			method: 'POST',
+			dataType: 'JSON',
+			data: {
+			supr_temoin: id_temoin,
+			id_contractant: id_contractant,
+			id_ivesti: id_ivesti,
+			del_temoin: 'katoula_yawou'
+		},
+		success: function (data) {
+			if (data == 'success') {
+			Swal.fire('Suppression Réussie!', 'Ce Témoin a été supprimé.', 'success');
+			location.reload();
+			} else {
+			swalWithBootstrapButtons.fire('Suppression Impossible', 'veuillez rééssayer plus tard  :)', 'error')
+			}
+		}
+	});
+
+	}
+	})
+});
+	});
+	</script>
 {% endblock %}

@@ -8,6 +8,7 @@ use App\Repository\ContractantInvestissementRepository;
 use App\Repository\InvestissementRepository;
 use App\Repository\TemoinInvestissementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -174,16 +175,46 @@ class TemoinInvestissementController extends AbstractController
     }
 
     /**
-     * @Route("/{id_contractant<\d+>}/invest/{id_invest<\d+>}/del/{id}", name="admin_gestion_temoin_investissement_delete", methods={"POST"})
+     * @Route("/{id_contractant<\d+>}/invest/{id_invest<\d+>}/del/{id<\d+>}", name="admin_gestion_temoin_investissement_delete", methods={"POST"})
      */
-    public function delete(Request $request, TemoinInvestissement $temoinInvestissement): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $temoinInvestissement->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($temoinInvestissement);
-            $entityManager->flush();
+    public function delete(
+        Request $request,
+        $id_contractant,
+        $id_invest,
+        ContractantInvestissementRepository $contractantInvestissementRepository,
+        InvestissementRepository $investissementRepository,
+        TemoinInvestissement $temoinInvestissement
+    ): Response {
+        if (
+            $contractantInvestissementRepository->find($id_contractant)
+            &&
+            $investissementRepository->find($id_invest)
+        ) {
+            $contractantInvestissement = $contractantInvestissementRepository->find($id_contractant);
+            $investissement = $investissementRepository->find($id_invest);
         }
 
-        return $this->redirectToRoute('admin_gestion_investissement_temoin_investissement_index', [], Response::HTTP_SEE_OTHER);
+        #verifications des element à supprimer
+        if (
+            $request->request->get('del_temoin') &&
+            $request->request->get('del_temoin') == 'katoula_yawou' &&
+            $request->request->get('supr_temoin') &&
+            $request->request->get('supr_temoin')  ==  $temoinInvestissement->getId() &&
+            $request->request->get('id_contractant') &&
+            $request->request->get('id_contractant') == $contractantInvestissement->getId() &&
+            $request->request->get('id_ivesti') &&
+            $request->request->get('id_ivesti') == $investissement->getId()
+        ) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($temoinInvestissement);
+
+            $entityManager->flush();
+            $response = 'success';
+        } else {
+            $response = 'false';
+        }
+
+        return new JsonResponse($response);
+        //return $this->redirectToRoute('admin_gestion_investissement_temoin_investissement_index', [], Response::HTTP_SEE_OTHER);
     }
 }

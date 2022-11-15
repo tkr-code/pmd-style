@@ -42,7 +42,7 @@ class ContractantInvestissement
     private $personneGestion;
 
     /**
-     * @ORM\OneToMany(targetEntity=Investissement::class, mappedBy="contractantInvestissement")
+     * @ORM\OneToMany(targetEntity=Investissement::class, mappedBy="contractantInvestissement",cascade={"remove"})
      */
     private $investissements;
 

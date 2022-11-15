@@ -11,6 +11,7 @@ use App\Repository\ContratInvestissementRepository;
 use App\Repository\InvestissementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -184,14 +185,35 @@ class InvestissementController extends AbstractController
     /**
      * @Route("/{id<\d+>}/contractant/{id_contractant<\d+>}/del", name="admin_gestion_investissement_delete", methods={"POST"})
      */
-    public function delete(Request $request, Investissement $investissement): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $investissement->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($investissement);
-            $entityManager->flush();
+    public function delete(
+        Request $request,
+        Investissement $investissement,
+        ContractantInvestissementRepository $contractantInvestissementRepository,
+        $id_contractant
+    ): Response {
+        if (
+            $contractantInvestissementRepository->find($id_contractant)
+
+        ) {
+            $contractantInvestissement = $contractantInvestissementRepository->find($id_contractant);
         }
 
-        return $this->redirectToRoute('admin_gestion_investissement_index', [], Response::HTTP_SEE_OTHER);
+        if (
+            $request->request->get('supr_investis') &&
+            $request->request->get('supr_investis') ==  $investissement->getId() &&
+            $request->request->get('id_contractant') &&
+            $request->request->get('id_contractant') == $contractantInvestissement->getId() &&
+            $request->request->get('del_investi') &&
+            $request->request->get('del_investi') == 'katoula_yawou'
+        ) {
+            $this->em->remove($investissement);
+            $this->em->flush();
+
+            $response = 'success';
+        } else {
+            $response = 'false';
+        }
+        return new JsonResponse($response);
+        //return $this->redirectToRoute('admin_gestion_investissement_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,39 +1,174 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}RetourInvestissement index{% endblock %}
+
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/badge.html.twig" as badge %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block title %}RetourInvestissement index
+{% endblock %}
 
 {% block body %}
-    <h1>RetourInvestissement index</h1>
+	{% for item in app.flashes('success') %}
+		{{alerte.alert(item,'success')}}
+	{% endfor %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Montant_recu</th>
-                <th>Date_reception</th>
-                <th>EstRecuperer</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for retour_investissement in retour_investissements %}
-            <tr>
-                <td>{{ retour_investissement.id }}</td>
-                <td>{{ retour_investissement.montantRecu }}</td>
-                <td>{{ retour_investissement.dateReception ? retour_investissement.dateReception|date('Y-m-d') : '' }}</td>
-                <td>{{ retour_investissement.estRecuperer ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('admin_gestion_investissement_retour_investissement_show', {'id': retour_investissement.id}) }}">show</a>
-                    <a href="{{ path('admin_gestion_investissement_retour_investissement_edit', {'id': retour_investissement.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('admin_gestion_investissement_retour_investissement_new') }}">Create new</a>
+	<div class="row mb-3">
+		<div class="col-lg-12 col-md-12 col-12">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					{{link.add(path('admin_gestion_retour_investissement_new',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id}))}}
+				</div>
+			</div>
+
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					Retour sur Investissement
+					<b class="text-danger">{{investissement.designation}}</b>
+					du partenaire
+					<b class="text-danger">{{contractantInvestissement.personneGestion.getFullName}}</b>
+					à la valeur de
+					<b class="text-danger">{{ investissement.montantInvestissement|number_format(0, '', ' ') }}
+						F</b>
+				</div>
+				<div class="card-body">
+					<div class="row mb-4">
+						<div class="col-md-6">
+							Vos retours  sur cet Investissement <b class="text-danger">{{investissement.designation}}</b> s'élèvent à <br>																	                        de
+							<b class="text-danger">{{somme_investissement|number_format(0,'',' ')}} F</b>
+						</div>
+
+						<div class="col-md-6">
+							Avez-vous fait de bénéfice ? &nbsp;
+							{% if benefice == 0 %}
+								<b class="text-danger">Non</b>, vous n'avez pas encore fait de benefice sur cet investiment
+							{% else %}
+								<b class="text-danger">Oui</b>, vous avez un bénéfice de
+								<b class="text-danger">{{benefice|number_format(0,'',' ')}} F</b>
+							{% endif %}
+
+						</div>
+					</div>
+
+					<table class="table" id="table-2">
+						<thead>
+							<tr>
+								<th>Investissement</th>
+								<th>Montant reçu</th>
+								<th>A la date du</th>
+								<th>Est Ce Recuperée la somme Investie ?</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for retour_investissement in retour_investissements %}
+								<tr>
+									<td>{{ investissement.designation }}</td>
+									<td>{{ retour_investissement.montantRecu|number_format(0,'',' ') }}
+										F</td>
+									<td>{{ retour_investissement.dateReception ? retour_investissement.dateReception|date_format_fr('Y-m-d') : '' }}</td>
+									<td>
+										{% if retour_investissement.estRecuperer == true %}
+											<b class="text-danger">Oui</b>
+											|
+											{{badge.complet('Somme Investie recuperée')}}
+										{% else %}
+											<b class="text-danger">Non</b>
+											|
+											{{badge.annuler('Somme Investie non atteinte ')}}
+										{% endif %}
+
+									</td>
+									<td>
+										{{link.show(path('admin_gestion_retour_investissement_show',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':retour_investissement.id}))}}
+										{{link.iconEdit(path('admin_gestion_retour_investissement_edit',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':retour_investissement.id}))}}
+										<button class="btn del_retour_invest" type="button" data-delete="{{retour_investissement.id}}" data-investi="{{investissement.id}}" data-contractant="{{contractantInvestissement.id}}" data-path="{{path('admin_gestion_retour_investissement_delete',{'id_contractant':contractantInvestissement.id,'id_invest':investissement.id,'id':retour_investissement.id})}}">
+											<i class="fas fa-trash-alt text-danger"></i>
+										</button>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="5">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer">
+					{{link.back(path('admin_gestion_investissement_index',{'id':contractantInvestissement.id}),'Vos Investissements')}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+	{{ dataTable.script('#table-2') }}
+	{{ dataTable.script('#table-3') }}
+
+
+	<script>
+		$(document).ready(function () {
+$(document).on('click', '.del_retour_invest', function () {
+let id_retour_investi = $(this).data('delete');
+let id_investi = $(this).data('investi');
+let id_contractant = $(this).data('contractant');
+let path = $(this).data('path');
+
+
+
+Swal.fire({
+title: 'Etes Vous sur de supprimer cet Investissement ?',
+text: "Une fois supprimé, la donnée sera perdue !",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+cancelButtonText: 'Annuler !',
+confirmButtonText: 'Oui, Supprimer !'
+}).then((result) => {
+if (result.isConfirmed) {
+$.ajax({
+url: path,
+method: 'POST',
+dataType: 'JSON',
+data: {
+supr_retour_investi: id_retour_investi,
+id_investi: id_investi,
+id_contractant: id_contractant,
+del_retour_invest: 'zimbissa_yawou'
+},
+success: function (data) {
+if (data == 'success') {
+Swal.fire('Suppression Réussie!', 'Ce Témoin a été supprimé.', 'success');
+location.reload();
+} else {
+swalWithBootstrapButtons.fire('Suppression Impossible', 'veuillez rééssayer plus tard  :)', 'error')
+}
+}
+});
+
+}
+})
+});
+});
+	</script>
 {% endblock %}
