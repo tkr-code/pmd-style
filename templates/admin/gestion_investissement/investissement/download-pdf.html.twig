@@ -1,0 +1,347 @@
+{% extends "base-pdf.html.twig" %}
+
+{% block title %}
+	PDF Contrat Investissement
+{% endblock  %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+	<style>
+		* {
+			padding: 0;
+			margin-top: 0;
+		}
+		body {
+			margin-top: 2%;
+		}
+		.contrat-info {
+			text-transform: uppercase;
+			font-weight: bold;
+			font-size: 20px;
+			text-align: center;
+			margin-bottom: 5%;
+		}
+		.infos {
+			display: inline-block;
+			position: relative;
+			width: 100%;
+			height: auto;
+
+		}
+		.contractant {
+			float: left;
+			margin-left: 5%;
+		}
+
+		.client {
+			float: right;
+			margin-right: 5%;
+		}
+		.description {
+			margin-left: 12%;
+			margin-right: 12%;
+			margin-top: 5%;
+			width: auto;
+			height: auto;
+			justify-content: center;
+		}
+		.temoins h5 {
+			text-align: center;
+		}
+		.temoins {
+			text-align: center;
+			width: auto;
+			height: auto;
+		}
+		.temoins table {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.card {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			word-wrap: break-word;
+			background-color: #fff;
+			background-clip: border-box;
+			border: 0 solid rgba(0, 0, 0, 0);
+			border-radius: 0.25rem;
+			margin-bottom: 1.5rem;
+			box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+		}
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			border-spacing: 0;
+			margin-bottom: 20px
+		}
+		table td,
+		table th {
+			padding: 15px;
+			background: #eee;
+			border-bottom: 1px solid #fff
+		}
+		table th {
+			white-space: nowrap;
+			font-weight: 400;
+			font-size: 16px
+		}
+		table td h3 {
+			margin: 0;
+			font-weight: 400;
+			color: #0d6efd;
+			font-size: 1.2em
+		}
+		.card {
+			*border: 2px solid #0d6efd;
+			margin-top: 5%;
+		}
+		.footer {
+			margin-top: 2%;
+			width: 100%;
+			display: inline-block;
+			position: relative;
+		}
+		.contact {
+			width: auto;
+			height: auto;
+			margin-bottom: -3%;
+		}
+		.telecharger {
+			width: auto;
+			height: auto;
+		}
+		.footer {
+			margin-top: 20%;
+			margin-bottom: -1%;
+		}
+		.footer .contact {
+			margin-right: 0;
+			text-align: center;
+		}
+		footer .telecharger {
+			float: right;
+			margin-right: 0;
+		}
+		.contrat-info {
+			color: #000;
+		}
+		span {
+			font-weight: bold;
+			color: #0d6efd;
+		}
+		.contractant p {
+			font-weight: bolder;
+			color: #000;
+		}
+		.contractant a {
+			text-decoration: none;
+			list-style: none;
+			color: red;
+		}
+		.contractant a:hover {
+			text-decoration: underline;
+			list-style: none;
+			color: blue;
+		}
+		.contact a {
+			text-decoration: none;
+			list-style: none;
+			color: red;
+			font-weight: bold;
+		}
+		.contact a:hover {
+			text-decoration: underline;
+			list-style: none;
+			color: blue;
+		}
+		.client p {
+			font-weight: bolder;
+			color: #000;
+		}
+
+		.description p {
+			*font-weight: 10;
+			font-size: 16px;
+		}
+		.date {
+			display: inline-block;
+		}
+	</style>
+	<div class="container">
+		<div class="card">
+			<div class="card-body">
+				<header>
+					<div class="contrat-info">Contrat D'investissement Numero
+						{{investissement.contratInvestissement.id}}
+						<br>
+						Enregistré à la date du
+						{{investissement.getDateCreation ? investissement.getDateCreation|date_format_fr('Y-m-d') : ''}}
+					</div>
+
+					<div class="infos">
+						<div class="contractant">
+							<h1>Contractant</h1>
+							<p>
+								<span>Nom</span>
+								:
+								{{app.user.personne.lastName}}</p>
+							<p>
+								<span>Prenom</span>
+								:
+								{{app.user.personne.firstName}}</p>
+							<p>
+								<span>E-mail</span>
+								:
+								{{app.user.email}}
+							</p>
+							<p>
+								<span>Poste</span>
+								:
+								{% if app.user.personne.lastName == 'Tounkara' %}
+									PCA de PMD-Developper
+								{% elseif app.user.personne.lastName == 'NGOULOU' %}
+									DG de PMD-Developper
+								{% else %}
+									DG Adjoint de PMD-Developper
+								{% endif %}
+							</p>
+							<p>
+								<span>Entreprise</span>
+								:
+																																																																																																																																																																																																								PMD-Developper
+							</p>
+							<p>
+								<span>Site-web</span>
+								:
+								<a href="https://pmd-developper.com/">pmd-developper.com</a>
+							</p>
+						</div>
+
+						<div class="client">
+							<h1>Client</h1>
+							<p>
+								<span>Nom</span>
+								:
+								{{contractantInvestissement.personneGestion.nom}}</p>
+							<p>
+								<span>Prenom</span>
+								:
+								{{contractantInvestissement.personneGestion.prenom}}
+							</p>
+							<p>
+								<span>Titre</span>
+								:
+								{{contractantInvestissement.personneGestion.titre}}
+							</p>
+							<p>
+								<span>E-mail</span>
+								:
+								{{contractantInvestissement.personneGestion.email}}
+							</p>
+							<p>
+								<span>Telephone</span>
+								:
+								{{contractantInvestissement.personneGestion.phone}}
+							</p>
+							<p>
+								<span>Localité</span>
+								:
+								{{contractantInvestissement.ville ~', '~ contractantInvestissement.pays}}
+							</p>
+						</div>
+
+					</div>
+
+				</header>
+
+				<main>
+
+					<div class="description">
+						<p><br>
+							Du
+							{{investissement.getDateDebut ? investissement.getDateDebut|date_format_fr('Y-m-d'):''}}
+							au
+							{{investissement.getDateFin ? investissement.getDateFin|date_format_fr}}, Mr ou Mme
+							{{app.user.personne.getFullName}}
+							a eu à signer une contrat d'investissement portant
+							{{investissement.designation}}
+							de type
+							{{investissement.type}}
+							à la valeur de
+							<br>
+							{{investissement.montantInvestissement|number_format(0, '', ' ')}}
+							F. 
+																																			L'investissement decrit ci-après :
+							{{investissement.description}}, a été signé en présence
+							{{investissement.temoinInvestissement|length}}
+							Témoin(s).																																																																																																																																							                    etablit le
+						</p>
+
+						<p>Le présent contrat a notamment pour objet de définir les prestations de services rendues par
+							{{contractantInvestissement.personneGestion.getFullName}}
+							envers Mr ou Mme
+							{{app.user.personne.getFullName}}
+							ne fournit ni services d’investissements ni conseil en placement, que ce soit au profit des Investisseurs ou des Entrepreneurs.</p>
+						<p>Ci dessous la liste des temoins</p>
+					</div>
+
+					<div class="temoins">
+						<table border="1">
+							<thead>
+								<tr>
+									<th scope="col">Nom & prenom</th>
+									<th scope="col">Titre</th>
+									<th scope="col">Email</th>
+									<th scope="col">Téléphone</th>
+									<th scope="col">Mot Temoignage</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for temoin in investissement.temoinInvestissement %}
+									<tr>
+										<td>{{temoin.personneGestion.getFullName}}</td>
+										<td>{{temoin.personneGestion.titre}}</td>
+										<td>{{temoin.personneGestion.email}}</td>
+										<td>{{temoin.personneGestion.phone}}</td>
+										<td>{{temoin.message}}</td>
+									</tr>
+								{% else %}
+									<tr>
+										no record found
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+					<div class="date">
+						<p>Date Debut :
+							<b>
+								{{investissement.getDateDebut ? investissement.getDateDebut|date_format_fr('Y-m-d'):''}}
+							</b>
+						</p>
+						<p>Date Fin :
+							<b>
+								{{investissement.getDateFin ? investissement.getDateFin|date_format_fr('Y-m-d'):''}}
+							</b>
+						</p>
+					</div>
+
+				</main>
+
+				<footer>
+					<div class="footer">
+						<div class="contact">
+							Power By PMD-Developper -
+							<a href="https://pmd-developper.com/">pmd-developper</a>
+							| Gestion Investissement
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+{% endblock %}

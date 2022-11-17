@@ -10,6 +10,8 @@ use App\Repository\ContractantInvestissementRepository;
 use App\Repository\ContratInvestissementRepository;
 use App\Repository\InvestissementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -215,5 +217,101 @@ class InvestissementController extends AbstractController
         }
         return new JsonResponse($response);
         //return $this->redirectToRoute('admin_gestion_investissement_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id<\d+>}/contractant/{id_contractant<\d+>}/display", name="admin_gestion_investissement_display_investissement", methods={"GET"})
+     */
+    public function displayInvestissement(
+        Investissement $investissement,
+        ContractantInvestissementRepository $contractantInvestissementRepository,
+        $id_contractant
+    ) {
+        if (
+            $contractantInvestissementRepository->find($id_contractant)
+
+        ) {
+            $contractantInvestissement = $contractantInvestissementRepository->find($id_contractant);
+        }
+
+        return $this->render(
+            'admin/gestion_investissement/investissement/displayInvestissement.html.twig',
+            [
+                'investissement' => $investissement,
+                'contractantInvestissement' => $contractantInvestissement
+            ]
+        );
+    }
+
+    /**
+     * @Route("/{id<\d+>}/contractant/{id_contractant<\d+>}/download", name="admin_gestion_investissement_download_investissement_pdf", methods={"GET"})
+     */
+    public function downloadPdfInvestissement(
+        Investissement $investissement,
+        ContractantInvestissementRepository $contractantInvestissementRepository,
+        $id_contractant
+    ) {
+        if (
+            $contractantInvestissementRepository->find($id_contractant)
+
+        ) {
+            $contractantInvestissement = $contractantInvestissementRepository->find($id_contractant);
+        }
+
+        //on instancie domPdf
+        $dompdf = new Dompdf();
+
+        //creation des options avec dompdf
+        $options = new Options();
+        $options->set('defalutFont', 'Arial');
+
+        //je passe les options
+        $dompdf->setOptions($options);
+
+        //pour ceux qui utlisent du SSL
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ]);
+        $dompdf->setHttpContext($context);
+
+        //on definit la page et l'orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        //le html que nous voulons voir dans le pdf
+        $html = $this->render(
+            'admin/gestion_investissement/investissement/download-pdf.html.twig',
+            [
+                'investissement' => $investissement,
+                'contractantInvestissement' => $contractantInvestissement
+            ]
+        );
+
+        //par defaut dompdf ne prend pas le css, on va ajouter le css
+       // $html.='<link type="text/css" media="dompdf" href="/public/css/pdfCssBootstrap/pdf.css" rel="stylesheet" />';
+
+        //definir la feuille de style
+
+       // $dompdf->setBasePath('/public/css/pdfCssBootstrap/pdf.css');
+
+        //charge le html a afficher
+        $dompdf->loadHtml($html);
+
+        //on rend la page en tant que PDF
+        $dompdf->render();
+
+        //on genere le fichier avec un nom
+        $fichier = 'Investissement ' . $contractantInvestissement->getPersonneGestion()->getFullName() . ' sur ' . $investissement->getDesignation();
+
+        //permettre la generation pdf par le navigateur
+        $dompdf->stream($fichier, [
+            "Attachment" => true
+        ]);
+
+        //on renvoie un response vide symfony
+        return new Response();
     }
 }

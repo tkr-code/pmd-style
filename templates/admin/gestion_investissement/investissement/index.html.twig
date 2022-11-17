@@ -86,13 +86,17 @@
 									<td>
 										{{link.show(path('admin_gestion_investissement_show', {'id': investissement.id,'id_contractant':contractantInvestissement.id}))}}
 										{{link.iconEdit(path('admin_gestion_investissement_edit', {'id': investissement.id,'id_contractant':contractantInvestissement.id}))}}
-										<button 
+										<button style="margin-left: -12px;"
 											class="btn del_investissement"
 											type="button"
 											data-delete="{{investissement.id}}"
 											data-contractant="{{contractantInvestissement.id}}"
-											data-path="{{path('admin_gestion_investissement_delete',{'id':investissement.id,'id_contractant':contractantInvestissement.id})}}"><i class="fas fa-trash-alt text-danger"></i>
+											data-path="{{path('admin_gestion_investissement_delete',{'id':investissement.id,'id_contractant':contractantInvestissement.id})}}"><i class="fas fa-trash-alt text-danger ml-0"></i>
 										</button>
+										{% if investissement.temoinInvestissement|length > 0 %}
+											{{link.iconPrint(path('admin_gestion_investissement_display_investissement',{'id':investissement.id,'id_contractant':contractantInvestissement.id}))}}
+										
+										{% endif %}
 									</td>
 								</tr>
 							{% else %}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link
+		rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
+		<!-- font-awesome -->
+		<link
+		rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+		<!-- Sweetalert 2 -->
+		<link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+		<title>
+			{% block title %}{% endblock %}
+			|
+			{{ app_name }}</title>
+		{% block head %}{% endblock %}
+	</head>
+
+	<body>
+
+		
+		{% block body %}{% endblock %}
+		{% block footer %}{% endblock %}
+		<script src="{{ asset('vendor/jquery/jquery.slim.min.js') }}"></script>
+
+		<script src="{{ asset('vendor/bootstrap/js/bootstrap.js') }}"></script>
+		<!-- sweetalert2-->
+		<script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+		{% block foot %}{% endblock %}
+		{% block javascripts %}{% endblock %}
+	</body>
+
+</html>
