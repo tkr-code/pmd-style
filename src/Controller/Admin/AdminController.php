@@ -4,11 +4,15 @@ namespace App\Controller\Admin;
 
 use App\Repository\CahierChargeRepository;
 use App\Service\CaisseService;
+use KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @Route("/my-account")
+ */
 class AdminController extends AbstractController
 {
     private $translator;
@@ -17,7 +21,7 @@ class AdminController extends AbstractController
         $this->translator = $translatorInterface;
     }
     /**
-     * @Route("/admin/", name="admin")
+     * @Route("/", name="admin")
      */
     public function index(CahierChargeRepository $cahierChargeRepository, CaisseService $caisseService): Response
     {
@@ -35,7 +39,22 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/blank", name="admin_blank_index")
+     * @Route("/analytics", name="admin_analytics")
+     */
+    public function analytics(): Response
+    {
+        $KEY_FILE_LOCATION = $this->getParameter('key_file_location');
+
+        // $client = new Goo
+        // $googleClient = new Google/Client();
+        // dd($googleClient);
+        // $googleClient->setApplicationName('Hello analitycs reports');
+        // $googleClient->setDeveloperKey($KEY_FILE_LOCATION);
+        return $this->render('admin/google/analytics.html.twig',[
+        ]);
+    }
+    /**
+     * @Route("/blank", name="admin_blank_index")
      */
     public function blank(): Response
     {

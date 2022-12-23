@@ -12,13 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("admin/user")
+ * @Route("my-account/user")
  */
 class UserController extends AbstractController
 {
     private $parent_page;
-    public function __construct(TranslatorInterface $translatorInterface)
+    private $userRepository;
+    public function __construct(UserRepository $userRepository, TranslatorInterface $translatorInterface)
     {
+        $this->userRepository = $userRepository;
         $this->parent_page = $translatorInterface->trans('User');
     }
     /**
@@ -30,6 +32,16 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
             'parent_page'=>$this->parent_page
         ]);
+    }
+            /**
+     * @Route("/client", name="admin_client_index")
+     */
+    public function client():Response
+    {
+       return $this->render('admin/user/client/index.html.twig',[
+           'clients'=>$this->userRepository->findByRole('ROLE_CLIENT'),
+           'parent_page'=>$this->parent_page
+       ]);
     }
 
     /**

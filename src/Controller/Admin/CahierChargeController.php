@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/cahier-de-charge")
+ * @Route("/my-account/cahier-de-charge")
  */
 class CahierChargeController extends AbstractController
 {

@@ -5,6 +5,8 @@ twig:
         app_name: 'Pmd developper'
         locales: '%app.locales%'
         navs: '@App\Twig\NavExtension'
+        categories: '@App\Twig\CategoryExtention'
+        # parentCategorys: '@App\Twig\CategoryParentExtention'
         site: 
             name: 'pmd-developper'
             description: "Startup de developement d'application"

@@ -17,6 +17,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const roles=[
+        // 'Administrateur'=>'ROLE_ADMIN',
+        'Editeur'=>'ROLE_EDITOR',
+        // 'Client'=>'ROLE_CLIENT',
+        // 'Utilisateur'=>'ROLE_USER'
+    ];
+    const status=[
+        'Activer'=>'Activer',
+        'Delete'=>'Delete'
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -70,16 +80,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToOne(targetEntity=Adresse::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $adresse;
-        /**
+    /**
      * 
      * @ORM\OneToMany(targetEntity=Phone::class, mappedBy="user")
      */
     private $phones;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="favori")
+     */
+    private $favoris;
+
+    /**
+     * @ORM\OneToOne(targetEntity=DeliverySpace::class, inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $delivery_space;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $orders;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cle;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->phones = new ArrayCollection();
         $this->socials = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
+        $this->status = 'Activer';
     }
 
 
@@ -279,6 +317,98 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $phone->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Order[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Article $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+            $favori->addFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Article $favori): self
+    {
+        if ($this->favoris->removeElement($favori)) {
+            $favori->removeFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function getDeliverySpace(): ?DeliverySpace
+    {
+        return $this->delivery_space;
+    }
+
+    public function setDeliverySpace(?DeliverySpace $delivery_space): self
+    {
+        $this->delivery_space = $delivery_space;
+
+        return $this;
+    }
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCle(): ?string
+    {
+        return $this->cle;
+    }
+
+    public function setCle(string $cle): self
+    {
+        $this->cle = $cle;
 
         return $this;
     }

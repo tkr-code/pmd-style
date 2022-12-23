@@ -1,0 +1,426 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Initiation à l’algorithmique{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+        const headerHeight = $('header').outerHeight()
+        // $('html,body').animate({
+        //         scrollTop: $('#introduction').offset().top
+        //     }, 'slow')
+        //REDIRIGE VERS L'ANCRE
+        $(document).on('click', '#table-de-matieres li a', function (e) {
+            e.preventDefault()
+            let target = $(this).attr('href');
+            $('html,body').animate({
+                scrollTop: $(target).offset().top - 200
+            }, 'slow')
+
+            //ACTIVE ANCRE
+            $('#table-de-matieres li a').removeClass('active')
+            $(this).addClass('active')
+        })
+    })
+</script>
+{% endblock %}
+{% block body %}
+<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+    <a class="breadcrumb-item" href="/">Accueil</a>
+    <a class="breadcrumb-item" href="{{ path('cours') }}">Cours</a>
+    <span class="breadcrumb-item text-white active">Initiation à l’algorithmique</span>
+</nav>
+<style>
+    #table-de-matieres {
+        border-top: 2px solid #ea0505f0;
+        max-height: 500px;
+        overflow-y: auto;
+        padding: 12px 12px 12px 16px;
+        position: fixed;
+        background: #011431;
+        color: #fff;
+        border-bottom: 1px solid #fff;
+        z-index: 90;
+        padding-top: 60px;
+        width: 330px;
+        width: 330px;
+    }
+
+    #table-de-matieres div {
+        height: 100%;
+    }
+
+    #table-de-matieres ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    #table-de-matieres ul p {
+        text-align: center;
+        text-transform: capitalize;
+    }
+
+    #table-de-matieres ul li {
+        margin-top: 10px;
+    }
+
+    #table-de-matieres ul li a {
+        color: #fff;
+        /* font-weight: bold; */
+
+        margin-left: 5px;
+        font-size: 13px;
+        text-transform: capitalize;
+    }
+
+    #table-de-matieres ul li a.active {
+        color: #007bff;
+    }
+
+    #cours {
+        background: #fff;
+        padding-top: 10px;
+        /* height: 400px; */
+        overflow: auto;
+        padding-bottom: 20px;
+    }
+
+    .chapitre {
+        font-size: 25px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+
+    .detail {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .detail-titre {
+        font-size: 18px;
+        font-weight: bold;
+        padding-left: 25px;
+    }
+
+    .detail-desc {
+        text-align: justify;
+        line-height: 30px;
+        padding-left: 50px;
+    }
+
+    .detail-desc ul {
+        margin-left: 25px;
+    }
+
+    footer {
+        position: relative;
+        z-index: 99 !important;
+    }
+
+    .cours-name {
+        background: linear-gradient(#011431, #007bff);
+        text-align: center;
+        height: 40px;
+        text-transform: uppercase;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .cours-name h5 {
+        text-shadow: wheat 0.006em 0.006em 0.007em,
+            #9c9c9c 1px 1px 1px;
+        color: #fff;
+        vertical-align: middle;
+        line-height: 40px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        /* font-size: 40px; */
+    }
+</style>
+<div class="row">
+    <div class="col-md-3 bg-2">
+        <div id="table-de-matieres">
+            <div>
+                <h5>Initiation à l’algorithmique</h5>
+                <ul>
+                    <p>Chapitre 1</p>
+                    <li>
+                        <a href="#generalite">Généralités</a>
+                    </li>
+                    <li>
+                        <a class="active" href="#introduction">1. Introduction</a>
+                    </li>
+                    <li>
+                        <a class="btn-detail" href="#quelque_definition_de_lalgorithme">2. Quelques définitions de
+                            l’algorithme</a>
+                    </li>
+                    <li>
+                        <a href="#notion_algorithme">3. Notion d’algorithme</a>
+                    </li>
+                    <p>Chapitre 2</p>
+                    <li>
+                        <a href="#">Les objets d'un univers</a>
+                    </li>
+                    <li>
+                        <a href="#">1. Les types d’objets</a>
+                    </li>
+                    <li>
+                        <a href="#">1.1 Le type booléens</a>
+                    </li>
+                    <li>
+                        <a href="#">1.2 Le type numérique</a>
+                    </li>
+                    <li>
+                        <a href="#">1.3 Le type chaine de caractères</a>
+                    </li>
+                    <li>
+                        <a href="#">2. Déclaration des variables et constantes dans un algorithme</a>
+                    </li>
+                    <li>
+                        <a href="#">2.1 Tableau signalétique</a>
+                    </li>
+                    <li>
+                        <a href="#">3. Les trois grandes étapes de l’analyse d’un algorithme</a>
+                    </li>
+                    <li>
+                        <a href="#">3.1 La préparation au traitement</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div id="cours">
+            <div class="container">
+                <div class="cours-name">
+                    <h5>Initiation à L’ALGORITHMIQUE</h5>
+                </div>
+                <p class="chapitre">Chapitre 1</p>
+                <p id="generalite" class="detail-titre">Généralités</p>
+                <div class="detail">
+                    <p id="introduction" class="detail-titre">1. Introduction </p>
+                    <div class="detail-desc">
+                        <p>
+                            La programmation ne se réduit pas à la codification dans un langage convenu des
+                            actions à réaliser pour résoudre un problème, elle se compose :
+                        </p>
+                        <ul>
+                            <li>
+                                d’une étape de conception de la solution
+                            </li>
+                            <li>
+                                d’une étape de traduction dans un langage compréhensible par la machine.
+                            </li>
+                        </ul>
+                        <p>
+
+                            Tout au long de cours nous développerons la conception de la démarche algorithmique.
+                            Cette démarche est nécessaire car sans elle la mise au point, la recherche d’erreur, la
+                            maintenance et les améliorations de programme seraient difficile.
+                        </p>
+                    </div>
+                </div>
+                <div class="detail">
+                    <p id="quelque_definition_de_lalgorithme" class="detail-titre">2. Quelques définitions de
+                        l’algorithme</p>
+                    <div class="detail-desc">
+                        <ul>
+                            <li>
+                                Un algorithme est une suite finie et non ambiguë d'instructions (ensemble
+                                d’instruction) et d’opérations permettant de résoudre un problème.
+                            </li>
+                            <li>
+                                Un algorithme est la description d'une suite d'étapes permettant d'obtenir un
+                                résultat à partir d'éléments fournis en entrée.
+                            </li>
+                        </ul>
+                        <p>
+                            Par exemple, une recette de cuisine est un algorithme permettant d'obtenir un
+                            plat à partir de ses ingrédients! Le domaine qui étudie les algorithmes est
+                            appelé l'algorithmique.
+                            Le mot algorithme vient d'Al-Khwârizmî, nom d'un mathématicien persan du IXème
+                            siècle.<br>
+                            De nos jours des algorithmes sont utilisés dans de nombreuses applications telles que
+                            le fonctionnement des ordinateurs, la cryptographie, le routage d'informations, la
+                            planification et l'utilisation optimale des ressources, le traitement d'images, le
+                            traitement de textes, la bio-informatique, etc.</p>
+                    </div>
+                </div>
+                <div class="detail">
+                    <p id="notion_algorithme" class="detail-titre">3. Notion d’algorithme</p>
+                    <div class="detail-desc">
+                        <p>Des définitions qui découlent, nous pouvons dire que l’algorithme est un langage de
+                            description des étapes de la résolution d’un problème.</p>
+                        <p>Il doit:<br>
+
+                        <ul>
+                            <li>
+                                Contenir un nombre fini d’action exécutable
+                            </li>
+                            <li>
+                                Utiliser des données connues par l’utilisateur
+                            </li>
+                            <li>Avoir au moins un résultat</li>
+                        </ul>
+                        Le point de départ de tout algorithme est d’identifier les données en entrées et les
+                        résultats en sortie ; par la suite en définit les moyens pour obtenir les résultats
+                        recherches à partir des données.<br>
+                        Lorsqu’un problème nous est soumis, aussi grand qu’il soit nous procèderons à la
+                        décomposition de ce problème en des petits problèmes faciles à résoudre et la somme
+                        de ces solutions constituera la solution à notre grand problème.<br>
+                        La méthode que nous utilisons se décrira par la décomposition d’un gros problème en
+                        un tout petit.<br>
+                        <span class="font-weight-bold">NB</span>: il n’existe pas un algorithme unique pour résoudre un
+                        problème, cependant il faut
+                        choisir la plus optimale.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            {#
+            1.3 Le type chaine de caractères
+            ........................................................................ 11
+            2. Déclaration des variables et constantes dans un algorithme ........................... 12
+            2.1 Tableau signalétique
+            .................................................................................... 13
+            3. Les trois grandes étapes de l’analyse d’un algorithme.................................... 13
+            3.1 La préparation au traitement
+            ........................................................................ 13
+            3.2 Le traitement
+            ................................................................................................ 13
+            3.3 Le résultat du traitement
+            .............................................................................. 14
+            4. Ossature d’un algorithme
+            ................................................................................ 15
+            Chapitre 3
+            ...................................................................................................................
+            16
+            Les instructions de base
+            ............................................................................................. 17
+            1. L’Instruction d’affectation
+            .............................................................................. 17
+            2. L’instruction de saisie
+            ..................................................................................... 17
+            3. L’instruction d’affichage
+            ................................................................................. 17
+            4. Format général
+            ................................................................................................ 17
+            Chapitre 4
+            ...................................................................................................................
+            19
+            Les structures alternatives
+            .......................................................................................... 20
+            1. Syntaxe
+            ............................................................................................................
+            20
+            2. Imbrication de condition ou structure alternative ........................................... 20
+            2.1 Syntaxe de SI imbriqué
+            ............................................................................... 21
+            3. Le choix multiple
+            ............................................................................................ 22
+            3.1 Syntaxe
+            ........................................................................................................
+            22
+            Les structures répétitives
+            ............................................................................................ 25
+            1. Introduction
+            ..................................................................................................... 25
+            Page 4 sur 58
+            2. Classification
+            ................................................................................................... 25
+            2.1 La structure TANT QUE .............................................................................
+            25
+            2.1.1 Syntaxe
+            ................................................................................................. 25
+            2.1.2 Remarques
+            ............................................................................................ 26
+            2.2 La structure Répéter jusqu’à........................................................................
+            28
+            2.2.1 Syntaxe
+            ................................................................................................. 28
+            2.2.2 Remarques
+            ............................................................................................ 28
+            2.3 La structure POUR
+            ...................................................................................... 31
+            2.3.1 Syntaxe
+            ................................................................................................. 31
+            2.3.2 Remarques
+            ............................................................................................ 31
+            Les Tableaux
+            ..............................................................................................................
+            32
+            I. Les vecteurs
+            ........................................................................................................
+            32
+            1. Définition
+            ........................................................................................................
+            32
+            1.1 Syntaxe
+            .......................................................................................................
+            32
+            1.2 Opération sur les vecteurs
+            ........................................................................... 33
+            1.2.1 Création d’un vecteur ...........................................................................
+            33
+            1.2.2 Affichage d’un vecteur .........................................................................
+            33
+            1.2.3 Recherche d’un élément dans un vecteur non ordonné ........................ 35
+            1.2.4 La recherche dichotomique .................................................................. 37
+            1.2.5 Tri de Tableau
+            ...................................................................................... 39
+            1.2.5.1 Principe de la méthode du tri par 2change (ou tri à bulle) ................... 39
+            II. Les Matrices
+            .......................................................................................................
+            42
+            1. Définition
+            ........................................................................................................
+            42
+            1.1 Syntaxe
+            .......................................................................................................
+            42
+            1.2 Opération sur les matrices
+            ........................................................................... 42
+            1.2.1 Lecture d’une matrice ..........................................................................
+            42
+            1.2.2 Affichage d’une matrice ....................................................................... 43
+            Chapitre 5
+            ...................................................................................................................
+            48
+            Les sous programmes
+            ................................................................................................. 49
+            1. Définition
+            ........................................................................................................
+            49
+            2. Types de sous-algorithme
+            ............................................................................... 50
+            2.1 Procédure
+            ..................................................................................................... 50
+            2.1.1 Déclaration d’une procédure ................................................................ 50
+            2.2 Fonction
+            .......................................................................................................
+            52
+            2.2.1 Déclaration d’une fonction ................................................................... 52
+            Page 5 sur 58
+            3. Mode de passages de paramètres ....................................................................
+            54
+            3.1 Passage paramètres par valeur .....................................................................
+            54
+            3.1.1 Syntaxe
+            ......................................................................................................
+            54
+            3.2 Passage paramètres par variable ..................................................................
+            55
+            3.2.1 Syntaxe
+            ................................................................................................. 55
+            3.2.2 Syntaxe
+            ................................................................................................. 56 #}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

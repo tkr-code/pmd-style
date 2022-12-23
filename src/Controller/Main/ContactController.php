@@ -20,7 +20,7 @@ class ContactController extends AbstractController
     {
         $form = $this->createForm(ContactType::class);
         $contact = $form->handleRequest($request);
-        $reCAPTCHA_secret_key="6Lf5x_ceAAAAADml1QNfCFcx_TZ-sWYo6_9euqeV";
+        $reCAPTCHA_secret_key="6LfDomMhAAAAAHVQGcmpEZUbJ-5XsGPq63w_7vw9";
         $g_recaptcha_response="";
         $ip = $_SERVER['REMOTE_ADDR'];
         $globaals = $this->get('twig')->getGlobals();

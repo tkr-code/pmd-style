@@ -23,7 +23,7 @@ class NavExtension extends AbstractExtension
     {
         return 
         [
-            'navs'=>
+            'user'=>
             [
                 [
                     'name'=>$this->translator->trans('Dashboard'),
@@ -69,7 +69,27 @@ class NavExtension extends AbstractExtension
                     'path'=>'admin_caisse_index',
                     'icon'=>'fas fa-funnel-dollar'
                 ],
-                
+                [
+                    'name'=>'Boutique',
+                    'path'=>'admin',
+                    'links'=>[
+                        [
+                            'name'=>'Produit',
+                            'path'=>'article_index',
+                            'icon'=>'far fa-circle'
+                        ],
+                        [
+                            'name'=>'Categorie',
+                            'path'=>'category_index',
+                            'icon'=>'far fa-circle'
+                        ],
+                        [
+                            'name'=>'Marque',
+                            'path'=>'admin_brand_index',
+                            'icon'=>'far fa-circle'
+                        ],
+                    ]
+                ],
             ],
             'admin'=>
             [
@@ -86,7 +106,26 @@ class NavExtension extends AbstractExtension
                             'path'=>'user_new',
                         ],
                     ]
-                ]
+                ],
+                [
+                    'name'=>'Categorie',
+                    'path'=>'category_index',
+                    'icon'=>'far fa-circle'
+                ],
+                [
+                    'name'=>'Marque',
+                    'links'=>[
+                        [
+                            'name'=>'Liste',
+                            'path'=>'admin_brand_index'
+                        ],       
+                        [
+                            'name'=>'new',
+                            'path'=>'admin_brand_new',
+                        ],
+                        
+                    ]
+                ],
             ]
         ];
     }

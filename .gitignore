@@ -8,6 +8,7 @@
 /var/
 /migrations/
 /vendor/
+/src/Service/Google/pmd-developper-305474b078b7.json'
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

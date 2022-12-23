@@ -17,7 +17,7 @@ use App\Repository\PhoneRepository;
 
 
 /**
- * @Route("admin/profile")
+ * @Route("my-account/profile")
  */
 class ProfileController extends AbstractController
 {

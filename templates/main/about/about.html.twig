@@ -3,25 +3,13 @@
 {% block title %}A propos{% endblock %}
 {% block navUl %}
 {{ navs.ul('about') }}
-{# <ul class="navbar-nav ml-auto text-uppercase f1">
-    <li>
-        <a href="/">Accueil</a>
-    </li>
-    <li>
-        <a href="/#services">Services</a>
-    </li>
-    <li>
-        <a href="/#team">Equipe</a>
-    </li>
-    <li>
-        <a class="active" href="{{ path('about') }}">A propos</a>
-    </li>
-    <li>
-        <a href="{{ path('contact') }}">Contact</a>
-    </li>
-</ul> #}
 {% endblock %}
 {% block body %}
+<style>
+    section#boutique{
+        background: #fff;
+    }
+</style>
 <nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
     <a class="breadcrumb-item" href="/">{{'Home'|trans}}</a>
     <span class="breadcrumb-item text-white active">{{'About'|trans}}</span>

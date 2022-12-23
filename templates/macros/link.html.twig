@@ -18,4 +18,8 @@
 {% macro show(path = '#') %}
     <a class="mx-1" href="{{ path }}"><i class="fa fa-eye text-dark"></i></a>
 {% endmacro %}
-
+{% macro pencil(path) %}
+    <a href="{{ path|default('#') }}" title="Modifier">
+        <i class="fas fa-pencil-alt text-success"></i>
+    </a>
+{% endmacro %}
