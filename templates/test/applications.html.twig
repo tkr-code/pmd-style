@@ -1,0 +1,57 @@
+{% extends "main/base.html.twig" %}
+{% block body %}
+<style>
+    #applications{
+
+    }
+    .app-card{
+        padding: 10px;
+        /* background: red; */
+        border-radius: 8px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+.app-card img{
+    width: 100%
+}
+</style>
+   <!-- Application -->
+   	<section id="applications" class="bg-2">
+        <div class="container">
+            <h2 class="text-center py-5">
+                Pmd App Store
+            </h2>
+            <div class="row">
+                <div class="col-xl-6">
+                    <p style="font-size:1.5rem; font-weight:bold">Gestion dépenses</p>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group">
+                      <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-2">
+                    <div class="app-card bg-1">
+                        <img src="https://placehold.co/200x200/png" alt="..." />
+                    </div>
+                </div>
+                <div class="col-xl-10">
+                    <div class="row">
+                        <div class="col-xl-12">
+
+                        </div>
+                        <div class="col-xl-12">
+                            <a href="#" class="btn btn-primary">Telecharger</a>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+	</section>
+
+{% endblock %}

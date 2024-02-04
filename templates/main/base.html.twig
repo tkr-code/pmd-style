@@ -13,7 +13,9 @@
 		        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
     <link rel="shortcut icon" href="{{ asset('img/logo/logo-pmd-1.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-    <!-- owl.carousel -->
+       <!-- owl.carousel -->
+    <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.theme.default.min.css') }}">
     <!-- fontawesome -->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.css') }}"> <!-- aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -22,12 +24,14 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{ asset('css/pmd.css') }}"> {% block head %}{% endblock %}
     <title>
-        {% block title %}Accueil - Votre équipe de solution informatique
-        {% endblock %}
-        - Pmd Developper
+        {% block title %}Accueil - Votre équipe de solution informatique{% endblock %} - Pmd Developper
     </title>
 </head>
-
+<style>
+.owl-theme .owl-nav [class*=owl-] {
+  background:transparent;
+}
+</style>
 <body>
     <button onclick="topFunction()" id="btn-scroll" class="bg-3" title="Go to top">
         <i class="fa fa-arrow-circle-up fa-1x" aria-hidden="true"></i>
@@ -61,197 +65,7 @@
         <!-- /.container -->
     </header>
     <main>
-        {% block body %}
-        <!-- home -->
-        <section id="home" data-aos="fade-up">
-            <div class="container py-5" data-aos="fade-up">
-                <img class="w-100" src="{{ asset('img/logo/pmd-developper.png')}}" alt="">
-                <p class="text-center home-title text-uppercase">
-                    <span>
-                        Nous vous accompagnons dans la réalisation de vos projets informatiques.
-                    </span>
-                </p>
-            </div>
-        </section>
-        <!-- services -->
-        <section id="services">
-            <h3>Services</h3>
-            <p class="text-justify  text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
-                projets aussi
-                fous soient-ils.</p>
-            <div class="container">
-                <div class="row pb-4">
-                    <div data-aos="flip-left" class="col-lg-4 bg-2  text-center">
-                        <div class="card bg-2  card-body rounded">
-                            <div class="mt-5">
-                                <i class="fa sh-2 fa-shopping-bag fa-5x rounded-circle bg-4 p-4"></i>
-                                <h5 class="mt-5 text-uppercase c-1">Vente informatique</h5>
-                                <p class="text-justify">Des ordinateurs et accessoires informatiques sont disponibles
-                                    dans
-                                    notre
-                                    boutique en ligne</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="zoom-in-down" class="col-lg-4  bg-3 text-center">
-                        <div class="card card-body bg-3 rounded">
-                            <div class="mt-5">
-                                <i class="fa fa-globe fa-5x sh-2 rounded-circle bg-4 p-4"></i>
-                                <h5 class="mt-5 text-uppercase c-1">Application Personalisée</h5>
-                                <p class="text-justify">Nous vous proposons des maquettes réalisées à partir des
-                                    informations de votre project.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-right" class="col-lg-4 bg-2 text-center">
-                        <div class="card card-body bg-2 mg-1 mb-4 rounded">
-                            <div class="mt-5">
-                                <i class="fa fa-cog fa-5x bg-4 sh-2 rounded-circle bg-1 p-4"></i>
-                                <h5 class="mt-5 c-1 text-uppercase">Maintenance de logiciel</h5>
-                                <p class="text-justify">Une améioration de logiciel après la mise en oeuvre,
-                                    pour en corriger les fautes, en
-                                    améliorant l'éfficacité ou autres caractéristiques, ou encore adapter celui-ci à un
-                                    environement modifié</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Notre equipe -->
-        <section id="team" class="bg-white">
-            <h3>Notre equipe</h3>
-            <p class="text-justify text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
-                projets aussi
-                fous soient-ils</p>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-right">
-                        <img src="{{ asset('img/user/pepin.jpg') }}" width="200px" class="rounded-circle circle-1 m-2"
-                            alt="">
-                        <h3>
-                            <span class="first">P</span>epin Djoneska
-                        </h3>
-                        <p>Développeur Full stack</p>
-                        <a href="https://api.whatsapp.com/send?phone=221772375369&text=Salut , Pépin j'ai eu votre contacte sur votre site"
-                            target="_blank" title="whatsapp" class="socials-item">
-                            <i class="fab fa-whatsapp whatsapp"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/pepin-ngoulou-1a5227223/" target="_blank" title="linkedin"
-                            class="socials-item">
-                            <i class="fab fa-linkedin linkedin" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ path('cv_show',{slug:'pepin-djoneska'}) }}" title="Pepin Djoneska"
-                            class="socials-item">
-                            Cv
-                        </a>
-                    </div>
-                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out">
-                        <img src="{{ asset('img/user/malick-tounkara.jpg') }}" width="200px"
-                            class="rounded-circle circle-1 m-2" alt="malick tounkara">
-                        <h3>
-                            <span class="first">M</span>alick Tounkara
-                        </h3>
-                        <p>Développeur Full Stack.</p>
-                        <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
-                            class="socials-item">
-                            <i class="fab fa-facebook-f facebook"></i>
-                        </a>
-                        <a href="https://api.whatsapp.com/send?phone=221781278288&text=Salut, Malick j'ai eu votre contacte sur votre site :"
-                            target="_blank" title="Whatsapp" class="socials-item">
-                            <i class="fab fa-whatsapp whatsapp"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/malick-tounkara-b858a41aa/" target="_blank"
-                            title="linkedin" class="socials-item">
-                            <i class="fab fa-linkedin" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ path('cv_show',{slug:'malick-tounkara'}) }}" title="cv malick toumkara"
-                            class="socials-item">
-                            Cv
-                        </a>
-                    </div>
-                    <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-left">
-                        <img src="{{ asset('img/user/dieme.jpg') }}" width="200px" class="rounded-circle circle-1 m-2"
-                            alt="">
-                        <h3>
-                            <span class="first">D</span>ieme mamadou
-                        </h3>
-                        <p>Développeur Java</p>
-                        <a href="https://api.whatsapp.com/send?phone=221770431225&text=Bienvenue chez TKR-CODE. (Merci de vous présenter)"
-                            target="_blank" title="Whatsapp" class="socials-item">
-                            <i class="fab fa-whatsapp whatsapp"></i>
-                        </a>
-                        <a href="{{ path('cv_show',{slug:'mamadou-dieme'}) }}" title="cv mamdou dieme"
-                            class="socials-item">
-                            Cv
-                        </a>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section>
-
-        <!-- creations -->
-        <section id="creations">
-            <h3>Creations</h3>
-            <p class="text-justify text-center p-4">Des exemples de projet créés dans nos ateliers</p>
-            <div class="container mx-auto mt-4">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="{{ asset('img/creation/gaboma-annonce.png') }}" width="100px" class="card-img-top"
-                                alt="Gaboma annonce">
-                            <div class="card-body">
-                                <h5 class="card-title">Gaboma annonce</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Site d'annonce au sénégal</h6>
-                                {# <a href="#https://gaboma-annonce.com" class="btn btn-1 mr-2">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                    Visiter le Site</a> #}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {# <div class="text-center">
-                    <a href="#" class="btn btn-2">
-                        Toutes nos creations
-                    </a>
-                </div> #}
-            </div>
-        </section>
-        <!-- cahier de charge -->
-        <section id="cahier-de-charge">
-            <div class="container py-5">
-                <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div>
-                            <img class="cahier-de-charge-img mx-auto"
-                                src="{{ asset('img/icons/cahier de charge.png') }}" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-8 py-4">
-                        <h3>VOUS AVEZ UN PROJET ?</h3>
-                        <p class="text-justify 1rem">
-                            Notre métier consiste à concevoir des logiciels sur mesure le plus
-                            souvent à la demande d'un
-                            client.<br /> Le travail débute sur la base d'un cahier de charge précis et détaillé.<br />
-                            Si vous n'avez
-                            pas de cahier de charge, nous avons confectionnés pour vous ce questionnaire qui vous
-                            permettra de mieux décrire votre besoin et vous servira de cahier de charge.<br /> Nos devis
-                            et
-                            études de projet sont gratuits
-                        </p>
-                        <a href="{{ path('cahier_charge_index') }}" class="btn btn-2"> <i class="fas fa-file"></i>
-                            Remplir le cahier de charge</a>
-                        <span class="span-1">|</span>
-                        <a href="{{ path('contact') }}" class="btn btn-2"> <i class="fa fa-address-book"
-                                aria-hidden="true"></i> Nous
-                            contacter</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        {% endblock %}
-
+    {% block body %}{% endblock %}
     </main>
     {% block footer %}
     <footer class="footer-10">
@@ -366,6 +180,8 @@
         </div>
     </footer>
     {% endblock %}
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
@@ -377,6 +193,8 @@
 	        crossorigin="anonymous"></script> -->
     <!-- sweetalert2-->
     <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+        <!-- owl-carousel -->
+    <script src="{{ asset('vendor/owl-carousel/owl.carousel.min.js') }}"></script>
     <!-- Aos -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"> </script><!-- pmd script  -->
     {% block foot %}{% endblock %}

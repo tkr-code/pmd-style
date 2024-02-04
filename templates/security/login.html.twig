@@ -50,7 +50,7 @@
                   {# <label for="username">Username</label>
                   <input type="text" class="form-control" id="username"> #}
                   <label for="inputEmail">Email</label>
-                  <input type="email" value="{{ (last_username) ? last_username : 'tkr@pmd-developper.com' }}" name="email" id="inputEmail"
+                  <input type="email" value="{{ (last_username) ? last_username : '' }}" name="email" id="inputEmail"
                     class="form-control" autocomplete="email" required autofocus>
 
                 </div>
@@ -59,7 +59,7 @@
                   <input type="password" class="form-control" id="password"> #}
                   <label for="inputPassword">{{'Password'|trans}}</label>
                   <input type="password" name="password" id="inputPassword" class="form-control"
-                    autocomplete="current-password" value="password" required>
+                    autocomplete="current-password" value="" required>
 
                   <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </div>
@@ -73,7 +73,23 @@
                 </div>
 
                 <input type="submit" value="Log In" class="btn btn-block btn-primary">
-                <a href="{{ path('connect_google_start') }}">Se connecter avec google</a>
+                {# <div class="my-2">
+                  <div id="g_id_onload"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-client_id="{{ GOOGLE_CLIENT_ID }}"
+                    data-login_uri="{{ GOOGLE_LOGIN_URL }}"
+                    data-auto_prompt="false">
+                  </div>
+                  <div class="g_id_signin"
+                    data-type="standard"
+                    data-size="large"
+                    data-theme="outline"
+                    data-text="sign_in_with"
+                    data-shape="rectangular"
+                    data-logo_alignment="left">
+                  </div>
+                </div> #}
                 {# <span class="d-block text-left my-4 text-muted">&mdash; or login with &mdash;</span>
 
                 <div class="social-login">
@@ -97,7 +113,7 @@
     </div>
   </div>
 
-
+   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

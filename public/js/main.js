@@ -1,5 +1,19 @@
 $(function(){
     "use strict";
+    $(document).on('click','.tutoriel-list-btn',function(){
+        $('.tutoriel-list-btn').removeClass('active')
+        $(this).toggleClass('active')
+    })
+
+    const headerHeight = $('header').outerHeight()
+    //REDIRIGE VERS L'ANCRE
+    $(document).on('click', '.header-link', function (e) {
+        e.preventDefault()
+        let target = $(this).attr('href');
+        $('html,body').animate({
+            scrollTop: $(target).offset().top - headerHeight +20
+        }, 'slow')
+    })
     //------- fixed navbar --------//  
     $(window).scroll(function () {
         var sticky = $('.main-header'),
@@ -29,4 +43,33 @@ $(function(){
         $(this).find('i').toggleClass('fa fa-angle-up fa fa-angle-down','slow')
 
     })
+
+    
+    //tutoriel active
+    $(document).on('click', '.tutoriel-list-btn', function () {
+        $('.tutoriel-list-btn').removeClass('active')
+        $(this).addClass('active')
+    })
+
+    
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: true,
+        // autoplay:true, 
+        dots: true,
+        navText: ['<i class="fa fa-arrow-circle-left fa-2x"></i>', '<i class="fa fa-arrow-circle-right fa-2x">'],
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            1000: {
+                items: 1
+            }
+        }
+    })
+
 })

@@ -1,0 +1,29 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}cours et Exercies{% endblock %}
+
+
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {})
+	</script>
+{% endblock %}
+{% block body %}
+<style></style>
+    <nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+        <a class="breadcrumb-item" href="#">Accueil</a>
+        <a class="breadcrumb-item" href="#">Formations</a>
+        <a class="breadcrumb-item" href="#">Algorithme</a>
+        <span class="breadcrumb-item text-white active">Exercices d'algorithme</span>
+    </nav>
+	<section id="test" class="container bg-white py-5">
+        <div>
+            <h3 class="title-1">Pages de test</h3>
+        </div>
+		<div class="list-group">
+			<a href="{{path('test_index')}}" class="list-group-item list-group-item-action active">Page de test</a>
+			<a href="{{path('test_application')}}" class="list-group-item list-group-item-action">Applicaton mobile </a>
+			{# <a href="#" class="list-group-item list-group-item-action disabled">Application mobile</a> #}
+		</div>
+	</section>
+{% endblock %}

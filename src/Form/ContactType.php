@@ -10,13 +10,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use App\Entity\Contact;
 
 class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',TextType::class,[
+            ->add('nom',TextType::class,[
                 'attr'=>[
                     'placeholder'=>'Votre nom (obligatoire)',
                 ],
@@ -37,7 +38,7 @@ class ContactType extends AbstractType
                 ],
                 'required'=>true,
             ])
-            ->add('phone_number',TextType::class,[
+            ->add('tel',TextType::class,[
                 'label'=>'Téléphone',
                 'attr'=>[
                     'placeholder'=>'Numéro de portable (obligatoire)',
@@ -67,6 +68,7 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'data_class' => Contact::class,
             // Configure your form options here
         ]);
     }

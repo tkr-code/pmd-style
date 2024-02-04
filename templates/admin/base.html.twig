@@ -12,6 +12,8 @@
 		{{ app_name }}</title>
 	<link rel="shortcut icon" href="{{ asset('img/logo/logo-pmd-1.png') }}" type="image/x-icon">
 
+	<!-- summernote-->
+    <link href="{{ asset('vendor/summernote/summernote-bs4.css')}}" rel="stylesheet">
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -182,6 +184,27 @@
 	<script src="{{ asset('js/adminlte.js') }}"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{ asset('js/demo.js') }}"></script>
+
+	<!--summernote-->
+    <script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script>
+	 <script>
+      $('.text_area_summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['']],
+		//   ['table', ['table']],
+		['insert', ['link', 'picture', 'video']],
+        //   ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>
 
 	<!-- util -->
 	<!--script src="{{ asset('js/util.js') }}"></script-->

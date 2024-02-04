@@ -40,16 +40,16 @@ function onSubmit(token) {
         <div class="row">
             <div class="col-lg-6 col-12">
                 <div class="form-group">
-                    <label for="">Name <span>*</span> </label>
-                    {{form_widget(form.name,{
+                    <label for="">Nom complet <span>*</span> </label>
+                    {{form_widget(form.nom,{
                     attr:{
                     'class':'size-input'
                     }
                     })}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Phone <span>*</span></label>
-                    {{form_widget(form.phone_number,{
+                    <label for="exampleInputEmail1">Téléphone <span>*</span></label>
+                    {{form_widget(form.tel,{
                     attr:{
                     class:'size-input'
                     }
@@ -66,7 +66,7 @@ function onSubmit(token) {
             </div>
             <div class="col-lg-6 col-12">
                 <div class="form-group ">
-                    <label for="exampleInputEmail1 ">Your Message <span>*</span></label>
+                    <label for="exampleInputEmail1 ">Votre  Message <span>*</span></label>
                     {{ form_widget(form.message) }}
                 </div>
             </div>
@@ -76,7 +76,7 @@ function onSubmit(token) {
             <div class="col-md-2">
                 <button type="submit" class="g-recaptcha btn btn-2" 
                 data-sitekey="6Lf5x_ceAAAAAGo5ObTVmBQva3GcIV8nzhmu2xlI" 
-                data-callback='onSubmit'><i class="fas fa-paper-plane"></i>&nbsp;Submit</button>
+                data-callback='onSubmit'><i class="fas fa-paper-plane"></i>&nbsp;Envoyer</button>
             </div>
         </div>
         {{form_widget(form)}}

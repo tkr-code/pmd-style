@@ -90,6 +90,17 @@ class NavExtension extends AbstractExtension
                         ],
                     ]
                 ],
+                [
+                    'name'=>'Formation',
+                    'path'=>'app_admin_formations_index',
+                    'links'=>[
+                        [
+                            'name'=>'Formations',
+                            'path'=>'app_admin_formations_index',
+                            'icon'=>'far fa-circle'
+                        ],
+                    ]
+                ],
             ],
             'admin'=>
             [

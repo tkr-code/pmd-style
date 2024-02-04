@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation{% endblock %}
+
+{% block body %}
+    <h1>Formation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ formation.id }}</td>
+            </tr>
+            <tr>
+                <th>Annee</th>
+                <td>{{ formation.annee }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ formation.ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ formation.pays }}</td>
+            </tr>
+            <tr>
+                <th>Ecole</th>
+                <td>{{ formation.ecole }}</td>
+            </tr>
+            <tr>
+                <th>Diplome</th>
+                <td>{{ formation.diplome }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ formation.description }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ formation.title }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ formation.nom }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ formation.slug }}</td>
+            </tr>
+            <tr>
+                <th>Is_active</th>
+                <td>{{ formation.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_formation_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_formation_edit', {'id': formation.id}) }}">edit</a>
+
+    {{ include('admin/formation/_delete_form.html.twig') }}
+{% endblock %}

@@ -19,6 +19,9 @@ twig:
             mission_text: 'text à definir'
             user_empty: 'empty.png'
         gg_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+        GOOGLE_CLIENT_ID: '%env(GOOGLE_CLIENT_ID)%'
+        GOOGLE_CLIENT_SECRET: '%env(GOOGLE_CLIENT_SECRET)%'
+        GOOGLE_LOGIN_URL: '%env(GOOGLE_LOGIN_URL)%'
 when@test:
     twig:
         strict_variables: true

@@ -1,0 +1,58 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}cours et Exercies{% endblock %}
+
+
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {})
+	</script>
+{% endblock %}
+{% block body %}
+    <nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+        <a class="breadcrumb-item" href="#">Accueil</a>
+        <a class="breadcrumb-item" href="#">Formations</a>
+        <a class="breadcrumb-item" href="#">Algorithme</a>
+        <span class="breadcrumb-item text-white active">Exercices d'algorithme</span>
+    </nav>
+	<style>
+        #exercices .title-1{
+            font-size:18x;
+            font-weight:bold;
+            padding: 10px 0;
+        }
+    </style>
+	<section id="exercices" class="container bg-white">
+        <div>
+            <h3 class="title-1">Exercice d'algorithme</h3>
+        </div>
+		<div class="row pb-5">
+			<div class="col-md-8">
+				<div>
+					<h3>Exercice 1:</h3>
+					<p class="text-justify"> consectetur adipisicing elit. Magni doloribus velit quidem dolore repellat porro fugiat, aliquid explicabo tenetur molestias unde ab quaerat illo vero? Maxime temporibus molestias nihil praesentium unde corrupti necessitatibus. Minima, mollitia quam veniam praesentium in maxime ea alias ducimus a ipsam asperiores beatae cumque vel, corporis quisquam maiores culpa illo sint distinctio totam dolorum. Ex itaque nam culpa ut a molestias modi sed pariatur eaque. Adipisci quos nobis facere debitis minus voluptate nulla sapiente, quod nihil cupiditate temporibus, voluptates saepe laborum vel, possimus sit eligendi!</p>
+                    <div class="editeur-text-card">
+                        
+                    </div>
+                    <a href="#">Correction</a>
+                    <div class="card card-body bg-light">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat quod quibusdam nihil voluptate ipsa quasi officia mollitia perferendis, dicta tenetur.</p>
+                    </div>
+                </div>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+					<ol>
+						<li><a href="#">Exercice 1.</a></li>
+						<li><a href="#">Exercice 2</a></li>
+						<li><a href="#">dolor sit amet.</a></li>
+						<li><a href="#">m dolor sit amet.</a></li>
+						<li><a href="#">Lorem ipsum dolor sit amet.</a></li>
+						<li><a href="#">ipsum dolor sit amet.</a></li>
+						<li><a href="#">Lorem sit amet.</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

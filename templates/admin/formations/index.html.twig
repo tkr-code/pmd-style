@@ -1,0 +1,70 @@
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/button.html.twig" as btn %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Listes des Formations
+{% endblock %}
+{% block head %}
+	{{ dataTable.css() }}
+{% endblock %}
+
+{% block foot %}
+	{{ dataTable.js() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ dataTable.script('#table-1') }}
+{% endblock %}
+
+{% block breadcrumb %}
+	{{ utils.breadcrumb('Gestion des formations')}}
+{% endblock %}
+
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-body">
+			<h1>Formations</h1>
+            		<a class="btn btn-primary" href="{{ path('app_admin_formations_new') }}">Ajouter une formations</a>
+
+			<table id="table-1" class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Detail</th>
+						<th>Is active</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for formation in formations %}
+						<tr>
+							<td>{{ formation.id }}</td>
+							<td>{{ formation.nom }}</td>
+							<td>
+								{{ formation.detail }}
+							</td>
+							<td>{{ formation.isActive ? 'Yes' : 'No' }}</td>
+							<td width="100px" >
+								{{ link.show(path('app_admin_formations_show', {'id': formation.id})) }}
+								{{ link.edit(path('app_admin_formations_edit', {'id': formation.id})) }}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+     {{ link.back(path('admin'), 'back to dashboard') }}
+{% endblock %}

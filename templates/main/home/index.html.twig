@@ -1,1 +1,338 @@
 {% extends "main/base.html.twig" %}
+{% block body %}
+	<!-- home -->
+	<section
+		id="home" data-aos="fade-up">
+		<!--div class="container py-5" data-aos="fade-up">
+		                <img class="w-100" src="public/img/logo/pmd-developper.png" alt="">
+		                <p class="text-center home-title text-uppercase">
+		                    <span>
+		                        Nous vous accompagnons dans la réalisation de vos projets informatique.
+		                    </span>
+		                </p>
+		            </div-->
+		<div class="owl-carousel owl-theme owl-loaded owl-nav-inside">
+			<div class="owl-stage-outer">
+				<div class="owl-stage">
+					<div class="owl-item">
+						<div class="slide-home-1 slide">
+							<div class="slide-card">
+								<div>
+									<img class="w-75" src="{{ asset('img/logo/pmd-developper.png') }}" alt="">
+
+									<p class="text-center home-title text-uppercase">
+										<span>
+											Nous vous accompagnons dans la réalisation de vos projets informatique.
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="owl-item">
+						<div class="slide slide-home-2"></div>
+					</div>
+					<div class="owl-item">
+						<div class="slide slide-home-3"></div>
+					</div>
+				</div>
+			</div>
+			<div class="owl-nav">
+				<div class="owl-prev"></div>
+				<div class="owl-next"></div>
+			</div>
+		</div>
+	</section>
+<!-- services -->
+<section id="services">
+    <h3>Services</h3>
+    <p class="text-justify  text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
+        projets aussi
+        fous soient-ils.</p>
+    <div class="container">
+        <div class="row pb-4">
+            <div data-aos="flip-left" class="col-lg-6 bg-2  text-center">
+                <div class="card bg-2  card-body rounded">
+                    <div class="mt-5">
+                        <i class="fa sh-2 fa-shopping-bag fa-5x rounded-circle bg-4 p-4"></i>
+                        <h5 class="mt-5 text-uppercase c-1">Vente informatique</h5>
+                        <p class="text-justify">Des ordinateurs et accessoires informatiques sont disponibles
+                            dans
+                            notre
+                            boutique en ligne</p>
+                    </div>
+                </div>
+            </div>
+            <div data-aos="zoom-in-down" class="col-lg-6  bg-3 text-center">
+                <div class="card card-body bg-3 rounded">
+                    <div class="mt-5">
+                        <i class="fa fa-globe fa-5x sh-2 rounded-circle bg-4 p-4"></i>
+                        <h5 class="mt-5 text-uppercase c-1">Application Personalisée</h5>
+                        <p class="text-justify">Nous vous proposons des maquettes réalisées à partir des
+                            informations de votre project.</p>
+                    </div>
+                </div>
+            </div>
+            <div data-aos="flip-right" class="col-lg-6 bg-2 text-center">
+                <div class="card card-body bg-2 mg-1 mb-4 rounded">
+                    <div class="mt-5">
+                        <i class="fa fa-cog fa-5x bg-4 sh-2 rounded-circle bg-1 p-4"></i>
+                        <h5 class="mt-5 c-1 text-uppercase">Maintenance de logiciel</h5>
+                        <p class="text-justify">Une améioration de logiciel après la mise en oeuvre,
+                            pour en corriger les fautes, en
+                            améliorant l'éfficacité ou autres caractéristiques, ou encore adapter celui-ci à un
+                            environement modifié</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Notre equipe -->
+<section id="team" class="bg-white">
+    <h3>Notre equipe</h3>
+    <p class="text-justify text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
+        projets aussi
+        fous soient-ils</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-right">
+                <img src="{{ asset('img/user/pepin.jpg') }}" width="200px" class="rounded-circle circle-1 m-2"
+                    alt="">
+                <h3>
+                    <span class="first">P</span>epin Djoneska
+                </h3>
+                <p>Développeur Full stack</p>
+                <a href="https://api.whatsapp.com/send?phone=221772375369&text=Salut , Pépin j'ai eu votre contacte sur votre site"
+                    target="_blank" title="whatsapp" class="socials-item">
+                    <i class="fab fa-whatsapp whatsapp"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/pepin-ngoulou-1a5227223/" target="_blank" title="linkedin"
+                    class="socials-item">
+                    <i class="fab fa-linkedin linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="{{ path('cv_show',{slug:'pepin-djoneska'}) }}" title="Pepin Djoneska"
+                    class="socials-item">
+                    Cv
+                </a>
+            </div>
+            <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out">
+                <img src="{{ asset('img/user/malick-tounkara.jpg') }}" width="200px"
+                    class="rounded-circle circle-1 m-2" alt="malick tounkara">
+                <h3>
+                    <span class="first">M</span>alick Tounkara
+                </h3>
+                <p>Développeur Full Stack.</p>
+                <a href="https://www.facebook.com/malick.tounkara.50/" target="_blank" title="Facebook"
+                    class="socials-item">
+                    <i class="fab fa-facebook-f facebook"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=221781278288&text=Salut, Malick j'ai eu votre contacte sur votre site :"
+                    target="_blank" title="Whatsapp" class="socials-item">
+                    <i class="fab fa-whatsapp whatsapp"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/malick-tounkara-b858a41aa/" target="_blank"
+                    title="linkedin" class="socials-item">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="{{ path('cv_show',{slug:'malick-tounkara'}) }}" title="cv malick toumkara"
+                    class="socials-item">
+                    Cv
+                </a>
+            </div>
+            <div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-left">
+                <img src="{{ asset('img/user/dieme.jpg') }}" width="200px" class="rounded-circle circle-1 m-2"
+                    alt="">
+                <h3>
+                    <span class="first">D</span>ieme mamadou
+                </h3>
+                <p>Développeur Java</p>
+                <a href="https://api.whatsapp.com/send?phone=221770431225&text=Bienvenue chez TKR-CODE. (Merci de vous présenter)"
+                    target="_blank" title="Whatsapp" class="socials-item">
+                    <i class="fab fa-whatsapp whatsapp"></i>
+                </a>
+                <a href="{{ path('cv_show',{slug:'mamadou-dieme'}) }}" title="cv mamdou dieme"
+                    class="socials-item">
+                    Cv
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+{# <!-- creations -->
+<section id="creations">
+    <h3>Creations</h3>
+    <p class="text-justify text-center p-4">Des exemples de projet créés dans nos ateliers</p>
+    <div class="container mx-auto mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ asset('img/creation/gaboma-annonce.png') }}" width="100px" class="card-img-top"
+                        alt="Gaboma annonce">
+                    <div class="card-body">
+                        <h5 class="card-title">Gaboma annonce</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Site d'annonce au sénégal</h6>
+                        {# <a href="#https://gaboma-annonce.com" class="btn btn-1 mr-2">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            Visiter le Site</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# <div class="text-center">
+            <a href="#" class="btn btn-2">
+                Toutes nos creations
+            </a>
+        </div> 
+    </div>
+</section> #}
+<!-- cahier de charge -->
+<section id="cahier-de-charge">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-4 py-4">
+                <div>
+                    <img class="cahier-de-charge-img mx-auto"
+                        src="{{ asset('img/icons/cahier de charge.png') }}" alt="">
+                </div>
+            </div>
+            <div class="col-md-8 py-4">
+                <h3>VOUS AVEZ UN PROJET ?</h3>
+                <p class="text-justify 1rem">
+                    Notre métier consiste à concevoir des logiciels sur mesure le plus
+                    souvent à la demande d'un
+                    client.<br /> Le travail débute sur la base d'un cahier de charge précis et détaillé.<br />
+                    Si vous n'avez
+                    pas de cahier de charge, nous avons confectionnés pour vous ce questionnaire qui vous
+                    permettra de mieux décrire votre besoin et vous servira de cahier de charge.<br /> Nos devis
+                    et
+                    études de projet sont gratuits
+                </p>
+                <a href="{{ path('cahier_charge_index') }}" class="btn btn-2"> <i class="fas fa-file"></i>
+                    Remplir le cahier de charge</a>
+                <span class="span-1">|</span>
+                <a href="{{ path('contact') }}" class="btn btn-2"> <i class="fa fa-address-book"
+                        aria-hidden="true"></i> Nous
+                    contacter</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+<h3>A propos de nous</h3>
+<p></p>
+<div class="container">
+<div class="row mb-3">
+    <div data-aos="zoom-in-left" class="col-md-8 col-12">
+        <p class="about-title">Pourquoi nous faire confiance ?</p>
+        <p class="about-content text-justify">Passionner par le développement de solution logiciel, la
+            satisfaction de nos clients est une priorité dans la mesure du possible.
+            La mise en avant des préoccupations du client est en adéquation avec les avancées
+            technologiques.
+            PMD Developper est une équipe dynamique, rigoureuse et excellente dans la réalisation puis
+            la livraison de vos projets.
+        </p>
+    </div>
+    <div class="col-md-4 col-12 text-center">
+        <img class="img-fluid about-img" src="{{ asset('img/about/about-1.jpg') }}">
+    </div>
+</div>
+<hr>
+<div class="row mt-5" id="profil">
+    <div class="col-md-4 col-12 text-center">
+        <img class="img-fluid about-img" src="{{ asset('img/about/about-3.jpg') }}">
+    </div>
+    <div data-aos="zoom-in-right" class="col-md-8 col-12">
+        <p class="about-title">Profil</p>
+        <p class="about-content text-justify">PMD Developper créé en 2020 suite à un regroupement de
+            trois développeurs issu d’une même formation professionnelle dans le but d’informatiser le
+            continent africain.
+            Ces trois développeurs sont Pepin NGOULOU, Malick TOUNKARA et Mamadou DIEME d’où
+            l’acronyme PMD,
+            suite à la proposition de Malick TOUNKARA de pouvoir consolider leurs compétences afin de
+            répondre à la forte demande d’informatisation du Sénégal puis du continent Africain, ses
+            collaborateurs ont approuvés l’idée et ce qui engendra la création de PMD Developper
+        </p>
+    </div>
+</div>
+<hr>
+<div class="row mb-3">
+    <div data-aos="fade-up" data-aos-duration="2000" class="col-md-8 col-12">
+        <p class="about-title">Motivation</p>
+        <p class="about-content text-justify">PMD DEVELOPPER est une structure passionnée du
+            développement des solutions informatiques.
+            Dans le but de contribuer au développement de l’Afrique (l’informatisation, la réalisation,
+            Amélioration des conditions
+            de travail, …) PMD DEVELOPPER se veut être un acteur important en proposant des solutions
+            innovantes et simples
+            d’utilisation
+        </p>
+    </div>
+    <div class="col-md-4 col-12 text-center">
+        <img class="img-fluid about-img" src="{{ asset('img/about/about-2.png') }}">
+    </div>
+</div>
+</div>
+</section>
+
+<!--message client-->
+<section id="message" data-aos="fade-down">
+<h3>Laissez-nous un message</h3>
+<p></p>
+<div class="container">
+{{ form_start(form,{
+  attr:{
+    id:'contact-form'
+  }
+})}}
+<div class="row">
+    <div class="col-lg-6 col-12">
+        <div class="form-group">
+            <label for="">Nom complet <span>*</span> </label>
+            {{form_widget(form.nom,{
+            attr:{
+            'class':'size-input'
+            }
+            })}}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Téléphone <span>*</span></label>
+            {{form_widget(form.tel,{
+            attr:{
+            class:'size-input'
+            }
+            })}}
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email <span>*</span></label>
+            {{form_widget(form.email,{
+            attr:{
+            class:'size-input'
+            }
+            })}}
+        </div>
+    </div>
+    <div class="col-lg-6 col-12">
+        <div class="form-group ">
+            <label for="exampleInputEmail1 ">Votre  Message <span>*</span></label>
+            {{ form_widget(form.message) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <button type="submit" class="g-recaptcha btn btn-2" 
+        data-sitekey="6Lf5x_ceAAAAAGo5ObTVmBQva3GcIV8nzhmu2xlI" 
+        data-callback='onSubmit'><i class="fas fa-paper-plane"></i>&nbsp;Envoyer</button>
+    </div>
+</div>
+{{form_widget(form)}}
+{{ form_end(form)}}
+<script>onload();</script>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Formations
+{% endblock %}
+
+
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {})
+	</script>
+{% endblock %}
+{% block body %}
+	<style>
+		/*  start Tutoriels */
+
+		section#tuto {
+			/* background-image: url(https://via.placeholder.com/500); */
+			background-size: cover;
+			height: 200px;
+			background-size: 100%;
+			display: flex;
+			padding: 10px 0;
+			justify-content: center;
+			align-items: center;
+			background-position-y: -120px;
+		}
+
+		section#tutoriel {
+			background: #fff;
+		}
+
+		.row-tuto {
+			margin-top: 10px;
+		}
+
+		.card-tuto {
+			width: 100%;
+			margin: 10px 0;
+			height: 252px;
+			overflow: hidden
+		}
+
+		.card-tuto img {
+			width: 100%;
+		}
+
+		.card-tuto .card-title {
+			text-transform: uppercase;
+		}
+
+		.card-tuto .tuto-name {
+			font-size: 1rem;
+			font-weight: bold;
+		}
+		/* tutoriel collaped start */
+
+		.tutoriel-list-btn:hover {
+			text-decoration: none
+		}
+
+		.tutoriel-list-btn span::before {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 3px;
+			top: 45px;
+			text-decoration: none
+		}
+
+		.tutoriel-list-btn:hover span::before {
+			background-color: red !important;
+			animation: active-bar 0.5s ease
+		}
+
+		.tutoriel-list-btn:focus span::before {
+			background-color: red !important;
+			animation: active-bar 0.5s ease
+		}
+
+		.tutoriel-list-btn.active span::before {
+			background-color: red !important;
+			animation: active-bar 0.5s ease
+		}
+
+		/*  end Tutoriels */
+
+		/* pagination start */
+
+		#pagination {
+			display: flex;
+			justify-content: center;
+		}
+
+		.page-item.active .page-link {
+			background-color: #010E21;
+			border-color: #010E21;
+		}
+
+		.page-link {
+			color: #003;
+		}
+
+		.page-link:hover {
+			color: #e22323;
+		}
+
+
+		/* pagination end */
+		/* start search */
+
+		.btn-search {
+			color: #fff;
+		}
+
+		.btn-search:hover {
+			background-color: red;
+			color: #fff;
+		}
+
+
+		/* end search */
+		.card-2 {
+			-webkit-box-shadow: 14px 7px 5px -2px rgba(0, 0, 0, 0.13);
+			box-shadow: 14px 7px 5px -2px rgba(0, 0, 0, 0.13);
+		}
+		.a2 {
+			color: #003;
+		}
+
+	</style>
+	<section data-aos="fade-up" id="tuto" class="bg-white text-center">
+		<p class="text-white font-weight-bold home-title">Formations</p>
+	</section>
+	<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+		<a class="breadcrumb-item" href="/">{{"Home"|trans}}</a>
+		<span class="breadcrumb-item text-white active">Formations</span>
+	</nav>
+	<section id="tutoriel" class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row row-tuto">
+					{% for item in formations %}
+						<div class="col-lg-6">
+							<div class="card card-tuto card-2">
+								<div class="card-body">
+									<h5 class="card-title">
+										<a href="{{ path('formations_show',{id:item.id, slug:item.slug})}}" class=" btn btn-2">
+											{{item.nom}}
+										</a>
+									</h5>
+									<p class="card-text text-justify">{{item.detail|u.truncate(100,'...')}}</p>
+									<p class="tuto-name">
+										<a href="{{ path('formations_show',{id:item.id,slug:item.slug})}}" class="a2">
+											{% for item2 in item.options|slice(0,3) %}
+                                                {% if item2.isActive %}
+    												{{ item2.titre}} |
+                                                {% endif %}
+											{% endfor %}
+										</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					<div class="col-12">
+						<nav id="pagination" aria-label="Page navigation">
+							{{ knp_pagination_render(formations) }}
+						</nav>
+
+					</div>
+				</div>
+
+			</div>
+			<aside class="col-md-4 ">
+				<div class="card-1 card-aside">
+					<div class="card-body">
+						<div class="search">
+							<p class="p-2">Rechercher dans notre site</p>
+							<div class="input-group card-2">
+								<input type="text" class="form-control" placeholder="Recherche">
+								<button class="btn  btn-search bg-2">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</section>
+{% endblock %}

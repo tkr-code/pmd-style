@@ -1,0 +1,76 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Cours !
+{% endblock %}
+
+{% block body %}
+	<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+		<a class="breadcrumb-item" href="{{ path('home')}}">Accueil</a>
+		<a class="breadcrumb-item" href="{{ path('formations')}}">Formations</a>
+		<span class="breadcrumb-item text-white active">{{formation.nom}}</span>
+	</nav>
+	<section id="tutoriel-detail" class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-12">
+						<div class="card mb-3 card-2">
+							<div class="card-body">
+								<h5 class="card-title">
+									<a href="#" class=" text-uppercase btn btn-2">
+										{{formation.nom}}
+									</a>
+								</h5>
+								<p class="card-text">{{formation.detail}}</p>
+								<div class="row">
+									<div class="col-12">
+										<div class="accordion card-2" id="accordionTutoriel">
+                                        {% for item in formation.options %}
+											{% if item.isActive %}
+												<div class="card ">
+													<div class="card-header bg-2 text-white" id="heading{{item.id}}">
+														<h2 class="mb-0">
+															<div class="btn border-none btn-link btn-block text-white tutoriel-list-btn  text-left" type="button" data-toggle="collapse" data-target="#collapse{{item.id}}" aria-expanded="true" aria-controls="collapse{{item.id}}">
+																<span class="text-capitalize">
+																	{{item.titre}}
+																</span>
+															</div>
+														</h2>
+													</div>
+													<div id="collapse{{item.id}}" class="collapse" aria-labelledby="heading{{item.id}}" data-parent="#accordionTutoriel">
+														<div class="card-body">
+															{{item.contenu|raw}}
+														</div>
+													</div>
+												</div>
+											{% endif %}
+                                        {% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<aside
+				class="col-md-4 ">
+				<!-- MENU DE DROIT-->
+				<div class="card-1 card-aside">
+					<div class="card-body">
+						<div class="search">
+							<p class="p-2">Rechercher dans notre site</p>
+							<div class="input-group card-2">
+								<input type="text" class="form-control" placeholder="Recherche">
+								<button class="btn  btn-search bg-2">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</section>
+
+{% endblock %}

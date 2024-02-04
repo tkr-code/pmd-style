@@ -10,15 +10,18 @@ use Symfony\Component\Mailer\MailerInterface;
 use App\Form\ContactType;
 use App\Service\Email\EmailService;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Contact;
+use App\Repository\ContactRepository;
 
 class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
      */
-    public function index( MailerInterface $mailerInterface, Request $request, EmailService $emailService): Response
+    public function index(ContactRepository $contactRepository, MailerInterface $mailerInterface, Request $request, EmailService $emailService): Response
     {
-        $form = $this->createForm(ContactType::class);
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class,$contact);
         $contact = $form->handleRequest($request);
         $reCAPTCHA_secret_key="6LfDomMhAAAAAHVQGcmpEZUbJ-5XsGPq63w_7vw9";
         $g_recaptcha_response="";
@@ -47,6 +50,8 @@ class ContactController extends AbstractController
             'message'=>$contact->get('message')->getData(),
           ]);
           $mailerInterface->send($email);
+          $contactRepository->add($contact);
+          
           $this->addFlash('success','Email envoyé');
           return $this->redirectToRoute('contact', []);
         }elseif($responeKey['error-codes']){

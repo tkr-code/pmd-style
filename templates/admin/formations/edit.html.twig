@@ -1,0 +1,39 @@
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+{% import "macros/link.html.twig" as link %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier Formation
+{% endblock %}
+
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-body">
+			<h1>Modifier Formation</h1>
+			{{ include('admin/formations/_form.html.twig', {'button_label': 'Update'}) }}
+			<hr>
+			<table class="table">
+				<thead>
+					<th>Titre</th>
+					<th>Visible</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					{% for item in formation.options %}
+						<tr>
+							<td>{{item.titre }}</td>
+							<td>{{item.isActive ? "Oui":"Non"}}</td>
+							<td class="flex justify-content-around">
+								{{ link.show(path('app_admin_formation_option_show', {'id': item.id})) }}
+								{{ link.edit(path('app_admin_formation_option_edit', {'id': item.id})) }}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			{{ include('admin/formations/_delete_form.html.twig') }}
+		</div>
+	</div>
+	{{ link.back(path('app_admin_formations_index')) }}
+{% endblock %}

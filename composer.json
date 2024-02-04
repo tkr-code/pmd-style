@@ -30,6 +30,7 @@
         "symfony/mime": "5.3.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "5.3.*",
+        "symfony/polyfill-intl-messageformatter": "^1.28",
         "symfony/process": "5.3.*",
         "symfony/property-access": "5.3.*",
         "symfony/property-info": "5.3.*",
@@ -45,6 +46,7 @@
         "symfony/yaml": "5.3.*",
         "symfonycasts/verify-email-bundle": "^1.5",
         "twig/extra-bundle": "^2.12|^3.0",
+        "twig/string-extra": "^3.7",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
