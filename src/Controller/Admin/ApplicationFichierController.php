@@ -30,8 +30,10 @@ class ApplicationFichierController extends AbstractController
         $applicationFichier->setNom($application->getNom());
         $form = $this->createForm(ApplicationFichierType::class, $applicationFichier);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
+            dd($request);
             $fichier = $form->get('fichier')->getData();
             $nom_fichier = $applicationFichier->getNom() . '.' . $fichier->getClientOriginalExtension();
 

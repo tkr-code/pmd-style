@@ -14,7 +14,7 @@
              {% if item.links is not defined %}
                 {{ li.li(item)}}
         {% else %}
-            {{ section.section(item.name,{pages:item.links,icon:item.icon|default('far fa-circle'),active:parent_page})}}
+            {{ section.section(item.name,{pages:item.links,icon:item.icon|default('fas fa-circle'),active:parent_page})}}
         {% endif %}
         {% endfor %}
 {% endmacro %}
