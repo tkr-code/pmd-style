@@ -32,6 +32,15 @@
             count:totalCaisse|number_format(0,'',' ') ~ ' ' ~ site.current_name
         }) }}
     </div>
+        <div class="col-12 col-sm-6 col-md-3">
+        {{ cards.infoBox({
+            path:path('app_admin_formations_index'),
+            bg:'bg-dark',
+            name:'Formations',
+            icon:"fas fa-book nav-icon",
+            count:formations|length
+        }) }}
+    </div>
 </div>
 <div class="row">
     <div class="col-12 col-md-8">

@@ -1,0 +1,27 @@
+{% import "macros/link.html.twig" as link %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Ajouter une Amélioration
+{% endblock %}
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Ajouter une amélioration',[
+{
+path:path('app_admin_amelioration_index'),
+name:'Gestion des améliorations'|trans
+}
+])}}
+{% endblock %}
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<div class="card-title">Ajouter une amélioration</div>
+		</div>
+		<div class="card-body">
+			{{ include('admin/amelioration/_form.html.twig') }}
+		</div>
+	</div>
+
+	{{ link.back(path('app_admin_amelioration_index')) }}
+{% endblock %}

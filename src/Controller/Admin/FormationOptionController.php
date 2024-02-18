@@ -13,11 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/formation/option')]
 class FormationOptionController extends AbstractController
 {
+    private $parent_page = 'Formation';
     #[Route('/', name: 'app_admin_formation_option_index', methods: ['GET'])]
     public function index(FormationOptionRepository $formationOptionRepository): Response
     {
         return $this->render('admin/formation_option/index.html.twig', [
             'formation_options' => $formationOptionRepository->findAll(),
+            
         ]);
     }
 
@@ -44,6 +46,7 @@ class FormationOptionController extends AbstractController
     {
         return $this->render('admin/formation_option/show.html.twig', [
             'formation_option' => $formationOption,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -61,6 +64,7 @@ class FormationOptionController extends AbstractController
         return $this->renderForm('admin/formation_option/edit.html.twig', [
             'formation_option' => $formationOption,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 

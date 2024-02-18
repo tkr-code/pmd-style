@@ -1,0 +1,16 @@
+api_platform:
+    description: "L'API de PMD Developer est une plateforme complète conçue pour faciliter l'accès aux données et aux fonctionnalités de la plateforme PMD Developer. Elle offre des fonctionnalités pour gérer les utilisateurs, les projets, les tâches, les discussions et bien plus encore."
+    version: "1.0.0"
+    title: "PMD DEVELOPPER"
+    formats:
+        jsonld: ["application/ld+json"]
+        json: ["application/json"]
+        html: ["text/html"]
+    # authentication:
+    #     - "Bearer Token"
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]

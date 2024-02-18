@@ -1,44 +1,51 @@
 {% import "macros/link.html.twig" as link %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
 
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Afficher une Formation{% endblock %}
-
+{% block title %}Afficher une Formation
+{% endblock %}
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Afficher une formation',[
+{
+path:path('app_admin_formations_index'),
+name:'Gestion des formations'|trans
+}
+])}}
+{% endblock %}
 {% block body %}
-<div class="card">
-        <div class="card-header"> 
-        <h2>Afficher une formation</h2>
-    </div>
-    <div class="card-body">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ formation.nom }}</td>
-                </tr>
-                <tr>
-                    <th>Detail</th>
-                    <td>{{ formation.detail }}</td>
-                </tr>
-                <tr>
-                    <th>Es activer ?</th>
-                    <td>{{ formation.isActive ? 'Yes' : 'No' }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="card">
-    <div class="card-header"> 
-        <h2>Description</h2>
-    </div>
-    <div class="card-body">
-        {{formation.description|raw}}
-    </div>
-</div>
-        {{ link.back(path('app_admin_formations_index')) }}
-
-        {{ link.edit(path('app_admin_formations_edit', {'id': formation.id})) }}
-        {{ include('admin/formations/_delete_form.html.twig') }}
-
+	<div class="card card-outline card-dark">
+		<div class="card-header">
+			<h2>Afficher une formation</h2>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Nom</th>
+						<td>{{ formation.nom }}</td>
+					</tr>
+					<tr>
+						<th>Detail</th>
+						<td>{{ formation.detail }}</td>
+					</tr>
+					<tr>
+						<th>Es activer ?</th>
+						<td>{{ formation.isActive ? 'Oui' : 'Non' }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<h2>Contenu</h2>
+		</div>
+		<div class="card-body">
+			{{formation.description|raw}}
+			{{ link.btnEdit(path('app_admin_formations_edit', {'id': formation.id}),"Modifier") }}
+			{{ include('admin/formations/_delete_form.html.twig') }}
+		</div>
+	</div>
+	{{ link.back(path('app_admin_formations_index')) }}
 {% endblock %}

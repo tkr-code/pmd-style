@@ -1,0 +1,29 @@
+{% import "macros/link.html.twig" as link %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Ajouter un Fichier{% endblock %}
+
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Ajouter une fichier',[
+{
+path:path('app_admin_application_index'),
+name:'Gestion des applications'|trans
+}
+])}}
+{% endblock %}
+
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<div class="card-title">Ajouter un fichier</div>
+		</div>
+		<div class="card-body">
+            <h3> Application: {{ application_fichier.application.nom}}</h3>
+			{{ include('admin/application_fichier/_form.html.twig') }}
+		</div>
+	</div>
+
+	{{ link.back(path('app_admin_application_fichier_index')) }}
+{% endblock %}

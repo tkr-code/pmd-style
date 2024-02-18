@@ -5,17 +5,24 @@
 
 {% block title %}Modifier Formatio nOption
 {% endblock %}
-
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Modifier une option de formation',[
+{
+path:path('app_admin_formations_index'),
+name:'Gestion des formations'|trans
+}
+])}}
+{% endblock %}
 {% block body %}
-
 	<div class="card card-autline card-primary">
 		<div class="card-body">
 			<h1>Modifier Formation Option</h1>
-            <h3>Formation : {{formation_option.formations.nom}}</h3>
+			<h3>Formation :
+				{{formation_option.formations.nom}}</h3>
 			{{ include('admin/formation_option/_form.html.twig', {'button_label': 'Update'}) }}
-	{{ include('admin/formation_option/_delete_form.html.twig') }}
+			{{ include('admin/formation_option/_delete_form.html.twig') }}
 		</div>
 	</div>
-	{{ link.back(path('app_admin_formation_option_index')) }}"
+	{{ link.back(path('app_admin_formations_edit',{id:formation_option.formations.id}),'Retour à la formation') }}"
 
 {% endblock %}

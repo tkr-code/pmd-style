@@ -1,4 +1,5 @@
 twig:
+    cache: false
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_4_layout.html.twig','form/google_recaptcha.html.twig'] # accepte plusieurs thèmes
     globals: 

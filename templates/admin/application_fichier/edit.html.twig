@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ApplicationFichier{% endblock %}
+
+{% block body %}
+    <h1>Edit ApplicationFichier</h1>
+
+    {{ include('admin/application_fichier/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_application_fichier_index') }}">back to list</a>
+
+    {{ include('admin/application_fichier/_delete_form.html.twig') }}
+{% endblock %}

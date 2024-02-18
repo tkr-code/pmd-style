@@ -60,6 +60,7 @@ class FormationsFixtures extends Fixture
                 $formationOption
                 ->setTitre($value2['title'])
                 ->setContenu($value2['contenu'])
+                ->setIsActive(true)
                 ;
                 $formations->addOption($formationOption);
             }

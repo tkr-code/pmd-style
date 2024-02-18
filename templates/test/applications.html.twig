@@ -1,57 +1,91 @@
 {% extends "main/base.html.twig" %}
 {% block body %}
-<style>
-    #applications{
-
-    }
-    .app-card{
-        padding: 10px;
-        /* background: red; */
-        border-radius: 8px;
-        height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center
-    }
-.app-card img{
-    width: 100%
-}
-</style>
-   <!-- Application -->
-   	<section id="applications" class="bg-2">
-        <div class="container">
-            <h2 class="text-center py-5">
-                Pmd App Store
-            </h2>
-            <div class="row">
-                <div class="col-xl-6">
-                    <p style="font-size:1.5rem; font-weight:bold">Gestion dépenses</p>
-                </div>
-                <div class="col-xl-6">
-                    <div class="form-group">
-                      <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-2">
-                    <div class="app-card bg-1">
-                        <img src="https://placehold.co/200x200/png" alt="..." />
-                    </div>
-                </div>
-                <div class="col-xl-10">
-                    <div class="row">
-                        <div class="col-xl-12">
-
-                        </div>
-                        <div class="col-xl-12">
-                            <a href="#" class="btn btn-primary">Telecharger</a>
-                        </div>
-                    
-                    </div>
-                </div>
-            </div>
-        </div>
+	<style>
+		#applications {}
+		.app-card {
+			padding: 10px;
+			/* background: red; */
+			border-radius: 8px;
+			height: 200px;
+			display: flex;
+			justify-content: center;
+			align-items: center
+		}
+		.app-card img {
+			width: 100%
+		}
+		
+	</style>
+	<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+		<a class="breadcrumb-item" href="/">{{"Home"|trans}}</a>
+		<span class="breadcrumb-item text-white active">Formations</span>
+	</nav>
+	<!-- Application -->
+	<section id="applications" class="bg-2">
+		<div class="container pt-3">
+			<div class="row">
+				<div class="col-xl-8 my-2">
+					<p style="font-size:1.5rem; font-weight:bold">Gestion dépenses</p>
+				</div>
+				<div class="col-xl-4 my-2">
+					<div
+						class="search">
+						{# <p class="p-2">Rechercher dans notre site</p> #}
+						<div class="input-group card-2">
+							<input type="text" class="form-control" placeholder="Recherche">
+							<button class="btn  btn-search bg-2">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-2">
+					<div class="app-card bg-white">
+						<img src="{{asset('img/application/gestion-depenses.png')}}" alt="..."/>
+					</div>
+				</div>
+				<div class="col-xl-10">
+					<div class="row">
+						<div class="col-xl-12" style="min-height:200px">
+							<div class="row pt-3">
+								<div class="col-xl-2  border-right">
+									<p>Vote</p>
+									<i class="fa fa-star text-warning mr-1" aria-hidden="true"></i>
+									4.1
+								</div>
+								<div class="col-xl-3 border-right">
+									<p>Taille</p>
+									<i class="fa fa-server text-primary mr-1" aria-hidden="true"></i>
+									50 MB
+								</div>
+								<div class="col-xl-3 border-right">
+									<p>Telechargemment</p>
+									<i class="fa fa-download text-success mr-1" aria-hidden="true"></i>
+									1 million
+								</div>
+								<div class="col-xl-4 pt-4">
+									<a class="btn btn-4 my-1" href="#">
+										<i class="fa fa-envelope" aria-hidden="true"></i>
+										Contact du developpeur</a>
+									<a class="btn btn-4 my-1" href="#">
+										<i class="fa fa-home" aria-hidden="true"></i>
+										Voir dans Play Store</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-6 mx-auto pt-3" style="height:100px">
+							<a href="#" class="btn btn-3">
+								<i class="fa fa-download text-danger" aria-hidden="true"></i>
+								Telecharger</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 
 {% endblock %}

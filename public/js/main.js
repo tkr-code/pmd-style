@@ -34,8 +34,7 @@ $(function(){
         $('#mainMenu li a.active').removeClass('active')
         $(this).addClass('active')
     })
-    //scroll active
-    AOS.init();
+
     
     //user menu click
     $(document).on('click','#user-icon',function(){
@@ -56,7 +55,7 @@ $(function(){
         loop: true,
         margin: 20,
         nav: true,
-        // autoplay:true, 
+        autoplay:true, 
         dots: true,
         navText: ['<i class="fa fa-arrow-circle-left fa-2x"></i>', '<i class="fa fa-arrow-circle-right fa-2x">'],
         responsive: {
@@ -71,5 +70,12 @@ $(function(){
             }
         }
     })
+    //scroll active
+    AOS.init({
+        duration: 1000,
+        offset: 120,
+    });
 
+    // /* ANIMATION AOS - RECHARGE AOS */
+    // AOS.refresh();
 })

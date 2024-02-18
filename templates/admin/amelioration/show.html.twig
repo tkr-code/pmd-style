@@ -1,0 +1,45 @@
+{% import "macros/link.html.twig" as link %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Affichier une Amelioration
+{% endblock %}
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Afficher une amélioration',[
+{
+path:path('app_admin_application_index'),
+name:'Gestion des applications'|trans
+}
+])}}
+{% endblock %}
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+			<div class"card-title">Amelioration</div>
+		</div>
+		<div class="card-body">
+			{{ link.btnEdit(path('app_admin_amelioration_edit', {'id': amelioration.id})) }}
+			{{ include('admin/amelioration/_delete_form.html.twig') }}
+			<table class="table table-striped my-1">
+				<tbody>
+					<tr>
+						<th>Id</th>
+						<td>{{ amelioration.id }}</td>
+					</tr>
+					<tr>
+						<th>Type</th>
+						<td>{{ amelioration.type }}</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>{{ amelioration.description }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	{{ link.back(path('app_admin_application_edit', {'id': amelioration.application.id}),'Retour') }}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/link.html.twig" as link %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Ajouter une Application
+{% endblock %}
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Ajouter une application',[
+{
+path:path('app_admin_application_index'),
+name:'Gestion des applications'|trans
+}
+])}}
+{% endblock %}
+{% block body %}
+	<div class="card card-outline card-primary">
+		<div class="card-header">
+                <div class="card-title">Ajouter une application</div>
+            </div>
+		<div class="card-body">
+			{{ include('admin/application/_form.html.twig') }}
+		</div>
+	</div>
+
+	{{ link.back(path('app_admin_application_index')) }}
+
+{% endblock %}

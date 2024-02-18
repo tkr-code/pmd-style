@@ -53,11 +53,12 @@ class ArticleType extends AbstractType
                 'label'=>'Reduction',
                 'choices'=>Article::reductions(),
                 'required'=>false,
+                
                 'attr'=>[
                     'class'=>'select2'
                 ]
-                // 'attr'=>[
                 //     'placeholder'=>'The price must be greater than zero'
+                // 'attr'=>[
                 // ],
                 // 'help'=>'The price must be greater than zero'
             ])

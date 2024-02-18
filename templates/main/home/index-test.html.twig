@@ -1,16 +1,7 @@
 {% extends "main/base.html.twig" %}
 {% block body %}
 	<!-- home -->
-	<section
-		id="home" data-aos="fade-up">
-		<!--div class="container py-5" data-aos="fade-up">
-		                <img class="w-100" src="public/img/logo/pmd-developper.png" alt="">
-		                <p class="text-center home-title text-uppercase">
-		                    <span>
-		                        Nous vous accompagnons dans la réalisation de vos projets informatique.
-		                    </span>
-		                </p>
-		            </div-->
+	<section id="home" data-aos="fade-up">
 		<div class="owl-carousel owl-theme owl-loaded owl-nav-inside">
 			<div class="owl-stage-outer">
 				<div class="owl-stage">
@@ -30,7 +21,19 @@
 						</div>
 					</div>
 					<div class="owl-item">
-						<div class="slide slide-home-2"></div>
+						<div class="slide slide-home-2">
+							<div class="slide-card">
+								<div>
+									<img class="w-75" src="{{ asset('img/logo/pmd-developper.png') }}" alt="">
+
+									<p class="text-center home-title text-uppercase">
+										<span>
+											Nous vous accompagnons dans la réalisation de vos projets informatique.
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="owl-item">
 						<div class="slide slide-home-3"></div>
@@ -42,24 +45,13 @@
 				<div class="owl-next"></div>
 			</div>
 		</div>
-		<!--div class="owl-carousel owl-theme">
-		                <div class="item">
-		                </div>
-		                <div class="item">
-		                    <img src="https://via.placeholder.com/1920x400" alt="...">
-		                </div>
-		                <div class="item">
-		                    <img src="https://via.placeholder.com/1920x400" alt="...">
-		                </div>
-		            </div-->
-
 	</section>
 	<!-- services -->
 	<section id="services">
 		<h3>Services</h3>
 		<p class="text-justify  text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
-			        projets aussi
-			        fous soient-ils.</p>
+						        projets aussi
+						        fous soient-ils.</p>
 		<div class="container">
 			<div class="row pb-4">
 				<div data-aos="flip-left" class="col-lg-6 bg-2  text-center">
@@ -68,9 +60,9 @@
 							<i class="fa sh-2 fa-shopping-bag fa-5x rounded-circle bg-4 p-3"></i>
 							<h5 class="mt-5 text-uppercase c-1">Vente informatique</h5>
 							<p class="text-justify">Des ordinateurs et accessoires informatiques sont disponibles
-								                            dans
-								                            notre
-								                            boutique en ligne</p>
+																                            dans
+																                            notre
+																                            boutique en ligne</p>
 						</div>
 					</div>
 				</div>
@@ -80,7 +72,7 @@
 							<i class="fa fa-globe fa-5x sh-2 rounded-circle bg-4 p-4"></i>
 							<h5 class="mt-5 text-uppercase c-1">Application Personalisée</h5>
 							<p class="text-justify">Nous vous proposons des maquettes réalisées à partir des
-								                            informations de votre project.</p>
+																                            informations de votre project.</p>
 						</div>
 					</div>
 				</div>
@@ -90,9 +82,9 @@
 							<i class="fa fa-cog fa-5x bg-4 sh-2 rounded-circle bg-1 p-3"></i>
 							<h5 class="mt-5 c-1 text-uppercase">Maintenance de logiciel</h5>
 							<p class="text-justify">Une améioration de logiciel après la mise en oeuvre,
-								                            pour en corriger les fautes, en
-								                            améliorant l'éfficacité ou autres caractéristiques, ou encore adapter celui-ci à un
-								                            environement modifié</p>
+																                            pour en corriger les fautes, en
+																                            améliorant l'éfficacité ou autres caractéristiques, ou encore adapter celui-ci à un
+																                            environement modifié</p>
 						</div>
 					</div>
 				</div>
@@ -112,8 +104,8 @@
 	<section id="team" class="bg-white">
 		<h3>Notre equipe</h3>
 		<p class="text-justify text-center p-4">Notre équipe est là pour vous accompagner et vous aider dans vos
-			        projets aussi
-			        fous soient-ils</p>
+						        projets aussi
+						        fous soient-ils</p>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 mb-5 text-center" data-aos="zoom-out-right">
@@ -209,15 +201,15 @@
 				<h3>VOUS AVEZ UN PROJET ?</h3>
 				<p class="text-justify 1rem">
 					Notre métier consiste à concevoir des logiciels sur mesure le plus
-					                    souvent à la demande d'un
-					                    client.<br/>
+										                    souvent à la demande d'un
+										                    client.<br/>
 					Le travail débute sur la base d'un cahier de charge précis et détaillé.<br/>
 					Si vous n'avez
-					                    pas de cahier de charge, nous avons confectionnés pour vous ce questionnaire qui vous
-					                    permettra de mieux décrire votre besoin et vous servira de cahier de charge.<br/>
+										                    pas de cahier de charge, nous avons confectionnés pour vous ce questionnaire qui vous
+										                    permettra de mieux décrire votre besoin et vous servira de cahier de charge.<br/>
 					Nos devis
-					                    et
-					                    études de projet sont gratuits
+										                    et
+										                    études de projet sont gratuits
 				</p>
 				<a href="{{ path('cahier_charge_index') }}" class="btn btn-2">
 					<i class="fas fa-file"></i>
@@ -226,7 +218,7 @@
 				<a href="{{ path('contact') }}" class="btn btn-2">
 					<i class="fa fa-address-book" aria-hidden="true"></i>
 					Nous
-					                    contacter</a>
+										                    contacter</a>
 			</div>
 		</div>
 	</div>
@@ -240,11 +232,11 @@
 			<div data-aos="zoom-in-left" class="col-md-8 col-12">
 				<p class="about-title">Pourquoi nous faire confiance ?</p>
 				<p class="about-content text-justify">Passionner par le développement de solution logiciel, la
-					            satisfaction de nos clients est une priorité dans la mesure du possible.
-					            La mise en avant des préoccupations du client est en adéquation avec les avancées
-					            technologiques.
-					            PMD Developper est une équipe dynamique, rigoureuse et excellente dans la réalisation puis
-					            la livraison de vos projets.
+										            satisfaction de nos clients est une priorité dans la mesure du possible.
+										            La mise en avant des préoccupations du client est en adéquation avec les avancées
+										            technologiques.
+										            PMD Developper est une équipe dynamique, rigoureuse et excellente dans la réalisation puis
+										            la livraison de vos projets.
 				</p>
 			</div>
 			<div class="col-md-4 col-12 text-center">
@@ -259,13 +251,13 @@
 			<div data-aos="zoom-in-right" class="col-md-8 col-12">
 				<p class="about-title">Profil</p>
 				<p class="about-content text-justify">PMD Developper créé en 2020 suite à un regroupement de
-					            trois développeurs issu d’une même formation professionnelle dans le but d’informatiser le
-					            continent africain.
-					            Ces trois développeurs sont Pepin NGOULOU, Malick TOUNKARA et Mamadou DIEME d’où
-					            l’acronyme PMD,
-					            suite à la proposition de Malick TOUNKARA de pouvoir consolider leurs compétences afin de
-					            répondre à la forte demande d’informatisation du Sénégal puis du continent Africain, ses
-					            collaborateurs ont approuvés l’idée et ce qui engendra la création de PMD Developper
+										            trois développeurs issu d’une même formation professionnelle dans le but d’informatiser le
+										            continent africain.
+										            Ces trois développeurs sont Pepin NGOULOU, Malick TOUNKARA et Mamadou DIEME d’où
+										            l’acronyme PMD,
+										            suite à la proposition de Malick TOUNKARA de pouvoir consolider leurs compétences afin de
+										            répondre à la forte demande d’informatisation du Sénégal puis du continent Africain, ses
+										            collaborateurs ont approuvés l’idée et ce qui engendra la création de PMD Developper
 				</p>
 			</div>
 		</div>
@@ -274,12 +266,12 @@
 			<div data-aos="fade-up" data-aos-duration="2000" class="col-md-8 col-12">
 				<p class="about-title">Motivation</p>
 				<p class="about-content text-justify">PMD DEVELOPPER est une structure passionnée du
-					            développement des solutions informatiques.
-					            Dans le but de contribuer au développement de l’Afrique (l’informatisation, la réalisation,
-					            Amélioration des conditions
-					            de travail, …) PMD DEVELOPPER se veut être un acteur important en proposant des solutions
-					            innovantes et simples
-					            d’utilisation
+										            développement des solutions informatiques.
+										            Dans le but de contribuer au développement de l’Afrique (l’informatisation, la réalisation,
+										            Amélioration des conditions
+										            de travail, …) PMD DEVELOPPER se veut être un acteur important en proposant des solutions
+										            innovantes et simples
+										            d’utilisation
 				</p>
 			</div>
 			<div class="col-md-4 col-12 text-center">

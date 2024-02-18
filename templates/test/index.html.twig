@@ -22,8 +22,10 @@
         </div>
 		<div class="list-group">
 			<a href="{{path('test_index')}}" class="list-group-item list-group-item-action active">Page de test</a>
-			<a href="{{path('test_application')}}" class="list-group-item list-group-item-action">Applicaton mobile </a>
-			{# <a href="#" class="list-group-item list-group-item-action disabled">Application mobile</a> #}
+		{% for item in pages %}
+			<a href="{{path(item.path)}}" class="list-group-item list-group-item-action">{{ item.name }}</a>
+
+		{% endfor %}
 		</div>
 	</section>
 {% endblock %}

@@ -1,30 +1,45 @@
+{% import "macros/link.html.twig" as link %}
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}FormationOption{% endblock %}
-
+{% block title %}FormationOption
+{% endblock %}
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Afficher une option de formation',[
+{
+path:path('app_admin_formations_index'),
+name:'Gestion des formations'|trans
+}
+])}}
+{% endblock %}
 {% block body %}
-    <h1>FormationOption</h1>
+	<div class="card card-outline card-dark">
+		<div class="card-header">
+			<h2>Afficher une option de formation</h2>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Id</th>
+						<td>{{ formation_option.id }}</td>
+					</tr>
+					<tr>
+						<th>Titre</th>
+						<td>{{ formation_option.titre }}</td>
+					</tr>
+					<tr>
+						<th>Contenu</th>
+						<td>{{ formation_option.contenu|raw }}</td>
+					</tr>
+				</tbody>
+			</table>
+			{{ link.btnEdit(path('app_admin_formation_option_edit', {'id': formation_option.id})) }}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ formation_option.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ formation_option.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ formation_option.contenu|raw }}</td>
-            </tr>
-        </tbody>
-    </table>
+			{{ include('admin/formation_option/_delete_form.html.twig') }}
+		</div>
+	</div>
+	{{ link.back(path('app_admin_formation_option_index')) }}
 
-    <a href="{{ path('app_admin_formation_option_index') }}">back to list</a>
-
-    <a href="{{ path('app_admin_formation_option_edit', {'id': formation_option.id}) }}">edit</a>
-
-    {{ include('admin/formation_option/_delete_form.html.twig') }}
 {% endblock %}

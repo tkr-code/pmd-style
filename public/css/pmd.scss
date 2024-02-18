@@ -288,6 +288,7 @@ section {
     margin: 0;
     min-height: 100px;
     padding-bottom: 15px;
+    overflow: hidden;
 }
 
 section>h3 {
@@ -320,6 +321,8 @@ section#home {
     /* background-size: cover; */
     background-color: #fff;
     padding:0;
+    overflow: hidden;
+    min-height: 400px;
 }
 
 section#description {
@@ -519,7 +522,9 @@ footer .col-lg-12>p {
     max-width: 40px;
     animation: fadeInLeft 0.4s both 0.4s;
 }
-
+.owl-theme .owl-nav [class*=owl-] {
+    background:transparent;
+  }
 @media only screen and (max-width: 991px) {
     .owl-prev{
         left: 1rem!important;
@@ -1344,6 +1349,8 @@ section#tutoriel {
 .card-tuto {
     width: 100%;
     margin: 10px 0;
+    height: 252px;
+    overflow: hidden
 }
 
 .card-tuto img {
@@ -1374,9 +1381,7 @@ section#tutoriel {
     color: #fff;
 }
 
-
 /* end search */
-
 
 /* Tutoriel detail */
 
@@ -1460,6 +1465,13 @@ section#tutoriel-detail {
 
 .btn-3:active {
     transform: scale(1.025);
+}
+.btn-4 {
+    color: #fff;
+    background: #0000008f
+}
+.btn-4:hover{
+    color:#ea0505f0
 }
 
 
@@ -1580,6 +1592,7 @@ li:hover .sous-menu-item {
     background-position: center center;
     /* background-image: url(https://via.placeholder.com/1920x400);  */
     height: 400px;
+    overflow: hidden;
 }
 
 .slide-card{
@@ -1588,6 +1601,7 @@ li:hover .sous-menu-item {
     position: relative;
     top: 20px;
     margin: 0 auto;
+    overflow: hidden;
     /* background-color: red; */
 }
 @media (max-width: 991px) {
@@ -1598,7 +1612,7 @@ li:hover .sous-menu-item {
         font-size: 25px!important;
     }
 
-    .slide-home-1{
+    .slide-home-1, .slide-home-3{
         background-image: url(../img/slide/slide-home-mobile.png)!important; 
     }
 }
@@ -1607,10 +1621,10 @@ li:hover .sous-menu-item {
     /* background-image: url(https://via.placeholder.com/1900x400);  */
 }
 .slide-home-2{
-    background-image: url(https://via.placeholder.com/1920x400); 
+    background-image: url(../img/slide/pmd-home-2.png); 
 }
 .slide-home-3{
-    background-image: url(https://via.placeholder.com/1920x400); 
+    background-image: url(../img/slide/slide-home.png); 
 }
 /* ./caroussel end */
 

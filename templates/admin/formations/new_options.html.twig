@@ -1,0 +1,43 @@
+{% import "macros/breadcrumb.html.twig" as breadcrumb %}
+{% import "macros/link.html.twig" as link %}
+
+{% extends 'admin/base.html.twig' %}
+{% block head %}
+	<link href="{{ asset('vendor/summernote/summernote-bs4.css')}}" rel="stylesheet">
+
+{% endblock %}
+
+{% block foot %}
+	<script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script>
+{% endblock %}
+
+{% block title %}Ajouter une option
+{% endblock %}
+
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Ajouter une option',[
+{
+path:path('app_admin_formations_index'),
+name:'Gestion des formations'|trans
+}
+])}}
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+	{% include "includes/_alerte.html.twig" %}
+
+	<div class="card card-outline card-primary">
+		<div class="card-header">Ajouter une option à la formation</div>
+		<div class="card-body">
+			<h1>Formation:
+				{{formation.nom }}</h1>
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			<button class="btn btn-primary">Enregister et ajouter un autre</button>
+			<button name="end" class="btn btn-success">Enregister Et Terminer</button>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}

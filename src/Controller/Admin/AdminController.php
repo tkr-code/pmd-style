@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Repository\CahierChargeRepository;
+use App\Repository\FormationsRepository;
 use App\Service\CaisseService;
 use KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="admin")
      */
-    public function index(CahierChargeRepository $cahierChargeRepository, CaisseService $caisseService): Response
+    public function index(FormationsRepository $formationsRepository, CahierChargeRepository $cahierChargeRepository, CaisseService $caisseService): Response
     {
 
         if (!$this->getUser()) {
@@ -35,7 +36,8 @@ class AdminController extends AbstractController
         return $this->render('admin/index.html.twig',[
             'parent_page'=>$this->translator->trans('Dashboard'),
             'cahierCharges'=>$cahierCharges,
-            'totalCaisse'=>$caisseService->total()
+            'totalCaisse'=>$caisseService->total(),
+            'formations'=>$formationsRepository->findAll()
         ]);
     }
     /**

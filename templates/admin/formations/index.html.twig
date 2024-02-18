@@ -28,10 +28,12 @@
 {% endblock %}
 
 {% block body %}
+{% include "includes/_alerte.html.twig" %}
+
 	<div class="card card-outline card-primary">
 		<div class="card-body">
 			<h1>Formations</h1>
-            		<a class="btn btn-primary" href="{{ path('app_admin_formations_new') }}">Ajouter une formations</a>
+            		<a class="btn btn-primary my-1" href="{{ path('app_admin_formations_new') }}">Ajouter une formation  </a>
 
 			<table id="table-1" class="table">
 				<thead>

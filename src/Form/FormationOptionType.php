@@ -24,7 +24,8 @@ class FormationOptionType extends AbstractType
                 
             )
             ->add('is_active',CheckboxType::class,[
-                'label'=>'Es Visible ?'
+                'label'=>'Es Visible ?',
+                'required'=>false
             ])
         ;
     }

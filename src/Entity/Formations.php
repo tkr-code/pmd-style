@@ -41,7 +41,7 @@ class Formations
     private $is_active;
 
     /**
-     * @ORM\OneToMany(targetEntity=FormationOption::class, mappedBy="formations", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=FormationOption::class, orphanRemoval=true, mappedBy="formations", cascade={"persist"})
      */
     private $options;
 

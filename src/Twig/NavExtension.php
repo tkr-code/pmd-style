@@ -99,6 +99,23 @@ class NavExtension extends AbstractExtension
                             'path'=>'app_admin_formations_index',
                             'icon'=>'far fa-circle'
                         ],
+                        
+                    ]
+                ],
+                [
+                    'name'=>'Application',
+                    'path'=>'app_admin_application_index',
+                    'links'=>[
+                        [
+                            'name'=>'Applications',
+                            'path'=>'app_admin_application_index',
+                            'icon'=>'far fa-circle'
+                        ],
+                        [
+                            'name'=>'Ajouter',
+                            'path'=>'app_admin_application_new',
+                            'icon'=>'far fa-circle'
+                        ],
                     ]
                 ],
             ],
