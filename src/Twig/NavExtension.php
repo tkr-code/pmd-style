@@ -70,6 +70,11 @@ class NavExtension extends AbstractExtension
                     'icon'=>'fas fa-funnel-dollar'
                 ],
                 [
+                    'name'=>'API',
+                    'path'=>'admin_api_index',
+                    // 'icon'=>'fas fa-funnel-dollar'
+                ],
+                [
                     'name'=>'Boutique',
                     'path'=>'admin',
                     'links'=>[

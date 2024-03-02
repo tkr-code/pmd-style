@@ -111,6 +111,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $api_key;
+
     public function __construct()
     {
         $this->phones = new ArrayCollection();
@@ -409,6 +414,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCle(string $cle): self
     {
         $this->cle = $cle;
+
+        return $this;
+    }
+
+    public function getApiKey(): ?string
+    {
+        return $this->api_key;
+    }
+
+    public function setApiKey(string $api_key): self
+    {
+        $this->api_key = $api_key;
 
         return $this;
     }

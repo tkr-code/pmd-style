@@ -55,6 +55,15 @@ class AdminController extends AbstractController
         return $this->render('admin/google/analytics.html.twig',[
         ]);
     }
+        /**
+     * @Route("/api", name="admin_api_index")
+     */
+    public function api(): Response
+    {
+        return $this->render('admin/api/index.html.twig',[
+            'parent_page'=>"API"
+        ]);
+    }
     /**
      * @Route("/blank", name="admin_blank_index")
      */

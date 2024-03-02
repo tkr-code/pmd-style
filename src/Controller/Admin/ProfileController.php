@@ -13,8 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Form\ChangePasswordFormType;
 use App\Repository\PhoneRepository;
-
-
+use App\Service\Service;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("my-account/profile")
@@ -106,6 +107,25 @@ class ProfileController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * @Route("-edit-api-key", name="profile_edit_api_key", methods={"POST"})
+     */
+    public function editApiKey(Request $request, EntityManagerInterface $entityManager, Service $service): Response
+    {
+        $user = $this->getUser();
+        if ($this->isCsrfTokenValid('edit_api' . $user->getId(), $request->request->get('_token'))) {
+            $newApiKey = $service->aleatoire(101);
+            $user->setApiKey($newApiKey);
+            $entityManager->flush();
+            return new JsonResponse([
+                'response'=>true,
+                'content'=>$newApiKey
+            ]);
+        }
+
+        return new JsonResponse(false);
+    }
     /**
      * @Route("-edit-password", name="profile_edit_password", methods={"GET","POST"})
      */
