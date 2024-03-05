@@ -10,6 +10,7 @@ use App\Service\Cart\CartService;
 use App\Repository\StreetRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
+use Symfony\Component\HttpFoundation\File\File;
 use Twig\Extension\AbstractExtension;
 
 class AppExtension extends AbstractExtension
@@ -44,7 +45,13 @@ class AppExtension extends AbstractExtension
             new TwigFunction('cartAll', [$this, 'cartAll']),
             new TwigFunction('rating', [$this, 'rating']),
             new TwigFunction('dateFilter', [$this, 'doSomething']),
+            new TwigFunction('fileInfo', [$this, 'fileInfo']),
         ];
+    }
+    
+    public function fileInfo($path){
+
+         return $path;
     }
     public function streets(){
         return $this->streetRepository->findbyCity();

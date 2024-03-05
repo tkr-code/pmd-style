@@ -152,7 +152,7 @@ class ArticleController extends AbstractController
             foreach($images as $image)
             {
                 //om gener un nouveau nom de fichier
-                $fichier = md5(uniqid()). '.'.$image->guessExtension();
+                $fichier = md5(uniqid()). '.'.$image->getClientOriginalExtension();
 
                 //on copie le fichier dans le dosiier uploads
                 $image->move(

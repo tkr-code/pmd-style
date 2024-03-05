@@ -89,6 +89,212 @@
         <source>About</source>
         <target>A propos</target>
       </trans-unit>
+      <trans-unit id="zJO1KsS" resname="Article cree">
+        <source>Article cree</source>
+        <target>__Article cree</target>
+      </trans-unit>
+      <trans-unit id="SiY0tMN" resname="Gestion des améliorations">
+        <source>Gestion des améliorations</source>
+        <target>__Gestion des améliorations</target>
+      </trans-unit>
+      <trans-unit id="3SZxvxt" resname="Gestion des applications">
+        <source>Gestion des applications</source>
+        <target>__Gestion des applications</target>
+      </trans-unit>
+      <trans-unit id="4tClSWj" resname="Delete">
+        <source>Delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="WNaOfuz" resname="Out of Stock">
+        <source>Out of Stock</source>
+        <target>__Out of Stock</target>
+      </trans-unit>
+      <trans-unit id="vYLPFmm" resname="Number">
+        <source>Number</source>
+        <target>__Number</target>
+      </trans-unit>
+      <trans-unit id="6Qeeiq2" resname="Manage Caisse">
+        <source>Manage Caisse</source>
+        <target>__Manage Caisse</target>
+      </trans-unit>
+      <trans-unit id="Yz0_DTV" resname="Manage delivery space">
+        <source>Manage delivery space</source>
+        <target>__Manage delivery space</target>
+      </trans-unit>
+      <trans-unit id="IKc4Fo7" resname="DeliverySpace">
+        <source>DeliverySpace</source>
+        <target>__DeliverySpace</target>
+      </trans-unit>
+      <trans-unit id="6ytiWrD" resname="Delivery Space">
+        <source>Delivery Space</source>
+        <target>__Delivery Space</target>
+      </trans-unit>
+      <trans-unit id="naQLNQL" resname="Gestion des formations">
+        <source>Gestion des formations</source>
+        <target>__Gestion des formations</target>
+      </trans-unit>
+      <trans-unit id="3w.nmJj" resname="Print">
+        <source>Print</source>
+        <target>__Print</target>
+      </trans-unit>
+      <trans-unit id="F1oB_p5" resname="Order manage">
+        <source>Order manage</source>
+        <target>__Order manage</target>
+      </trans-unit>
+      <trans-unit id="pSrOQg8" resname="All">
+        <source>All</source>
+        <target>__All</target>
+      </trans-unit>
+      <trans-unit id="bik6jAC" resname="Waiting">
+        <source>Waiting</source>
+        <target>__Waiting</target>
+      </trans-unit>
+      <trans-unit id="wfiOnWx" resname="In progress">
+        <source>In progress</source>
+        <target>__In progress</target>
+      </trans-unit>
+      <trans-unit id="E8ou4km" resname="Canceled">
+        <source>Canceled</source>
+        <target>__Canceled</target>
+      </trans-unit>
+      <trans-unit id="Iqlw0uW" resname="Completed">
+        <source>Completed</source>
+        <target>__Completed</target>
+      </trans-unit>
+      <trans-unit id="uDIALaK" resname="Invoice">
+        <source>Invoice</source>
+        <target>__Invoice</target>
+      </trans-unit>
+      <trans-unit id="IYGXaTQ" resname="From">
+        <source>From</source>
+        <target>__From</target>
+      </trans-unit>
+      <trans-unit id="9LBu9tP" resname="To">
+        <source>To</source>
+        <target>__To</target>
+      </trans-unit>
+      <trans-unit id="Y9zriAC" resname="Phone">
+        <source>Phone</source>
+        <target>__Phone</target>
+      </trans-unit>
+      <trans-unit id="lpzL089" resname="Email">
+        <source>Email</source>
+        <target>__Email</target>
+      </trans-unit>
+      <trans-unit id="a_CQgly" resname="Order">
+        <source>Order</source>
+        <target>__Order</target>
+      </trans-unit>
+      <trans-unit id="_574lBd" resname="Product">
+        <source>Product</source>
+        <target>__Product</target>
+      </trans-unit>
+      <trans-unit id="aDtTH0H" resname="price">
+        <source>price</source>
+        <target>__price</target>
+      </trans-unit>
+      <trans-unit id="jA8ss0B" resname="Subtotal">
+        <source>Subtotal</source>
+        <target>__Subtotal</target>
+      </trans-unit>
+      <trans-unit id="n04svjv" resname="Payment Methods">
+        <source>Payment Methods</source>
+        <target>__Payment Methods</target>
+      </trans-unit>
+      <trans-unit id="oTX5MgC" resname="Amount Due">
+        <source>Amount Due</source>
+        <target>__Amount Due</target>
+      </trans-unit>
+      <trans-unit id="rVdRQw4" resname="Shipping">
+        <source>Shipping</source>
+        <target>__Shipping</target>
+      </trans-unit>
+      <trans-unit id="ybPDgkf" resname="Total">
+        <source>Total</source>
+        <target>__Total</target>
+      </trans-unit>
+      <trans-unit id="EohvnQA" resname="number">
+        <source>number</source>
+        <target>__number</target>
+      </trans-unit>
+      <trans-unit id="vzdjODq" resname="Customer">
+        <source>Customer</source>
+        <target>__Customer</target>
+      </trans-unit>
+      <trans-unit id="kg5BPH1" resname="Status">
+        <source>Status</source>
+        <target>__Status</target>
+      </trans-unit>
+      <trans-unit id="AXdcnaP" resname="New Client">
+        <source>New Client</source>
+        <target>__New Client</target>
+      </trans-unit>
+      <trans-unit id="R6sXNJC" resname="back to client list">
+        <source>back to client list</source>
+        <target>__back to client list</target>
+      </trans-unit>
+      <trans-unit id="L.WZgUO" resname="Tous">
+        <source>Tous</source>
+        <target>__Tous</target>
+      </trans-unit>
+      <trans-unit id="1gQxCni" resname="Showing">
+        <source>Showing</source>
+        <target>__Showing</target>
+      </trans-unit>
+      <trans-unit id="KDkdO8Z" resname="of">
+        <source>of</source>
+        <target>__of</target>
+      </trans-unit>
+      <trans-unit id="TtyL_vx" resname="Products">
+        <source>Products</source>
+        <target>__Products</target>
+      </trans-unit>
+      <trans-unit id="0Aqua3_" resname="Shop">
+        <source>Shop</source>
+        <target>__Shop</target>
+      </trans-unit>
+      <trans-unit id="yeo7yKR" resname="Out of&#10;                                    Stock">
+        <source>Out of
+                                    Stock</source>
+        <target>__Out of
+                                    Stock</target>
+      </trans-unit>
+      <trans-unit id="DpQINTx" resname="Add to cart">
+        <source>Add to cart</source>
+        <target>__Add to cart</target>
+      </trans-unit>
+      <trans-unit id="jZOHsT0" resname="add to wishlist">
+        <source>add to wishlist</source>
+        <target>__add to wishlist</target>
+      </trans-unit>
+      <trans-unit id="i3ilyiH" resname="remove to wishlist">
+        <source>remove to wishlist</source>
+        <target>__remove to wishlist</target>
+      </trans-unit>
+      <trans-unit id="MZAKOYu" resname="add to cart">
+        <source>add to cart</source>
+        <target>__add to cart</target>
+      </trans-unit>
+      <trans-unit id="GP3VSbL" resname="New">
+        <source>New</source>
+        <target>__New</target>
+      </trans-unit>
+      <trans-unit id="1c389.9" resname="Top">
+        <source>Top</source>
+        <target>__Top</target>
+      </trans-unit>
+      <trans-unit id="1crefvM" resname="Stock">
+        <source>Stock</source>
+        <target>__Stock</target>
+      </trans-unit>
+      <trans-unit id="U0M9PNE" resname="back to list">
+        <source>back to list</source>
+        <target>Retour à la liste</target>
+      </trans-unit>
+      <trans-unit id="wYmEDPf" resname="Log in">
+        <source>Log in</source>
+        <target>__Log in</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

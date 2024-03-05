@@ -26,6 +26,33 @@
     display: none;
   }
 
+  
+  /* .loader {
+    display: none
+  } */
+
+  .js-loader {
+    z-index: 1052;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #97383863;
+    display: none;
+    justify-content: center;
+    align-items: center
+  }
+
+  .js-loader p {
+    text-align: center
+  }
+
+  .js-loader-content {
+    padding: 10px;
+    width: 300px;
+    background: #fff;
+    border-radius: 15px
+  }
+
 /* loader end */
 
 

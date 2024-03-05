@@ -69,9 +69,11 @@ class AmeliorationController extends AbstractController
     public function delete(Request $request, Amelioration $amelioration, AmeliorationRepository $ameliorationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$amelioration->getId(), $request->request->get('_token'))) {
+            $application = $amelioration->getApplication();
             $ameliorationRepository->remove($amelioration);
+            $this->addFlash('success',"La remarques ou suggestion a été supprimé avec succès");
         }
 
-        return $this->redirectToRoute('app_admin_amelioration_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_application_edit', ['id'=>$application->getId()], Response::HTTP_SEE_OTHER);
     }
 }

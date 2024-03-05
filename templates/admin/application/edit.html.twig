@@ -6,66 +6,56 @@
 {% endblock %}
 
 {% block body %}
-{% include "includes/_alerte.html.twig" %}
+	{% include "includes/_alerte.html.twig" %}
 	<div class="row">
-		<div class="col-xl-6">
+		<div class="col-xl-5">
 			<div class="card">
 				<div class="card-header">
 					<div class="card-title">Modifier Application</div>
 				</div>
 				<div class="card-body">
-					{{ include('admin/application/_form.html.twig', {'button_label': 'Update'}) }}
+					{{ form_start(form) }}
+					{{ form_widget(form) }}
+												<div class="gallery">
+													<p class="text-center">Prévisualisez vos images</p>
+												</div>
+
+					{# {{ include('admin/application/_form.html.twig', {'button_label': 'Update'}) }} #}
+					<div class="row">
+						{% for image in application.images %}
+							<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+								<img src="{{ asset('img/application/' ~ image.nom)}}" class="zoom img-fluid " alt="">
+								<a class="btn btn-application-image-delete position-absolute text-center" href="{{ path('application_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
+									<i class="fa fa-window-close"></i>
+								</a>
+							</div>
+						{% else %}
+							<div class="col-md-12 col-12">
+								<p class="font-weight-bold text-center">L'application ne possede pas d'image</p>
+							</div>
+						{% endfor %}
+					</div>
+										<button class="btn btn-primary my-1">{{ button_label|default('Save') }}</button>
+					{{ form_end(form) }}
 					{{ include('admin/application/_delete_form.html.twig') }}
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-6">
-			<div class="card">
-				<div class="card-header">
-					<div class="card-title">Remarques et suggestions</div>
-				</div>
-				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Type</th>
-								<th>Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for amelioration in application.ameliorations %}
-								<tr>
-									<td>
-                                    {{ link.show(path('app_admin_amelioration_show', {'id': amelioration.id})) }}
-                                    #{{ amelioration.id }}
-									<td>{{ amelioration.type }}</td>
-									<td>{{ amelioration.description }}</td>
-			
-								</tr>
-							{% else %}
-								<tr>
-									<td colspan="3">no records found</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-        <div class="col-xl-6">
+		<div class="col-xl-7">
 			<div class="card">
 				<div class="card-header">
 					<div class="card-title">Fichiers</div>
 				</div>
 				<div class="card-body">
-				<a class="btn btn-primary my-1" href="{{ path('app_admin_application_fichier_new',{id:application.id}) }}">Ajouter un fichier</a>
-				<hr>
+					<a class="btn btn-primary my-1" href="{{ path('app_admin_application_fichier_new',{id:application.id}) }}">Ajouter un fichier</a>
+					<hr>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>nom</th>
 								<th>Version</th>
-                                <th>Actions</th>
+								<th>Fichier</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -74,7 +64,15 @@
 									<td>{{ fichier.nom }}</td>
 									<td>{{ fichier.version }}</td>
 									<td>
-										<a href="{{ path('app_admin_amelioration_edit', {'id': amelioration.id}) }}">edit</a>
+									{{ link.download(asset('application/fichier/' ~ fichier.fichier), fichier.nom)}}
+										{{fichier.fichier}}
+									</td>
+									<td>
+										{{ link.edit(path('app_admin_application_fichier_edit', {'id': fichier.id})) }}
+										<form method="post" class="d-inline-block" action="{{ path('app_admin_application_fichier_delete', {'id': fichier.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichier.id) }}">
+											<button class="btn text-danger my-1"><i class="fas fa-trash-alt"></i></button>
+										</form>
 									</td>
 								</tr>
 							{% else %}
@@ -87,8 +85,49 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-xl-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title">Remarques et suggestions</div>
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Type</th>
+								<th>Description</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for amelioration in application.ameliorations %}
+								<tr>
+									<td>
+										{{ link.show(path('app_admin_amelioration_show', {'id': amelioration.id})) }}
+										#{{ amelioration.id }}</td>
+									<td>{{ amelioration.type }}</td>
+									<td>{{ amelioration.description }}</td>
+									<td>
+										<form method="post" class="d-inline" action="{{ path('app_admin_amelioration_delete', {'id': amelioration.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ amelioration.id) }}">
+											<button type="submit" class="btn">
+											<i class="fas fa-trash-alt text-danger"></i>
+											</button>
+										</form>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="3">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
 	</div>
-
-
 	{{ link.back(path('app_admin_application_index')) }}
 {% endblock %}

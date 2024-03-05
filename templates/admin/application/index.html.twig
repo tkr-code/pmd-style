@@ -33,11 +33,24 @@
 					{% for application in applications %}
 						<tr>
 							<td>{{ application.id }}</td>
-							<td>{{ application.nom }}</td>
+							<td>
+							{% for image in application.images %}
+								<img width="60" class="m-1" src="{{ asset('img/application/' ~ image.nom )}}">
+							{% else %}
+								<img width="60" class="m-1" src="{{ asset('img/vide.png' )}}">
+							{% endfor %}
+							{{ application.nom }}</td>
 							<td>{{ application.nombreTelechargement }}</td>
 							<td>
 								{{ link.show(path('app_admin_application_show', {'id': application.id})) }}
 								{{ link.edit(path('app_admin_application_edit', {'id': application.id})) }}
+								<form method="post" class="d-inline-block" action="{{ path('app_admin_application_delete', {'id': application.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ application.id) }}">
+									<button class="btn text-danger my-1">
+										<i class="fas fa-trash-alt"></i>
+									</button>
+								</form>
+
 							</td>
 						</tr>
 					{% else %}

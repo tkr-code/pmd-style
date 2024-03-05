@@ -9,9 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=ApplicationRepository::class)
+ * @UniqueEntity(fields={"nom"}, message="Il existe déjà une application avec ce nom")
  * @ApiResource(
  *     collectionOperations={"post"},
  *     itemOperations={"get"}
@@ -32,12 +33,12 @@ class Application
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Amelioration::class, mappedBy="application", cascade={"persist"}))
+     * @ORM\OneToMany(targetEntity=Amelioration::class, mappedBy="application", orphanRemoval=true, cascade={"persist"}))
      */
     private $ameliorations;
 
     /**
-     * @ORM\OneToMany(targetEntity=ApplicationImage::class, mappedBy="application", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ApplicationImage::class, mappedBy="application", orphanRemoval=true, cascade={"persist"} )
      */
     private $images;
 

@@ -11,6 +11,8 @@ class TestController extends AbstractController
     #[Route('/test', name: 'test_index')]
     public function index(): Response
     {
+
+        
         $pages =[
             [
                 'path'=>'test_application',

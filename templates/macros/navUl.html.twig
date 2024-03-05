@@ -1,10 +1,11 @@
-{% macro ul(page = 'home') %}
+{% macro ul() %}
+	{% set page  = app.request.get('_route') %}
 	<ul class="navbar-nav ml-auto text-uppercase f1">
 		<li>
-			<a href="{{path('home')}}" class="{{ (app.request.get('_route') == 'home') ? 'active':'' }}">Accueil</a>
+			<a href="{{path('home')}}" class="{{ (page == 'home') ? 'active':'' }}">Accueil</a>
 		</li>
 		<li>
-			<a class="{{ (app.request.get('_route') == 'service') ? 'active':'' }}" href="{{ (page == 'home') ? '#services':'/#services' }}">Services</a>
+			<a class="{{ (app.request.get('_route') == 'service') ? 'active':'' }}" href="{{ (page == 'home') ? '#services': '/#services' }}">Services</a>
 		</li>
 		<li>
 			<a class="{{ (app.request.get('_route') == 'team') ? 'active':'' }}" href="{{ (page == 'home') ? '#team':'/#team' }}">Equipe</a>
@@ -30,7 +31,7 @@
 			<a class="{{ (app.request.get('_route') == 'about') ? 'active':'' }}" href="#about">A propos</a>
 		</li> #}
 		<li>
-			<a class="{{ (app.request.get('_route') == 'contact') ? 'active':'' }}" href="#message">Contact</a>
+			<a class="{{ (app.request.get('_route') == 'contact') ? 'active':'' }}" href="{{ (page == 'home') ? '#message':'/#message' }}" >Contact</a>
 		</li>
 		{% if is_granted('ROLE_USER') %}
 			<li>

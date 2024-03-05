@@ -7,6 +7,20 @@
 {% endblock %}
 
 {% block body %}
+<style>
+		.app-card {
+			padding: 10px;
+			/* background: red; */
+			border-radius: 8px;
+			height: 200px;
+			display: flex;
+			justify-content: center;
+			align-items: center
+		}
+		.app-card img {
+			width: 100%
+		}
+</style>
 	<div class="card card-outline card-primary">
 		<div class="card-header">
 			<div class"card-title">Application</div>
@@ -14,6 +28,41 @@
 		<div class="card-body">
 			{{ link.BtnEdit(path('app_admin_application_edit', {'id': application.id})) }}
 			{{ include('admin/application/_delete_form.html.twig') }}
+				<p style="font-size:1.5rem; font-weight:bold">Gestion dépenses</p>
+						<div class="row">
+				<div class="col-xl-2">
+					<div class="app-card bg-white">
+					{% for image in application.images %}
+								<img width="60" class="m-1" src="{{ asset('img/application/' ~ image.nom )}}">
+							{% else %}
+								<img width="60" class="m-1" src="{{ asset('img/vide.png' )}}">
+							{% endfor %}
+					</div>
+				</div>
+				<div class="col-xl-10">
+					<div class="row">
+						<div class="col-xl-12" style="min-height:200px">
+							<div class="row pt-3">
+								<div class="col-xl-2  border-right">
+									<p>Vote</p>
+									<i class="fa fa-star text-warning mr-1" aria-hidden="true"></i>
+									4.1
+								</div>
+								<div class="col-xl-3 border-right">
+									<p>Taille</p>
+									<i class="fa fa-server text-primary mr-1" aria-hidden="true"></i>
+									50 MB
+								</div>
+								<div class="col-xl-3 border-right">
+									<p>Telechargemment</p>
+									<i class="fa fa-download text-success mr-1" aria-hidden="true"></i>
+									1 million
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<table class="table">
 				<tbody>
 					<tr>
@@ -26,8 +75,41 @@
 					</tr>
 				</tbody>
 			</table>
+
 		</div>
 	</div>
+				<div class="card">
+				<div class="card-header">
+					<div class="card-title">Remarques et suggestions</div>
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+							<th>Id</th>
+								<th>Type</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for amelioration in application.ameliorations %}
+								<tr>
+									<td>
+                                    {{ link.show(path('app_admin_amelioration_show', {'id': amelioration.id})) }}
+                                    #{{ amelioration.id }}</td>
+									<td>{{ amelioration.type }}</td>
+									<td>{{ amelioration.description }}</td>
+			
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="3">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
 
 	{{ link.back(path('app_admin_application_index')) }}
 {% endblock %}

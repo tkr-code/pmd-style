@@ -27,13 +27,13 @@ class ApplicationFichierController extends AbstractController
     {
         $applicationFichier = new ApplicationFichier();
         $applicationFichier->setApplication($application);
-        $applicationFichier->setNom($application->getNom());
+        // $applicationFichier->setNom($application->getNom());
         $form = $this->createForm(ApplicationFichierType::class, $applicationFichier);
         $form->handleRequest($request);
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($request);
+            // dd($request);
             $fichier = $form->get('fichier')->getData();
             $nom_fichier = $applicationFichier->getNom() . '.' . $fichier->getClientOriginalExtension();
 
@@ -43,7 +43,7 @@ class ApplicationFichierController extends AbstractController
             $applicationFichier->setFichier($nom_fichier);            
             $applicationFichierRepository->add($applicationFichier);
             $this->addFlash('success','Fichier ajouté');
-            return $this->redirectToRoute('app_admin_application_fichier_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_application_edit', ['id'=>$application->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/application_fichier/new.html.twig', [
@@ -81,9 +81,14 @@ class ApplicationFichierController extends AbstractController
     public function delete(Request $request, ApplicationFichier $applicationFichier, ApplicationFichierRepository $applicationFichierRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $applicationFichier->getId(), $request->request->get('_token'))) {
+            $path = $this->getParameter('application_fichiers_directory').'/'.$applicationFichier->getNom();
+            if(file_exists($path)){
+                unlink($path);
+            }
             $applicationFichierRepository->remove($applicationFichier);
+            $this->addFlash('success',"Le fichier a été supprimé avec succès");
         }
 
-        return $this->redirectToRoute('app_admin_application_fichier_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_application_edit', ['id'=>$applicationFichier->getApplication()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

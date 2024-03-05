@@ -3,9 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Application;
+use App\Entity\ApplicationImage;
 use App\Form\ApplicationType;
 use App\Repository\ApplicationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,12 +30,30 @@ class ApplicationController extends AbstractController
     public function new(Request $request, ApplicationRepository $applicationRepository): Response
     {
         $application = new Application();
+        $application->setNombreTelechargement(0);
         $form = $this->createForm(ApplicationType::class, $application);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //on recupere les images transmise
+            $images = $form->get('images')->getData();
+
+            foreach($images as $image)
+            {
+                //om gener un nouveau nom de fichier
+                $fichier = md5(uniqid()). '.'.$image->guessExtension();
+                //on copie le fichier dans le dosiier uploads
+                $image->move(
+                    $this->getParameter('application_images_directory'),
+                    $fichier
+                );
+                //on stocke l'image dans la base de donnees 
+                $img = new ApplicationImage();
+                $img->setNom($fichier);
+                $application->addImage($img);
+            }
             $applicationRepository->add($application);
-            $this->addFlash('success','Application créer.');
+            $this->addFlash('success','L\'application a été créé avec succès.');
             return $this->redirectToRoute('app_admin_application_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +80,24 @@ class ApplicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //on recupere les images transmise
+            $images = $form->get('images')->getData();
+
+            foreach($images as $image)
+            {
+                //om gener un nouveau nom de fichier
+                $fichier = md5(uniqid()). '.'.$image->guessExtension();
+                //on copie le fichier dans le dosiier uploads
+                $image->move(
+                    $this->getParameter('application_images_directory'),
+                    $fichier
+                );
+                //on stocke l'image dans la base de donnees 
+                $img = new ApplicationImage();
+                $img->setNom($fichier);
+                $application->addImage($img);
+            }
+            $this->addFlash('success',"L'application a été modifié avec succès");
             $applicationRepository->add($application);
             return $this->redirectToRoute('app_admin_application_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -74,9 +113,41 @@ class ApplicationController extends AbstractController
     public function delete(Request $request, Application $application, ApplicationRepository $applicationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$application->getId(), $request->request->get('_token'))) {
+            foreach ($application->getImages() as $key => $image) {
+                $path = $this->getParameter('application_images_directory').'/'.$image->getNom();
+                if(file_exists($path)){
+                    unlink($path);
+                }
+            }
+
+            foreach ($application->getFichiers() as $key => $applicationFichier) {
+                $path = $this->getParameter('application_fichiers_directory').'/'.$applicationFichier->getNom();
+                    if(file_exists($path)){
+                        unlink($path);
+                    }
+            }
             $applicationRepository->remove($application);
+            $this->addFlash('success',"L'application a été supprimé avec succès");
         }
 
         return $this->redirectToRoute('app_admin_application_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/delete/image/{id}", name="application_delete_image", methods={"DELETE"})
+     */
+    public function deleteImage(ApplicationImage $image,Request $request, EntityManagerInterface $entityManager){
+        //om verifi si le token est valide         
+        if($this->isCsrfTokenValid('delete'.$image->getId(),$request->request->get('_token'))){
+            $path = $this->getParameter('application_images_directory').'/'.$image->getNom();
+            if(file_exists($path)){
+                unlink($path);
+            }
+            $entityManager->remove($image);
+            $entityManager->flush();
+            return new JsonResponse(['success'=>1]);
+        }else{
+            return new JsonResponse(['error'=>'Token invalide'],400);
+        }
     }
 }
