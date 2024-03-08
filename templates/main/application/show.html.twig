@@ -1,0 +1,112 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Hello ApplicationController!{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+	<nav class="breadcrumb breadcrumb-1 border-none  py-1 bg-2 m-0">
+		<a class="breadcrumb-item" href="/">{{"Home"|trans}}</a>
+		<span class="breadcrumb-item text-white active">Applications</span>
+	</nav>
+	<!-- Application -->
+	<section id="applications" class="bg-2">
+		<div class="container pt-3">
+			<div class="row">
+				<div class="col-xl-8 my-2">
+					<p style="font-size:1.5rem; font-weight:bold">{{ application.nom }}</p>
+				</div>
+				<div class="col-xl-4 my-2">
+					<div
+						class="search">
+						{# <p class="p-2">Rechercher dans notre site</p> #}
+						<div class="input-group card-2">
+							<input type="text" class="form-control" placeholder="Recherche">
+							<button class="btn  btn-search bg-2">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-2">
+					<div class="app-card bg-white">
+						{% for image in application.images|slice(0,1) %}
+						<img src="{{asset('img/application/' ~ image.nom )}}" alt="..."/>
+						{% else %}
+							<img src="{{asset('img/vide.png')}}" alt="..."/>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-xl-10">
+					<div class="row">
+						<div class="col-xl-12" style="min-height:200px">
+							<div class="row pt-3">
+								<div class="col-xl-2  border-right">
+									<p>Vote</p>
+									<i class="fa fa-star text-warning mr-1" aria-hidden="true"></i>
+									4.1
+								</div>
+								<div class="col-xl-3 border-right">
+									<p>Taille</p>
+									<i class="fa fa-server text-primary mr-1" aria-hidden="true"></i>
+									{{ file_size }}
+								</div>
+								<div class="col-xl-3 border-right">
+									<p>Telechargemment</p>									
+										<i class="fa fa-download text-success mr-1" aria-hidden="true"></i>
+									{{ application.nombreTelechargement}}
+								</div>
+								<div class="col-xl-4 pt-4">
+									{# <a class="btn btn-4 my-1" href="#">
+										<i class="fa fa-envelope" aria-hidden="true"></i>
+										Contact du developpeur</a>
+									<a class="btn btn-4 my-1" href="#">
+										<i class="fa fa-home" aria-hidden="true"></i>
+										Voir dans Play Store</a> #}
+										
+									<a class="btn btn-4 my-1 btn-copy" data-copy="{{ url('app_main_application',{id:application.id,slug:application.slug}) }}" href="#"><i class="fa fa-copy" aria-hidden="true"></i> Copier le lien</a>	
+								</div>
+							</div>
+						</div>
+					</div>
+					
+{% set application_telecharger = app.request.cookies.get('application_telecharger') %}
+{% if application_telecharger %}
+					{% if fichier %}
+					<div class="row">
+						<div class="col-xl-6 mx-auto pt-3">
+
+						</div>
+						<div class="col-xl-6 mx-auto pt-3">
+						{{ form_start(form) }}
+						{{ form_widget(form) }}
+						<button href="{{path('download_application_fichier',{id:fichier.id})}}" class="btn btn-3">
+								<i class="fa fa-download text-danger"></i>
+								Télécharger</button>
+					{{ form_end(form) }}
+							
+						</div>
+					</div>
+					{% endif %}
+
+{% else %}
+						<div class="row">
+						<div class="col-xl-6 mx-auto pt-3">
+						
+						<a href="{{path('download_application_fichier',{id:fichier.id})}}" class="btn btn-3">
+								<i class="fa fa-download text-danger"></i>
+								Télécharger</a>
+							
+						</div>
+					</div>
+{% endif %}
+
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

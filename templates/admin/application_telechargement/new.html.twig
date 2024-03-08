@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ApplicationTelechargementUser{% endblock %}
+
+{% block body %}
+    <h1>Create new ApplicationTelechargementUser</h1>
+
+    {{ include('admin/application_telechargement/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_application_telechargement_index') }}">back to list</a>
+{% endblock %}

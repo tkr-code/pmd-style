@@ -28,7 +28,7 @@
 		<div class="card-body">
 			{{ link.BtnEdit(path('app_admin_application_edit', {'id': application.id})) }}
 			{{ include('admin/application/_delete_form.html.twig') }}
-				<p style="font-size:1.5rem; font-weight:bold">Gestion dépenses</p>
+				<p style="font-size:1.5rem; font-weight:bold"> {{application.nom ~ application.version}} Gestion dépenses</p>
 						<div class="row">
 				<div class="col-xl-2">
 					<div class="app-card bg-white">

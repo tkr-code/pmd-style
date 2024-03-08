@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ApplicationTelechargementUser{% endblock %}
+
+{% block body %}
+    <h1>Edit ApplicationTelechargementUser</h1>
+
+    {{ include('admin/application_telechargement/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_application_telechargement_index') }}">back to list</a>
+
+    {{ include('admin/application_telechargement/_delete_form.html.twig') }}
+{% endblock %}

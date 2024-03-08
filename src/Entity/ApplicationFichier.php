@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ApplicationFichier
 {
-    const VERSION =[
+    const TYPE =[
         'Android'=>'Android',
         'Iphone'=>'Iphone'
     ];
@@ -41,6 +41,11 @@ class ApplicationFichier
      * @ORM\Column(type="string", length=255)
      */
     private $fichier;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
 
     public function getId(): ?int
     {
@@ -91,6 +96,18 @@ class ApplicationFichier
     public function setFichier(string $fichier): self
     {
         $this->fichier = $fichier;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

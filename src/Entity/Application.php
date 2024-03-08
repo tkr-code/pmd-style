@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Cocur\Slugify\Slugify;
 use App\Repository\ApplicationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -52,11 +52,23 @@ class Application
      */
     private $nombre_telechargement;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $version;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ApplicationTelechargementUser::class, mappedBy="application", orphanRemoval=true)
+     */
+    private $telechargement_user;
+
+
     public function __construct()
     {
         $this->ameliorations = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->fichiers = new ArrayCollection();
+        $this->telechargement_user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +186,53 @@ class Application
     public function setNombreTelechargement(int $nombre_telechargement): self
     {
         $this->nombre_telechargement = $nombre_telechargement;
+
+        return $this;
+    }
+
+    public function getVersion(): ?string
+    {
+        return $this->version;
+    }
+
+    public function setVersion(string $version): self
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return (new Slugify())->slugify($this->nom);
+    }
+
+    /**
+     * @return Collection<int, ApplicationTelechargementUser>
+     */
+    public function getTelechargementUser(): Collection
+    {
+        return $this->telechargement_user;
+    }
+
+    public function addTelechargementUser(ApplicationTelechargementUser $telechargementUser): self
+    {
+        if (!$this->telechargement_user->contains($telechargementUser)) {
+            $this->telechargement_user[] = $telechargementUser;
+            $telechargementUser->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTelechargementUser(ApplicationTelechargementUser $telechargementUser): self
+    {
+        if ($this->telechargement_user->removeElement($telechargementUser)) {
+            // set the owning side to null (unless already changed)
+            if ($telechargementUser->getApplication() === $this) {
+                $telechargementUser->setApplication(null);
+            }
+        }
 
         return $this;
     }

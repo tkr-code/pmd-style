@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ApplicationTelechargementUser{% endblock %}
+
+{% block body %}
+    <h1>ApplicationTelechargementUser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ application_telechargement_user.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ application_telechargement_user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ application_telechargement_user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_application_telechargement_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_application_telechargement_edit', {'id': application_telechargement_user.id}) }}">edit</a>
+
+    {{ include('admin/application_telechargement/_delete_form.html.twig') }}
+{% endblock %}

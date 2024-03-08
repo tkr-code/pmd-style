@@ -15,9 +15,10 @@ class ApplicationFichierType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('version',ChoiceType::class,[
-                'label'=>'Version *',
-                'choices'=>ApplicationFichier::VERSION,
+            ->add('version')
+            ->add('type',ChoiceType::class,[
+                'label'=>'Type *',
+                'choices'=>ApplicationFichier::TYPE,
                 'attr'=>[
                     'class'=>'select2'
                 ]

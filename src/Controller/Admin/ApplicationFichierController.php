@@ -63,7 +63,7 @@ class ApplicationFichierController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_application_fichier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ApplicationFichier $applicationFichier, ApplicationFichierRepository $applicationFichierRepository): Response
     {
-        $form = $this->createForm(ApplicationFichierType::class, $applicationFichier);
+        $form = $this->createForm(ApplicationFichierType::class, $applicationFichier, ['edit'=>true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

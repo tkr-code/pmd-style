@@ -25,6 +25,7 @@
 					<tr>
 						<th>Id</th>
 						<th>Nom</th>
+						<th>Version</th>
 						<th>Telechargement</th>
 						<th>actions</th>
 					</tr>
@@ -41,6 +42,7 @@
 							{% endfor %}
 							{{ application.nom }}</td>
 							<td>{{ application.nombreTelechargement }}</td>
+							<td>{{application.version }}</td>
 							<td>
 								{{ link.show(path('app_admin_application_show', {'id': application.id})) }}
 								{{ link.edit(path('app_admin_application_edit', {'id': application.id})) }}

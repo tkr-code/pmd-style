@@ -21,6 +21,19 @@ body {
 main {
     overflow: hidden;
 }
+
+.app-card {
+    padding: 10px;
+    /* background: red; */
+    border-radius: 8px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.app-card img {
+    width: 100%
+}
 /*  cahier-charge start */
 .btn-cahier-charge-card{
     position: fixed;

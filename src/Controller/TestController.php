@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,21 +12,31 @@ class TestController extends AbstractController
     #[Route('/test', name: 'test_index')]
     public function index(): Response
     {
+        // $expiration = new \DateTime();
+        // $expiration->modify('+1 year');
 
-        
-        $pages =[
+        // $cookie = Cookie::create('test','Malick',$expiration);
+
+        // $response = new Response();
+        // $response->headers->setCookie($cookie);
+        // $response->send();
+        // $options['edit']=true;
+        $optionEdit = empty($options['edit']) ? false:true;
+        $required = $optionEdit == true ? true:false;
+        dd($required);
+        $pages = [
             [
-                'path'=>'test_application',
-                'name'=>'Application Mobile'
+                'path' => 'test_application',
+                'name' => 'Application Mobile'
             ],
             [
-                'path'=>'test_search',
-                'name'=>'Page de recherche'
+                'path' => 'test_search',
+                'name' => 'Page de recherche'
             ]
         ];
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
-            'pages'=>$pages
+            'pages' => $pages
         ]);
     }
 

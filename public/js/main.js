@@ -1,5 +1,20 @@
 $(function(){
     "use strict";
+    $(document).on('click','.btn-copy',function(){
+        let data = $(this).data('copy')
+        navigator.clipboard.writeText(data)
+        .then(function() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Texte copié !',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+        .catch(function(error) {
+            alert('Impossible de copier le texte: ' + error);
+        });
+    })
     $(document).on('click','.tutoriel-list-btn',function(){
         $('.tutoriel-list-btn').removeClass('active')
         $(this).toggleClass('active')
