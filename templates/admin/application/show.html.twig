@@ -5,7 +5,14 @@
 
 {% block title %}Afficher une application
 {% endblock %}
-
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Afficher une application',[
+{
+path:path('app_admin_application_index'),
+name:'Gestion des applications'|trans
+}
+])}}
+{% endblock %}
 {% block body %}
 <style>
 		.app-card {
@@ -28,15 +35,11 @@
 		<div class="card-body">
 			{{ link.BtnEdit(path('app_admin_application_edit', {'id': application.id})) }}
 			{{ include('admin/application/_delete_form.html.twig') }}
-				<p style="font-size:1.5rem; font-weight:bold"> {{application.nom ~ application.version}} Gestion dépenses</p>
+				<p style="font-size:1.5rem; font-weight:bold"> {{application.nom ~ ' ' ~ application.version}}</p>
 						<div class="row">
 				<div class="col-xl-2">
 					<div class="app-card bg-white">
-					{% for image in application.images %}
-								<img width="60" class="m-1" src="{{ asset('img/application/' ~ image.nom )}}">
-							{% else %}
-								<img width="60" class="m-1" src="{{ asset('img/vide.png' )}}">
-							{% endfor %}
+						<img width="60" class="m-1" src="{{ asset('img/application/' ~ application.logo )}}">							
 					</div>
 				</div>
 				<div class="col-xl-10">

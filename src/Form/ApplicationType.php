@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Application;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,6 +18,22 @@ class ApplicationType extends AbstractType
         $builder
             ->add('nom')
             ->add('version')
+            ->add('description',TextareaType::class,[
+                'attr'=>[
+
+                    'class'=>'text_area_summernote'
+                ]
+            ]);
+            if($optionEdit){
+                $builder->add('logo',FileType::class,[
+                    'label'=>'Ajouter le logo (*)',
+                    'multiple'=>false,
+                    'mapped'=>false,
+                    'required'=>$required,
+                    'constraints'=>[],
+                ]);
+            }
+            $builder
             ->add('images',FileType::class,[
                 'label'=>'Ajouter une ou plusieurs images (*)',
                 'multiple'=>true,

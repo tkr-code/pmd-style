@@ -2,6 +2,7 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\Application;
 use App\Entity\ApplicationTelechargementUser;
 use App\Form\ApplicationTelechargementUserType;
 use App\Repository\ApplicationTelechargementUserRepository;
@@ -64,6 +65,23 @@ class ApplicationTelechargementController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}', name: 'app_admin_application_telechargement__list_delete', methods: ['POST'])]
+    public function deleteList(Request $request, Application $application, ApplicationTelechargementUserRepository $applicationTelechargementUserRepository): Response
+    {
+        
+        if ($this->isCsrfTokenValid('delete_list'.$application->getId(), $request->request->get('_token'))) {
+            $seletedData = $request->request->all()['selectedIds'];
+            foreach ($seletedData as $key => $value) {
+               $applicationUser =  $applicationTelechargementUserRepository->findOneBy([
+                    'id'=>$value
+                ]);
+                $applicationTelechargementUserRepository->remove($applicationUser);
+            }
+            $this->addFlash('success',"La selection a été supprimé avec succès");
+        }
+
+        return $this->redirectToRoute('app_admin_application_edit', ['id'=>$application->getId()], Response::HTTP_SEE_OTHER);
+    }
     #[Route('/{id}', name: 'app_admin_application_telechargement_delete', methods: ['POST'])]
     public function delete(Request $request, ApplicationTelechargementUser $applicationTelechargementUser, ApplicationTelechargementUserRepository $applicationTelechargementUserRepository): Response
     {
@@ -74,4 +92,5 @@ class ApplicationTelechargementController extends AbstractController
 
         return $this->redirectToRoute('app_admin_application_edit', ['id'=>$applicationTelechargementUser->getApplication()->getId()], Response::HTTP_SEE_OTHER);
     }
+
 }

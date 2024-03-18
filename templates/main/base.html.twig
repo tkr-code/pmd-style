@@ -11,7 +11,10 @@
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 		        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
-    <link rel="shortcut icon" href="{{ asset('img/logo/logo-pmd-1.png') }}" type="image/x-icon">
+        <!-- Favicon -->
+    {% block favicon %}
+        <link rel="shortcut icon" href="{{ asset('img/logo/logo-pmd-1.png') }}" type="image/x-icon">
+    {% endblock %}
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
        <!-- owl.carousel -->
     <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.min.css') }}">
@@ -195,6 +198,60 @@
     {% block foot %}{% endblock %}
     <script src="{{ asset('js/util.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script>
+   $(document).ready(function(){
+    const $searchInput = $('#searchInput');
+    const $searchResults = $('#searchResults');
+
+    // Données de pages exemple (vous pouvez remplacer ceci par vos propres données)
+    const pages = [
+        { path:'/', name: 'Accueil', description: 'Page d\'accueil du site' },
+        { path:'/formations', name: 'Formations', description: 'Page d\'informations sur le site' },
+        { path:'/#service', name: 'Services', description: 'Page présentant les services proposés' },
+        { path:'/#messages', name: 'Contact', description: 'Page de contact' },
+        { path:'/login', name: 'Se connecter', description: 'Page de conection' }
+    ];
+
+    // Fonction de recherche
+    function searchPages(query) {
+        // Filtrer les pages dont le nom ou la description correspond à la recherche
+        return pages.filter(page => page.name.toLowerCase().includes(query.toLowerCase()) || page.description.toLowerCase().includes(query.toLowerCase()));
+    }
+
+    // Fonction pour afficher les résultats de recherche
+    function displaySearchResults(results) {
+        $searchResults.empty();
+        if (results.length > 0) {
+            $.each(results, function(index, result){
+                const $li = $('<li><a href="' + result.path + '"><strong>' + result.name + '</strong><br>' + result.description + '</a></li>');
+                $searchResults.append($li);
+            });
+            $searchResults.css('display', 'block');
+        } else {
+            $searchResults.css('display', 'none');
+        }
+    }
+
+    // Événement de saisie dans la barre de recherche
+    $searchInput.on('input', function() {
+        const query = $(this).val().trim();
+        if (query.length > 0) {
+            const results = searchPages(query);
+            displaySearchResults(results);
+        } else {
+            $searchResults.css('display', 'none');
+        }
+    });
+
+    // Cacher les résultats de recherche lorsque l'utilisateur clique en dehors de la zone de recherche
+    $(document).on('click', function(e) {
+        if (!$searchInput.is(e.target) && !$searchResults.is(e.target) && $searchResults.has(e.target).length === 0) {
+            $searchResults.css('display', 'none');
+        }
+    });
+});
+
+    </script>
     {% block javascripts %}{% endblock %}
 
 </body>

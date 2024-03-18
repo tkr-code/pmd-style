@@ -31,7 +31,7 @@
 	#js-editor {
 		display: none;
 	}
-	.gallery img{
+	.gallery img, .gallery2 img{
 		width:100px
 	}
 </style>
@@ -240,12 +240,13 @@
         }
       };
 
-      $('#article_images, #application_images').on('change', function () {
+      $('#article_images, #application_images, #article_edit_images').on('change', function () {
         imagesPreview(this, 'div.gallery');
       });
-      $('#article_edit_images').on('change', function () {
-        imagesPreview(this, 'div.gallery');
+	$('#application_logo_logo').on('change', function () {
+        imagesPreview(this, 'div.gallery2');
       });
+	  
 		})
 	</script>
 	{% block javascripts %}{% endblock %}

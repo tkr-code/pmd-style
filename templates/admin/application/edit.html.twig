@@ -4,11 +4,18 @@
 
 {% block title %}Modifier une  Application
 {% endblock %}
-
+{% block breadcrumb %}
+	{{ breadcrumb.breadcrumb('Modifier une application',[
+{
+path:path('app_admin_application_index'),
+name:'Gestion des applications'
+}
+])}}
+{% endblock %}
 {% block body %}
 	{% include "includes/_alerte.html.twig" %}
 	<div class="row">
-		<div class="col-xl-5">
+		<div class="col-xl-7">
 			<div class="card">
 				<div class="card-header">
 					<div class="card-title">Modifier Application</div>
@@ -16,15 +23,15 @@
 				<div class="card-body">
 					{{ form_start(form) }}
 					{{ form_widget(form) }}
-												<div class="gallery">
-													<p class="text-center">Prévisualisez vos images</p>
-												</div>
+					<div class="gallery">
+						<p class="text-center">Prévisualisez vos images</p>
+					</div>
 
 					{# {{ include('admin/application/_form.html.twig', {'button_label': 'Update'}) }} #}
 					<div class="row">
 						{% for image in application.images %}
 							<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-								<img src="{{ asset('img/application/' ~ image.nom)}}" class="zoom img-fluid " alt="">
+								<img width="100" src="{{ asset('img/application/' ~ image.nom)}}" class="zoom img-fluid " alt="">
 								<a class="btn btn-application-image-delete position-absolute text-center" href="{{ path('application_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
 									<i class="fa fa-window-close"></i>
 								</a>
@@ -35,13 +42,39 @@
 							</div>
 						{% endfor %}
 					</div>
-										<button class="btn btn-primary my-1">{{ button_label|default('Save') }}</button>
+					<button class="btn btn-primary my-1">{{ button_label|default('Save') }}</button>
 					{{ form_end(form) }}
 					{{ include('admin/application/_delete_form.html.twig') }}
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-7">
+
+		<div class="col-xl-5">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title">Modifier le logo</div>
+				</div>
+				<div class="card-body">
+					{% if application.logo %}
+						<img width="140" src="{{ asset('img/application/' ~ application.logo)}}" class="" alt="...">
+					{% else %}
+						<div class="col-md-12 col-12">
+							<p class="font-weight-bold text-center">L'application ne possede pas d'image</p>
+						</div>
+
+					{% endif %}
+					{{ form_start(form2) }}
+					{{ form_widget(form2) }}
+					<div class="gallery2">
+						<p class="text-center">Prévisualisez vos images</p>
+					</div>
+					<button class="btn btn-primary my-1">{{ button_label|default('Save') }}</button>
+					{{ form_end(form2) }}
+					{{ include('admin/application/_delete_form.html.twig') }}
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-6">
 			<div class="card">
 				<div class="card-header">
 					<div class="card-title">Fichiers</div>
@@ -52,6 +85,7 @@
 					<table class="table">
 						<thead>
 							<tr>
+								<th></th>
 								<th>nom</th>
 								<th>Version</th>
 								<th>Fichier</th>
@@ -61,17 +95,25 @@
 						<tbody>
 							{% for fichier in application.fichiers %}
 								<tr>
+									<td>
+										<div class="custom-control custom-checkbox">
+											<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+											<label for="customCheckbox1" class="custom-control-label"></label>
+										</div>
+									</td>
 									<td>{{ fichier.nom }}</td>
 									<td>{{ fichier.version }}</td>
 									<td>
-									{{ link.download(asset('application/fichier/' ~ fichier.fichier), fichier.nom)}}
+										{{ link.download(asset('application/fichier/' ~ fichier.fichier), fichier.nom)}}
 										{{fichier.fichier}}
 									</td>
 									<td>
 										{{ link.edit(path('app_admin_application_fichier_edit', {'id': fichier.id})) }}
 										<form method="post" class="d-inline-block" action="{{ path('app_admin_application_fichier_delete', {'id': fichier.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
 											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichier.id) }}">
-											<button class="btn text-danger my-1"><i class="fas fa-trash-alt"></i></button>
+											<button class="btn text-danger my-1">
+												<i class="fas fa-trash-alt"></i>
+											</button>
 										</form>
 									</td>
 								</tr>
@@ -94,6 +136,7 @@
 					<table class="table">
 						<thead>
 							<tr>
+								<th></th>
 								<th>Id</th>
 								<th>Type</th>
 								<th>Description</th>
@@ -103,6 +146,12 @@
 						<tbody>
 							{% for amelioration in application.ameliorations %}
 								<tr>
+																	<td>
+										<div class="custom-control custom-checkbox">
+											<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+											<label for="customCheckbox1" class="custom-control-label"></label>
+										</div>
+									</td>
 									<td>
 										{{ link.show(path('app_admin_amelioration_show', {'id': amelioration.id})) }}
 										#{{ amelioration.id }}</td>
@@ -112,7 +161,7 @@
 										<form method="post" class="d-inline" action="{{ path('app_admin_amelioration_delete', {'id': amelioration.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
 											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ amelioration.id) }}">
 											<button type="submit" class="btn">
-											<i class="fas fa-trash-alt text-danger"></i>
+												<i class="fas fa-trash-alt text-danger"></i>
 											</button>
 										</form>
 									</td>
@@ -127,49 +176,90 @@
 				</div>
 			</div>
 		</div>
-				<div class="col-xl-6">
+		<div class="col-xl-6">
 			<div class="card">
 				<div class="card-header">
-					<div class="card-title">Remarques et suggestions</div>
+					<div class="card-title">Contact utilisateurs</div>
 				</div>
 				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Nom</th>
-								<th>Email</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for item in application.telechargementUser %}
+					<form id="form_delete_telechargment_user" method="POST" action="{{path('app_admin_application_telechargement__list_delete',{id:application.id})}}" onsubmit="return confirm('Are you sure you want to delete this list?');">
+						<table class="table">
+							<thead>
 								<tr>
-									<td>
-										#{{ item.id }}
-									</td>
-									<td>{{ item.nom }}</td>
-									<td>{{ item.email }}</td>
-									<td>
-										<form method="post" class="d-inline" action="{{ path('app_admin_application_telechargement_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
-											<button type="submit" class="btn">
-											<i class="fas fa-trash-alt text-danger"></i>
-											</button>
-										</form>
-									</td>
+									<th></th>
+									<th>Id</th>
+									<th>Nom</th>
+									<th>Email</th>
+									<th>Actions</th>
 								</tr>
-							{% else %}
-								<tr>
-									<td colspan="4">no records found</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{% for item in application.telechargementUser %}
+									<tr>
+										<td>
+											<div class="custom-control custom-checkbox">
+												<input class="custom-control-input" type="checkbox" id="customCheckbox{{item.id}}" name="selectedIds[]" value="{{item.id}}">
+												<label for="customCheckbox{{item.id}}" class="custom-control-label"></label>
+											</div>
+										</td>
+										<td>
+											#{{ item.id }}
+										</td>
+										<td>{{ item.nom }}</td>
+										<td>{{ item.email }}</td>
+										<td>
+											<form method="post" class="d-inline" action="{{ path('app_admin_application_telechargement_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+												<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+												<button type="submit" class="btn">
+													<i class="fas fa-trash-alt text-danger"></i>
+												</button>
+											</form>
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="5">no records found</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<input type="hidden" name="_token" value="{{ csrf_token('delete_list' ~ application.id) }}">
+						<input class="btn btn-danger" type="submit" name="delete" value="Supprimer les lignes sélectionnées">
+					</form>
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 	{{ link.back(path('app_admin_application_index')) }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function(){
+	
+    // Fonction pour vérifier si au moins une case est cochée
+    function checkIfAtLeastOneChecked() {
+        var atLeastOneChecked = false;
+        $('#form_delete_telechargment_user input[type="checkbox"]').each(function(){
+            if($(this).is(':checked')){
+                atLeastOneChecked = true;
+                return false; // Sortir de la boucle si une case est cochée
+            }
+        });
+        return atLeastOneChecked;
+    }
+    
+    $('#form_delete_telechargment_user input[type="submit"]').prop('disabled', true); // Désactiver le bouton de soumission
+
+    // Activer ou désactiver le bouton de soumission en fonction de l'état des cases à cocher
+    $('#form_delete_telechargment_user input[type="checkbox"]').change(function(){
+        if(checkIfAtLeastOneChecked()){
+            $('#form_delete_telechargment_user input[type="submit"]').prop('disabled', false); // Activer le bouton de soumission
+        } else {
+            $('#form_delete_telechargment_user input[type="submit"]').prop('disabled', true); // Désactiver le bouton de soumission
+        }
+    });
+});
+</script>
 {% endblock %}

@@ -12,14 +12,14 @@ class TestController extends AbstractController
     #[Route('/test', name: 'test_index')]
     public function index(): Response
     {
-        // $expiration = new \DateTime();
-        // $expiration->modify('+1 year');
+        $expiration = new \DateTime();
+        $expiration->modify('+1 year');
 
-        // $cookie = Cookie::create('test','Malick',$expiration);
+        $cookie = Cookie::create('test','Malick',$expiration);
 
-        // $response = new Response();
-        // $response->headers->setCookie($cookie);
-        // $response->send();
+        $response = new Response();
+        $response->headers->setCookie($cookie);
+        $response->send();
         // $options['edit']=true;
         $optionEdit = empty($options['edit']) ? false:true;
         $required = $optionEdit == true ? true:false;

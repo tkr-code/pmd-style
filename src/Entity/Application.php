@@ -33,6 +33,11 @@ class Application
     private $nom;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
      * @ORM\OneToMany(targetEntity=Amelioration::class, mappedBy="application", orphanRemoval=true, cascade={"persist"}))
      */
     private $ameliorations;
@@ -61,6 +66,16 @@ class Application
      * @ORM\OneToMany(targetEntity=ApplicationTelechargementUser::class, mappedBy="application", orphanRemoval=true)
      */
     private $telechargement_user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $logo;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
 
 
     public function __construct()
@@ -204,7 +219,14 @@ class Application
 
     public function getSlug(): ?string
     {
-        return (new Slugify())->slugify($this->nom);
+        return (new Slugify())->slugify($this->slug);
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = (new Slugify())->slugify($slug);
+
+        return $this;
     }
 
     /**
@@ -233,6 +255,30 @@ class Application
                 $telechargementUser->setApplication(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

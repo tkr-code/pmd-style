@@ -215,11 +215,11 @@
       </trans-unit>
       <trans-unit id="EohvnQA" resname="number">
         <source>number</source>
-        <target>__number</target>
+        <target>Numéro</target>
       </trans-unit>
       <trans-unit id="vzdjODq" resname="Customer">
         <source>Customer</source>
-        <target>__Customer</target>
+        <target>Client</target>
       </trans-unit>
       <trans-unit id="kg5BPH1" resname="Status">
         <source>Status</source>
@@ -277,7 +277,7 @@
       </trans-unit>
       <trans-unit id="GP3VSbL" resname="New">
         <source>New</source>
-        <target>__New</target>
+        <target>Nouveau</target>
       </trans-unit>
       <trans-unit id="1c389.9" resname="Top">
         <source>Top</source>
@@ -285,7 +285,7 @@
       </trans-unit>
       <trans-unit id="1crefvM" resname="Stock">
         <source>Stock</source>
-        <target>__Stock</target>
+        <target>Stock</target>
       </trans-unit>
       <trans-unit id="U0M9PNE" resname="back to list">
         <source>back to list</source>
@@ -293,7 +293,7 @@
       </trans-unit>
       <trans-unit id="wYmEDPf" resname="Log in">
         <source>Log in</source>
-        <target>__Log in</target>
+        <target>Se connecter</target>
       </trans-unit>
     </body>
   </file>

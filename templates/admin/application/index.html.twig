@@ -34,15 +34,10 @@
 					{% for application in applications %}
 						<tr>
 							<td>{{ application.id }}</td>
-							<td>
-							{% for image in application.images %}
-								<img width="60" class="m-1" src="{{ asset('img/application/' ~ image.nom )}}">
-							{% else %}
-								<img width="60" class="m-1" src="{{ asset('img/vide.png' )}}">
-							{% endfor %}
+							<td><img width="60" class="m-1" src="{{ asset('img/application/' ~ application.logo )}}">							
 							{{ application.nom }}</td>
-							<td>{{ application.nombreTelechargement }}</td>
 							<td>{{application.version }}</td>
+							<td>{{ application.nombreTelechargement }}</td>
 							<td>
 								{{ link.show(path('app_admin_application_show', {'id': application.id})) }}
 								{{ link.edit(path('app_admin_application_edit', {'id': application.id})) }}
