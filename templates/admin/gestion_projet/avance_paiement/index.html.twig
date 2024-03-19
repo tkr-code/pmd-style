@@ -46,7 +46,7 @@
 				appartenant à Mr ou Mme :
 				{{projet.client.getFullName}}
 				pour une valeur de
-				<b class="text-danger">{{projet.paiement.montantTotal}}</b>
+				<b class="text-danger">{{projet.paiement.montantTotal|number_format(0, '', ' ')}}</b>
 			</h3>
 		</div>
 		<div class="card-body">
@@ -124,7 +124,7 @@
 	</div>
 	{#     les modal
 				 #}
-	{{modal.modal_brut('show_paiementModal','Ajouter uneAvance')}}
+	{{modal.modal_brut('show_paiementModal','Ajouter une Avance')}}
 
 	{# 	<a href="{{ path('avance_paiement_new') }}">Create new</a>
 		 #}

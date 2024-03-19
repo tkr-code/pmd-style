@@ -90,7 +90,7 @@ class NavExtension extends AbstractExtension
                     ],
                     [
                         'name' => 'Gestion Projets',
-                        'icon' => 'fa fa-home',
+                        'icon' => 'fa fa-project-diagram',
                         'links' =>
                         [
                             [
@@ -106,7 +106,7 @@ class NavExtension extends AbstractExtension
                     ],
                     [
                         'name' => 'Gestion Formations',
-                        'icon' => 'fa fa-home',
+                        'icon' => 'fa fa-book',
                         'links' =>
                         [
                             [
@@ -130,7 +130,7 @@ class NavExtension extends AbstractExtension
                     ],
                     [
                         'name' => 'Gestion Rendez-vous',
-                        'icon' => 'fa fa-home',
+                        'icon' => 'fa fa-address-book',
                         'links' =>
                         [
                             [
@@ -146,7 +146,7 @@ class NavExtension extends AbstractExtension
                     ],
                     [
                         'name' => 'Gestion Depenses',
-                        'icon' => 'fa fa-home',
+                        'icon' => 'fa fa-wallet',
                         'links' =>
                         [
                             [
@@ -162,7 +162,7 @@ class NavExtension extends AbstractExtension
                     ],
                     [
                         'name' => 'Gestion Investissement',
-                        'icon' => 'fa fa-home',
+                        'icon' => 'fa fa-coins',
                         'links' =>
                         [
                             [

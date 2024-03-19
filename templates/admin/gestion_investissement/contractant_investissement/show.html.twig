@@ -183,7 +183,7 @@
 										<tr>
 											<td>{{ investissement.type }}</td>
 											<td>{{ investissement.designation }}</td>
-											<td>{{ investissement.montantInvestissement }}</td>
+											<td>{{ investissement.montantInvestissement|number_format(0, '', ' ') }}</td>
 											<td>{{ investissement.getDateDebut ? investissement.getDateDebut|date_format_fr('Y-m-d') : '' }}</td>
 											<td>{{ investissement.getDateFin ? investissement.getDateFin|date_format_fr('Y-m-d') : ''}}</td>
 											

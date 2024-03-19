@@ -17,7 +17,7 @@
 					Depense concernant
 					<b class="text-danger">{{depense.designation}}</b>
 					pour une valeur de
-					<b class="text-danger">{{depense.valeurTotal}}</b>
+					<b class="text-danger">{{depense.valeurTotal|number_format(0, '', ' ')}}</b>
 					effectuée à l'endroit
 					<b class="text-danger">{{depense.lieu}}</b>
 				</div>

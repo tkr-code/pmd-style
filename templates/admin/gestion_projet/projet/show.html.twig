@@ -71,7 +71,7 @@
 									<p class="mb-0 bol font-weight-bold">Estimé à la valeur</p>
 								</div>
 								<div class="col-sm-9">
-									<p class="text-muted mb-0">{{projet.valeurTotal}}</p>
+									<p class="text-muted mb-0">{{projet.valeurTotal|number_format(0, '', ' ')}}</p>
 								</div>
 							</div>
 							<hr>
@@ -92,7 +92,7 @@
 									</p>
 								</div>
 								<div class="col-sm-9">
-									<p class="text-muted mb-0">{{projet.dateDebut ? projet.dateDebut|date('Y-m-d') : ''}}</p>
+									<p class="text-muted mb-0">{{projet.dateDebut ? projet.dateDebut|date_format_fr('Y-m-d') : ''}}</p>
 								</div>
 							</div>
 							<hr>
@@ -101,7 +101,7 @@
 									<p class="mb-0 bol font-weight-bold">Date de fin prévu</p>
 								</div>
 								<div class="col-sm-9">
-									<p class="text-muted mb-0">{{projet.dateDebut ? projet.dateDebut|date('Y-m-d') : ''}}</p>
+									<p class="text-muted mb-0">{{projet.dateDebut ? projet.dateDebut|date_format_fr('Y-m-d') : ''}}</p>
 								</div>
 							</div>
 							<hr>
@@ -110,7 +110,7 @@
 									<p class="mb-0 bol font-weight-bold">Date de Fin Exacte</p>
 								</div>
 								<div class="col-sm-9">
-									<p class="text-muted mb-0">{{projet.dateFinRealisation ? projet.dateFinRealisation|date('Y-m-d') : 'non definie'}}</p>
+									<p class="text-muted mb-0">{{projet.dateFinRealisation ? projet.dateFinRealisation|date_format_fr('Y-m-d') : 'non definie'}}</p>
 								</div>
 							</div>
 							<hr>
@@ -247,15 +247,15 @@
 						<div class="col-md-7">
 							<p>
 								Le cout total du projet est :
-								<b class="text-danger">{{paiement.montantTotal}}
+								<b class="text-danger">{{paiement.montantTotal|number_format(0, '', ' ')}}
 								</b>&nbsp; fcfa,
 								{% if paiement.montantDu > 0 %}
 									le paiement n'est pas ecore achevé, il reste la somme de
-									<b class="text-danger">{{paiement.montantDu}}
+									<b class="text-danger">{{paiement.montantDu|number_format(0, '', ' ')}}
 									</b>&nbsp; fcfa
 								{% elseif paiement.montantDu == 0 %}
 									le paiement est  achevé, il reste la somme de
-									<b class="text-danger">{{paiement.montantDu}}
+									<b class="text-danger">{{paiement.montantDu|number_format(0, '', ' ')}}
 									</b>&nbsp; fcfa
 								{% endif %}
 							</p>
@@ -286,8 +286,8 @@
 									{% for avance_paiement in avance_paiements %}
 										<tr>
 											<td>{{ avance_paiement.dateAvance ? avance_paiement.dateAvance|date_format_fr('Y-m-d') : '' }}</td>
-											<td>{{ avance_paiement.montantAvance }}</td>
-											<td>{{ avance_paiement.montantDu }}</td>
+											<td>{{ avance_paiement.montantAvance|number_format(0, '', ' ') }}</td>
+											<td>{{ avance_paiement.montantDu|number_format(0, '', ' ') }}</td>
 											<td>
 												{% if avance_paiement.estAtteint %}
 													{{badge.complet('Yes')}}
