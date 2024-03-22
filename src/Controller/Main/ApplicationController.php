@@ -79,8 +79,6 @@ class ApplicationController extends AbstractController
         $application = $applicationFichier->getApplication();
         // Chemin vers le fichier à télécharger
         $fichier = $this->getParameter('application_fichiers_directory') . '/' . $applicationFichier->getFichier();
-        // dd($applicationFichier);
-
         // Vérifier si le fichier existe
         if (file_exists($fichier)) {
             $compteur = $application->getNombreTelechargement();
@@ -91,7 +89,7 @@ class ApplicationController extends AbstractController
             // Envoyer le fichier au navigateur
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . $application->getNom() . ' ' . $application->getVersion() . '"');
+            header('Content-Disposition: attachment; filename="' . basename($fichier) .'"');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
